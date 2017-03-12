@@ -15,6 +15,10 @@ describe('find a pair with given sum in an unsorted array of integers', function
         let output = fPair.findPair(arr, 10);
         
         expect(output).toBe('Pair found at index 0 and 2');
+        
+        output = fPair.findPair(arr, 7);
+    
+        expect(output).toBe('Pair found at index 2 and 3');
     });
     
     
