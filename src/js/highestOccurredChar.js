@@ -19,14 +19,11 @@ let highestOccurredChar = (s) => {
 		
 	}
 	
-	console.log("arrOccurred1 ", arrOccurred);
 	arrOccurred = Object.keys(arrOccurred).reduce(function(a, b) { 
 		return arrOccurred[a] > arrOccurred[b] ? a : b; 
 	});
 	
-	console.log("arrOccurred2 ", arrOccurred);
 	return arrOccurred;
-	
 }
 	
 export default highestOccurredChar;

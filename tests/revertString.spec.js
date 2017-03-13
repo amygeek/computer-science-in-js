@@ -15,7 +15,6 @@ describe('Revert String', () => {
 		let s = "123456789";
 		
 		let revertS = rString.revertByLen(s);
-		
-		console.log(revertS);
+		expect(revertS).toEqual('987654321');
 	});
 });
