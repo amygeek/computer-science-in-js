@@ -1,5 +1,3 @@
-
-
 /*
 @desc find the duplication words in an array. based on the total count, rearrange the array to show the popularity
 @param Array Object
@@ -7,7 +5,7 @@
 Ex: var arr = ["pear", "pear", "cherry", "apple", "apple", "pear", "apple", "banana", "pear"];
 return: ['pear', 'apple', 'cherry', 'banana']
 */
-export default function ReorderPopularWords (arr) {
+function ReorderPopularWords (arr) {
     
     var temp = {};
     var newArr = [];
@@ -47,3 +45,5 @@ export default function ReorderPopularWords (arr) {
     return newArr;  // ['pear', 'apple', 'cherry', 'banana']
 
 }
+
+export default ReorderPopularWords;
