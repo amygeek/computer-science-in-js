@@ -2,37 +2,34 @@
 
 let BinarySearch = {
     
-    searchRec (arr, search, low, high) {
+    searchRec (arr, data, low, high) {
       if (low > high) {
         return -1;
       }
 
       let mid = Math.floor( ( high + low ) / 2 );
-      if ( arr[mid] === search ) {
+      if ( arr[mid] === data ) {
         return mid;
-      } else if ( arr[mid] < search) {
-        return this.searchRec( arr, search, (mid + 1), high );
+      } else if ( arr[mid] < data) {
+        return this.searchRec( arr, data, (mid + 1), high );
         
       } else {
-        return this.searchRec( arr, search, low, (mid - 1) );
+        return this.searchRec( arr, data, low, (mid - 1) );
       }
     
       return -1;
     },
         
-    searchIterative (arr, search) {
+    searchIterative (arr, data) {
   
       let low = 0;
       let high = arr.length - 1;
       while (low <= high) {
         let mid = Math.floor((high + low) / 2);
-        if (arr[mid] === search) {
+        if (arr[mid] === data) {
             return mid;
-        }
-
-        if (arr[mid] < search) {
+        } else if (arr[mid] < data) {
             low = mid + 1;
-          
         } else {
             high = mid - 1;
         }

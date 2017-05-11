@@ -41,8 +41,21 @@ class MergeSort {
         this.mergeSort(left);  // sorting the left subarray
         this.mergeSort(right);  // sorting the right subarray
         this.merge(arr, left, right);  // Merging left and right into A as sorted list.
+        return arr;
     }
 
-} 
+}
 
-export default MergeSort;
+//export default MergeSort;
+
+//run test
+(function() {
+    let arr1 = [2, 4, 6, 1, 5, 3];
+
+    let sort = new MergeSort(arr1);
+
+    let newArr = sort.mergeSort([2, 4, 1, 6, 5, 3]);
+
+    console.log("Sorted array: ", newArr);
+})();
+
