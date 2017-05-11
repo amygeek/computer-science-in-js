@@ -1,2 +1,7 @@
+<<<<<<< HEAD
+node_modules
+**/.DS_Store
+=======
 .gitignore
 node_modules
+>>>>>>> a5f86c250176fc4b05ec9392f0f9cd23eaa63367
