@@ -13,15 +13,14 @@ class LinkedList {
 
     remove(item) {
         var prevNode = this.findPrevious(item);
-        if (!(prevNode.next == null)) {
+        if (prevNode.next !== null) {
             prevNode.next = prevNode.next.next;
         }
     }
 
     findPrevious(item) {
         var currNode = this.head;
-        while (!(currNode.next == null) &&
-        (currNode.next.element != item)) {
+        while (currNode.next !== null && currNode.next.element != item ) {
             currNode = currNode.next;
         }
         return currNode;
@@ -87,7 +86,7 @@ class LinkedList {
     cities.insertAt("Beverly Hills", "Carlisle");
     cities.display();
     console.log();
-    cities.remove("Carlisle");
+    cities.remove("Alma");
     cities.display();
 
 }());

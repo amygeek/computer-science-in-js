@@ -46,4 +46,12 @@ function ReorderPopularWords (arr) {
 
 }
 
-export default ReorderPopularWords;
+(function(){
+    var arr = ["pear", "pear", "cherry", "apple", "apple", "pear", "apple", "banana", "pear"];
+
+    var newArr = ReorderPopularWords(arr);
+
+    console.log(newArr);
+
+})();
+//export default ReorderPopularWords;

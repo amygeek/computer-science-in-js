@@ -1,93 +1,127 @@
-/* Deleting a node from Binary search tree */
-#include<iostream>
-using namespace std;
-struct Node {
-	int data;
-	struct Node *left;
-	struct Node *right;
+
+class Node {
+
+    constructor(data) {
+        this.data = data;
+    }
 };
-//Function to find minimum in a tree. 
-Node* FindMin(Node* root)
-{
-	while(root->left != NULL) root = root->left;
-	return root;
+
+
+class BST extends Node {
+
+    constructor() {
+        super();
+        this.root = null;
+    }
+
+    //Function to find minimum in a tree.
+    findMin() {
+        
+        while (this.root.left != null) {
+            this.root = this.root.left;
+        }
+        return this.root;
+    }
+
+    findMinNode (node) {
+
+        if (node === void 0) {
+            node = this.root;
+        }
+        while (node.left) {
+            node = node.left;
+        }
+        return node.data;
+
+    }
+
+    remove (data) {
+        
+        this.root = this.removeInner(data, this.root);
+    }
+
+    removeInner (data, node) {
+        if (node) {
+            if (data < node.data) {
+                node.left = this.removeInner(data, node.left);
+            } else if (data > node.data) {
+                node.right = this.removeInner(data, node.right);
+            } else if (node.left && node.right) {
+                node.data = this.findMinNode(node.right);
+                node.right = this.removeInner(node.data, node.right);
+            } else {
+                node = node.left || node.right;
+            }
+        }
+        return node;
+    }
+
+    inorder(root) {
+        if(root == null) {
+            return;
+        }
+
+        this.inorder(root.left);       //Visit left subtree
+        console.log(" ", root.data);  //Print data
+        this.inorder(root.right);      // Visit right subtree
+    }
+
+    insert( val ) {
+
+        var root = this.root;
+
+        if(!root){
+            this.root = new Node(val);
+            return;
+        }
+
+        var current = root;
+        var newNode = new Node(val);
+
+        while ( current ){
+            if(val < current.data){
+                if(!current.left){
+                    current.left = newNode;
+                    break;
+                } else{
+                    current = current.left;
+                }
+            } else{
+                if(!current.right){
+                    current.right = newNode;
+                    break;
+                } else{
+                    current = current.right;
+                }
+            }
+        }
+    }
+
+    main() {
+        /*Code To Test the logic
+         Creating an example tree
+                5
+               / \
+              3   10
+            /  \   \
+           1   4   11
+        */
+
+        this.insert( 5 );
+        this.insert( 10 );
+        this.insert( 3 );
+        this.insert( 4 );
+        this.insert( 1 );
+        this.insert( 11 );
+
+        // Deleting node with data 5, change this data to test other cases
+        this.remove(4);
+
+        //Print Nodes in Inorder
+        console.log("Inorder: ");
+        this.inorder(this.root);
+    }
 }
 
-// Function to search a delete a value from tree.
-struct Node* Delete(struct Node *root, int data) {
-	if(root == NULL) return root; 
-	else if(data < root->data) root->left = Delete(root->left,data);
-	else if (data > root->data) root->right = Delete(root->right,data);
-	// Wohoo... I found you, Get ready to be deleted	
-	else {
-		// Case 1:  No child
-		if(root->left == NULL && root->right == NULL) { 
-			delete root;
-			root = NULL;
-		}
-		//Case 2: One child 
-		else if(root->left == NULL) {
-			struct Node *temp = root;
-			root = root->right;
-			delete temp;
-		}
-		else if(root->right == NULL) {
-			struct Node *temp = root;
-			root = root->left;
-			delete temp;
-		}
-		// case 3: 2 children
-		else { 
-			struct Node *temp = FindMin(root->right);
-			root->data = temp->data;
-			root->right = Delete(root->right,temp->data);
-		}
-	}
-	return root;
-}
- 
-//Function to visit nodes in Inorder
-void Inorder(Node *root) {
-	if(root == NULL) return;
- 
-	Inorder(root->left);       //Visit left subtree
-	printf("%d ",root->data);  //Print data
-	Inorder(root->right);      // Visit right subtree
-}
- 
-// Function to Insert Node in a Binary Search Tree
-Node* Insert(Node *root,char data) {
-	if(root == NULL) {
-		root = new Node();
-		root->data = data;
-		root->left = root->right = NULL;
-	}
-	else if(data <= root->data)
-		root->left = Insert(root->left,data);
-	else 
-		root->right = Insert(root->right,data);
-	return root;
-}
-
-int main() {
-	/*Code To Test the logic
-	  Creating an example tree
-	                    5
-			   / \
-			  3   10
-			 / \   \
-			1   4   11
-    */
-	Node* root = NULL;
-	root = Insert(root,5); root = Insert(root,10);
-	root = Insert(root,3); root = Insert(root,4); 
-	root = Insert(root,1); root = Insert(root,11);
-
-	// Deleting node with value 5, change this value to test other cases
-	root = Delete(root,5);
-
-	//Print Nodes in Inorder
-	cout<<"Inorder: ";
-	Inorder(root);
-	cout<<"\n";
-}
+let bst = new BST();
+bst.main();

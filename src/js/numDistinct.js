@@ -3,19 +3,19 @@
  * @param {string} t
  * @return {number}
  */
-var numDistinct = function(s, t) {
+var numDistinct = function(str1, str2) {
 
-    var sArr = s.split("");
-    var tArr = t.split("");
+    var s1 = str1.split("");
+    var s2 = str2.split("");
     var res = [];
 
-    for (var i=0, l=t.length; i<l; i++) {
-        if (tArr[i] == sArr[i] && res.indexOf(tArr[i]) === -1) {
-            res.push(tArr[i]);
+    for (var i=0, l=s2.length; i<l; i++) {
+        if (s2[i] == s1[i] && res.indexOf(s2[i]) === -1) {
+            res.push(s2[i]);
         }
     }
 
     return res.length;
 };
 
-numDistinct('rabbbit', 'rabbit');
+console.log(numDistinct('rabbbit', 'rabbit'));  //3, rab

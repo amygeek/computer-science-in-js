@@ -78,8 +78,8 @@ let findSumOfThreeV2 = function(arr, required_sum) {
  * Memory Complexity
     Constant, O(1)
  */
-let findSumOfTwo = function(arr, val, start_index) {
-    for (let i = start_index, j = arr.length - 1; i < j;) {
+let findSumOfTwo = function(arr, val, index) {
+    for (let i = index, j = arr.length - 1; i < j;) {
         let sum = arr[i] + arr[j];
         if (sum === val) {
             return true;

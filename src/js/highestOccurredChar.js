@@ -25,5 +25,5 @@ let highestOccurredChar = (s) => {
 	
 	return arrOccurred;
 }
-	
+
 export default highestOccurredChar;
