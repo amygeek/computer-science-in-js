@@ -111,7 +111,7 @@ let find_pythagorean_triplets_2 = function(arr) {
             if (a2 + b2 === c2) {
                 triplets.push([arr[i], arr[j], arr[k]]);
                 break;
-            } else if (a2 + b2 + (-c2) > 0) {
+            } else if (a2 + b2 -c2 > 0) {
                 k--;
             } else {
                 j++;
