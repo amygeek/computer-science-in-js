@@ -9,7 +9,7 @@
  * The solution reverses every word in-place i.e. it does not require any extra space.
  */
 let replaceAt = function(string, index, character){
-    return string.substr(0, index) + character + string.substr(index+character.length);
+    return string.substr(0, index) + character + string.substr(index + character.length);
 };
 
 let strRev = function(str, start, end) {
