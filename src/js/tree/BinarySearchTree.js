@@ -346,6 +346,37 @@ class BinarySearchTree {
         }
     }
 
+    levelOrderTraversal (root) {
+
+        if ( root ) {
+            let current_queue = [];
+            current_queue.push(root);
+            current_queue.push(null);
+
+            while (current_queue.length != 0) {
+
+                let temp = current_queue.shift();
+
+                console.log(temp.data);
+
+                if (temp.left) {
+                    current_queue.push(temp.left);
+                }
+
+                if (temp.right) {
+                    current_queue.push(temp.right);
+                }
+
+                if (!current_queue[0]) {
+                    current_queue.shift();   //dequeue null
+                    if (current_queue.length != 0) {
+                        current_queue.push(null);  //enqueue null on end of level
+                    }
+                }
+            }
+        }
+    }
+
     find_min(root) {
         if (!root) {
             return null;
@@ -383,6 +414,13 @@ class BinarySearchTree {
 
 };
 
+/*********************************
+              100
+            /    \
+         50     200
+        /  \    /  \
+      25   75 125   350
+ *********************************/
 let test = () => {
     let tree = new BinarySearchTree();
     tree.add(100);
@@ -393,15 +431,19 @@ let test = () => {
     tree.add(125);
     tree.add(350);
 
-    //print 25 50 75 100 125 200 350
     console.log('travel tree in order recursively');
+    //print 25 50 75 100 125 200 350
     tree.inOrderRec(tree.root);
 
     console.log('travel tree in order iteratively');
     tree.inOrderIterative(tree.root);
 
+    console.log('Level order traversal');
+    //print 100 50 200 25 75 125 350
+    tree.levelOrderTraversal(tree.root);
+
     //100
-    console.log('find inorder successor: ', tree.inorder_successor_bst(tree.root, 75));
+    //console.log('find inorder successor: ', tree.inorder_successor_bst(tree.root, 75));
 }
 
 test();
