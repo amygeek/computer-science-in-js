@@ -1,6 +1,9 @@
 
 /**
  * Given a string find all substrings that are palindromes
+    input String: aabbbaa
+    Palindrome Substrings: aa bb bbb abbba aabbbaa bb aa
+
     A palindrome is a word, phrase, number, or other sequence of characters which reads the same backwards as it reads forwards.
      Runtime Complexity
      Polynomial, O(n3).
@@ -66,3 +69,5 @@ let find_all_palindrome_substrings2 = function(input) {
     }
     return count;
 };
+
+console.log(find_all_palindrome_substrings2('aabbbaa'));
