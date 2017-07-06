@@ -66,3 +66,5 @@ let find_all_palindrome_substrings2 = function(input) {
     }
     return count;
 };
+
+console.log(find_all_palindrome_substrings2("aabbbaa"));
