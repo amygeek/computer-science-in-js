@@ -38,7 +38,7 @@ let find_fast = function(a, key) {
     let low = 0;
     let high = a.length - 1;
     while (low <= high) {
-        let mid = low + Math.floor((high - low) / 2);
+        let mid = Math.floor((low + high) / 2);
         if (a[mid] === key) {
             return mid;
         }
@@ -77,11 +77,11 @@ let find_sum_of_three_v2 = function(arr, required_sum) {
  Memory Complexity
  Constant, O(1)
  */
-let find_sum_of_two_sol = function(arr, val, start_index) {
-    for (let i = start_index, j = arr.length - 1; i < j;) {
+let find_sum_of_two = function(arr, val, start) {
+    for (let i = start, j = arr.length - 1; i < j;) {
         let sum = arr[i] + arr[j];
         if (sum === val) {
-            return true;
+            return `${i} and ${j}`;
         }
 
         if (sum < val) {
@@ -97,11 +97,19 @@ let find_sum_of_three_v3 = function(arr, required_sum) {
     arr.sort(function(a, b) {
         return a - b;
     });
+
     for (let i = 0; i < arr.length - 2; ++i) {
         let remaining_sum = required_sum - arr[i];
-        if (find_sum_of_two_sol(arr, remaining_sum, i + 1)) {
-            return true;
+
+        let sumOfTwo = find_sum_of_two(arr, remaining_sum, i + 1);
+        if ( false !== sumOfTwo ) {
+            return `index at ${i}, ${sumOfTwo}`;
         }
     }
     return false;
 };
+
+
+let arr = [1, 3, 8, 10, 30, 2, 9, 50, 18, 20];
+// after sort arr = [ 1, 2, 3, 8, 9, 10, 18, 20, 30, 50 ]
+console.log( find_sum_of_three_v3( arr, 37) );  //index at 3, 4 and 7

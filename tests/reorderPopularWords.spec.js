@@ -1,13 +1,14 @@
 import reorderPopularWords from '../src/js/ReorderPopularWords';
 
-describe("Count Duplicate Words", () => {
+describe("Reorder words in array based their popularity. ", () => {
     
-    it('should return total count of each dupicate words', () => {
+    it('should return an array that is sorted by the highest count', () => {
         
         var arr = ["pear", "pear", "cherry", "apple", "apple", "pear", "apple", "banana", "pear"];
-        
+
+        arr.sort();
         var newArr = reorderPopularWords(arr);
         
-        expect(newArr).toEqual(['pear', 'apple', 'cherry', 'banana']);
+        expect(newArr).toEqual(['pear', 'pear', 'pear', 'pear', 'apple', 'apple', 'apple', 'banana', 'cherry' ]);
     });
 });

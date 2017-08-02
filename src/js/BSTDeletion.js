@@ -115,7 +115,7 @@ class BST extends Node {
         this.insert( 11 );
 
         // Deleting node with data 5, change this data to test other cases
-        this.remove(4);
+        this.remove(3);
 
         //Print Nodes in Inorder
         console.log("Inorder: ");

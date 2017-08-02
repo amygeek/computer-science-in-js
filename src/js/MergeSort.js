@@ -46,16 +46,16 @@ class MergeSort {
 
 }
 
-//export default MergeSort;
+export default MergeSort;
 
 //run test
-(function() {
-    let arr1 = [2, 4, 6, 1, 5, 3];
-
-    let sort = new MergeSort(arr1);
-
-    let newArr = sort.mergeSort([2, 4, 1, 6, 5, 3]);
-
-    console.log("Sorted array: ", newArr);
-})();
+//(function() {
+//    let arr1 = [2, 4, 6, 1, 5, 3];
+//
+//    let sort = new MergeSort(arr1);
+//
+//    let newArr = sort.mergeSort([2, 4, 1, 6, 5, 3]);
+//
+//    console.log("Sorted array: ", newArr);
+//})();
 

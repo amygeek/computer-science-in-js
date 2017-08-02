@@ -68,3 +68,21 @@ let reverseWords = function(sentence) {
     }
     return sentence;
 };
+
+
+let reverseWords2 = (str) => {
+    str = str.split(' ');
+    let len = str.length;
+    let mid = Math.floor(len / 2);
+
+    let temp;
+    for (let i= 0; i<mid; i++) {
+        temp = str[i];
+        str[i] = str[len - i - 1];
+        str[len - i - 1] = temp;
+    }
+    return str.join(' ');
+}
+
+console.log(reverseWords('Hello      World  People'));
+console.log(reverseWords2('Hello      World  People'));

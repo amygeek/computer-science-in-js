@@ -11,8 +11,8 @@
     "name": "Amy Huang"
   },
   "devDependencies": {
-    "babel-core": "^6.17.0",
-    "babel-loader": "^6.2.5",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
     "babel-preset-es2015": "^6.16.0",
     "jasmine": "^2.4.1",
     "jasmine-core": "^2.4.1",

@@ -27,10 +27,10 @@ let search_in_matrix = function(matrix, value) {
             return [i, j];
         } else if (value < matrix[i][j]) {
             // search left
-            j = j - 1;
+            j--;
         } else {
             // search down
-            i = i + 1;
+            i++;
         }
     }
     return [-1, -1];
@@ -44,4 +44,4 @@ let m = [
     [9, 11, 20, 25]
 ]
 
-console.log( search_in_matrix( m, 16 ) );  //[2, 2] key's position in matrix
+console.log( search_in_matrix( m, 20 ) );  //[3, 2] key's position in matrix

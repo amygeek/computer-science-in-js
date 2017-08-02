@@ -1,4 +1,5 @@
 //set bit using |; clear bit using &; toggling bit using xor ^
+// -0 = 11111111; -1 = 11111110
 //Determining if an integer is a power of 2
 
 let isPowerOf2 = (v) => {
@@ -13,11 +14,12 @@ let findMin = (x, y) => {
     return y ^ (x ^ y) & -( x < y );
 }
 
+
 let findMax = (x, y) => {
     return x ^ (x ^ y) & -( x < y );
 }
 
-console.log(findMin(5, 10));   //5
+console.log(findMin(5, 8));   //5
 console.log(findMax(100, 10));  //100
 
 //compute the integer absolute value
