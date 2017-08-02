@@ -26,4 +26,12 @@ let highestOccurredChar = (s) => {
 	return arrOccurred;
 }
 
+(function(){
+	let s = 'aaaaaaaaaaaaaaaaaabbbbcddddeeeeee';
+
+	let output = highestOccurredChar(s);
+
+	console.log (output);
+})();
+
 export default highestOccurredChar;

@@ -19,10 +19,9 @@ let find_max_sliding_window = function(arr, wSize) {
             w.pop();
         }
 
-        w.push(i);
+        w.push(i); //push arr indexes
     }
 
-    console.log( w);
     for (let i = wSize; i < arr.length; i++) {
         // remove all numbers that are smaller than current number
         // from the tail of list

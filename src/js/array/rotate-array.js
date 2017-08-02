@@ -100,7 +100,8 @@ let rotate_array = function(arr, n) {
     return arr;
 };
 
-let arr2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+//let arr2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let arr2 = [1, 2, 3, 4, 5];
 
 //[ 4, 5, 6, 7, 8, 9, 10, 1, 2, 3 ]
-console.log( rotate_array( arr2, -3 ) );
+console.log( rotate_array( arr2, 3 ) );
