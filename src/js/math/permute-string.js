@@ -37,5 +37,32 @@ let permute_string = (str) => {
     return perms;
 };
 
-let perms = permute_string('abc');
-console.log(perms);
+let insertCharAt = (word, c, j) => {
+    let start = word.substr(0, j);
+    let end = word.substr(j);
+    return start + c + end;
+}
+
+let permute_string2 = (str) => {
+    let perms = []
+    if(str.length == 0) {
+        perms.push('');
+        return perms;
+    }
+
+    let first = str.charAt(0);
+    let remainder = str.substr(1);
+    let words = permute_string2(remainder);
+
+    words.forEach((word) => {
+        for(let i=0, l=word.length; i<=l; i++) {
+            perms.push( insertCharAt(word, first, i));
+        }
+    });
+    return perms;
+
+}
+(function(){
+    console.log( permute_string( 'abc' ));
+    console.log( permute_string2( 'abc' ));
+})()

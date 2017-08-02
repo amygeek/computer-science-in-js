@@ -69,20 +69,21 @@ let reverseWords = function(sentence) {
     return sentence;
 };
 
-
-let reverseWords2 = (str) => {
-    str = str.split(' ');
-    let len = str.length;
+let reverseWords2 = (words) => {
+    words = words.split( ' ');
+    let len = words.length;
     let mid = Math.floor(len / 2);
 
-    let temp;
-    for (let i= 0; i<mid; i++) {
-        temp = str[i];
-        str[i] = str[len - i - 1];
-        str[len - i - 1] = temp;
+    for(let i=0; i<mid; i++) {
+        let temp = words[i];
+        words[i] = words[len-i-1];
+        words[len-i-1] = temp;
     }
-    return str.join(' ');
+    return words.join(' ');
 }
 
-console.log(reverseWords('Hello      World  People'));
-console.log(reverseWords2('Hello      World  People'));
+(function(){
+    let sentense = "hello           world good      morning";
+    console.log(reverseWords( sentense ));
+    console.log(reverseWords2( sentense ));
+})();
