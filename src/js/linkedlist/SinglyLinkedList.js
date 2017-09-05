@@ -76,28 +76,29 @@ class SinglyLinkedList {
         return temp;
     }
 
-    removeByVal( v ) {
+    deleteNode( v ) {
         let current = this.head;
         let previous = null;
 
         if ( current.data === v ) {
             this.head = current.next;
-            return current.data;
         } else {
+
             while(current && current.data !== v) {
                 previous = current;
                 current = current.next;
             }
-            //skip current item that is being removed
-            if (current) {
-                previous.next = current.next;
-                return current.data;
-            } else {
-                return -1;
+            //not found in the list
+            if (!current) {
+                return null;
             }
+            // skip current item that is being removed
+            previous.next = current.next;
         }
-    }
 
+
+        return this.head;
+    }
     removeByIndex( index ) {
 
         let len = this.length();
@@ -123,6 +124,26 @@ class SinglyLinkedList {
         }
 
     }
+
+    findNthFromlastNode(head, k) {
+        if ( !head || k < 1 ) {
+            return null;
+        }
+        let current = head;
+        while ( current && k > 0) {
+            current = current.next;
+            k--;
+        }
+        if ( k !== 0 ) {
+            return null; //out of bound
+        }
+        while(current) {
+            current = current.next;
+            head = head.next;
+        }
+        return head;
+
+    }
 }
 
 export default SinglyLinkedList;
@@ -138,13 +159,15 @@ export default SinglyLinkedList;
     linkedList.insert(1);
     linkedList.insert(18);
     console.log(linkedList.print());
+    let node = linkedList.findNthFromlastNode(linkedList.head, 1);
+    console.log(node);
     console.log(linkedList.length());
     linkedList.reverseIteratively();
     console.log(linkedList.print());
-    let node = linkedList.reverseRecursively(linkedList.head);
+    node = linkedList.reverseRecursively(linkedList.head);
     linkedList.head = node;
     console.log(linkedList.print());
-    linkedList.removeByIndex(2);
+    linkedList.deleteNode(18);
     console.log(linkedList.length());
     console.log(linkedList.print());
     console.log(linkedList.removeByIndex(10)); // -1

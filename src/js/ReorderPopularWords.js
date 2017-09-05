@@ -11,9 +11,13 @@ function ReorderPopularWords (arr) {
     var tempObj = {};
     var tempArr = [];
     
-    for (var i=0, l=arr.length; i<l; i++) {
-        tempObj[arr[i]] = (tempObj[arr[i]] || 0) + 1;
-    }
+    //for (var i=0, l=arr.length; i<l; i++) {
+    //    tempObj[arr[i]] = (tempObj[arr[i]] || 0) + 1;
+    //}
+    tempObj   = arr.reduce(function(prev,next){
+        prev[next] = (prev[next] + 1) || 1;
+        return prev;
+    }, {});
 
     Object.keys(tempObj).forEach((key) => {
         tempArr.push([key, tempObj[key]]);

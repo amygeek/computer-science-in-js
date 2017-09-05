@@ -36,7 +36,7 @@ describe('Singly Linked List', () => {
     });
 
     it('should remove the item by value from linked list', () => {
-        linkedList.removeByVal(1);
+        linkedList.deleteNode(1);
         let printStr = linkedList.print();
         expect(printStr).toEqual('3 -> 2 -> 8 -> 7 -> 18 -> null');
         let len = linkedList.length();
@@ -45,8 +45,8 @@ describe('Singly Linked List', () => {
     });
 
     it('should return -1 when deleting not-found item in linked list', () => {
-        let item = linkedList.removeByVal(100);
-        expect(item).toBe(-1);
+        let item = linkedList.deleteNode(100);
+        expect(item).toBe(null);
     });
 
     it('should remove the item by index from linked list', () => {
@@ -56,4 +56,11 @@ describe('Singly Linked List', () => {
         let len = linkedList.length();
         expect(len).toEqual(5);
     });
+
+    it('should return nth node from the last node', () => {
+        let node = linkedList.findNthFromlastNode(linkedList.head, 1);
+        expect(node.data).toEqual(18);
+        node = linkedList.findNthFromlastNode(linkedList.head, 5);
+        expect(node.data).toEqual(2);
+    })
 });
