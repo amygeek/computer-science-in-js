@@ -13,12 +13,6 @@ class SinglyLinkedList {
     length() {
         let len = 0;
         let current = this.head;
-
-        if (current) {
-            let len = 1;
-        } else {
-            let len = 0;
-        }
         while (current) {
             current = current.next;
             len++;
