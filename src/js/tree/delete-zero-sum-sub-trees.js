@@ -47,3 +47,36 @@ let delete_zero_sum_subtree = function(root) {
         }
     }
 };
+
+let inOrderRec = (node) => {
+
+    if ( node ) {
+        inOrderRec( node.left );
+
+        console.log(node.data);
+
+        inOrderRec( node.right );
+    }
+}
+
+class Node {
+    constructor( d ) {
+        this.data = d;
+        this.left = null;
+        this.right = null
+    }
+}
+
+(function() {
+    let root = new Node(7);
+    root.left = new Node(5);
+    root.right = new Node(6);
+    root.left.left = new Node(-3);
+    root.left.right = new Node(-2);
+
+    inOrderRec(root);
+
+    delete_zero_sum_subtree(root);
+
+    inOrderRec(root);
+})()

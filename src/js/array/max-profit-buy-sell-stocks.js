@@ -41,5 +41,7 @@ let arr = [12, 5, 9, 19];
 console.log(find_buy_sell_stock_prices(arr));  //[5, 19] buy at 5; sell at 19
 
 arr = [21, 12, 11, 9, 6, 3];
-console.log(find_buy_sell_stock_prices(arr));  //[12, 11] buy at 12; sell at 11
+let stockPrice = [10, 5, 8, 9, 2, 20, 15, 30];
+
+console.log(find_buy_sell_stock_prices(stockPrice));  //[12, 11] buy at 12; sell at 11
 

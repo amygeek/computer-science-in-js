@@ -27,6 +27,7 @@ let get_k_sum_subsets_1 = function(v, target_sum, sets) {
         for (let j = 0; j < v.length; j++) {
             if (get_bit(i, j) === 1) {
                 sum = sum + v[j];
+                console.log("sum: ", sum);
                 if (sum > target_sum) {
                     break;
                 }
@@ -89,4 +90,7 @@ let get_k_sum_subsets_2 = function(list, target_sum, sets) {
     let partial_list = [];
     let array_stack = [];
     get_k_sum_subsets_rec(list, partial_list, target_sum, sets, array_stack);
+    return sets;
 };
+
+//console.log(get_k_sum_subsets_2(v, target_sum, sets));  //[ Set { 2, 5 }, Set { 7 } ]

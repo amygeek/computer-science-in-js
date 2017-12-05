@@ -38,7 +38,7 @@ class SinglyLinkedList {
             current = current.next;
         }
         str += 'null';
-        return str;
+        console.log( str );
     }
     reverseIteratively() {
 
@@ -117,30 +117,64 @@ class SinglyLinkedList {
         }
 
     }
+
+    add_integers (list1, list2) {
+
+        let result = null;
+        let last = null;
+        let carry = 0;
+        let integer1 = list1.head;
+        let integer2 = list2.head;
+
+        while (integer1 || integer2 || carry > 0) {
+            let first = !integer1 ? 0 : integer1.data;
+            let second = !integer2 ? 0 : integer2.data;
+            let sum = first + second + carry;
+            let pNew = this.insert(sum);
+            carry = Math.floor(sum / 10);
+            if (!result) {
+                result = pNew;
+            } else {
+                last.next = pNew;
+            }
+
+            last = pNew;
+            if (integer1) {
+                integer1 = integer1.next;
+            }
+
+            if (integer2) {
+                integer2 = integer2.next;
+            }
+        }
+
+        return result;
+    }
 }
 
-export default SinglyLinkedList;
+//export default SinglyLinkedList;
 
 //test
-/*
+
 (function() {
-    let linkedList = new SinglyLinkedList();
-    linkedList.insert(3);
-    linkedList.insert(2);
-    linkedList.insert(8);
-    linkedList.insert(7);
-    linkedList.insert(1);
-    linkedList.insert(18);
-    console.log(linkedList.print());
-    console.log(linkedList.length());
-    linkedList.reverseIteratively();
-    console.log(linkedList.print());
-    let node = linkedList.reverseRecursively(linkedList.head);
-    linkedList.head = node;
-    console.log(linkedList.print());
-    linkedList.removeByIndex(2);
-    console.log(linkedList.length());
-    console.log(linkedList.print());
-    console.log(linkedList.removeByIndex(10)); // -1
+    let list1 = new SinglyLinkedList();
+    list1.insert(5);
+    list1.insert(7);
+    list1.insert(9);
+    list1.insert(9);
+    list1.print();
+
+    let list2 = new SinglyLinkedList();
+    list2.insert(7);
+    list2.insert(1);
+    list2.insert(9);
+    list2.print();
+
+    let list3 = new SinglyLinkedList();
+
+    list3.add_integers(list1, list2);
+
+    console.log(list3)
+
 })();
-*/
+

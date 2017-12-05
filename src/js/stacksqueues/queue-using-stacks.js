@@ -14,28 +14,28 @@
  */
 class queue_using_stack {
     constructor() {
-        this.stack1 = [];
-        this.stack2 = [];
+        this.newestStack = [];
+        this.oldestStack = [];
     }
 
     enqueue(data) {
-        this.stack1.push(data);
+        this.newestStack.push(data);
     }
     empty() {
-        return (this.stack1.length === 0 && this.stack2.length === 0);
+        return (this.newestStack.length === 0 && this.oldestStack.length === 0);
     }
     dequeue() {
         if (this.empty()) {
             throw "stack is empty";
         }
 
-        if (this.stack2.length === 0) {
-            while (this.stack1.length !== 0) {
-                this.stack2.push(this.stack1.pop());
+        if (this.oldestStack.length === 0) {
+            while (this.newestStack.length !== 0) {
+                this.oldestStack.push(this.newestStack.pop());
             }
         }
 
-        return this.stack2.pop();
+        return this.oldestStack.pop();
     }
 }
 
@@ -51,28 +51,28 @@ class queue_using_stack {
  */
 class queue_using_stack_2 {
     constructor() {
-        this.stack1 = [];
-        this.stack2 = [];
+        this.newestStack = [];
+        this.oldestStack = [];
     }
-    //newest item is on the bottom of stack1, and the oldest item are on top of stack1
+    //newest item is on the bottom of newestStack, and the oldest item are on top of newestStack
     enqueue(data) {
 
-        while (this.stack1.length !== 0) {
-            this.stack2.push(this.stack1.pop());
+        while (this.newestStack.length !== 0) {
+            this.oldestStack.push(this.newestStack.pop());
         }
-        this.stack1.push(data);
+        this.newestStack.push(data);
 
-        while (this.stack2.length !== 0) {
-            this.stack1.push(this.stack2.pop());
+        while (this.oldestStack.length !== 0) {
+            this.newestStack.push(this.oldestStack.pop());
         }
     }
     empty() {
-        return (this.stack1.length === 0 && this.stack2.length === 0);
+        return (this.newestStack.length === 0 && this.oldestStack.length === 0);
     }
     dequeue() {
         if (this.empty()) {
             throw "stack is empty";
         }
-        return this.stack1.pop();
+        return this.newestStack.pop();
     }
 }

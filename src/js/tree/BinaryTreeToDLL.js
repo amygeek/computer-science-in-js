@@ -79,6 +79,25 @@ class BinaryTreeToDLL {
         this.updatePrev( node );
         return this.updateNext( node );
     }
+
+    inOrderRec(root){
+        if (root){
+
+            //traverse the left subtree
+            if (root.left !== null){
+                this.inOrderRec(root.left);
+            }
+
+            //call the process method on this node
+            console.log(root.data);
+
+            //traverse the right subtree
+            if (root.right !== null){
+                this.inOrderRec(root.right);
+            }
+        }
+    }
+
 }
 
 //testing
@@ -103,6 +122,7 @@ class BinaryTreeToDLL {
 
     let BT2Dll = new BinaryTreeToDLL();
 
+    BT2Dll.inOrderRec(root);
     let head = BT2Dll.binaryTree2Dll(root);
     BT2Dll.printDll(head);
 

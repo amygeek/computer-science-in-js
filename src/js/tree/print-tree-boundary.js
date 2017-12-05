@@ -67,3 +67,39 @@ let display_tree_perimeter = function(root) {
         print_right_perimeter(root.right);
     }
 };
+
+class Node {
+    constructor( d ) {
+        this.data = d;
+        this.left = null;
+        this.right = null;
+    }
+
+
+}
+
+/*********************************
+       100
+     /    \
+   50     200
+  /  \    /  \
+ 25  75  125  350
+  \    \
+  40    80
+print 100 50 25 40 80 125 350 200
+ *********************************/
+
+(function() {
+    let root = new Node(100);
+    root.left = new Node(50);
+    root.right = new Node(200);
+    root.left.left = new Node(25);
+    root.left.left.right = new Node(40);
+    root.left.right = new Node(75);
+    root.left.right.right = new Node(80);
+    root.right.left = new Node(125);
+    root.right.right = new Node(350);
+
+    display_tree_perimeter(root);
+
+})()
