@@ -45,5 +45,4 @@ let arr = [90,100,200,50,60,70,80,1,10,20,30,40];
 let binary_search_rotated = function(arr, x) {
     return binarySearchRecs(arr, 0, arr.length - 1, x);
 };
-
 console.log(binary_search_rotated(arr, 1));

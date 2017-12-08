@@ -19,49 +19,54 @@ let LIS = (arr) => {
 }
 
 
-let ceilIndex = ( arr,  l,  r,  key) => {
+let ceilIndex = ( arr,  left,  right,  key) => {
 
-    while (l<=r) {
-        let mid = (l + r ) /2;
+    while (left < right) {
 
-        if (arr[mid] >= key)
-            r = mid - 1;
-        else
-            l = mid + 1;
-    }
+        let mid = (left + right ) /2;
 
-    return r;
-}
-
-let LIS2 = (arr, size) => {
-    // Add boundary case, when array size is one
-
-    let tailTable = [];
-    let len = 0; // always points empty slot
-
-    tailTable[0] = arr[0];
-
-    for (let i = 1; i < size; i++) {
-        if (arr[i] < tailTable[0]) {
-            // new smallest value
-            tailTable[0] = arr[i];
-
-        } else if (arr[i] > tailTable[len]) {
-            // arr[i] wants to extend largest subsequence
-            tailTable[++len] = arr[i];
-
+        if (arr[mid] >= key) {
+            right = mid - 1;
         } else {
-            // arr[i] wants to be current end candidate of an existing
-            // subsequence. It will replace ceil value in tailTable
-            tailTable[ceilIndex(tailTable, 0, len, arr[i])] = arr[i];
+            left = mid + 1;
         }
 
     }
 
-    return tailTable;
+    return right;
 }
 
-let testArr = [2, 6, 3, 4, 1, 2, 9, 5, 8];
+let LIS2 = (arr, size) => {
 
-console.log(LIS2(testArr, testArr.length));
+    // Add boundary case, when array size is one
+
+    let newArr = [];
+    let len = 0;
+
+    newArr[0] = arr[0];
+
+    for (let i = 1; i < size; i++) {
+        if (arr[i] < newArr[0]) {
+            // new smallest value
+            newArr[0] = arr[i];
+
+        } else if (arr[i] > newArr[len]) {
+            // arr[i] wants to extend largest subsequence
+            newArr[++len] = arr[i];
+
+        } else if (i + 1 < size) {
+            // If arr[i] is in between, we will find a list with largest end element that is smaller than arr[i]
+            // It will replace ceil value in newArr. We make sure there is at least one more element after arr[i]
+            newArr[ceilIndex(newArr, 0, len, arr[i])] = arr[i];
+        }
+
+    }
+
+    return newArr;
+}
+
+let testArr = [2, 5, 3, 7, 11, 8, 10, 13, 6 ];
+
+console.log(LIS2(testArr, testArr.length));  //6 in len [ 2, 3, 7, 8, 10, 13 ]
+
 

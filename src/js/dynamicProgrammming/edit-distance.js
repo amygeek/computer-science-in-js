@@ -182,41 +182,37 @@ let compute_levenshtein_distance2 = function(str1, str2) {
 
 let  editDistDP = (str1, str2, m, n) => {
     // Create a table to store results of subproblems
-    let dp;
-
-    for (let i = 0; i < m + 1; i++) {
-        dp = [];
-        for (let j = 0; j < n + 1; j++) {
-            dp.push([]);
-        }
+    let dp = new Array(m+1);
+    for (let i = 0; i <= m; i++) {
+        dp[i] = new Array(n+1);
     }
 
     // Fill d[][] in bottom up manner
-    for (let i=0; i<=m; i++)
-    {
-        for (let j=0; j<=n; j++)
-        {
+    for (let i=0; i<=m; i++) {
+        for (let j=0; j<=n; j++) {
+
             // If first string is empty, only option is to
-            // isnert all characters of second string
-            if (i==0)
+            // insert all characters of second string
+            if ( i == 0 ) {
                 dp[i][j] = j;  // Min. operations = j
 
             // If second string is empty, only option is to
             // remove all characters of second string
-            else if (j==0)
+            } else if (j==0) {
                 dp[i][j] = i; // Min. operations = i
 
             // If last characters are same, ignore last char
             // and recur for remaining string
-            else if (str1.charAt(i-1) == str2.charAt(j-1))
-                dp[i][j] = dp[i-1][j-1];
+            } else if (str1[i-1] == str2[j-1]) {
+                dp[i][j] = dp[i - 1][j - 1];
 
-            // If last character are different, consider all
-            // possibilities and find minimum
-            else
-                dp[i][j] = 1 + minimum(dp[i][j-1],  // Insert
-                        dp[i-1][j],  // Remove
-                        dp[i-1][j-1]); // Replace
+                // If last character are different, consider all
+                // possibilities and find minimum
+            } else {
+                dp[i][j] = 1 + minimum(dp[i][j - 1],  // Insert
+                        dp[i - 1][j],  // Remove
+                        dp[i - 1][j - 1]); // Replace
+            }
         }
     }
 
@@ -224,5 +220,5 @@ let  editDistDP = (str1, str2, m, n) => {
 }
 
 let str1 = "sunday";
-let str2 = "saturday";
-console.log( editDistDP( str1 , str2 , str1.length, str2.length) );
+let str2 = "monday";
+console.log( editDistDP( str1 , str2 , str1.length, str2.length) );  //2

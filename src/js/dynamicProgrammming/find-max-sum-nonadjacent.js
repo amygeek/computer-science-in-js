@@ -17,11 +17,11 @@ let find_max_sum_nonadjacent = function( a ) {
     }
 
     let result = [];
-    result.push(a[0]);
+    result[0] = a[0];
     for (var i = 1; i < len; i++) {
 
         //Max Sum of the last iteration
-        result.push(Math.max(a[i], result[i - 1]));
+        result[i] = Math.max(a[i], result[i - 1]);
         if (i - 2 >= 0) {
             //Max Sum of second last iteration + current iteration index.
             result[i] = Math.max(result[i], a[i] + result[i - 2]);

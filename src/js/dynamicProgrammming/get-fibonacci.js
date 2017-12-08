@@ -43,3 +43,21 @@ let get_fibonacci_rec = function(n) {
 
     return get_fibonacci_rec(n - 1) + get_fibonacci_rec(n - 2);
 };
+
+let fibonacci2 = n => {
+    if ( n === 0 || n === 1) {
+        return n;
+    }
+
+    let n1 = 0;
+    let n2 = 1
+    let res = 0;
+
+    let i = 2;
+    while ( i <= n ) {
+        res = n1 + n2;
+        n1 = n2;
+        n2 = res;
+        i++
+    }
+}
