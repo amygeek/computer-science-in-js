@@ -39,3 +39,42 @@ let remove_duplicates = function(head) {
 
     return head;
 };
+
+let print = (head) => {
+    if ( !head ) {
+        return;
+    }
+
+    let str = '';
+    while (head) {
+        str += head.data + '->';
+        head = head.next;
+    }
+    console.log(str);
+
+
+}
+
+//test
+class Node {
+    constructor( x ) {
+        this.data = x;
+        this.next = null;
+    }
+}
+
+//turn 7 ->14->28->28->14->21->null  to 7 ->14->28->21->null
+let list = new Node(7);
+list.next = new Node(14);
+list.next.next = new Node(28);
+list.next.next.next = new Node(28);
+list.next.next.next.next = new Node(14);
+list.next.next.next.next.next = new Node(21);
+
+print(list)
+
+remove_duplicates(list);
+
+print(list)
+
+

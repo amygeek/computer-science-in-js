@@ -14,7 +14,7 @@ let search = (grid, v) => {
             return [rows, cols];
         } else if ( grid[rows][cols] < v ) {
             rows++;
-        } else if ( grid[rows][cols] > v ) {
+        } else  {
             cols--
         }
     }
@@ -22,4 +22,4 @@ let search = (grid, v) => {
     return -1;
 };
 
-console.log(search(m, 18));
+console.log(search(m, 25));

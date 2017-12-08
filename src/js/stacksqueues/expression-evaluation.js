@@ -107,6 +107,7 @@ let evaluate = function(expr) {
 
     let t = (operands.length > 0) ? operands[0] : 0;
     i = 1;
+
     for (let k = 0; k < operators.length; k++) {
         let operator = operators[k];
         let operand = operands[i];

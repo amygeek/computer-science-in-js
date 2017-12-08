@@ -105,3 +105,28 @@ let arr2 = [1, 2, 3, 4, 5];
 
 //[ 4, 5, 6, 7, 8, 9, 10, 1, 2, 3 ]
 console.log( rotate_array( arr2, 3 ) );
+
+//using JS build in function. Return a copy of rotated array
+let rotateArray = (array, steps) => {
+    // check if there's even something to rotate
+    if(array.length < 2) {
+        return array.slice(0); // always return a copy
+    }
+
+    // get the number of actual rotations to perform
+    var n = steps % array.length;
+
+    // check if there's any need to rotate
+    if(n === 0) {
+        return array.slice(0); // always return a copy
+    }
+
+    // slice and concat
+    if(n < 0) {
+        return array.slice(n).concat(array.slice(0, array.length+n));
+    } else {
+        return array.slice(n).concat(array.slice(0, n));
+    }
+}
+
+console.log( rotateArray( arr2, 2 ) );

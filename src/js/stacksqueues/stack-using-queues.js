@@ -93,3 +93,13 @@ class stack_using_queue_2 {
         return this.queue1.shift();
     }
 }
+
+let testStack = new stack_using_queue();
+
+testStack.push(1);
+testStack.push(2);
+testStack.push(3);
+testStack.push(4);
+
+console.log(testStack);
+console.log(testStack.pop());

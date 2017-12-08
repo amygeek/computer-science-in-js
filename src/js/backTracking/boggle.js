@@ -74,7 +74,10 @@ class Boggle {
     }
 }
 
-let g = [['c', 'a', 't'], ['r', 'r', 'e'], ['t', 'o', 'n']];
+let g = [
+    ['c', 'a', 't'],
+    ['r', 'r', 'e'],
+    ['t', 'o', 'n']];
 let dict = new Set(['cat', 'cater', 'art', 'toon', 'moon', 'not', 'eat', 'ton']);
 let boggle = new Boggle(g, dict);
 

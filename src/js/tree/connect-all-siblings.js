@@ -54,3 +54,60 @@ let connect_siblings_using_queue = function(root) {
     }
     prev.next = null;
 };
+
+let isBst = (root, min, max) => {
+
+    if (!root ) {
+        return;
+    }
+
+    if (min && root.data < min || max && root.data > max ) {
+        return false;
+    }
+
+    return isBst(root.left, root.data, max) && isBst(root.right, min, root.data);
+
+}
+
+class Node {
+    constructor( d ) {
+        this.data = d;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class BST {
+    constructor() {
+        this.root = null;
+        this.head = null;
+    }
+
+    add( d ) {
+        let n = new Node( d );
+        if (!this.root ) {
+            this.root = n;
+        } else {
+            let current = this.root;
+            while( current ) {
+                if (current.data > d ) {
+                    if (!current.left) {
+                        current.left = n;
+                        break;
+                    } else {
+                        current = current.left;
+                    }
+                } else if (current.data < d ) {
+                    if(!current.right) {
+                        current.right = d;
+                        break;
+                    } else {
+                        current = current.right;
+                    }
+                } else {
+                    break; //skid the same value
+                }
+            }
+        }
+    }
+}

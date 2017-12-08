@@ -19,14 +19,12 @@ let is_valid_move = function(proposed_row, proposed_col, solution) {
 
     // we need to check with all queens
     // in current solution
-    for (let i = 0; i < proposed_row; i++) {
-        let old_row = i;
-        let old_col = solution[i];
+    for (let row = 0; row < proposed_row; row++) {
 
-        let diagonal_offset = proposed_row - old_row;
-        if (old_col === proposed_col ||
-            old_col === proposed_col - diagonal_offset ||
-            old_col === proposed_col + diagonal_offset) {
+        let col = solution[row];
+
+
+        if (col === proposed_col || Math.abs(col - proposed_col) === proposed_row - row) {
             return false;
         }
     }
@@ -105,6 +103,46 @@ let solve_n_queens_2 = function(n, results) {
 
 let re = [];
 
-solve_n_queens_2(4, re);
+//solve_n_queens_2(4, re);
 
+
+solve_n_queens(4, re);  //[ [ 1, 3, 0, 2 ], [ 2, 0, 3, 1 ] ]
 console.log(re);
+
+let placeQueen = (n) => {
+    let result = [];
+    let solution = [];
+    moveQueen(n, solution, 0, result);
+    return result;
+}
+
+let moveQueen = (n, solution, row, result) => {
+    if ( row === n ) {
+        result.push(solution.slice());
+        return;
+    }
+    for (let col = 0; col < n; col++) {
+        if ( canPlaceQueen (solution, row, col) ) {
+            solution[row] = col;
+            moveQueen(n, solution, row + 1, result);
+        }
+    }
+}
+
+let canPlaceQueen = (solution, row1, col1) => {
+    for (let row2=0; row2<row1; row2++) {
+        let col2 = solution[row2];
+        if (col2 === col1) {
+            return false;
+        }
+        let rowDistance = row1 - row2;
+        colDistance = Math.abs(col1 - col2);
+        if (rowDistance === colDistance) {
+            return false;
+        }
+    }
+    return true;
+}
+
+//[ [ 1, 3, 0, 2 ], [ 2, 0, 3, 1 ] ]
+console.log(placeQueen(4));

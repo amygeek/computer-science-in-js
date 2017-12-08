@@ -113,3 +113,41 @@ let merge_sort = function(head) {
 
     return merge_sorted_lists(first_second.first, first_second.second);
 };
+
+//test
+let print = (head) => {
+    if ( !head ) {
+        return;
+    }
+
+    let str = '';
+    while (head) {
+        str += head.data + '->';
+        head = head.next;
+    }
+    console.log(str);
+
+
+}
+class Node {
+    constructor( x ) {
+        this.data = x;
+        this.next = null;
+    }
+}
+
+let list = new Node(7);
+list.next = new Node(14);
+list.next.next = new Node(38);
+list.next.next.next = new Node(28);
+list.next.next.next.next = new Node(15);
+list.next.next.next.next.next = new Node(21);
+list.next.next.next.next.next.next = new Node(11);
+
+print(list)
+
+merge_sort(list);
+
+print(list)
+
+

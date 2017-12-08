@@ -117,3 +117,4 @@ let shortest_distance_travelled_2 = function(m, points) {
     }
     return min_pt;
 };
+

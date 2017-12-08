@@ -83,6 +83,16 @@ let display = function (head) {
     console.log(list + "null");
 }
 
+let displayRec = function (head) {
+
+    if (!head) {
+        return head;
+    }
+
+    displayRec(head.next);
+}
+
+//test
 class Node {
 
     constructor (data) {
@@ -91,18 +101,17 @@ class Node {
     }
 }
 
-(function() {
+let a = new Node(1);
+a.next = new Node(2);
+a.next.next = new Node(3);
+a.next.next.next = new Node(4);
+a.next.next.next.next = new Node(5);
 
-    let a = new Node(1);
-    a.next = new Node(2);
-    a.next.next = new Node(3);
-    a.next.next.next = new Node(4);
-    a.next.next.next.next = new Node(5);
+display(a);
+displayRec(a);
+let x = rotate_list(a, 2);
+console.log("Rotate LinkedList: ");
+display(x);
 
-    display(a);
-    let x = rotate_list(a, 2);
-    console.log("Rotate LinkedList: ");
-    display(x);
 
-})();
 
