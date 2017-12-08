@@ -13,12 +13,6 @@ class SinglyLinkedList {
     length() {
         let len = 0;
         let current = this.head;
-
-        if (current) {
-            let len = 1;
-        } else {
-            let len = 0;
-        }
         while (current) {
             current = current.next;
             len++;
@@ -44,7 +38,7 @@ class SinglyLinkedList {
             current = current.next;
         }
         str += 'null';
-        return str;
+        console.log( str );
     }
     reverseIteratively() {
 
@@ -99,6 +93,28 @@ class SinglyLinkedList {
 
         return this.head;
     }
+    removeByVal( v ) {
+        let current = this.head;
+        let previous = null;
+
+        if ( current.data === v ) {
+            this.head = current.next;
+            return current.data;
+        } else {
+            while(current && current.data !== v) {
+                previous = current;
+                current = current.next;
+            }
+            //skip current item that is being removed
+            if (current) {
+                previous.next = current.next;
+                return current.data;
+            } else {
+                return -1;
+            }
+        }
+    }
+
     removeByIndex( index ) {
 
         let len = this.length();
@@ -143,6 +159,39 @@ class SinglyLinkedList {
         }
         return head;
 
+    }
+
+    add_integers (list1, list2) {
+
+        let result = null;
+        let last = null;
+        let carry = 0;
+        let integer1 = list1.head;
+        let integer2 = list2.head;
+
+        while (integer1 || integer2 || carry > 0) {
+            let first = !integer1 ? 0 : integer1.data;
+            let second = !integer2 ? 0 : integer2.data;
+            let sum = first + second + carry;
+            let pNew = this.insert(sum);
+            carry = Math.floor(sum / 10);
+            if (!result) {
+                result = pNew;
+            } else {
+                last.next = pNew;
+            }
+
+            last = pNew;
+            if (integer1) {
+                integer1 = integer1.next;
+            }
+
+            if (integer2) {
+                integer2 = integer2.next;
+            }
+        }
+
+        return result;
     }
 }
 
