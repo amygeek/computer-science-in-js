@@ -57,7 +57,9 @@ let remove_duplicates_2 = function(str) {
         if (!found) {
             str = replaceAt(str, write_index, str[i]);
             write_index++;
+            console.log('str=', str)
         }
+
     }
     return str.substr(0, write_index);
 };

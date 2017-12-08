@@ -26,6 +26,8 @@ let find_max_sum_nonadjacent = function( a ) {
             //Max Sum of second last iteration + current iteration index.
             result[i] = Math.max(result[i], a[i] + result[i - 2]);
         }
+
+        console.log(result);
     }
     return result[len - 1];
 };

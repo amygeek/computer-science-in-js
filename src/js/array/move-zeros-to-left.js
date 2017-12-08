@@ -20,4 +20,9 @@ let move_zeros_to_left = function(A) {
         A[write_index] = 0;
         write_index--;
     }
+
+    return A;
 };
+
+let arr = [1, 0, 3, 0, 4, 5];
+console.log(move_zeros_to_left(arr));

@@ -1,3 +1,10 @@
+class Node {
+    constructor(data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
 
 class BinarySearchTree {
 
@@ -18,11 +25,7 @@ class BinarySearchTree {
     add(data){
 
         //create a new item object, place data in
-        let node = {
-                data: data,
-                left: null,
-                right: null
-            },
+        let node = new Node( data ),
 
         //used to traverse the structure
             current = null;
@@ -65,6 +68,29 @@ class BinarySearchTree {
         }
     }
 
+    insert(data) {
+
+        this.root = this.insertRec( this.root, data);
+
+    }
+
+    insertRec(root, data) {
+
+        if ( root === null ) {
+            root = new Node(data);
+            return root;
+        }
+        if (root.data < data ) {
+            root.right = this.insertRec(root.right, data);
+
+        } else if ( root.data > data ) {
+            root.left = this.insertRec(root.left, data);
+        }
+
+        return root;
+
+    }
+
     /**
      * Determines if the given data is present in the tree.
      * @param {variant} data The data to find.
@@ -74,7 +100,7 @@ class BinarySearchTree {
     contains (data){
 
         var found       = false,
-            current     = this.root
+            current     = this.root;
 
         //make sure there's a node to search
         while(!found && current){
@@ -254,6 +280,41 @@ class BinarySearchTree {
 
     }
 
+    minValue( root) {
+        let min = root.data;
+        while (root.left !== null) {
+            min = root.left.data;
+            root = root.left;
+        }
+        return min;
+    }
+
+    removeRec(root, data) {
+        if (!root) {
+            return root;
+        }
+
+        if ( root.data < data ) {
+            root.right = this.removeRec(root.right, data);
+        } else if ( root.data > data ) {
+            root.left = this.removeRec(root.left, data);
+        } else {
+            //found the item to be deleted
+            if (!root.left) {
+                return root.right;
+            } else if (!root.right) {
+                return root.left;
+            }
+
+            root.data = this.find_min(root.right).data;
+
+            root.right = this.removeRec(root.right, root.data);
+
+        }
+
+        return root;
+    }
+
     /**
      * Returns the number of items in the tree. To do this, a traversal
      * must be executed.
@@ -300,20 +361,11 @@ class BinarySearchTree {
      * @param root
      */
     inOrderRec(root){
-        if (root){
 
-            //traverse the left subtree
-            if (root.left !== null){
-                this.inOrderRec(root.left);
-            }
-
-            //call the process method on this node
+        if (root != null) {
+            this.inOrderRec(root.left);
             console.log(root.data);
-
-            //traverse the right subtree
-            if (root.right !== null){
-                this.inOrderRec(root.right);
-            }
+            this.inOrderRec(root.right);
         }
     }
 
@@ -423,23 +475,30 @@ class BinarySearchTree {
  *********************************/
 let test = () => {
     let tree = new BinarySearchTree();
-    tree.add(100);
-    tree.add(50);
-    tree.add(200);
-    tree.add(25);
-    tree.add(75);
-    tree.add(125);
-    tree.add(350);
+    tree.insert(100);
+    tree.insert(50);
+    tree.insert(200);
+    tree.insert(25);
+    tree.insert(75);
+    tree.insert(125);
+    tree.insert(350);
 
+    let root = tree.root;
     console.log('travel tree in order recursively');
     //print 25 50 75 100 125 200 350
-    tree.inOrderRec(tree.root);
-
-    console.log('travel tree in order iteratively');
-    tree.inOrderIterative(tree.root);
+    tree.inOrderRec(root);
 
     console.log('Level order traversal');
     //print 100 50 200 25 75 125 350
+    tree.levelOrderTraversal(tree.root);
+
+    //tree.remove(100)
+    tree.removeRec(tree.root, 100)
+    console.log('Level order traversal after removing node 100');
+    tree.inOrderIterative(tree.root);
+
+    console.log('Level order traversal');
+    //print 75 50 200 25 125 350
     tree.levelOrderTraversal(tree.root);
 
     //100
@@ -447,3 +506,4 @@ let test = () => {
 }
 
 test();
+

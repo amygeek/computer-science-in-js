@@ -11,21 +11,29 @@
  * @returns {string}
  */
 
-let swap_char = (str, i, j) => {
-    let arr = str.split('');
-    let temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
-    return arr.join('');
+let replaceAt = function(string, index, character){
+    return string.substr(0, index) + character + string.substr(index+character.length);
+}
+
+let swap_char = function(input, i, j) {
+    let temp = input[i];
+    input = replaceAt(input, i, input[j]);
+    input = replaceAt(input, j, temp);
+    return input;
 };
 
+
 let permute_string_rec = (str, start, end, perms) => {
+
     if (start === end) {
         perms.push(str);
         return;
     }
-    for (let i = start; i < end + 1; i++) {
+
+    for (let i = start; i < end; i++) {
+
         let swapped_input = swap_char(str, start, i);
+
         permute_string_rec(swapped_input, start + 1, end, perms);
     }
 };
@@ -33,13 +41,15 @@ let permute_string_rec = (str, start, end, perms) => {
 
 let permute_string = (str) => {
     let perms = [];
-    permute_string_rec(str, 0, str.length - 1, perms);
+    permute_string_rec(str, 0, str.length, perms);
     return perms;
 };
 
 let insertCharAt = (word, c, j) => {
+
     let start = word.substr(0, j);
     let end = word.substr(j);
+
     return start + c + end;
 }
 
@@ -51,6 +61,7 @@ let permute_string2 = (str) => {
     }
 
     let first = str.charAt(0);
+
     let remainder = str.substr(1);
     let words = permute_string2(remainder);
 
@@ -59,9 +70,11 @@ let permute_string2 = (str) => {
             perms.push( insertCharAt(word, first, i));
         }
     });
+
     return perms;
 
 }
+
 (function(){
     console.log( permute_string( 'abc' ));
     console.log( permute_string2( 'abc' ));

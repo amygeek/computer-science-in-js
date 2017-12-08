@@ -54,16 +54,16 @@ class queue_using_stack_2 {
         this.newestStack = [];
         this.oldestStack = [];
     }
-    //newest item is on the bottom of newestStack, and the oldest item are on top of newestStack
+    //newest item is on the bottom of oldestStack, and the oldest item are on top of oldestStack
     enqueue(data) {
-
-        while (this.newestStack.length !== 0) {
-            this.oldestStack.push(this.newestStack.pop());
-        }
-        this.newestStack.push(data);
 
         while (this.oldestStack.length !== 0) {
             this.newestStack.push(this.oldestStack.pop());
+        }
+        this.oldestStack.push(data);
+
+        while (this.newestStack.length !== 0) {
+            this.oldestStack.push(this.newestStack.pop());
         }
     }
     empty() {
@@ -73,6 +73,16 @@ class queue_using_stack_2 {
         if (this.empty()) {
             throw "stack is empty";
         }
-        return this.newestStack.pop();
+        return this.oldestStack.pop();
     }
 }
+
+let testQueue = new queue_using_stack_2();
+
+testQueue.enqueue(1);
+testQueue.enqueue(2);
+testQueue.enqueue(3);
+testQueue.enqueue(4);
+
+console.log(testQueue);
+console.log(testQueue.dequeue());

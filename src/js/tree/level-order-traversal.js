@@ -1,3 +1,18 @@
+/**
+ * Level Order Traversal of Binary Tree
+    Given root of a binary tree, display node values at each level. Node values for all levels should be displayed on separate lines.
+     100
+    /    \
+   50    200
+  /  \   /  \
+ 25  75 125   350
+
+ Level order traversal for this tree should look like:
+
+ 100
+ 50, 200
+ 25, 75, 350
+ */
 let level_order_traversal_2 = function(root) {
     if (!root) {
         return;

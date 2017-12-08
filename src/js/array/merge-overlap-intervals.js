@@ -4,36 +4,37 @@
  * Input array is sorted by starting timestamps. You are required to merge overlapping intervals and return output array (list)
  * Consider below input array. Intervals (1, 5), (3, 7), (4, 6), (6, 8) are overlapping so should be merged to one big interval (1, 8).
  * Similarly intervals (10, 12) and (11, 15) are also overlapping intervals and should be merged to (10, 15).
- * @param v1
+ * @param list
  * @returns {Array}
  */
-let find_busy_intervals = function(v1) {
-    if (!v1 || v1.length === 0) {
+let find_busy_intervals = function(list) {
+    let len = list.length;
+    if (!list || len === 0) {
         return;
     }
 
-    let v2 = [];
-    v2.push({
-        'first': v1[0].first,
-        'second': v1[0].second
+    let newList = [];
+    newList.push({
+        'first': list[0].first,
+        'second': list[0].second
     });
-    for (let i = 0; i < v1.length; i++) {
-        let x1 = v1[i].first;
-        let y1 = v1[i].second;
+    for (let i = 2; i < len; i++) {
+        let x1 = list[i].first;
+        let y1 = list[i].second;
 
-        let y2 = v2[v2.length - 1].second;
+        let y2 = newList[newList.length - 1].second;
 
         if (y2 >= x1) {
-            v2[v2.length - 1].second = Math.max(y1, y2);
+            newList[newList.length - 1].second = Math.max(y1, y2);
         } else {
-            v2.push({
+            newList.push({
                 'first': x1,
                 'second': y1
             });
         }
 
     }
-    return v2;
+    return newList;
 };
 
 let list = [

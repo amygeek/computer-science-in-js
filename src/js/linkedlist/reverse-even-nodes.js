@@ -50,6 +50,7 @@ let reverse_even_nodes = function(head) {
         list_even = even;
 
         curr = curr.next;
+
     }
 
     // Now, merge the two lists
@@ -60,3 +61,41 @@ let reverse_even_nodes = function(head) {
 
     return merge_alternating(head, list_even);
 };
+
+let print = (head) => {
+    if ( !head ) {
+        return;
+    }
+
+    let str = '';
+    while (head) {
+        str += head.data + '->';
+        head = head.next;
+    }
+    console.log(str);
+
+
+}
+
+//test
+class Node {
+    constructor( x ) {
+        this.data = x;
+        this.next = null;
+    }
+}
+
+let list = new Node(1);
+list.next = new Node(2);
+list.next.next = new Node(3);
+list.next.next.next = new Node(4);
+list.next.next.next.next = new Node(5);
+//list.next.next.next.next.next = new Node(6);
+
+print(list)
+
+reverse_even_nodes(list);
+
+print(list)
+
+

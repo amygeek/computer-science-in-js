@@ -70,6 +70,29 @@ class SinglyLinkedList {
         return temp;
     }
 
+    deleteNode( v ) {
+        let current = this.head;
+        let previous = null;
+
+        if ( current.data === v ) {
+            this.head = current.next;
+        } else {
+
+            while(current && current.data !== v) {
+                previous = current;
+                current = current.next;
+            }
+            //not found in the list
+            if (!current) {
+                return null;
+            }
+            // skip current item that is being removed
+            previous.next = current.next;
+        }
+
+
+        return this.head;
+    }
     removeByVal( v ) {
         let current = this.head;
         let previous = null;
@@ -118,6 +141,26 @@ class SinglyLinkedList {
 
     }
 
+    findNthFromlastNode(head, k) {
+        if ( !head || k < 1 ) {
+            return null;
+        }
+        let current = head;
+        while ( current && k > 0) {
+            current = current.next;
+            k--;
+        }
+        if ( k !== 0 ) {
+            return null; //out of bound
+        }
+        while(current) {
+            current = current.next;
+            head = head.next;
+        }
+        return head;
+
+    }
+
     add_integers (list1, list2) {
 
         let result = null;
@@ -152,29 +195,30 @@ class SinglyLinkedList {
     }
 }
 
-//export default SinglyLinkedList;
+export default SinglyLinkedList;
 
 //test
-
+/*
 (function() {
-    let list1 = new SinglyLinkedList();
-    list1.insert(5);
-    list1.insert(7);
-    list1.insert(9);
-    list1.insert(9);
-    list1.print();
-
-    let list2 = new SinglyLinkedList();
-    list2.insert(7);
-    list2.insert(1);
-    list2.insert(9);
-    list2.print();
-
-    let list3 = new SinglyLinkedList();
-
-    list3.add_integers(list1, list2);
-
-    console.log(list3)
-
+    let linkedList = new SinglyLinkedList();
+    linkedList.insert(3);
+    linkedList.insert(2);
+    linkedList.insert(8);
+    linkedList.insert(7);
+    linkedList.insert(1);
+    linkedList.insert(18);
+    console.log(linkedList.print());
+    let node = linkedList.findNthFromlastNode(linkedList.head, 1);
+    console.log(node);
+    console.log(linkedList.length());
+    linkedList.reverseIteratively();
+    console.log(linkedList.print());
+    node = linkedList.reverseRecursively(linkedList.head);
+    linkedList.head = node;
+    console.log(linkedList.print());
+    linkedList.deleteNode(18);
+    console.log(linkedList.length());
+    console.log(linkedList.print());
+    console.log(linkedList.removeByIndex(10)); // -1
 })();
-
+*/

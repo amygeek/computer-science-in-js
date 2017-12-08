@@ -33,7 +33,7 @@ let find_low_index = function(arr, num) {
             high = mid - 1;
         }
 
-        mid = low + Math.floor((high - low) / 2);
+        mid = Math.floor((low + high) / 2);
     }
 
     if (arr[low] === num) {
@@ -57,7 +57,7 @@ let find_high_index = function(arr, num) {
             high = mid - 1;
         }
 
-        mid = low + Math.floor((high - low) / 2);
+        mid = Math.floor((low + high) / 2);
     }
 
     if (arr[high] === num) {
