@@ -18,7 +18,7 @@ let find_busy_intervals = function(list) {
         'first': list[0].first,
         'second': list[0].second
     });
-    for (let i = 2; i < len; i++) {
+    for (let i = 1; i < len; i++) {
         let x1 = list[i].first;
         let y1 = list[i].second;
 
@@ -45,4 +45,4 @@ let list = [
     {first: 10, second: 12},
     {first: 11, second: 15}];
 
-console.log(find_busy_intervals(list));
+console.log(mergeInterval(list));
