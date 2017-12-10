@@ -44,3 +44,30 @@ let find_max_sum_sub_array = function(arr) {
     }
     return global_max;
 };
+
+let getLargestSum = ( arr ) => {
+
+    if ( arr.length < 1 ) {
+        return 0;
+    }
+
+    let largest = arr[0];
+    let currentMax = arr[0];
+
+    for (let i = 1, l = arr.length; i < l; i++) {
+        if ( currentMax < 0 ) {
+            currentMax = arr[i];
+        } else {
+            currentMax += arr[i];
+        }
+        if ( currentMax > largest ) {
+            largest = currentMax;
+        }
+    }
+    return largest;
+}
+
+let arr = [-4, 2, -5, 1, 2, 3, 6, -5, 1];
+
+console.log(find_max_sum_sub_array(arr));
+console.log(getLargestSum(arr));

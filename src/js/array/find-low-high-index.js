@@ -21,19 +21,17 @@
 let find_low_index = function(arr, num) {
     let low = 0;
     let high = arr.length - 1;
-    let mid = Math.floor(high / 2);
 
     while (low <= high) {
+        let mid = Math.floor((low + high) / 2);
 
-        let mid_elem = arr[mid];
-
-        if (mid_elem < num) {
+        if (arr[mid] < num) {
             low = mid + 1;
         } else {
             high = mid - 1;
         }
 
-        mid = Math.floor((low + high) / 2);
+
     }
 
     if (arr[low] === num) {
@@ -46,18 +44,17 @@ let find_low_index = function(arr, num) {
 let find_high_index = function(arr, num) {
     let low = 0;
     let high = arr.length - 1;
-    let mid = Math.floor(high / 2);
+
 
     while (low <= high) {
-        let mid_elem = arr[mid];
+        let mid = Math.floor((low + high) / 2);
 
-        if (mid_elem <= num) {
+        if (arr[mid] <= num) {
             low = mid + 1;
         } else {
             high = mid - 1;
         }
 
-        mid = Math.floor((low + high) / 2);
     }
 
     if (arr[high] === num) {

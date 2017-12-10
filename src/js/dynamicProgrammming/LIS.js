@@ -4,21 +4,6 @@
  * for [10, 22, 9, 33, 21, 50, 41, 60, 80] is 6 and LIS is [10, 22, 33, 50, 60, 80].
  */
 
-let LIS = (arr) => {
-    let len = arr.length;
-    let lis = Array(len).fill(1);
-
-    for(let i=1; i<len; i++) {
-        for(let j=0; j<i; j++) {
-            if (arr[j] < arr[i] && lis[i] < lis[j] + 1) {
-                lis[i] = lis[j] + 1;
-            }
-        }
-    }
-    return lis;
-}
-
-
 let ceilIndex = ( arr,  left,  right,  key) => {
 
     while (left < right) {
@@ -36,8 +21,11 @@ let ceilIndex = ( arr,  left,  right,  key) => {
     return right;
 }
 
-let LIS2 = (arr, size) => {
+let LIS = (arr, size) => {
 
+    if ( size === 0 ) {
+        return -1;
+    }
     // Add boundary case, when array size is one
 
     let newArr = [];
@@ -62,11 +50,11 @@ let LIS2 = (arr, size) => {
 
     }
 
+    //return newArr.length;
     return newArr;
 }
 
-let testArr = [2, 5, 3, 7, 11, 8, 10, 13, 6 ];
+//[10, 22, 9, 33, 21, 50, 41, 60, 80] is 6 and LIS is [10, 22, 33, 41, 60, 80].
+let testArr = [2, 5, 3, 7, 11, 8, 10, 13, 6];
 
-console.log(LIS2(testArr, testArr.length));  //6 in len [ 2, 3, 7, 8, 10, 13 ]
-
-
+console.log(LIS(testArr, testArr.length));  //6 in len [ 2, 3, 7, 8, 10, 13 ]

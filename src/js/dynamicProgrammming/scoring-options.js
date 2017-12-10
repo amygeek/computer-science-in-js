@@ -33,10 +33,7 @@ let scoring_options = function(n) {
         return 0;
     }
 
-    let result = [];
-    for (let i = 0; i < n + 1; i++) {
-        result[i] = 0;
-    }
+    let result = new Array(n+1).fill(0);
 
     result[0] = 1;
 
@@ -82,3 +79,46 @@ let scoring_options_dp = function(n) {
     }
     return result[3];
 };
+
+console.log( scoring_options_dp(5) );  //10
+
+let scoreOption = (n) => {
+
+    if ( n <= 0 ) {
+        return 0;
+    }
+    let result = new Array( n + 1).fill(0);
+    result[0] = 1;
+
+    scoreOptionRec( n, result);
+    return result[n]
+}
+let scoreOptionRec = ( n, result) => {
+    if ( n< 0) {
+        return 0;
+    }
+    if (result[n] > 0) {
+        return result[n];
+    }
+    result[n] = scoreOptionRec(n-1, result) + scoreOptionRec(n-2, result) + scoreOptionRec(n-4, result);
+    return result[n];
+}
+
+let scoreOptionDp = ( n ) => {
+    if ( n <= 0 ) {
+        return 0;
+    }
+    let result = [ 0, 0, 0, 1];
+    for (let i=1; i<=n; i++) {
+        let sum = result[3] + result[2] + result[0];
+        result[0] = result[1];
+        result[1] = result[2];
+        result[2] = result[3];
+        result[3] = sum;
+    }
+    return result[3];
+}
+
+
+
+console.log( scoreOptionDp(5) );  //10
