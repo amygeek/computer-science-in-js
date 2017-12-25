@@ -5,7 +5,6 @@ class Boggle {
         this.grid = grid;
         this.dictionary = dictionary;
         this.state = [];
-        this.words = new Set([]);
 
         for (let i = 0; i < grid.length; i++) {
             let temp = [];

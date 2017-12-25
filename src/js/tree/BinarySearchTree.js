@@ -8,7 +8,7 @@ class Node {
 
 class BinarySearchTree {
 
-    
+
     constructor() {
         this.root = null;
     }
@@ -183,28 +183,27 @@ class BinarySearchTree {
                     //two children, little work to do
                     case 2:
 
-                        //new root will be the old root's left child...maybe
-                        replacement = this.root.left;
+                        //new root will be the old root's right child...maybe
+                        replacement = this.root.right;
 
-                        //find the right-most leaf node to be the real new root
-                        while (replacement.right !== null){
+                        //find the left-most leaf node to be the real new root
+                        while (replacement.left !== null){
                             replacementParent = replacement;
-                            replacement = replacement.right;
+                            replacement = replacement.left;
                         }
 
-                        //it's not the first node on the left
-                        if (replacementParent !== null){
+                        //it's not the first node on the right
+                        if (replacementParent !== undefined){
 
-                            //remove the new root from it's previous position
-                            replacementParent.right = replacement.left;
+                            replacementParent.left = replacement.right;
 
                             //give the new root all of the old root's children
-                            replacement.right = this.root.right;
                             replacement.left = this.root.left;
+                            replacement.right = this.root.right;
                         } else {
 
                             //just assign the children
-                            replacement.right = this.root.right;
+                            replacement.left = this.root.left;
                         }
 
                         //officially assign new root
@@ -247,20 +246,25 @@ class BinarySearchTree {
                     case 2:
 
                         //reset pointers for new traversal
-                        replacement = current.left;
-                        replacementParent = current;
+                        replacement = current.right;
 
-                        //find the right-most node
-                        while(replacement.right !== null){
+
+                        //find the left-most node
+                        while(replacement.left !== null){
                             replacementParent = replacement;
-                            replacement = replacement.right;
+                            replacement = replacement.left;
                         }
 
-                        replacementParent.right = replacement.left;
+                        if (replacementParent !== undefined) {
+                            replacementParent.left = replacement.right;
 
-                        //assign children to the replacement
-                        replacement.right = current.right;
-                        replacement.left = current.left;
+                            //assign children to the replacement
+                            replacement.right = current.right;
+                            replacement.left = current.left;
+                        } else {
+                            replacement.left = current.left;
+                        }
+
 
                         //place the replacement in the right spot
                         if (current.data < parent.data){
@@ -291,7 +295,7 @@ class BinarySearchTree {
 
     removeRec(root, data) {
         if (!root) {
-            return root;
+            return null;
         }
 
         if ( root.data < data ) {
@@ -354,7 +358,7 @@ class BinarySearchTree {
     toString() {
         return this.toArray().toString();
     }
-    
+
     /**
      * Traverses the tree and runs the given method on each node
      * For a BST, inorder traversal will always print nodes in an ascending order (based on their datas).
@@ -370,14 +374,14 @@ class BinarySearchTree {
     }
 
     /**
-        Runtime Complexity
-        Linear, O(n).
-        Memory Complexity
-        O(h).
+     Runtime Complexity
+     Linear, O(n).
+     Memory Complexity
+     O(h).
 
-        The iterative solution has O(h) memory complexity as it instantiates a stack
-        that has to store information up to the height of binary tree h.
-        It will be O(log n) for a balanced tree and can be O(n) in the worst case.
+     The iterative solution has O(h) memory complexity as it instantiates a stack
+     that has to store information up to the height of binary tree h.
+     It will be O(log n) for a balanced tree and can be O(n) in the worst case.
      * @param root
      */
     inOrderIterative(root) {
@@ -464,14 +468,59 @@ class BinarySearchTree {
         return successor;
     }
 
+    isBST(root, min, max) {
+        if (!root) {
+            return true;
+        }
+
+        if ( (min && root.data < min) || (max && root.data > max)) {
+            return false;
+        }
+
+        return this.isBST(root.left, min, root.data) && this.isBST(root.right, root.data, max);
+        
+    }
+
+    getNthNode (root, n, stack) {
+        if (!root) {
+            return;
+        }
+        this.getNthNode(root.right, n, stack);
+
+        stack.push(root);
+
+        this.getNthNode(root.left, n, stack);
+        return stack[n-1];
+    }
+
+    getNthNode2 (root, n, cnt) {
+        if (!root) {
+            return;
+        }
+        let res = this.getNthNode2(root.right, n, cnt);
+        if ( res ) {
+            return res;
+        }
+        if ( n === cnt) {
+            return root;
+        }
+        cnt += 1;
+        res = this.getNthNode2(root.left, n, cnt);
+        if ( res ) {
+            return res;
+        }
+
+        return null;
+    }
+
 };
 
 /*********************************
-              100
-            /    \
-         50     200
-        /  \    /  \
-      25   75 125   350
+ 100
+ /    \
+ 50     200
+ /  \    /  \
+ 25   75 125   350
  *********************************/
 let test = () => {
     let tree = new BinarySearchTree();
@@ -484,6 +533,14 @@ let test = () => {
     tree.insert(350);
 
     let root = tree.root;
+
+    let isBst = tree.isBST(tree.root, -Number.MAX_VALUE - 1, Number.MAX_VALUE);
+    console.log("isBst: ", isBst);
+    //let stk = [];
+    //let nthNode = tree.getNthNode(tree.root, 1, stk);
+    let nthNode = tree.getNthNode2(tree.root, 1, 1);
+    console.log("Nth Node: ", nthNode);
+
     console.log('travel tree in order recursively');
     //print 25 50 75 100 125 200 350
     tree.inOrderRec(root);
@@ -494,11 +551,12 @@ let test = () => {
 
     //tree.remove(100)
     tree.removeRec(tree.root, 100)
+
     console.log('Level order traversal after removing node 100');
     tree.inOrderIterative(tree.root);
 
     console.log('Level order traversal');
-    //print 75 50 200 25 125 350
+    //print 125 50 200 25 75 350
     tree.levelOrderTraversal(tree.root);
 
     //100

@@ -7,7 +7,7 @@
  * @param list
  * @returns {Array}
  */
-let find_busy_intervals = function(list) {
+let mergeInterval = function(list) {
     let len = list.length;
     if (!list || len === 0) {
         return;

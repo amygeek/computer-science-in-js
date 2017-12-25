@@ -1,13 +1,13 @@
 /**
  * Implement a queue using Stacks.
  * Imagine we have a stack class that provides all common operations like push, pop, isEmpty.
- * Using the instances of this stack class, implement a queue class with its enqueue, dequeue and isEmpty operations.
+ * Using the instances of this stack class, implement a queue class with its add, remove and isEmpty operations.
 
-     Solution #1: make the 'enqueue' operation faster
+     Solution #1: make the 'add' operation faster
      Runtime Complexity
-     enqueue(): Constant, O(1).
+     add(): Constant, O(1).
 
-     dequeue(): Linear, O(n).
+     remove(): Linear, O(n).
 
      Memory Complexity
      Linear, O(n).
@@ -18,13 +18,13 @@ class queue_using_stack {
         this.oldestStack = [];
     }
 
-    enqueue(data) {
+    add(data) {
         this.newestStack.push(data);
     }
     empty() {
         return (this.newestStack.length === 0 && this.oldestStack.length === 0);
     }
-    dequeue() {
+    remove() {
         if (this.empty()) {
             throw "stack is empty";
         }
@@ -42,9 +42,9 @@ class queue_using_stack {
 /**
  Solution #2
  Runtime Complexity
- enqueue(): Linear, O(n).
+ add(): Linear, O(n).
 
- dequeue(): Constant, O(1).
+ remove(): Constant, O(1).
 
  Memory Complexity
  Linear, O(n).
@@ -55,7 +55,7 @@ class queue_using_stack_2 {
         this.oldestStack = [];
     }
     //newest item is on the bottom of oldestStack, and the oldest item are on top of oldestStack
-    enqueue(data) {
+    add(data) {
 
         while (this.oldestStack.length !== 0) {
             this.newestStack.push(this.oldestStack.pop());
@@ -69,7 +69,7 @@ class queue_using_stack_2 {
     empty() {
         return (this.newestStack.length === 0 && this.oldestStack.length === 0);
     }
-    dequeue() {
+    remove() {
         if (this.empty()) {
             throw "stack is empty";
         }
@@ -77,12 +77,12 @@ class queue_using_stack_2 {
     }
 }
 
-let testQueue = new queue_using_stack_2();
+let testQueue = new queue_using_stack();
 
-testQueue.enqueue(1);
-testQueue.enqueue(2);
-testQueue.enqueue(3);
-testQueue.enqueue(4);
+testQueue.add(1);
+testQueue.add(2);
+testQueue.add(3);
+testQueue.add(4);
 
 console.log(testQueue);
-console.log(testQueue.dequeue());
+console.log(testQueue.remove());

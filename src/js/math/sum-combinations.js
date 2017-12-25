@@ -34,6 +34,7 @@ let print_all_sum = function(target) {
     let output = [];
     let result = [];
     print_all_sum_rec(target, 0, 1, output, result);
+
     return result;
 };
 

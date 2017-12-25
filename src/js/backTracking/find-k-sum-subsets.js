@@ -47,7 +47,7 @@ let v = [2, 5, 7];
 let target_sum = 7;
 let sets = [];
 
-console.log(get_k_sum_subsets_1(v, target_sum, sets));  //[ Set { 2, 5 }, Set { 7 } ]
+//console.log(get_k_sum_subsets_1(v, target_sum, sets));  //[ Set { 2, 5 }, Set { 7 } ]
 
 /**
  * In this solution we will recursively generate subsets of the given list. While generating a subset,
@@ -93,4 +93,4 @@ let get_k_sum_subsets_2 = function(list, target_sum, sets) {
     return sets;
 };
 
-//console.log(get_k_sum_subsets_2(v, target_sum, sets));  //[ Set { 2, 5 }, Set { 7 } ]
+console.log(get_k_sum_subsets_2(v, target_sum, sets));  //[ Set { 2, 5 }, Set { 7 } ]

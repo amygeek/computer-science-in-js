@@ -94,9 +94,9 @@ print 100 50 25 40 80 125 350 200
     root.left = new Node(50);
     root.right = new Node(200);
     root.left.left = new Node(25);
-    root.left.left.right = new Node(40);
+    //root.left.left.right = new Node(40);
     root.left.right = new Node(75);
-    root.left.right.right = new Node(80);
+    //root.left.right.right = new Node(80);
     root.right.left = new Node(125);
     root.right.right = new Node(350);
 

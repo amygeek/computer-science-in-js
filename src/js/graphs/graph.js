@@ -20,141 +20,231 @@ class Queue {
 
 }
 
+class Node {
+    constructor( v ) {
+        this.vertex = v;
+        this.adjList = new Map();
+    }
+}
 class Graph {
     
     // defining vertex array and
     // adjacent list
-    constructor(noOfVertices) {
-        this.noOfVertices = noOfVertices;
-        this.AdjList = new Map();
+    constructor(noVerts) {
+        this.noVerts = noVerts;
+        this.adjList = new Map();
+        this.vertex = [];
     }
-
-    // add vertex to the adjacent list
-    addAdjacent(v) {
-        // initialize the adjacent list with null array
-        this.AdjList.set(v, []);
+    
+    addVertex(v) {
+        // add vertex 
+        this.vertex.push(v);
+        // initialize the adjacent list with an empty array
+        this.adjList.set(v, []);
     }
 
     // add edge to the graph
     addEdge(v, w) {
-        // get the list for vertex v and put the
-        // vertex w denoting edge betweeen v and w
-        this.AdjList.get(v).push(w);
+        
+        // get the list for vertex v and put the vertex w denoting edge between v and w
+        this.adjList.get(v).push(w);
 
-        // Since graph is undirected,
-        // add an edge from w to w also
-        this.AdjList.get(w).push(v);
+        // Since graph is undirected, add an edge from w to w also
+        this.adjList.get(w).push(v);
     }
 
+    removeEdge(v, w) {
+
+        let adjList = this.adjList.get(v);
+        
+        for(let i=0, l=adjList.length; i<l; i++) {
+
+            if ( adjList[i] == w ) {
+                adjList.splice(i, 1);
+            }
+        }
+    }
+    
     // Prints the vertex and adjacency list
-    printGraph() {
+    printGraph(list) {
+        
         // get all the vertices
-        var get_keys = this.AdjList.keys();
+        let getVertex = list.keys();
 
         // iterate over the vertices
-        for (var i of get_keys) {
-            // great the corresponding adjacency list
-            // for the vertex
-            var get_values = this.AdjList.get(i);
-            var conc = "";
+        for ( let i of getVertex ) {
+            
+            // great the corresponding adjacency list for the vertex
+            let getAdj = list.get(i);
+            let adjStr = "";
 
             // iterate over the adjacency list
             // concatenate the values into a string
-            for (var j of get_values) {
-                conc += j + " ";
+            for ( let j of getAdj ) {
+                adjStr += j + " ";
             }
 
             // print the vertex and its adjacency list
-            console.log(i + " -> " + conc);
+            console.log(i + " -> " + adjStr);
         }
     }
 
     // function to performs BFS: Breadth First Search
-    bfs(startingNode) {
+    bfs( startNode ) {
 
         // create a visited array
-        var visited = [];
-        for (var i = 0; i < this.noOfVertices; i++) {
+        let visited = [];
+        for (let i = 0; i < this.noVerts; i++) {
             visited[i] = false;
         }
 
         // Create an object for queue
-        var q = new Queue();
+        let q = new Queue();
 
         // add the starting node to the queue
-        visited[startingNode] = true;
-        q.enqueue(startingNode);
+        visited[startNode] = true;
+        q.enqueue(startNode);
 
         // loop until queue is element
-        let vertex = '';
         while (!q.isEmpty()) {
             // get the element from the queue
-            var getQueueElement = q.dequeue();
+            let vertex = q.dequeue();
 
-            vertex +=  getQueueElement + ' ';
+            console.log(vertex);
 
             // get the adjacent list for current vertex
-            var get_List = this.AdjList.get(getQueueElement);
+            let adjList = this.adjList.get( vertex );
 
             // loop through the list and add the elemnet to the
             // queue if it is not processed yet
-            for (var i in get_List) {
-                var neighbor = get_List[i];
+            for (let i in adjList) {
+                let neighbor = adjList[i];
 
-                if (!visited[neighbor]) {
+                if ( !visited[neighbor] ) {
                     visited[neighbor] = true;
                     q.enqueue(neighbor);
                 }
             }
         }
-        console.log(vertex);
+
     }
 
     // main dfs method: Depth first traversal
-    dfs(startingNode) {
+    dfs( startNode ) {
 
-        var visited = [];
-        for (var i = 0; i < this.noOfVertices; i++) {
+        let visited = [];
+        for (let i = 0; i < this.noVerts; i++) {
             visited[i] = false;
         }
 
-        this.DFSUtil(startingNode, visited);
+        this.DFSUtil(startNode, visited);
     }
 
     // Recursive function which process and explore
     // all the adjacent vertex of the vertex with which it is called
-    DFSUtil(vert, visited) {
+    DFSUtil( vert, visited ) {
+        
         visited[vert] = true;
         console.log(vert);
 
-        var getNeighbors = this.AdjList.get(vert);
+        let adjList = this.adjList.get( vert );
 
-        for (var i in getNeighbors) {
-            var get_elem = getNeighbors[i];
-            if (!visited[get_elem])
-                this.DFSUtil(get_elem, visited);
+        for (let i in adjList) {
+            let neighbor = adjList[i];
+            if ( !visited[neighbor] ) {
+                this.DFSUtil( neighbor, visited);
+            }                
+        }
+    }
+
+    //F is not printed
+    dfsI(g, root ) {
+        let stack = [];
+        let visited = [];
+        for ( let i of g.vertex) {
+            visited[i] = false;
+        }
+        stack.push(root);
+        visited[root] = true;
+
+        while (stack.length > 0) {
+
+            let v = stack.pop();
+            console.log(v);
+
+            let adjList = g.adjList.get(v);
+            let len = adjList.length;
+
+            for(let i=len-1; i>=0; i--) {
+                
+                let neighbor = adjList[i];
+                if ( !visited[neighbor] ) {
+                    visited[neighbor] = true;
+                    stack.push(neighbor);
+                }  
+            }
+        }
+    }
+    
+    cloneGraph(source){
+        let visited = [];
+        let vertex = source.vertex;
+        for(let i=0; i<vertex.length; i++) {
+            visited[i] = false;
+        }
+        let cp = {
+            vertex: [],
+            adjList: new Map()
+        };
+        
+        this.cloneGraphRec(source, source.vertex[0], cp, visited);
+        return cp;
+    }
+
+    cloneGraphRec(sourceG, vert, dest, visited) {
+        
+        visited[vert] = true;
+        
+        dest.vertex.push(vert);
+        dest.adjList.set(vert, []);
+
+        let adjList = sourceG.adjList.get(vert);
+        for(let i in adjList) {
+            let neighbor = adjList[i];
+            dest.adjList.get(vert).push(neighbor);
+            if ( !visited[neighbor] ) {
+                this.cloneGraphRec(sourceG, neighbor, dest, visited);
+            }
+
         }
     }
 }
 
+/*
+          1
+        /  \
+       2    3
+      / \
+     4  5
+ */
 // test graph class
 var g = new Graph(6);
-var vertices = [ 'A', 'B', 'C', 'D', 'E', 'F' ];
 
 // adding vertices
-for (var i = 0; i < vertices.length; i++) {
-    g.addAdjacent(vertices[i]);
-}
+g.addVertex(1);
+g.addVertex(2);
+g.addVertex(3);
+g.addVertex(4);
+g.addVertex(5);
+
 
 // adding edges
-g.addEdge('A', 'B');
-g.addEdge('A', 'D');
-g.addEdge('A', 'E');
-g.addEdge('B', 'C');
-g.addEdge('D', 'E');
-g.addEdge('E', 'F');
-g.addEdge('E', 'C');
-g.addEdge('C', 'F');
+g.addEdge(1, 2);
+g.addEdge(1, 3);
+
+g.addEdge(2, 4);
+g.addEdge(2, 5);
+
 
 // prints all vertex and
 // its adjacency list
@@ -164,12 +254,19 @@ g.addEdge('C', 'F');
 // D -> A E
 // E -> A D F C
 // F -> E C
-g.printGraph();
+g.printGraph(g.adjList);
 
 
 console.log("prints BFS");
-g.bfs('A');  //A B D E C F
+g.bfs(1);  //A B D E C F
 
 
-console.log("prints");
-g.dfs('A'); // A B C E D F
+console.log("prints DFS");
+g.dfs(1); // A B C E D F
+
+// let newG = g.cloneGraph(g);
+// console.log("prints Vertex and adjacency list for cloned graph");
+// g.printGraph(newG.adjList);
+
+console.log("prints DFS iterative");
+g.dfsI(g, 1);
