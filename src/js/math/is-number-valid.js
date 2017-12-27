@@ -60,3 +60,5 @@ let is_number_valid = function(s) {
     }
     return true;
 };
+
+console.log(is_number_valid('22.34'));

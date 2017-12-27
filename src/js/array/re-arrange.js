@@ -1,10 +1,11 @@
+//re arrange arr so that the value at even index is greater than its left and less than its right
 let arrangeArr = (arr) => {
     for (let i = 1; i < arr.length; i += 2 ) {
 
         if (arr[i - 1] > arr[i]) {
             let temp = arr[i - 1];
             arr[i - 1] = arr[i];
-            arr[i] = arr[i - 1];
+            arr[i] = temp;
         }
 
         if ( i + 1 < arr.length && arr[i+1] > arr[i]) {

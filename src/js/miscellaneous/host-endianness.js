@@ -15,3 +15,5 @@ let checkEndian = function() {
     if (c[0] === 0xa1b2c3d4) return "big endian";
     else throw new Error("Something crazy just happened");
 };
+
+console.log(checkEndian());

@@ -69,6 +69,31 @@ class BinaryTreeToDLLRec {
         this.binaryTree2DllRec(node.right);
     }
 
+    binaryTree2DllIterative ( node ) {
+        if ( !node ) {
+            return;
+        }
+
+        let stack = [];
+        while ( node || stack.length > 0) {
+            if (node) {
+                stack.push(node);
+                node = node.left;
+                continue;
+            }
+
+            let n = stack[stack.length-1];
+            if (!this.prev ) {
+                this.head = n;
+            } else {
+                n.left = this.prev;
+                this.prev.right = n;
+            }
+            this.prev = n;
+            node = n.right;
+            stack.pop();
+        }
+    }
     binaryTree2DllRec2( node ) {
         // Base cases
         if ( !node ) {
@@ -116,10 +141,10 @@ class BinaryTreeToDLLRec {
 
     let BT2Dll = new BinaryTreeToDLLRec();
 
-    //BT2Dll.binaryTree2DllRec(root);
-    //BT2Dll.printDll(BT2Dll.head);
-
-    BT2Dll.binaryTree2DllRec2(root);
+    BT2Dll.binaryTree2DllIterative(root);
     BT2Dll.printDll(BT2Dll.head);
+
+    //BT2Dll.binaryTree2DllRec2(root);
+    //BT2Dll.printDll(BT2Dll.head);
 
 })()

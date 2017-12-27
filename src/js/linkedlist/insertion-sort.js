@@ -10,26 +10,26 @@
  * @param node
  * @returns {*}
  */
-let sorted_insert = function(head, node){
+let sorted_insert = function(sorted, newNode){
 
-    if (!node){
-        return head;
+    if (!newNode){
+        return sorted;
     }
 
-    if (!head || node.data <= head.data){
-        node.next = head;
-        return node;
+    if (!sorted || sorted.data >= newNode.data){
+        newNode.next = sorted;
+        return newNode;
     }
 
-    let curr = head;
-    while (curr.next && curr.next.data < node.data){
+    let curr = sorted;
+    while (curr.next && curr.next.data < newNode.data){
         curr = curr.next;
     }
 
-    node.next = curr.next;
-    curr.next = node;
+    newNode.next = curr.next;
+    curr.next = newNode;
 
-    return head;
+    return sorted;
 };
 
 let insertion_sort = function(head){
@@ -45,3 +45,36 @@ let insertion_sort = function(head){
 
     return sorted;
 };
+
+class Node {
+    constructor( d ) {
+        this.data = d;
+        this.next = null;
+    }
+}
+
+let n = new Node( 2 );
+n.next = new Node( 5 );
+n.next.next = new Node( 3 );
+n.next.next.next = new Node( 1 );
+n.next.next.next.next = new Node( 4 );
+
+let print = (node) => {
+
+    if (!node) {
+        return;
+    }
+    let str = "";
+    while ( node) {
+        str += node.data + " -> ";
+        node = node.next;
+    }
+    str += "null";
+    console.log(str);
+}
+
+print(n);
+
+let sorted = insertion_sort(n);
+
+print(sorted);

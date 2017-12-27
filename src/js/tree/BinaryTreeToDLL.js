@@ -98,6 +98,19 @@ class BinaryTreeToDLL {
         }
     }
 
+    isBST(root, min, max) {
+        if (!root) {
+            return true;
+        }
+
+        if ( (min && root.data < min) || (max && root.data > max)) {
+            return false;
+        }
+
+        return this.isBST(root.left, min, root.data) && this.isBST(root.right, root.data, max);
+
+    }
+
 }
 
 //testing
@@ -121,6 +134,10 @@ class BinaryTreeToDLL {
     root.right.left = new Node(36);
 
     let BT2Dll = new BinaryTreeToDLL();
+
+
+    let isBst = BT2Dll.isBST(root, Number.MIN_VALUE, Number.MAX_VALUE);
+    console.log("isBst: ", isBst);
 
     BT2Dll.inOrderRec(root);
     let head = BT2Dll.binaryTree2Dll(root);
