@@ -7,6 +7,10 @@
      Constant, O(1).
  * @param input
  * @returns {number}
+ * uses the arithmetic series sum formula.
+ * Sum(1−n)= ​n(n+1) / 2
+
+ ​​
  */
 let find_missing = function(input) {
     //  calculate sum of all integers

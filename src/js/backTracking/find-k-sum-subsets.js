@@ -9,6 +9,15 @@
 
  Memory Complexity
  Constant, O(1)
+
+ n = size of given integer set
+ subsets_count = 2^n
+ for i = 0 to subsets_count
+    form a subset using the value of 'i' as following:
+        bits in number 'i' represent index of elements to choose from original set,
+    if a specific bit is 1 choose that number from original set and add it to current subset,
+        e.g. if i = 6 i.e 110 in binary means that 2nd and 3rd elements in original array need to be picked.
+    if subset elements sum up to K (required sum), add current subset to list of all subsets
  */
 let get_bit = function(num, bit){
     let temp = (1 << bit);
@@ -27,7 +36,6 @@ let get_k_sum_subsets_1 = function(v, target_sum, sets) {
         for (let j = 0; j < v.length; j++) {
             if (get_bit(i, j) === 1) {
                 sum = sum + v[j];
-                console.log("sum: ", sum);
                 if (sum > target_sum) {
                     break;
                 }
@@ -43,7 +51,7 @@ let get_k_sum_subsets_1 = function(v, target_sum, sets) {
     return sets;
 };
 
-let v = [2, 5, 7];
+let v = [2, 5, 7];  //{} {2}, {5}, {7} {2,5} {5,7} {2, 7} {2,5,7}
 let target_sum = 7;
 let sets = [];
 
