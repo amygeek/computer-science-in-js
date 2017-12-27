@@ -44,4 +44,4 @@ let numberOf1Solution3 = ( n ) => {
     return count;
 }
 
-console.log(numberOf1Solution1(9));  //2: 1001
+console.log(numberOf1Solution3(11));  //2: 1011

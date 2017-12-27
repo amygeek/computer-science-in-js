@@ -17,46 +17,46 @@
 
  The first solution is very straightforward, but it has a greater time complexity.
  We can calculate the distance between two points using the following Euclidean distance formula.
+
+d = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2-y1));
+ ​
+ ​​
  */
 class point {
-    constructor(x, y) {
+    constructor( x, y) {
         this.x = x;
         this.y = y;
     }
-
-    calculate_distance(p) {
-        let distance = Math.sqrt((p.x - this.x) * (p.x - this.x) +
-            (p.y - this.y) * (p.y - this.y));
-        return distance;
+    calDistance( p ) {
+        return Math.sqrt( (p.x - this.x) * (p.x - this.x) + (p.y - this.y) * (p.y - this.y) );
     }
-
-    calculate_sum_of_distances(points) {
-        let distance_sum = 0;
-        for (let i = 0; i < points.length; i++) {
-            distance_sum += this.calculate_distance(points[i]);
+    calSumOfDistance(points) {
+        let sum = 0;
+        for(let i=0; i<points.length; i++) {
+            sum += this.calDistance(points[i]);
         }
-        return distance_sum;
+        return sum;
     }
 }
 
 let shortest_distance_travelled = function(m, points) {
     let pt = new point(1, 1);
-    let min_distance = pt.calculate_sum_of_distances(points);
-    let min_pt = new point(1, 1);
+    let min_distance = pt.calSumOfDistance(points);
+    let minPt = new point(1, 1);
 
     for (let i = 1; i < m; i++) {
         for (let j = 1; j < m; j++) {
             pt.x = i;
             pt.y = j;
-            let distance = pt.calculate_sum_of_distances(points);
+            let distance = pt.calSumOfDistance(points);
             if (distance < min_distance) {
                 min_distance = distance;
-                min_pt.x = pt.x;
-                min_pt.y = pt.y;
+                minPt.x = pt.x;
+                minPt.y = pt.y;
             }
         }
     }
-    return min_pt;
+    return minPt;
 };
 
 /*
@@ -78,8 +78,8 @@ let shortest_distance_travelled = function(m, points) {
  minimum distance travelled point. It is the average of x-coordinates and y-coordinates.
  */
 
-let shortest_distance_travelled_2 = function(m, points) {
-    let min_pt = new point(0, 0);
+let shortestDistance = function(m, points) {
+    let minPt = new point(0, 0);
     let x = 0;
     let y = 0;
 
@@ -93,28 +93,32 @@ let shortest_distance_travelled_2 = function(m, points) {
     centroid.x = parseInt(Math.round(x / points.length));
     centroid.y = parseInt(Math.round(y / points.length));
 
-    // initialize the min_pt to centroid
-    min_pt.x = centroid.x;
-    min_pt.y = centroid.y;
+    // initialize the minPt to centroid
+    minPt.x = centroid.x;
+    minPt.y = centroid.y;
 
-    let min_distance = min_pt.calculate_sum_of_distances(points);
+    let minDistance = minPt.calSumOfDistance(points);
 
     // checking points surrounding the potential centroid
-    for (let i = min_pt.x - 1; i < min_pt.x + 2; i++) {
-        for (let j = min_pt.y - 1; j < min_pt.y + 2; j++) {
+    for (let i = minPt.x - 1; i < minPt.x + 2; i++) {
+        for (let j = minPt.y - 1; j < minPt.y + 2; j++) {
             if (i < 1 || j > m) {
                 continue;
             }
 
             let pt = new point(i, j);
-            let distance = pt.calculate_sum_of_distances(points);
-            if (distance < min_distance) {
-                min_distance = distance;
-                min_pt.x = pt.x;
-                min_pt.y = pt.y;
+            let distance = pt.calSumOfDistance(points);
+            if (distance < minDistance) {
+                minDistance = distance;
+                minPt.x = pt.x;
+                minPt.y = pt.y;
             }
         }
     }
-    return min_pt;
+    return minPt;
 };
 
+
+//let distance = shortest_distance_travelled(4, [{x:1,y:2}, {x:3, y:2}]);  //point { x: 1, y: 2 }
+let distance = shortestDistance(6, [{x:1,y:2}, {x:3, y:3}, {x:4, y:2}]);  //point { x: 3, y: 3 }
+console.log(distance);

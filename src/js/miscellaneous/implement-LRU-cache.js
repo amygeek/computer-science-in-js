@@ -40,13 +40,13 @@ class LinkedList {
     }
 
     insert_at_head(key, data) {
-        newNode = this.LinkedListNode(key, data);
+        let newNode = this.LinkedListNode(key, data);
         if (!this.head) {
             this.tail = newnode;
             this.head = newNode;
         } else {
-            newNode.next = head;
-            this.head.previous = newNode;
+            newNode.next = this.head;
+            this.head.prev = newNode;
             this.head = newNode;
         }
 
@@ -56,7 +56,7 @@ class LinkedList {
     }
 
     insert_at_tail(key, value) {
-        newNode = this.LinkedListNode(key, data);
+        let newNode = this.LinkedListNode(key, data);
         this.insert_at_tail(newNode);
         return newNode;
     }
@@ -145,8 +145,9 @@ class LRUCache {
 
     evict_if_needed() {
         if (this.cache_vals.size >= this.capacity) {
-            node = this.cache_vals.remove_head();
-            this.cache.remove(node);
+            let node = this.cache_vals.remove_head();
+            //this.cache.remove(node);
+            delete this.cache[node.key];
         }
     }
 
@@ -158,3 +159,26 @@ class LRUCache {
         }
     }
 }
+
+//test
+let cache = new LRUCache(4);
+
+cache.set(1, 1);
+cache.set(2, 2);
+cache.set(3, 3);
+cache.set(4, 4);
+
+cache.printcache();
+
+cache.set(5, 5);
+
+console.log("after access 5")
+cache.printcache();
+
+
+cache.get(2);
+console.log("after access 2")
+cache.printcache();
+
+cache.get(5);
+cache.printcache();

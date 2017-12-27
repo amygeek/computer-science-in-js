@@ -30,15 +30,21 @@ let make_zeroes = function(matrix) {
         }
     }
 
-    zero_rows.forEach(function(r) {
+    for (let r of zero_rows)  {
         for (let c = 0; c < cols; c++) {
             matrix[r][c] = 0;
         }
-    });
+    }
 
-    zero_cols.forEach(function(c) {
+    for ( let c of zero_cols) {
         for (let r = 0; r < rows; r++) {
             matrix[r][c] = 0;
         }
-    });
+    }
+
+    return matrix;
 };
+
+let matrix = [[1,7, 4, 5], [3, 0, 9, 10], [11, 12, 0, 19], [6, 2, 8, 28]];
+
+console.log(make_zeroes(matrix));
