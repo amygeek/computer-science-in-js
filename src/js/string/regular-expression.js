@@ -16,7 +16,7 @@ let regx_match_rec2 = function(text, pattern, i, j) {
     }
 
     if (j < pattern.length - 1 && pattern[j + 1] === '*') {
-        for (let k = i; i < text.length + 1; k++) {
+        for (let k = i; k <= text.length; k++) {
             if (regx_match_rec2(text, pattern, k, j + 2)) {
                 return true;
             }

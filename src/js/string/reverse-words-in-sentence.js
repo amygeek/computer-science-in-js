@@ -57,6 +57,7 @@ let reverseWords = function(sentence) {
 
         //  find the end index of the word.
         end = start + 1;
+
         while (end < sentence.length && sentence[end] != ' ') {
             end++;
         }
@@ -82,8 +83,7 @@ let reverseWords2 = (words) => {
     return words.join(' ');
 }
 
-(function(){
-    let sentense = "hello           world good      morning";
-    console.log(reverseWords( sentense ));
-    console.log(reverseWords2( sentense ));
-})();
+
+let sentense = "hello           world good      morning";
+console.log(reverseWords( sentense ));
+console.log(reverseWords2( sentense ));

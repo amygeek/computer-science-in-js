@@ -11,7 +11,6 @@ let isUnique = ( str ) => {
     return true;
 }
 
-(function(){
-    let isUniqueStr = isUnique('abccd');
-    console.log(isUniqueStr);
-})();
+
+let isUniqueStr = isUnique('abccd');
+console.log(isUniqueStr);
