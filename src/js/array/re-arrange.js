@@ -22,3 +22,17 @@ let arrangeArr = (arr) => {
 let arr = [9, 6, 8, 3, 7];  // [ 6, 8, 3, 7, 3 ]
 
 console.log(arrangeArr(arr));
+
+//wave arrange
+
+let arrangeArr2 = (arr) => {
+    arr.sort();
+    for(let i=1; i<arr.length; i+=2) {
+        let temp = arr[i];
+        arr[i] = arr[i-1];
+        arr[i-1] = temp;
+    }
+    return arr;
+}
+
+console.log(arrangeArr2(arr));
