@@ -1,4 +1,11 @@
 /**
+ Runtime Complexity
+ Linear, O(n).
+
+ Memory Complexity
+ O(w).
+ where 'w' is the window size.
+
  * @desc Find Maximum in Sliding Window
  * Given a large array of integers and a window of size 'w', 
  * find the current maximum in the window as the window slides through the entire array.

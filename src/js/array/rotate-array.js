@@ -235,7 +235,6 @@ let preprocess = (arr, temp, len) => {
     for(let i=0; i<len; i++) {
         temp[i] = temp[i+len] = arr[i];
     }
-    console.log(temp);
 }
 let findMultiRotation = (arr, n, len, temp) => {
 
@@ -252,8 +251,35 @@ let findMultiRotation = (arr, n, len, temp) => {
     return temp.slice(start, start+ len);
 }
 
-let testArr = [1, 2, 3, 4, 5];
+let testArr = [7, 9, 11, 12, 5];
 let temp = [];
 preprocess(testArr, temp, testArr.length);
 console.log(findMultiRotation(testArr, 2, testArr.length, temp ));
 //console.log(findMultiRotation(testArr, 3, testArr.length, temp ));
+
+let findMin = (arr, low, high) => {
+
+    if (high < low) {
+        return arr[0];
+    }
+
+    if ( low == high) {
+        return arr[low];
+    }
+    let mid = Math.floor ( (high + low) / 2 );
+
+    if (mid > low && arr[mid] < arr[mid - 1]) {
+        return arr[mid];
+    }
+
+    if (mid < high && arr[mid + 1] < arr[mid]) {
+        return arr[mid + 1];
+    }
+
+    if ( arr[high] > arr[mid]) {
+        return findMin(arr, low, mid -1);
+    }
+    return findMin(arr, mid+1, high);
+}
+
+console.log(findMin(testArr, 0, testArr.length - 1));
