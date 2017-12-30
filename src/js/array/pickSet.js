@@ -1,3 +1,4 @@
+//Randomly generate a set of m integers from an array of size n
 let rand = (low, high) => {
     return parseInt(Math.random() * (high - low + 1) + low);
 }
