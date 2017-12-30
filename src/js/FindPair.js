@@ -14,22 +14,59 @@
 
 class FindPair {
     
-    constructor() {
-        this.map = {};
-    }
-    
-    findPair(arr, sum) {
-        
+    findPair(arr, sum, sets) {
+        let st = new Set();
         for (let i=0, l=arr.length; i<l; i++) {
             
-            if (this.map.hasOwnProperty(sum - arr[i])) {
-                return "Pair found at index " + this.map[sum - arr[i]] + " and " + i;
+            if (st.has(sum - arr[i])) {
+                //return "Pair found at index " + arr.indexOf(sum - arr[i]) + " and " + i;
+                sets.add([arr.indexOf(sum - arr[i]), i]);
+            } else {
+                st.add(arr[i]);
             }
             
-            this.map[arr[i]] = i ;
+
         }
         
     }
+
+    findPairRotated(arr, sum, sets) {
+
+        let len = arr.length;
+        let i;
+        for ( i=1; i<len; i++) {
+            if (arr[i] < arr[i-1]) {
+                break;
+            }
+        }
+
+        let low = i % len;
+        let high = i - 1;
+
+        while(low != high) {
+            let v = arr[low] + arr[high];
+            if (v === sum) {
+                sets.add([low, high]);
+
+            }
+            if (v < sum) {
+                low = (low + 1) % len;
+            } else {
+                high = (high + len - 1) % len;
+            }
+        }
+    }
 }
 
-export default FindPair;
+//export default FindPair;
+
+let arr = [8, 7, 2, 5, 3, 1, 9];
+let st = new Set();
+let findPair = new FindPair();
+//findPair.findPair(arr, 10, st);
+//console.log(st)
+
+let rotatedArr = [3, 4, 5, 1, 2];
+
+findPair.findPairRotated(rotatedArr, 5, st);
+console.log(st)
