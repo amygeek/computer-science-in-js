@@ -42,9 +42,15 @@ let rotate_array_in_place = function(arr, n) {
     // -> 4, 5, 3, 2, 1
     // -> 4, 5, 1, 2, 3
 
+    //right rotate: reverse the original array first
     reverse_array(arr, 0, len - 1);  //Reverse the elements of the original array.
     reverse_array(arr, 0, n - 1);   //Reverse the elements from 0 -> N-1.
     reverse_array(arr, n, len - 1); //Reverse the elements from N -> Length-1.
+
+    //left rotate: reverse the original array last
+    //reverse_array(arr, 0, n - 1);   //Reverse the elements from 0 -> N-1.
+    //reverse_array(arr, n, len - 1); //Reverse the elements from N -> Length-1.
+    //reverse_array(arr, 0, len - 1);  //Reverse the elements of the original array.
 
     return arr;
 };
@@ -70,7 +76,7 @@ console.log( rotate_array_in_place( arr, 2 ) );
  * @param arr
  * @param n
  */
-let rotate_array = function(arr, n) {
+let rotate_array = function(arr, n) {  //right rotate
     let len = arr.length;
 
     // Let's normalize rotations
@@ -101,10 +107,153 @@ let rotate_array = function(arr, n) {
 };
 
 //let arr2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-let arr2 = [1, 2, 3, 4, 5];  //[ 4, 5, 1, 2, 3 ]
+let arr2 = [1, 2, 3, 4, 5];  //[ 3, 4, 5, 1, 2 ]
 
-console.log( rotate_array( arr2, 2 ) );
+//console.log( rotate_array( arr2, 2 ) );
+
+let rotate = (arr) => {
+    let temp = arr[0];
+    let i = 0;
+    for(i=0; i<arr.length - 1; i++) {
+        arr[i] = arr[i+1];
+    }
+    arr[i] = temp;
+
+}
+let leftRotate = (arr, d) => {
+    for(let i=0; i<d; i++) {
+        rotate(arr);
+    }
+    return arr;
+}
+
+console.log( leftRotate( arr2, 2 ) );
+
+/**
+ *
+ * Given an array, only rotation operation is allowed on array. We can rotate the array as many times as we want.
+ * Return the maximum possible of summation of i*arr[i].
+ Input: arr[] = {1, 20, 2, 10}
+ Output: 72 rotating array twice.
+ {2, 10, 1, 20}
+ 20*3 + 1*2 + 10*1 + 2*0 = 72
+
+ Input: arr[] = {10, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+ Output: 330
+ rotating array 9 times.
+ {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+ 0*1 + 1*2 + 2*3 ... 9*10 = 330
+ */
+let getMaxSumInRotation = (arr, len) => {
+
+    let currentSum = 0;
+    let currentValue = 0;
+    for (let i=0; i<len; i++) {
+        currentSum += arr[i];
+        currentValue += arr[i] * i;
+    }
+
+    let max = currentValue;
+
+    for (let i=1; i<len; i++) {
+        currentValue = currentValue + (currentSum - len * arr[len-i]);
+        if (currentValue > max ) {
+            max = currentValue;
+        }
+    }
+    return max;
+}
 
 
 
+let getMaxSumInAllRotation = (arr, len) => {
 
+    let currentSum = 0;
+    let currentValue = 0;
+    for (let i=0; i<len; i++) {
+        currentSum += arr[i];
+        currentValue += arr[i] * i;
+    }
+    let max = currentValue;
+
+    for(let i=1; i<len; i++) {
+        currentValue = currentValue - ( currentSum - arr[i-1] ) + arr[i-1] * (len - 1);
+        if (currentValue > max ) {
+            max = currentValue;
+        }
+    }
+    return max;
+}
+
+let arr3 = [10, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+console.log(getMaxSumInAllRotation(arr3,  arr3.length));
+
+//o(n)
+let findRotatingCount = ( arr ) => {
+    let count = 0;
+    for(let i=1, l=arr.length; i<l; i++) {
+        if(arr[i] < arr[i - 1]) {
+            count = count + i;
+            break;
+        }
+    }
+    return count;
+}
+
+//o(logn)
+let findRotatingCount2 = (arr, low, high) => {
+    if (high > low) {
+        return 0;
+    }
+    if (low === high) {
+        return low;
+    }
+    let mid = Math.floor( (high + low) / 2 );
+    if (mid > low && arr[mid] < arr[mid - 1]) {
+        return mid - 1;
+    }
+    if ( mid < high && arr[mid + 1] < arr[mid] ) {
+        return mid;
+    }
+
+    if (arr[mid] < arr[high]) {
+        return findRotatingCount2(arr, low, mid-1);
+    }
+    return findRotatingCount2(arr, mid+1, high);
+}
+//console.log(findRotatingCount([7, 9, 11, 12, 5])) //4
+console.log(findRotatingCount([7, 9, 11, 12, 5], 0, 4)) //4
+
+/*
+ Quickly find multiple left rotations of an array
+ Given an array of size n and multiple values around which we need to left rotate the array.
+ How to quickly find multiple left rotations?
+ */
+
+let preprocess = (arr, temp, len) => {
+    //fills temp[] with two copies of arr[]
+    for(let i=0; i<len; i++) {
+        temp[i] = temp[i+len] = arr[i];
+    }
+    console.log(temp);
+}
+let findMultiRotation = (arr, n, len, temp) => {
+
+    if ( n < 0) {
+        n = n + len;
+    }
+
+    let start = n % len;
+
+
+    //for( let i=start; i< start+ len; i++) {
+    //    console.log(temp[i]);
+    //}
+    return temp.slice(start, start+ len);
+}
+
+let testArr = [1, 2, 3, 4, 5];
+let temp = [];
+preprocess(testArr, temp, testArr.length);
+console.log(findMultiRotation(testArr, 2, testArr.length, temp ));
+//console.log(findMultiRotation(testArr, 3, testArr.length, temp ));

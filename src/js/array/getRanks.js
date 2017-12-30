@@ -1,61 +1,49 @@
 //get smallest one million number from a billion number
 
-let getRandNumInRange = (low, high) => {
-    return parseInt( Math.random() * (high - low + 1) + low );
-}
-let swap = (arr, i, j) => {
-    let temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
-}
-let partition = (arr, left, right, pivot) => {
+class Ranks {
 
-    while( true) {
-        while( left <= right && arr[left] <= pivot ) {
-            left++;
-        }
-        while ( left <= right && arr[right] > pivot ) {
-            right --;
-        }
-
-        if ( left > right ) {
-            return left -1;
-        }
-        swap( arr, left, right);
+    getRandomIntInArray ( low, high ) {
+        return parseInt( Math.random() * (high - low + 1) + low);
     }
 
-}
-
-let max = ( arr, left, right ) => {
-    let max = Number.MIN_VALUE;
-    for( let i=0; i<=right; i++) {
-        max = Math.max(max, arr[i]);
+    swap(arr, i, j) {
+        let temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
-    return max;
-}
-
-let getRanks = (arr, left, right, rank) => {
-    let p = getRandNumInRange( left, right);
-    //console.log('pIndex: ', arr[p]);
-    //let leftEnd = partition(arr, left, right, arr[p]);
-    let leftEnd = partition(arr, left, right, 8);
-    let leftSize = leftEnd - left + 1;
-
-    if ( leftSize === rank + 1 ) {
-        //console.log('arr: ', arr);
-        //return max(arr,left, leftEnd);
-        return arr.splice(0, leftEnd);
-    } else if (rank < leftSize) {
-        return getRanks(arr, left, leftEnd, rank);
-    } else {
-        return getRanks(arr, leftEnd + 1, right, rank-leftSize);
+    partition(arr, low, high, randomNum) {
+        this.swap(arr, high, randomNum);
+        let value = arr[high];
+        let pIndex = low;
+        for(let i=low; i<high; i++) {
+            if (arr[i] <= value) {
+                this.swap(arr, i, pIndex);
+                pIndex++;
+            }
+        }
+        this.swap(arr, high, pIndex);
+        return pIndex;
     }
+    getRank( arr, low, high, rank) {
+        let randowNum = this.getRandomIntInArray(low, high);
+        let leftEnd = this.partition(arr, low, high, randowNum);
 
+        let leftSide = leftEnd - low + 1;
+
+        if (leftSide === rank + 1) {
+            return arr.slice(0, leftEnd);
+        } else if (rank < leftSide) {
+            return this.getRank(arr, low, leftEnd, rank);
+        } else {
+            return this.getRank(arr, leftEnd + 1, high, rank - leftSide )
+        }
+    }
 }
 
 //testing
 let arr = [2, 4, 50, 7, 90, 10, 1, 30, 16, 8];
 
+let ranks = new Ranks();
 
-console.log(getRanks(arr, 0, arr.length-1, 4));
-//console.log(arr.sort((a, b) => a > b))
+console.log(ranks.getRank(arr, 0, arr.length-1, 4));
+

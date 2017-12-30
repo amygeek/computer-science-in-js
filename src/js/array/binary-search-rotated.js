@@ -58,3 +58,6 @@ console.log(binary_search_rotated( a, 3));   //1
 console.log(binary_search_rotated( a, 4));   //-1
 console.log(binary_search_rotated( a, 1));   //-1
 
+let searchMin = (arr, low, high) => {
+
+}

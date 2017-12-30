@@ -50,8 +50,10 @@ let findUnSortedSeq = (arr) => {
     }
     let startRight = findRightIndex(arr);
 
-    let min = arr[startRight];
-    let max = arr[endLeft];
+    let min = arr[startRight]; //5
+
+    let max = arr[endLeft]; //11
+
     for(let i=endLeft + 1; i<startRight; i++) {
         if (arr[i] < min ) {
             min = arr[i];
