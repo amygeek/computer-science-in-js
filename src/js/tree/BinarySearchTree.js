@@ -513,6 +513,45 @@ class BinarySearchTree {
         return null;
     }
 
+    checkHeight(root) {
+        if(!root) {
+            return 0;
+        }
+        let leftHt = this.checkHeight(root.left);
+        if ( leftHt === -1 ) {
+            return -1;
+        }
+
+        let rightHt = this.checkHeight(root.right);
+        if (rightHt === -1) {
+            return -1;
+        }
+        let heightDiff = Math.abs(leftHt - rightHt);
+        if ( heightDiff > 1 ) {
+            return -1;
+        } else {
+            return Math.max(leftHt, rightHt) + 1;
+        }
+    }
+    isBalanced( root ) {
+        if (this.checkHeight(root) !== -1 ) {
+            return true;
+        }
+        return false;
+    }
+
+    createBST(arr, low, high) {
+        if ( high < low ) {
+            return null;
+        }
+        let mid = Math.floor( (high + low) / 2 );
+        let n = new Node(arr[mid]);
+        this.add(n);
+
+        n.left = this.createBST(arr, low, mid-1);
+        n.right = this.createBST(arr, mid+1, high);
+        return n;
+    }
 };
 
 /*********************************
@@ -524,21 +563,23 @@ class BinarySearchTree {
  *********************************/
 let test = () => {
     let tree = new BinarySearchTree();
-    tree.insert(100);
-    tree.insert(50);
-    tree.insert(200);
-    tree.insert(25);
-    tree.insert(75);
-    tree.insert(125);
-    tree.insert(350);
+    //tree.insert(100);
+    //tree.insert(50);
+    //tree.insert(200);
+    //tree.insert(25);
+    //tree.insert(75);
+    //tree.insert(125);
+    //tree.insert(350);
 
-    let root = tree.root;
+    let arr = [25,50,75,100,125,200,350];
+    let root = tree.createBST(arr, 0, arr.length - 1);
 
-    let isBst = tree.isBST(tree.root, -Number.MAX_VALUE - 1, Number.MAX_VALUE);
+    let isBst = tree.isBST(root, -Number.MAX_VALUE - 1, Number.MAX_VALUE);
     console.log("isBst: ", isBst);
+    console.log("tree is balanced : ", tree.isBalanced(root));
     //let stk = [];
     //let nthNode = tree.getNthNode(tree.root, 1, stk);
-    let nthNode = tree.getNthNode2(tree.root, 1, 1);
+    let nthNode = tree.getNthNode2(root, 1, 1);
     console.log("Nth Node: ", nthNode);
 
     console.log('travel tree in order recursively');
@@ -547,17 +588,17 @@ let test = () => {
 
     console.log('Level order traversal');
     //print 100 50 200 25 75 125 350
-    tree.levelOrderTraversal(tree.root);
+    tree.levelOrderTraversal(root);
 
     //tree.remove(100)
-    tree.removeRec(tree.root, 100)
+    tree.removeRec(root, 100)
 
     console.log('Level order traversal after removing node 100');
-    tree.inOrderIterative(tree.root);
+    tree.inOrderIterative(root);
 
     console.log('Level order traversal');
     //print 125 50 200 25 75 350
-    tree.levelOrderTraversal(tree.root);
+    tree.levelOrderTraversal(root);
 
     //100
     //console.log('find inorder successor: ', tree.inorder_successor_bst(tree.root, 75));

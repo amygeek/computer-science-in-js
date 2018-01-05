@@ -24,18 +24,18 @@ class Ranks {
         this.swap(arr, high, pIndex);
         return pIndex;
     }
-    getRank( arr, low, high, rank) {
-        let randowNum = this.getRandomIntInArray(low, high);
-        let leftEnd = this.partition(arr, low, high, randowNum);
+    getRank( arr, left, right, rank) {
+        let randowNum = this.getRandomIntInArray(left, right);
+        let leftEnd = this.partition(arr, left, right, randowNum);
 
-        let leftSide = leftEnd - low + 1;
+        let leftSide = leftEnd - left + 1;
 
         if (leftSide === rank + 1) {
             return arr.slice(0, leftEnd);
         } else if (rank < leftSide) {
-            return this.getRank(arr, low, leftEnd, rank);
+            return this.getRank(arr, left, leftEnd, rank);
         } else {
-            return this.getRank(arr, leftEnd + 1, high, rank - leftSide )
+            return this.getRank(arr, leftEnd + 1, right, rank - leftSide )
         }
     }
 }

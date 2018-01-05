@@ -23,6 +23,8 @@ let getTranslationCount = (number) => {
         }
 
         if (i < len - 1) {
+
+            // convert string num[i] to number by minus '0'
             let digit1 = num[i] - '0';
             let digit2 = num[i + 1] - '0';
             let converted = digit1 * 10 + digit2;

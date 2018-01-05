@@ -50,6 +50,40 @@ let sets = get_all_subsets(arr);
  Set { 3, 4 }
  Set { 2, 3, 4 }
  */
-for(let v of sets) {
-    console.log(v);
+// for(let v of sets) {
+//     console.log(v);
+// }
+
+
+let getAllSubSets = (sets, arr, n, index) => {
+
+    if ( n === index) {
+        //base case: add an empty set
+        let st = new Set();
+        sets.add(st);
+    } else {
+        sets = getAllSubSets(sets, arr, n, index + 1);
+        let item = arr[index];
+        let moreSet = new Set();
+        for (let set of sets) {
+            let st = new Set();
+            for (let s of set) {
+                st.add(s);
+            }
+            st.add(item);
+            moreSet.add(st);
+
+        }
+
+        for (let set of moreSet) {
+            sets.add(set);
+        }
+
+    }
+    return sets;
+
 }
+
+let st = new Set();
+console.log(getAllSubSets(st, [0,1,2], 3, 0));
+
