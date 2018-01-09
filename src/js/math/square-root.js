@@ -84,3 +84,5 @@ let square_root_rec = function(num, low, high) {
 let square_root_recursive = function(num) {
     return square_root_rec(num, 0, 1 + num / 2);
 };
+
+console.log(square_root_recursive(9));

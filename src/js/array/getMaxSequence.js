@@ -30,7 +30,7 @@ let checkSeq = (currentSeq, stack) => {
         if ( currentSeqSum > lastSeqSum) {
             stack.pop();
             stack.push(currentSeq);
-            
+
         } else if (currentSeqSum === lastSeqSum) {
             if (currentSeqLen > lastSeqLen || (currentSeqLen === lastSeqLen && currentSeq[0] < stack[0][0] ) ) {
                 stack.pop();
@@ -81,4 +81,4 @@ let getMaxSeq = (arr) => {
 }
 let arr2 = [-2, -3, 4, -1, -2, 1, 5, -3];  //7
 
-console.log(getMaxSeq(arr2));
+//console.log(getMaxSeq(arr2));

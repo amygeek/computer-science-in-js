@@ -61,15 +61,15 @@ let permute_string2 = (str) => {
     }
 
     let first = str.charAt(0);
-
     let remainder = str.substr(1);
+
     let words = permute_string2(remainder);
 
-    words.forEach((word) => {
+    for ( let word of words ){
         for(let i=0, l=word.length; i<=l; i++) {
             perms.push( insertCharAt(word, first, i));
         }
-    });
+    };
 
     return perms;
 

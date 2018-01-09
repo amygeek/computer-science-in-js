@@ -62,3 +62,35 @@ let is_number_valid = function(s) {
 };
 
 console.log(is_number_valid('22.34'));
+
+let isValidNum = (num, periodStack) => {
+
+    if (num === "." && !periodStack[0]) {
+        periodStack[0] = true;
+        return true;
+    } else if (num === "." && periodStack[0]) {
+        periodStack[1] = true;
+        return false;
+    } else if ( num >= '0' && num <= '9' && !periodStack[1]) {
+        return true;
+    }
+    return false;
+}
+
+let checkValidNum = (num) => {
+    if ( num.length === 0) {
+        return false;
+    }
+    //hold boolean value of first period and second period. If second period is true, we will invalid the number
+    let periodStack = [false, false];
+
+    for ( let i=0, l=num.length; i<l; i++) {
+        let isValid = isValidNum(num[i], periodStack);
+        if (isValid === false) {
+            return false;
+        }
+    }
+    return true;
+}
+
+console.log(checkValidNum('223.40.0'));  //false

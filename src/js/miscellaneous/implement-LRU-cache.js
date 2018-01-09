@@ -181,4 +181,5 @@ console.log("after access 2")
 cache.printcache();
 
 cache.get(5);
+console.log("after access 5")
 cache.printcache();

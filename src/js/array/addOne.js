@@ -55,6 +55,6 @@ let addOne2 = (arr, x) => {
     return arr;
 }
 
-let arr = [ 1, 0, 0, 3 ];
+let arr = [ 9,9,9 ];
 console.log(addOne(arr));
 console.log(addOne2(arr, 8));
