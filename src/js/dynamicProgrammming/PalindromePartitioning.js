@@ -53,7 +53,7 @@ let palindromePartitioning = (str, n) => {
 
         }
     }
-    return C[n-1];
+    return C;
 }
 
 let str = "ababbbabbababa";
