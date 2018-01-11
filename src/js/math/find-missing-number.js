@@ -27,5 +27,4 @@ let find_missing = function(input) {
 };
 
 let arr = [3, 5, 7, 8, 9, 2, 1, 4];
-
-console.log(find_missing(arr));  //6
+console.log("Missing number is " + find_missing(arr));  //6

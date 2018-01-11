@@ -17,10 +17,7 @@ let palindromePartitioning = (str, n) => {
     let P = [];  //hold true or false for each position in the string palindrome matrix
     let i, j, l;
     for ( i=0; i<n; i++ ) {
-        let temp =[];
-        for( j=0; j<n; j++) {
-            temp[j] = true;
-        }
+        let temp =new Array(n).fill(true);
         P.push(temp);
     }
 
@@ -59,8 +56,8 @@ let palindromePartitioning = (str, n) => {
     return C[n-1];
 }
 
-//let str = "ababbbabbababa";
-let str = "aba";
+let str = "ababbbabbababa";
+//let str = "aba";
 
 console.log(palindromePartitioning(str, str.length));
 

@@ -6,7 +6,7 @@ let isParenthesis = (c) => {
 
 //  method returns true if string contains valid
 // parenthesis
-let  isValidString = ( str) => {
+let  isValidParenthesis = ( str) => {
 
     let cnt = 0;
     for (let i = 0; i < str.length; i++) {
@@ -41,9 +41,10 @@ let removeInvalidParenthesis = ( str ) =>
     while (q.length !== 0) {
 
         let str = q.shift();
+
         q.pop();
 
-        if (isValidString(str)) {
+        if (isValidParenthesis(str)) {
             console.log(str);
             level = true;
         }

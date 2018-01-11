@@ -6,7 +6,38 @@
  * 
  * @type {number[]}
  */
-let arr = [2, 4, 6, -7, 6, 10, -3, 5, 11];
+
+
+let maxSet = (arr) => {
+
+    let n = arr.length;
+
+    let maxSum = Number.MIN_VALUE;
+    let currentSum = 0;
+    let currentSet = [];
+    let maxSet = [];
+
+    for( let i=0; i<n; i++ ) {
+
+
+        if (arr[i] > 0) {
+            currentSum += arr[i];
+            currentSet.push(arr[i]);
+            if (currentSum > maxSum || (currentSet.length === maxSet.length && (currentSet.length > maxSet.length || currentSet[0] < maxSet[0]) ) ){
+                maxSum = currentSum;
+                maxSet = currentSet;
+            }
+        } else {
+            currentSum = 0;
+            currentSet = [];
+        }
+
+    }
+    return maxSet;
+}
+
+let arr = [2, 8, 6, -7, 6, 10, -3, 4, 11, 1];  //[ 2, 8, 6 ]
+console.log(maxSet(arr));
 
 /**
  * @desc: compare currentSeq with the first seq in stack
@@ -63,7 +94,7 @@ let getMaxSequence = (arr) => {
     return stack;
 }
 
-console.log(getMaxSequence(arr));
+
 
 //get continue sub sequence that includes negative integer .
 let getMaxSeq = (arr) => {
