@@ -21,20 +21,20 @@
 
 
 let coinChange = (denom, amount) => {
-    let solution = [];
+    let res = [];
     //preset to 0 for each
     for(let i=0; i<amount +1; i++) {
-        solution[i] = 0;
+        res[i] = 0;
     }
     //this will be only selected if you don't select any coin
-    solution[0] = 1;
+    res[0] = 1;
 
     for(let j=0; j<denom.length; j++) {
         for (let i=denom[j]; i< amount + 1; i++) {
-            solution[i] += solution[i-denom[j]];
+            res[i] += res[i-denom[j]];
         }
     }
-    return solution[solution.length-1];
+    return res[res.length-1];
 }
 
 let denom = [1, 2, 5];

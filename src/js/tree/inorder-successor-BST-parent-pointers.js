@@ -137,5 +137,5 @@ bst.insert(25);
 bst.insert(75);
 bst.insert(350);
 bst.insert(125);
-console.log(bst.findSuccessor(bst.root, 75).data);
+console.log(bst.findSuccessor(bst.root, 125));
 

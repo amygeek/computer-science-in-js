@@ -9,7 +9,9 @@ let longestRepeatingSubSeq = (str) => {
     }
 
     for (let i=1; i<=n; i++) {
+
         for (let j=1; j<=n; j++) {
+
             if (str[i-1] === str[j-1] && i !== j) {
 
                 res[i][j] = res[i-1][j-1] + 1;

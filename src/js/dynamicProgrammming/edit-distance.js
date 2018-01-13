@@ -219,6 +219,6 @@ let  editDistDP = (str1, str2, m, n) => {
     return solution[m][n];
 }
 
-let str1 = "sunday";
-let str2 = "saturday";
+let str1 = "amyb";
+let str2 = "bamy";
 console.log( editDistDP( str1 , str2 , str1.length, str2.length) );  //2
