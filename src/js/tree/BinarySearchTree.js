@@ -1,8 +1,20 @@
-class Node {
+class TreeNode {
     constructor(data) {
         this.data = data;
         this.left = null;
         this.right = null;
+    }
+
+    createBST(arr, low, high) {
+        if ( high < low ) {
+            return null;
+        }
+        let mid = Math.floor( (high + low) / 2 );
+        let n = new TreeNode(arr[mid]);
+
+        n.left = this.createBST(arr, low, mid-1);
+        n.right = this.createBST(arr, mid+1, high);
+        return n;
     }
 }
 
@@ -25,7 +37,7 @@ class BinarySearchTree {
     add(data){
 
         //create a new item object, place data in
-        let node = new Node( data ),
+        let node = new TreeNode( data ),
 
         //used to traverse the structure
             current = null;
@@ -77,7 +89,7 @@ class BinarySearchTree {
     insertRec(root, data) {
 
         if ( root === null ) {
-            root = new Node(data);
+            root = new TreeNode(data);
             return root;
         }
         if (root.data < data ) {
@@ -388,17 +400,19 @@ class BinarySearchTree {
 
         if ( root ) {
             let stk = [];
-
+            let str = "";
             while (stk.length != 0 || root) {
                 if (root) {
                     stk.push(root);
                     root = root.left;
                     continue;
                 }
-                console.log(stk[stk.length - 1].data );
+                str += stk[stk.length - 1].data + " ";
+
                 root = stk[stk.length - 1].right;
                 stk.pop();
             }
+            console.log( str );
         }
     }
 
@@ -540,17 +554,49 @@ class BinarySearchTree {
         return false;
     }
 
-    createBST(arr, low, high) {
-        if ( high < low ) {
-            return null;
-        }
-        let mid = Math.floor( (high + low) / 2 );
-        let n = new Node(arr[mid]);
-        this.add(n);
+    //createBST(arr, low, high) {
+    //    if ( high < low ) {
+    //        return null;
+    //    }
+    //    let mid = Math.floor( (high + low) / 2 );
+    //    let n = new TreeNode(arr[mid]);
+    //    this.add(n);
+    //
+    //    n.left = this.createBST(arr, low, mid-1);
+    //    n.right = this.createBST(arr, mid+1, high);
+    //    return n;
+    //}
 
-        n.left = this.createBST(arr, low, mid-1);
-        n.right = this.createBST(arr, mid+1, high);
-        return n;
+    levelOrderTraversal2 ( root ) {
+        if ( !root ) {
+            return;
+        }
+        let q = [];
+        q.push(root);
+
+        let str = "";
+        while( q.length !== 0 ) {
+
+            let levelNodes = q.length;
+            let str = " ";
+            while ( levelNodes !== 0 ) {
+                let n = q.shift();
+
+                str += n.data + " ";
+
+                if (n.left ) {
+                    q.push(n.left);
+                }
+
+                if (n.right ) {
+                    q.push(n.right );
+                }
+                levelNodes--;
+            }
+
+            console.log( str );
+
+        }
     }
 };
 
@@ -571,8 +617,10 @@ let test = () => {
     //tree.insert(125);
     //tree.insert(350);
 
-    let arr = [25,50,75,100,125,200,350];
-    let root = tree.createBST(arr, 0, arr.length - 1);
+
+    let arr = [25,50,75,100, 125, 200, 350];
+    let node = new TreeNode( null );
+    let root = node.createBST(arr, 0, arr.length - 1);
 
     let isBst = tree.isBST(root, -Number.MAX_VALUE - 1, Number.MAX_VALUE);
     console.log("isBst: ", isBst);
@@ -580,25 +628,25 @@ let test = () => {
     //let stk = [];
     //let nthNode = tree.getNthNode(tree.root, 1, stk);
     let nthNode = tree.getNthNode2(root, 1, 1);
-    console.log("Nth Node: ", nthNode);
+    console.log("Nth TreeNode: ", nthNode);
 
     console.log('travel tree in order recursively');
     //print 25 50 75 100 125 200 350
     tree.inOrderRec(root);
 
-    console.log('Level order traversal');
+    console.log('Level order traversal 2');
     //print 100 50 200 25 75 125 350
-    tree.levelOrderTraversal(root);
+    tree.levelOrderTraversal2(root);
 
     //tree.remove(100)
     tree.removeRec(root, 100)
 
     console.log('Level order traversal after removing node 100');
-    tree.inOrderIterative(root);
-
-    console.log('Level order traversal');
     //print 125 50 200 25 75 350
-    tree.levelOrderTraversal(root);
+    tree.levelOrderTraversal2(root);
+
+    console.log('inOrder Iterative after removing node 100');
+    tree.inOrderIterative(root);
 
     //100
     //console.log('find inorder successor: ', tree.inorder_successor_bst(tree.root, 75));

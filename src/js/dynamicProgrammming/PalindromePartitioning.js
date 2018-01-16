@@ -36,7 +36,7 @@ let palindromePartitioning = (str, n) => {
             } else {
                 res[i][j] = (str[i] === str[j] && res[i+1][j-1]);
             }
-            console.log(res)
+
         }
     }
 
@@ -57,8 +57,25 @@ let palindromePartitioning = (str, n) => {
     return C[n-1];
 }
 
-//let str = "ababbbabbababa";
-let str = "abab";
+
+let isPalindrome = (str) => {
+    let i = 0;
+    let j = str.length -1;
+    while( i < j ) {
+
+        if (str[i] != str[j]) {
+            return false;
+        }
+        i++;
+        j--;
+    }
+
+    return true;
+}
+
+let str = "ababbbabbababa";
+//let str = "abab";
 
 console.log(palindromePartitioning(str, str.length));
+console.log(isPalindrome(str));
 

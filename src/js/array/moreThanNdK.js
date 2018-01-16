@@ -1,3 +1,21 @@
+/*
+ Find All Elements in an Array which appears more than N/K times, N is Array Size and k is a Number.
+ int[] arrA = { 2, 2, 4, 4, 3, 5, 3, 4, 4, 6, 4, 3, 3, 8 };
+
+ K = 4
+
+ N/k = 14/4 = 3
+
+ Output will be [3,4] they appear 5, 4 times respectively.
+ Naive Approach: Take two for loops , check every element with all other elements, Time Complexity -   O(n2) time.
+
+ Better Approach: Tetris Game technique– O(Nk)
+ Create array etms[] contains k-1 objects of class Elements with element =0 and count = 0.
+ So idea is, navigate all the elements of given array.
+ Check if element exist in etms[] if not, insert it with the count 1 and if exist then increase its count.
+ Also check if etms[] gets full when inserting an element, if it is not, follow the previous step. If it is full then reduce the count of every existing element in the etms[]. (Just think of a Tetris game, when row gets full, it gets deleted and size of the Tetris reduced by 1) see the picture below.
+ Once all the elements of array gets over, check every element of etms[] with array and print those elements which has N/K times.
+ */
 class Element {
     constructor(e, c) {
         this.element = e;

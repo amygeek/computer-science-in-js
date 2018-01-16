@@ -56,12 +56,14 @@ class MaxDistance {
             leftMin[i] = this.min(arr[i], leftMin[i - 1]);
         }
 
+        //console.log(leftMin)
         /* Construct rightMax[] such that rightMax[j] stores the maximum value from (arr[j], arr[j+1], ..arr[n-1]) */
         rightMax[n - 1] = arr[n - 1];
         for (j = n - 2; j >= 0; --j) {
             rightMax[j] = this.max(arr[j], rightMax[j + 1]);
         }
 
+        //console.log(rightMax)
         /* Traverse both arrays from left to right to find optimum j - i. This process is similar to merge() of MergeSort */
         i = 0; j = 0; maxDiff = -1;
         while (j < n && i < n) {
@@ -77,13 +79,32 @@ class MaxDistance {
 
         return maxDiff;
     }
+
+    maxIndexDiff2 ( arr ) {
+
+        let i=0;
+        let j= arr.length -1;
+        let max = -1;
+        while ( i < j ) {
+            if ( arr[j] > arr[i] ) {
+                max = Math.max( max, j - i);
+            } else if (arr[j-1] > arr[i]) {
+                max = Math.max( max, j - i - 1);
+            }
+            i++;
+            j--;
+        }
+        return max;
+    }
 }
 
 let maxDistance = new MaxDistance();
 
 //let arr = [3, 5, 4, 2];
-let arr = [34, 8, 10, 3, 2, 80, 30, 33, 1];
+let arr = [9, 2, 3, 4, 5, 6, 7, 8, 18, 0];
 
 let dist = maxDistance.maxIndexDiff(arr, arr.length)
+let dist2 = maxDistance.maxIndexDiff2(arr);
 
 console.log(dist);
+console.log(dist2);
