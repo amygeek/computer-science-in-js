@@ -1,17 +1,19 @@
-let magicIndexSearch = (arr, start, end) => {
 
-    if ( end  < start || start < 0 || end >= arr.length) {
-        return -1;
-    }
+let search = (arr, start, end) => {
+    if (start <= end) {
+        let mid = Math.floor( ( start + end ) / 2 );
 
-    let mid =  Math.floor( ( start + end ) / 2 );
-    if (arr[mid] === mid) {
-        return mid;
-    } else if (arr[mid] < mid) {
-        return magicIndexSearch( arr, mid + 1, end);
-    } else {
-        return magicIndexSearch( arr, start, mid - 1);
+        if (mid == arr[mid]) // check for magic index.
+            return mid;
+        if (mid > arr[mid]) {
+
+            return search(arr, mid + 1, end);  // the right half of the array
+        } else {
+
+            return search(arr, start, mid - 1);  // the left half of the array
+        }
     }
+    return -1;
 }
 
 let magicIndex = (arr, start, end) => {
@@ -19,28 +21,28 @@ let magicIndex = (arr, start, end) => {
         return -1;
     }
 
-    let midIndex = Math.floor( ( start + end ) / 2 );
-    let midValue = arr[midIndex];
+    let mid = Math.floor( ( start + end ) / 2 );
+    let midVal = arr[mid];
 
-    if ( midIndex === midValue) {
-        return midIndex;
+    if ( mid === midVal) {
+        return mid;
     }
 
-    let rightIndex = Math.max(midIndex + 1, midValue);
-    let right = magicIndexSearch(arr, rightIndex, end);
+    let rightIndex = Math.max(mid + 1, midVal);
+    let right = search(arr, rightIndex, end);
 
     if (right > 0) {
         return right;
     }
 
-    let leftIndex = Math.min(midIndex - 1, midValue);
-    let left = magicIndexSearch(arr, start, leftIndex);
+    let leftIndex = Math.min(mid - 1, midVal);
+    let left = search(arr, start, leftIndex);
 
     if (left > 0 ) {
         return left;
     }
 }
 
-let a = [-10, -5, 2, 2, 2, 3, 4, 7, 9, 12, 13];
+let a = [-10, -5, 2, 2, 2, 2, 2, 3, 5, 7, 9, 12, 13];
 
 console.log(magicIndex(a, 0, a.length));
