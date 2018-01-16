@@ -1,5 +1,0 @@
-knapsackProblem (c, w, v) {
-    
-    
-    
-}

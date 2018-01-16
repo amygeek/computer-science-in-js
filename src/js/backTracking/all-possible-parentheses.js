@@ -34,6 +34,23 @@ let print_all_parentheses = function(n) {
     return output;
 };
 
+let print_all_parentheses2 = (openP, closeP, str) => {
+
+    if (openP === 0 && closeP === 0 ) {
+        console.log(str);
+    }
+
+    if ( openP > closeP ) {
+        return;
+    }
+    if ( openP > 0 ) {
+        print_all_parentheses2( openP - 1, closeP, str + "(")
+    }
+    if ( closeP > 0 ) {
+        print_all_parentheses2 ( openP, closeP - 1, str + ")");
+    }
+}
+
 /*
  [ '{', '{', '{', '}', '}', '}' ]
  [ '{', '{', '}', '{', '}', '}' ]
@@ -46,4 +63,4 @@ let print_all_parentheses = function(n) {
  [ '{', '{', '}', '}' ]
  [ '{', '}', '{', '}' ]
  */
-console.log( print_all_parentheses( 2 ) );
+print_all_parentheses2( 2, 2, "" ) ;

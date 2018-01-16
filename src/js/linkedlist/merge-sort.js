@@ -48,48 +48,49 @@ let split_in_half = function(head, first_second) {
     }
 };
 
-let merge_sorted_lists = function(first, second) {
-    if (!first) {
-        return second;
+let merge_sorted_lists = function(head1, head2) {
+    // if both lists are empty then merged list is also empty
+    // if one of the lists is empty then other is the merged list
+    if (!head1) {
+        return head2;
+    } else if (!head2) {
+        return head1;
     }
 
-    if (!second) {
-        return first;
-    }
-
-    let new_head = null;
-
-    if (first.data <= second.data) {
-        new_head = first;
-        first = first.next;
+    let mergedHead = null;
+    if (head1.data <= head2.data) {
+        mergedHead = head1;
+        head1 = head1.next;
     } else {
-        new_head = second;
-        second = second.next;
+        mergedHead = head2;
+        head2 = head2.next;
     }
 
-    let new_current = new_head;
-    while (first && second) {
+    let mergedTail = mergedHead;
+
+    while (head1 && head2) {
         let temp = null;
-        if (first.data <= second.data) {
-            temp = first;
-            first = first.next;
+        if (head1.data <= head2.data) {
+            temp = head1;
+            head1 = head1.next;
         } else {
-            temp = second;
-            second = second.next;
+            temp = head2;
+            head2 = head2.next;
         }
 
-        new_current.next = temp;
-        new_current = temp;
+        mergedTail.next = temp;
+        mergedTail = temp;
     }
 
-    if (first) {
-        new_current.next = first;
-    } else if (second) {
-        new_current.next = second;
+    if (head1) {
+        mergedTail.next = head1;
+    } else if (head2) {
+        mergedTail.next = head2;
     }
 
-    return new_head;
+    return mergedHead;
 };
+
 
 let merge_sort = function(head) {
     // No need to sort a single element.
