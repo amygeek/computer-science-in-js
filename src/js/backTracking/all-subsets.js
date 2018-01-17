@@ -85,5 +85,5 @@ let getAllSubSets = (sets, arr, n, index) => {
 }
 
 let st = new Set();
-console.log(getAllSubSets(st, [0,1,2], 3, 0));
+console.log(getAllSubSets(st, [1,2,3], 3, 0));
 
