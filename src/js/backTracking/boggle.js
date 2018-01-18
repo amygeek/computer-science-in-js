@@ -1,29 +1,47 @@
 
 //  It is simple backtracking algorithm
 class Boggle {
+
     constructor(grid, dictionary) {
         this.grid = grid;
         this.dictionary = dictionary;
         this.state = [];
+        this.size = grid.length;
 
-        for (let i = 0; i < grid.length; i++) {
-            let temp = [];
-            for (let j = 0; j < grid.length; j++) {
-                temp.push(false);
-            }
-            this.state.push(temp);
+        for (let i = 0; i < this.size; i++) {
+            this.state.push ( new Array( this.size).fill( false ));
         }
+
     }
 
-    find_all_nbrs(x, y) {
-        let nbrs = [];
-        let start_x = Math.max(0, x - 1);
-        let start_y = Math.max(0, y - 1);
-        let end_x = Math.min(this.grid.length - 1, x + 1);
-        let end_y = Math.min(this.grid.length - 1, y + 1);
+    isPrefix( str ) {
 
-        for (let i = start_x; i <= end_x; i++) {
-            for (let j = start_y; j <= end_y; j++) {
+        if (str === "") {
+            return true;
+        }
+        //let n = this.dictionary.size;
+
+        for ( let val of this.dictionary ) {
+            if ( val.indexOf( str ) !== -1 ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    find_all_nbrs( x, y ) {
+        
+        let nbrs = [];
+        
+        let startX = Math.max(0, x - 1);
+        let startY = Math.max(0, y - 1);
+        let endX = Math.min(this.size - 1, x + 1);
+        let endY = Math.min(this.size - 1, y + 1);
+
+        for (let i = startX; i <= endX; i++) {
+            
+            for (let j = startY; j <= endY; j++) {
                 if (i === x && j === y) {
                     continue;
                 }
@@ -32,23 +50,26 @@ class Boggle {
                 }
             }
         }
+
         return nbrs;
     }
 
     find_words_rec(i, j, current, words) {
+
         if (current.length > 0 && this.dictionary.has(current)) {
             words.add(current);
         }
 
-        //  we can really speed up our algorithm if we have prefix method available
-        //  for our dictionary by using code like below
-
-        // if not dictionary.is_prefix(current):
-        //   // if current word is not prefix of any word in dictionary
-        //   // we don't need to continue with search
-        //   return
+        // we can really speed up our algorithm if we have prefix method available for our dictionary by using code like below
+        //21.239ms without check the prefix in the dictionary. 3.919ms with the check
+        if (!this.isPrefix( current ) ) {
+            // if current word is not prefix of any word in dictionary, we don't need to continue with search
+            return;
+        }
 
         let nbrs = this.find_all_nbrs(i, j);
+        //console.log(nbrs)
+
         for (let k = 0; k < nbrs.length; k++) {
             let first = nbrs[k][0];
             let second = nbrs[k][1];
@@ -63,8 +84,8 @@ class Boggle {
 
     find_all_words() {
         let words = new Set([]);
-        for (let i = 0; i < this.grid.length; i++) {
-            for (let j = 0; j < this.grid.length; j++) {
+        for (let i = 0; i < this.size; i++) {
+            for (let j = 0; j < this.size; j++) {
                 let current_word = "";
                 this.find_words_rec(i, j, current_word, words);
             }
@@ -80,4 +101,6 @@ let g = [
 let dict = new Set(['cat', 'cater', 'art', 'toon', 'moon', 'not', 'eat', 'ton']);
 let boggle = new Boggle(g, dict);
 
+console.time("find words");
 console.log( boggle.find_all_words() );   //Set { 'art', 'cat', 'cater', 'eat', 'ton', 'not' }
+console.timeEnd("find words")
