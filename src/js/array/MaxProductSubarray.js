@@ -58,7 +58,7 @@ class MaxProductSubarray {
                 minEnd = this.min (minEnd * arr[i], 1);
             } else if (arr[i] == 0) {
                 /* If this element is 0, then the maximum product cannot
-                 end here, make both maxEnd and minEnd 0
+                 end here, make both maxEnd and minEnd 1
                  Assumption: Output is always greater than or equal to 1. */
                 maxEnd = 1;
                 minEnd = 1;

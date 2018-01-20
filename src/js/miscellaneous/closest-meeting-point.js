@@ -79,19 +79,22 @@ let shortest_distance_travelled = function(m, points) {
  */
 
 let shortestDistance = function(m, points) {
+
+    let n = points.length;
+
     let minPt = new point(0, 0);
     let x = 0;
     let y = 0;
 
     // calculate the centroid
     let centroid = new point(0, 0);
-    for (let i = 0; i < points.length; i++) {
+    for (let i = 0; i < n; i++) {
         x += points[i].x;
         y += points[i].y;
     }
 
-    centroid.x = parseInt(Math.round(x / points.length));
-    centroid.y = parseInt(Math.round(y / points.length));
+    centroid.x = parseInt(Math.round(x / n));
+    centroid.y = parseInt(Math.round(y / n));
 
     // initialize the minPt to centroid
     minPt.x = centroid.x;
@@ -120,5 +123,7 @@ let shortestDistance = function(m, points) {
 
 
 //let distance = shortest_distance_travelled(4, [{x:1,y:2}, {x:3, y:2}]);  //point { x: 1, y: 2 }
+console.time("shortest");
 let distance = shortestDistance(6, [{x:1,y:2}, {x:3, y:3}, {x:4, y:2}]);  //point { x: 3, y: 3 }
+console.timeEnd('shortest');
 console.log(distance);

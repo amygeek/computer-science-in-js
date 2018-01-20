@@ -31,4 +31,13 @@ let longestPalindromicSubsequence = ( str ) => {
 
 let str = "agbdba";
 
+/*
+     0 1 2 3 4 5
+     a g b d b a
+  1  g
+  2  b
+  3  d
+  4  b
+  5  a
+*/
 console.log(longestPalindromicSubsequence(str));

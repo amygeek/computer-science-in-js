@@ -47,27 +47,27 @@ class MaxDistance {
         let maxDiff;
         let i, j;
 
-        let rightMax = new Array(n);
-        let leftMin = new Array(n);
+        let maxArr = new Array(n);
+        let minArr = new Array(n);
 
-        /* Construct leftMin[] such that leftMin[i] stores the minimum value from (arr[0], arr[1], ... arr[i]) */
-        leftMin[0] = arr[0];
+        /* Construct minArr[] such that minArr[i] stores the minimum value from (arr[0], arr[1], ... arr[i]) */
+        minArr[0] = arr[0];
         for (i = 1; i < n; ++i) {
-            leftMin[i] = this.min(arr[i], leftMin[i - 1]);
+            minArr[i] = this.min(arr[i], minArr[i - 1]);
         }
 
-        //console.log(leftMin)
-        /* Construct rightMax[] such that rightMax[j] stores the maximum value from (arr[j], arr[j+1], ..arr[n-1]) */
-        rightMax[n - 1] = arr[n - 1];
+        //console.log(minArr)
+        /* Construct maxArr[] such that maxArr[j] stores the maximum value from (arr[j], arr[j+1], ..arr[n-1]) */
+        maxArr[n - 1] = arr[n - 1];
         for (j = n - 2; j >= 0; --j) {
-            rightMax[j] = this.max(arr[j], rightMax[j + 1]);
+            maxArr[j] = this.max(arr[j], maxArr[j + 1]);
         }
 
-        //console.log(rightMax)
+        //console.log(maxArr)
         /* Traverse both arrays from left to right to find optimum j - i. This process is similar to merge() of MergeSort */
         i = 0; j = 0; maxDiff = -1;
         while (j < n && i < n) {
-            if (leftMin[i] < rightMax[j])
+            if (minArr[i] < maxArr[j])
             {
                 maxDiff = this.max(maxDiff, j - i);
                 j = j + 1;

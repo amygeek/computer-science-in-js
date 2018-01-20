@@ -21,6 +21,7 @@ let longestRepeatingSubSeq = (str) => {
             }
         }
     }
+    console.log(res)
     return res[n][n];
 }
 
