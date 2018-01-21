@@ -29,3 +29,33 @@
  The answer is awag as it has 3 distinct characters in a string of size 4, and only one character is repeated twice.
 
  */
+
+let findSubString = ( str, k) => {
+
+    let n = str.length;
+
+    for( let i=0; i<n - k + 1; i++ ) {
+        
+        let currentStr = str.substr( i, 4);
+        let map = new Map();
+
+        for (let j=0; j<currentStr.length; j++) {
+
+            let s = map.get(currentStr[j]);
+
+            if ( s )  {
+                map.set(currentStr[j], s + 1 );
+            } else {
+                map.set(currentStr[j], 1 );
+            }
+        }
+        //if map size is 3, that means only one character is repeated
+        if ( map.size === 3 ) {
+            return currentStr;  //return it if we only care about finding one
+        }
+    }
+
+}
+
+console.log( findSubString("awaglk", 4) );  //awag
+

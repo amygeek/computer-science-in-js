@@ -1,7 +1,16 @@
+//time O(n), space O(256)
 let isUnique = ( str ) => {
+
+    let len = str.length;
+
+    // If length is greater than 265,
+    // some characters must have been repeated
+    if ( len > 256 ) {
+        return false;
+    }
     let arr = Array(256).fill(false);
 
-    for(let i= 0, l=str.length; i<l; i++) {
+    for(let i= 0; i<len; i++) {
         if( arr[str[i].charCodeAt(0)] ) {
             return false;
         }
@@ -11,6 +20,24 @@ let isUnique = ( str ) => {
     return true;
 }
 
+//time O(n), space O(1)
+// The approach is valid for strings having alphabet as a-z
+let isUnique2 = (str) => {
 
-let isUniqueStr = isUnique('abccd');
+    let n = str.length;
+    let checker = 0;
+
+    for(let i=0; i<n; i++) {
+
+        let bitAtIndex = str[i].charCodeAt(0) - 97;
+
+        if ( checker & ( 1 << bitAtIndex ) ) {
+            return false;
+        }
+        checker |= ( 1 << bitAtIndex );
+    }
+    return true;
+}
+
+let isUniqueStr = isUnique2('abccd');
 console.log(isUniqueStr);

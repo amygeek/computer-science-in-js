@@ -415,37 +415,7 @@ class BinarySearchTree {
             console.log( str );
         }
     }
-
-    levelOrderTraversal (root) {
-
-        if ( root ) {
-            let current_queue = [];
-            current_queue.push(root);
-            current_queue.push(null);
-
-            while (current_queue.length != 0) {
-
-                let temp = current_queue.shift();
-
-                console.log(temp.data);
-
-                if (temp.left) {
-                    current_queue.push(temp.left);
-                }
-
-                if (temp.right) {
-                    current_queue.push(temp.right);
-                }
-
-                if (!current_queue[0]) {
-                    current_queue.shift();   //dequeue null
-                    if (current_queue.length != 0) {
-                        current_queue.push(null);  //enqueue null on end of level
-                    }
-                }
-            }
-        }
-    }
+    
 
     find_min(root) {
         if (!root) {
@@ -567,19 +537,20 @@ class BinarySearchTree {
     //    return n;
     //}
 
-    levelOrderTraversal2 ( root ) {
+    levelOrderTraversal ( root ) {
         if ( !root ) {
             return;
         }
+
         let q = [];
         q.push(root);
-
-        let str = "";
+        
         while( q.length !== 0 ) {
 
-            let levelNodes = q.length;
+            let levelNodeLen = q.length;
             let str = " ";
-            while ( levelNodes !== 0 ) {
+
+            while ( levelNodeLen !== 0 ) {
                 let n = q.shift();
 
                 str += n.data + " ";
@@ -591,7 +562,7 @@ class BinarySearchTree {
                 if (n.right ) {
                     q.push(n.right );
                 }
-                levelNodes--;
+                levelNodeLen--;
             }
 
             console.log( str );
@@ -634,16 +605,16 @@ let test = () => {
     //print 25 50 75 100 125 200 350
     tree.inOrderRec(root);
 
-    console.log('Level order traversal 2');
+    console.log('Level order traversal');
     //print 100 50 200 25 75 125 350
-    tree.levelOrderTraversal2(root);
+    tree.levelOrderTraversal(root);
 
     //tree.remove(100)
     tree.removeRec(root, 100)
 
     console.log('Level order traversal after removing node 100');
     //print 125 50 200 25 75 350
-    tree.levelOrderTraversal2(root);
+    tree.levelOrderTraversal(root);
 
     console.log('inOrder Iterative after removing node 100');
     tree.inOrderIterative(root);

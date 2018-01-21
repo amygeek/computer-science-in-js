@@ -46,8 +46,8 @@ class OccurrencesInArray {
     }
 }
 
-let arr = [1,2,2,2,2,2,2,2,3,4,5,5,6];
+let arr = [2,3,4,5,5,6];
 
 let occurrencesInArray = new OccurrencesInArray(arr);
 
-console.log(occurrencesInArray.occurrenceLen( 2 ));
+console.log("No of Occurrences of number 5 is : " + occurrencesInArray.occurrenceLen( 5 ));
