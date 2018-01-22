@@ -32,10 +32,10 @@
 
     while (temp < n) {
         //if consecutive Integer is same return 0
-        if (set.has(s.charAt(temp) - '0')) {
+        if (set.has(s[temp] - '0')) {
                 return false;
         }
-        set.add(s.charAt(temp) - '0');
+        set.add(s[temp] - '0');
         temp++;
     }
     
@@ -46,8 +46,8 @@
     
     while (j < n) {
     
-        val1 = s.charAt(i) - '0';
-        val2 = s.charAt(j) - '0';
+        val1 = s[i] - '0';
+        val2 = s[j] - '0';
     
         if (set.has(val1 * val2)) {
             return false;
