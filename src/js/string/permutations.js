@@ -75,7 +75,21 @@ let permute_string2 = (str) => {
 
 }
 
-(function(){
-    console.log( permute_string( 'abc' ));
-    console.log( permute_string2( 'abc' ));
-})()
+let permutation = (str, left) {
+    if (left == str.length) {
+        if (isWellFormed(str)) {
+            System.out.println(Arrays.toString(str));
+        }
+        return;
+    }
+    for (int i = left; i < str.length; i++) {
+        swap(i, left);
+        permutation(str, left + 1);
+        swap(i, left); // backtrack
+    }
+}
+
+
+console.log( permute_string( 'abc' ));
+console.log( permute_string2( 'abc' ));
+

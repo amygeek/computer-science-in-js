@@ -7,108 +7,58 @@
  T(n) = nT(n-1) + O(n^2)T(n)=nT(n−1)+O(n​2)
 
  Memory Complexity
- Exponential.
- */
-// this method determines if a queen can
-// be placed at row, col
-// with current solution i.e. this move
-// is valid only if no queen in current
-// solution should attacked square at
-// proposed_row and proposed_col
-let isValidMove = (solution, row, col) => {
-    // check all queens in current solution
-    for (let row2=0; row2<row; row2++) {
-        let col2 = solution[row2];
-        if (col2 === col) {
-            return false;
-        }
-        let rowDistance = row - row2;
-        colDistance = Math.abs(col - col2);
-
-        if (rowDistance === colDistance) {
-            return false;
-        }
-    }
-    return true;
-}
-
-let solveQueenRec = (n, solution, row, result) => {
-    if ( row === n ) {
-        result.push(solution.slice());
-        return;
-    }
-    for (let col = 0; col < n; col++) {
-        if ( isValidMove (solution, row, col) ) {
-            solution[row] = col;
-            solveQueenRec(n, solution, row + 1, result);
-        }
-    }
-}
-
-let solveQueen = (n) => {
-    let result = [];
-    let solution = new Array(n);
-    solveQueenRec(n, solution, 0, result);
-    return result;
-}
-
-/**
- Runtime Complexity
- Exponential.
-
- Memory Complexity
  O(n)
 
- The number of solutions grow exponentially. Memory consumed by the stack will be linear, O(n)
- in this solution as there won't be more than 'n' elements in the stack at one time.
+ how to place queens on an ordinary chess board so that none of them can hit any other in one move
+
+ This earlier approach we have seen solution matrix, at every row we have only one entry as 1 and rest of the entries are 0.
+ Solution matrix takes O(N2) space. We can reduce it to O(N). We will solve it by taking one dimensional array and
+ consider this.res[1] = 2 as “Queen at 1st row is placed at 2nd column.
+
+ this.res[i]=j means queen at i-th row is placed at j-th column.
+
+ Check if Queens placed at (x1, y1) and (x2,y2) are safe
+
+ x1==x2 means same rows,
+ y1==y2 means same columns
+ |x2-x1|==|y2-y1| means they are placed in diagonals.
  */
-// This solution uses stack to store the solution.
-// Stack will hold only the column values and one solution
-// will be stored in the stack at a time.
-let solveQueens2 = function(n, results) {
-    let solution = new Array(n);
-    let sol_stack = [];
-
-    let row = 0;
-    let col = 0;
-
-    while (row < n) {
-        while (col < n) {
-            if (isValidMove(solution, row, col)) {
-                sol_stack.push(col);
-                solution[row] = col;
-                row++;
-                col = 0;
-                break;
-            }
-            col++;
-        }
-
-        if (col === n) {
-            if (sol_stack.length != 0) {
-                col = sol_stack.pop() + 1;
-                row = row - 1;
-
-            } else {
-                break; // no more solutions exist
+class NQueens {
+    
+    constructor() {
+        this.res = []; // this array will store the result
+    }
+    // this.res[i]=j; means queen at i-th row is placed at j-th column.
+    // Queens placed at (x1, y1) and (x2,y2)
+    // x1==x2 means same rows, y1==y2 means same columns, |x2-x1|==|y2-y1| means
+    // they are placed in diagonals.
+    canPlace( x2, y2) {
+    // This function will check if queen can be placed (x2,y2), or we can
+        // say that Can queen at x2 row is placed at y2 column.
+        // for finding the column for x2 row, we will check all the columns for
+        // all the rows till x2-1.
+        for (let i = 0; i < x2; i++) {
+            //this.res[i] == y2 => columns are same
+            //|i - x2| == |this.res[i] - y2| => in diagonals.
+            if ( this.res[i] === y2 || ( Math.abs( i - x2 ) == Math.abs( this.res[i] - y2 ) )) {
+                    return false;
             }
         }
-
-        if (row === n) {
-            // add the solution into results
-            results.push(solution.slice());
-
-            // backtrack to find the next solution
-            row = row - 1;
-            col = sol_stack.pop() + 1;
+        return true;
+    }
+    placeQueens( x, size) {
+        for (let i = 0; i < size; i++) {
+            //check if queen at xth row can be placed at i-th column.
+            if (this.canPlace(x, i)) {
+                this.res[x] = i; // place the queen at this position.
+                if (x == size - 1) {
+                    console.log( this.res );
+                }
+                this.placeQueens(x + 1, size);
+            }
         }
     }
-};
-
-let re = [];
-solveQueens2(4, re);  //[ [ 1, 3, 0, 2 ], [ 2, 0, 3, 1 ] ]
-console.log(re);
-
+}
 
 /***** [ [ 1, 3, 0, 2 ], [ 2, 0, 3, 1 ] ] *****
  | 0 | 1 | 0 | 0 |
@@ -120,7 +70,11 @@ console.log(re);
  | 1 | 0 | 0 | 0 |
  | 0 | 0 | 0 | 1 |
  | 0 | 1 | 0 | 0 |
-
  */
-console.log(solveQueen(4));
+let i = new NQueens();
+i.placeQueens(0, 4);;
+
+
+
+
 

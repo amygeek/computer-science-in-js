@@ -26,21 +26,24 @@ class TreeNode {
     
     while(q.length !== 0){
 
-        let levelNum = q.length;
+        let levelNodeLen = q.length;
 
         let subList = [];
     
-        for(let i=0; i<levelNum; i++) {
+        while ( levelNodeLen > 0) {
 
-            let front = q[0];
+            let n = q.shift();
 
-            if(front.left != null) {
-                q.push(front.left);
+            subList.push( n.data );
+
+            if( n.left != null ) {
+                q.push( n.left );
             }
-            if (front.right != null) {
-                q.push(front.right);
+            if ( n.right != null ) {
+                q.push( n.right );
             }
-            subList.push(q.shift().data);
+
+            levelNodeLen--;
         }
 
         list.unshift(subList); //push the sublist to front of the list

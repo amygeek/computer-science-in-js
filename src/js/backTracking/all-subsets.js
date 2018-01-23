@@ -87,3 +87,24 @@ let getAllSubSets = (sets, arr, n, index) => {
 let st = new Set();
 console.log(getAllSubSets(st, [1,2,3], 3, 0));
 
+/*
+ 111
+ 12
+ 21
+ 3
+ */
+let printSubsets = ( n, x) => {
+    if( n == 0 ){
+        console.log(x);
+        return;
+    } else {
+        for(let i=1; i<=n; i++){
+            x = x + i;
+            printSubsets(n - i, x);
+            x = x.substr(0, x.length - 1);
+        }
+    }
+}
+
+printSubsets(3,"");
+

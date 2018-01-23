@@ -13,6 +13,8 @@ class MergeSort {
     merge(results, left, right ) {
 
         let i = 0, j = 0, k = 0;
+        console.log('left: ', left)
+        console.log('right: ', right)
 
         while (k < results.length) {
             
@@ -46,16 +48,16 @@ class MergeSort {
 
 }
 
-export default MergeSort;
+//export default MergeSort;
 
 //run test
-//(function() {
-//    let arr1 = [2, 4, 6, 1, 5, 3];
-//
-//    let sort = new MergeSort(arr1);
-//
-//    let newArr = sort.mergeSort([2, 4, 1, 6, 5, 3]);
-//
-//    console.log("Sorted array: ", newArr);
-//})();
+
+let arr1 = [2, 4, 6, 1, 5, 3];
+
+let sort = new MergeSort(arr1);
+
+let newArr = sort.mergeSort([2, 4, 1, 6, 5, 3]);
+
+console.log("Sorted array: ", newArr);
+
 

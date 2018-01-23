@@ -551,16 +551,17 @@ class BinarySearchTree {
             let str = " ";
 
             while ( levelNodeLen !== 0 ) {
+
                 let n = q.shift();
 
                 str += n.data + " ";
 
-                if (n.left ) {
-                    q.push(n.left);
+                if ( n.left ) {
+                    q.push( n.left );
                 }
 
-                if (n.right ) {
-                    q.push(n.right );
+                if ( n.right ) {
+                    q.push( n.right );
                 }
                 levelNodeLen--;
             }

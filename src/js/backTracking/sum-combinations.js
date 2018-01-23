@@ -39,14 +39,14 @@ let print_all_sum = function(target) {
 };
 
 let printSubsets = (n, x) => {
-    if(n==0){
+    if( n == 0 ){
         console.log(x);
         return;
     }else{
-        for(let i=1;i<=n;i++){
+        for(let i=1; i<=n; i++){
             x = x + i;
             printSubsets(n - i, x);
-            x = x.substr(0,x.length-1);
+            x = x.substr(0, x.length-1);
         }
     }
 }
