@@ -7,11 +7,14 @@ let longestPrefixSeq = ( str ) => {
     let endIndex = arr[0].length;
 
     for ( let i=1; i<n; i++ ) {
-        let current = 0;
-        while ( current < endIndex && current < arr[i].length && arr[0].charAt(current) === arr[i].charAt(current) ) {
-            current++;
+
+        let j = 0;
+
+        while ( j < endIndex && j < arr[i].length && arr[0].charAt(j) === arr[i].charAt(j) ) {
+            j++;
         }
-        endIndex = current;
+
+        endIndex = j;
     }
     return arr[0].substr(0, endIndex);
 

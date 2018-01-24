@@ -43,13 +43,11 @@ let printSubsets = (n, x) => {
         console.log(x);
         return;
     }else{
-        for(let i=1; i<=n; i++){
+        for(let i = 1; i <= n; i++){
             x = x + i;
             printSubsets(n - i, x);
             x = x.substr(0, x.length-1);
         }
     }
 }
-printSubsets(4, "");
-
-console.log(print_all_sum(4));
+printSubsets(5, "");

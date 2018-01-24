@@ -1,3 +1,4 @@
+//only work for sorted array
 var removeDuplicates = function(nums) {
     let i=0;
     for (let j = 1; j < nums.length; j++) {
@@ -10,6 +11,22 @@ var removeDuplicates = function(nums) {
     return nums;
 };
 
-let nums = [1,1,2,2,3,4,4];
-removeDuplicates(nums)
-console.log(nums);
+
+let arr = [1,2,2,3,5,5,5,7,7, 7 ];
+removeDuplicates(arr); //[ 1, 2, 3, 4, 5, 7 ]
+console.log(arr);
+
+let removeDuplicates2 = ( arr ) => {
+
+    for ( let i=0; i<arr.length - 1; i++ ) {
+       for ( let j=i+1; j< arr.length; j++) {
+           while ( arr[i] == arr[j]) {
+               arr.splice(j, 1);
+           }
+       }
+    }
+}
+
+let arr2 = [1,2,2,3,5,5,5,7,7, 7,3,4,4 ];
+removeDuplicates2(arr2);
+console.log(arr2);

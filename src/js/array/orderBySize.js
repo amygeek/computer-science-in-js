@@ -48,7 +48,8 @@ let sortByFrequency = (arr) => {
     let newArr = Array.from(map);
 
     newArr.sort((a, b) => {
-        return a[1] > b[1] ? -1 : a[1] < b[1] ? 1 : 0;
+        //return a[1] > b[1] ? -1 : a[1] < b[1] ? 1 : 0;
+        return b[1] - a[1];
     })
 
     let temp = [];

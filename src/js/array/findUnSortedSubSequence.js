@@ -68,6 +68,7 @@ let findUnSortedSeq = (arr) => {
 }
 
 //test
-let arr = [1, 2, 4, 7, 10, 11, 8, 12, 5, 6, 16, 17, 18];
+//let arr = [1, 2, 4, 7, 10, 11, 8, 12, 5, 6, 16, 17, 18];
+let arr = [1, 2, 3, 6, 4, 7, 5, 8, 18, 17, 16];
 
 findUnSortedSeq( arr );

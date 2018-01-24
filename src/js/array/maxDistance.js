@@ -63,7 +63,9 @@ class MaxDistance {
             maxArr[j] = this.max(arr[j], maxArr[j + 1]);
         }
 
-        //console.log(maxArr)
+
+        console.log(minArr)
+         console.log(maxArr)
         /* Traverse both arrays from left to right to find optimum j - i. This process is similar to merge() of MergeSort */
         i = 0; j = 0; maxDiff = -1;
         while (j < n && i < n) {

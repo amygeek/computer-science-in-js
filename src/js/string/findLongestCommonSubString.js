@@ -7,9 +7,11 @@ let findLongestCommonSubString = (str1, str2, m, n) => {
         }
         result.push(temp);
     }
+
     let longestLen = 0;
     for(let i=1; i<=m; i++) {
         for(let j=1; j<=n; j++) {
+
             if (str1[i-1] == str2[j-1]) {
                 result[i][j] = result[i-1][j-1] + 1;
                 longestLen = Math.max(result[i][j], longestLen);

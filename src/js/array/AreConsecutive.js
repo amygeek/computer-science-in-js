@@ -92,7 +92,7 @@ class AreConsecutive {
         for(let i = 0;i<arr.length;i++){
             let x  = Math.abs(arr[i]);
             if(arr[x-1] > 0){
-                arr[x-1] = arr[x-1] * -1;
+                arr[x-1] *= -1;
             } else {
                 return false;
             }

@@ -22,8 +22,8 @@ let longestBitonicSubSeq = ( arr ) => {
     let lis = new Array(n).fill(1);  //store longest increase indexes
 
     /* Compute LIS values from left to right */
-    for (i = 1; i < n; i++) {
-        for (j = 0; j < i; j++) {
+    for (let i = 1; i < n; i++) {
+        for (let j = 0; j < i; j++) {
             if (arr[i] > arr[j] && lis[i] < lis[j] + 1) {
                 lis[i] = lis[j] + 1;
             }
@@ -38,8 +38,8 @@ let longestBitonicSubSeq = ( arr ) => {
     let lds = new Array(n).fill(1);
 
     /* Compute LDS values from right to left */
-    for (i = n-2; i >= 0; i--) {
-        for (j = n-1; j > i; j--) {
+    for (let i = n-2; i >= 0; i--) {
+        for (let j = n-1; j > i; j--) {
             if (arr[i] > arr[j] && lds[i] < lds[j] + 1) {
                 lds[i] = lds[j] + 1;
             }
@@ -50,7 +50,7 @@ let longestBitonicSubSeq = ( arr ) => {
     //console.log(lds);
     /* Return the maximum value of lis[i] + lds[i] - 1*/
     let max = lis[0] + lds[0] - 1;
-    for (i = 1; i < n; i++) {
+    for (let i = 1; i < n; i++) {
 
         if (lis[i] + lds[i] - 1 > max) {
             max = lis[i] + lds[i] - 1;

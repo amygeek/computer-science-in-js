@@ -75,21 +75,29 @@ let permute_string2 = (str) => {
 
 }
 
-let permutation = (str, left) {
+let swap = ( str, a,  b) => {
+
+    let temp = str[a];
+    str[a] = str[b];
+    str[b] = temp;
+
+}
+
+let permutation = (str, left) => {
     if (left == str.length) {
-        if (isWellFormed(str)) {
-            System.out.println(Arrays.toString(str));
-        }
+        console.log( str.join("") );
         return;
     }
-    for (int i = left; i < str.length; i++) {
-        swap(i, left);
+    for (let i = left; i < str.length; i++) {
+        swap(str, i, left);
         permutation(str, left + 1);
-        swap(i, left); // backtrack
+        swap(str, i, left); // backtrack
     }
 }
 
 
 console.log( permute_string( 'abc' ));
-console.log( permute_string2( 'abc' ));
+
+
+permutation( 'abc'.split(""), 0 );
 

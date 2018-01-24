@@ -1,5 +1,5 @@
 /**
- * Given a chess board of size N x N, determine how many ways N queens can be placed on this board so that no two queens attack each other.
+ * Given a chess board of n N x N, determine how many ways N queens can be placed on this board so that no two queens attack each other.
  Runtime Complexity
  Factorial, O(n!).
 
@@ -46,15 +46,19 @@ class NQueens {
         }
         return true;
     }
-    placeQueens( x, size) {
-        for (let i = 0; i < size; i++) {
-            //check if queen at xth row can be placed at i-th column.
+    placeQueens( x, n) {
+
+        //check if queen at xth row can be placed at i-th column.
+        for (let i = 0; i < n; i++) {
+
             if (this.canPlace(x, i)) {
+
                 this.res[x] = i; // place the queen at this position.
-                if (x == size - 1) {
+
+                if (x == n - 1) {
                     console.log( this.res );
                 }
-                this.placeQueens(x + 1, size);
+                this.placeQueens(x + 1, n);
             }
         }
     }

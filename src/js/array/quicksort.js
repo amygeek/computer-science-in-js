@@ -1,5 +1,5 @@
 /**
- * Given an integer array, sort it in ascending order using quicksort.
+ * Given an integer arr, sort it in ascending order using quicksort.
  Runtime Complexity
  Linearithmic, O(nlogn).
 
@@ -8,53 +8,59 @@
 
  Recursive solution has O(logn) memory complexity as it will consume memory on the stack.
  */
-let partition = function(arr, low, high) {
-    let pivot_value = arr[low];
-    let i = low;
-    let j = high;
 
-    while (i < j) {
-        while (i <= high && arr[i] <= pivot_value) {
-            i++;
-        }
 
-        while (arr[j] > pivot_value) {
-            j--;
-        }
+class Quicksort {
 
-        if (i < j) {
-            // swap arr[i], arr[j]
-            let temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-        } else {
-            break;
-        }
-
+    swap( arr,  i,  j) {
+        let temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
-
-    arr[low] = arr[j];
-    arr[j] = pivot_value;
-
-    // return the pivot index
-    return j;
-};
-
-let quick_sort_rec = function(a, l, h) {
-    if (h > l) {
-        let pivot_index = partition(a, l, h);
-        quick_sort_rec(a, l, pivot_index - 1);
-        quick_sort_rec(a, pivot_index + 1, h);
+    
+    partition( arr, left, right) {
+        
+        let mid = parseInt( (left + right) / 2 ) 
+        let pivot = arr[mid]; // Pick a pivot point. Can be an element.
+        
+        while (left <= right) { // Until we've gone through the whole array
+            // Find element on left that should be on right
+            while (arr[left] < pivot) {
+                left++;
+            }
+    
+            // Find element on right that should be on left
+            while (arr[right] > pivot) {
+                right--;
+            }
+    
+            // Swap elements, and move left and right indices
+            if (left <= right) {
+                this.swap(arr, left, right);
+                left++;
+                right--;
+            }
+        }
+        return left;
     }
-};
+    
+    sort( arr, left, right ) {
 
-let quick_sort = function(a) {
-    quick_sort_rec(a, 0, a.length - 1);
-};
+        let pIndex = this.partition(arr, left, right);
 
-(function(){
-    //test
-    let arr = [20, 5, 80, 1, 8];
-    quick_sort(arr);
-    console.log(arr); //[ 1, 5, 8, 20, 80 ]
-})();
+        if (left < pIndex - 1) { // Sort left half
+            this.sort(arr, left, pIndex - 1);
+        }
+        if (pIndex < right) { // Sort right half
+            this.sort(arr, pIndex, right);
+        }
+    }
+}
+
+
+let arr = [1,8,6, 2, 1, 4, 1, 5, 0, 10];
+
+let quicksort = new Quicksort();
+quicksort.sort(arr, 0, arr.length - 1);
+
+console.log(arr)

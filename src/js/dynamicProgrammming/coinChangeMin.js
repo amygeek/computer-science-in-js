@@ -53,7 +53,7 @@ class coinChangeMin {
             }
             //Now solutions for amt using all the coins is stored in CC[]
             //			take out the minimum (optimal) and store in res[amt]
-            console.log(CC)
+            //console.log(CC)
             res[amt] = -1;
             for(let j=1;j<CC.length;j++){
 
@@ -61,7 +61,7 @@ class coinChangeMin {
                     res[amt] = CC[j];
                 }
             }
-            console.log('res: ' + res)
+
         }
         //return the optimal solution for amount
         return res[amount];
@@ -70,7 +70,7 @@ class coinChangeMin {
 
 }
 
-let coins = [ 1, 2, 5 ];
+let coins = [ 1, 2 ];
 let amount = 7;
 let m = new coinChangeMin();
 console.log("Minimum Coins required to make change for " + amount + " are: " + m.minCoinDynamic(amount, coins));

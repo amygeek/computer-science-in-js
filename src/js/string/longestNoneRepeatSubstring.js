@@ -41,8 +41,9 @@ let lengthOfLongestSubstring2 = (s) => {
   res = Math.max(res, j - i + 1);
   map.set(s[j], j + 1);
  }
+    console.log(map)
  return res;
 }
 
 let str = "abcabcbb";
-console.log(lengthOfLongestSubstring(str));
+console.log(lengthOfLongestSubstring2(str));

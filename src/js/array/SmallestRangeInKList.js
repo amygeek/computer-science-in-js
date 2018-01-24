@@ -26,7 +26,7 @@ class SmallestRangeInKList {
             this.insert( lists[i][ ptrs[i] ], i); // insert the element into heap
     
         }
-        
+        console.log(this.heap)
         while (count < nk) {
             
             let h = this.extractMin(); // get the min node from the heap.
@@ -57,9 +57,7 @@ class SmallestRangeInKList {
             this.currMax = data;
         }
         if (this.position == 0) { // check if this.heap is empty
-            this.heap[this.position + 1] = new HeapNode(data, listNo); // insert the first
-            // element in
-            // heap
+            this.heap[this.position + 1] = new HeapNode(data, listNo); // insert the first element in heap
             this.position = 2;
         } else {
             this.heap[this.position++] = new HeapNode(data, listNo);// insert the element
@@ -84,10 +82,10 @@ class SmallestRangeInKList {
         let l = 2 * i;
         let r = 2 * i + 1;
         // check which is smaller child , 2k or 2k+1.
-        if (l < this.position && this.heap[i].data > this.heap[l].data) {
+        if (l < this.position && this.heap[l].data < this.heap[i].data) {
             smallest = l;
         }
-        if (r < this.position && this.heap[smallest].data > this.heap[r].data) {
+        if (r < this.position && this.heap[r].data< this.heap[smallest].data ) {
             smallest = r;
         }
         if (smallest != i) { // if any if the child is small, swap
@@ -106,10 +104,10 @@ class SmallestRangeInKList {
 
     bubbleUp() {
         let pos = this.position - 1; // last position
-        let p = parseInt( pos / 2 );
-        while (pos > 0 && this.heap[p].data > this.heap[pos].data) { // check if its parent is greater.
-            this.swap(p, pos);
-            pos = p; // make pos to its parent for next iteration.
+
+        while (pos > 0 && this.heap[parseInt( pos / 2 )].data > this.heap[pos].data) { // check if its parseInt( pos / 2 ) is greater.
+            this.swap(parseInt( pos / 2 ), pos);
+            pos = parseInt( pos / 2 ); // make pos to its parseInt( pos / 2 ) for next iteration.
         }
     }
 }

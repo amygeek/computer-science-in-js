@@ -48,9 +48,9 @@ let rotate_array_in_place = function(arr, n) {
     reverse_array(arr, n, len - 1); //Reverse the elements from N -> Length-1.
 
     //left rotate: reverse the original array last
-    //reverse_array(arr, 0, n - 1);   //Reverse the elements from 0 -> N-1.
-    //reverse_array(arr, n, len - 1); //Reverse the elements from N -> Length-1.
-    //reverse_array(arr, 0, len - 1);  //Reverse the elements of the original array.
+    //reverse_array(arr, 0, n - 1);   //Reverse the elements from 0 -> N-1.           => 2, 1, 3, 4, 5
+    //reverse_array(arr, n, len - 1); //Reverse the elements from N -> Length-1.      => 2, 1, 5, 4, 3
+    //reverse_array(arr, 0, len - 1);  //Reverse the elements of the original array.  => 3, 4, 5, 1, 2
 
     return arr;
 };

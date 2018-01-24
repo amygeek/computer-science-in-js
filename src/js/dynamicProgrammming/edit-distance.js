@@ -182,9 +182,9 @@ let compute_levenshtein_distance2 = function(str1, str2) {
 
 let  editDistDP = (str1, str2, m, n) => {
     // Create a table to store results of subproblems
-    let solution = new Array(m+1);
+    let res = new Array( m + 1 );
     for (let i = 0; i <= m; i++) {
-        solution[i] = new Array(n+1);
+        res[i] = new Array( n + 1);
     }
 
     // Fill d[][] in bottom up manner
@@ -194,31 +194,31 @@ let  editDistDP = (str1, str2, m, n) => {
             // If first string is empty, only option is to
             // insert all characters of second string
             if ( i == 0 ) {
-                solution[i][j] = j;  // Min. operations = j
+                res[i][j] = j;  // Min. operations = j
 
             // If second string is empty, only option is to
             // remove all characters of second string
             } else if (j==0) {
-                solution[i][j] = i; // Min. operations = i
+                res[i][j] = i; // Min. operations = i
 
             // If last characters are same, ignore last char
             // and recur for remaining string
             } else if (str1[i-1] == str2[j-1]) {
-                solution[i][j] = solution[i - 1][j - 1];
+                res[i][j] = res[i - 1][j - 1];
 
                 // If last character are different, consider all
                 // possibilities and find minimum
             } else {
-                solution[i][j] = 1 + Math.min(solution[i][j - 1],  // Insert
-                        solution[i - 1][j],  // Remove
-                        solution[i - 1][j - 1]); // Replace
+                res[i][j] = 1 + Math.min(res[i][j - 1],  // Insert
+                        res[i - 1][j],  // Remove
+                        res[i - 1][j - 1]); // Replace
             }
         }
     }
 
-    return solution[m][n];
+    return res[m][n];
 }
 
-let str1 = "amyb";
-let str2 = "bamy";
+let str1 = "kitten";
+let str2 = "sitting";
 console.log( editDistDP( str1 , str2 , str1.length, str2.length) );  //2
