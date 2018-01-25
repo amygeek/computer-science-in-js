@@ -127,7 +127,7 @@ let leftRotate = (arr, d) => {
     return arr;
 }
 
-console.log( leftRotate( arr2, 2 ) );
+console.log("leftRotate: " + leftRotate( arr2, 2 ) );
 
 /**
  *
@@ -144,7 +144,7 @@ console.log( leftRotate( arr2, 2 ) );
  {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
  0*1 + 1*2 + 2*3 ... 9*10 = 330
  */
-let getMaxSumInRotation = (arr, len) => {
+let getMaxSumInAllRotation = (arr, len) => {
 
     let currentSum = 0;
     let currentValue = 0;
@@ -165,28 +165,9 @@ let getMaxSumInRotation = (arr, len) => {
 }
 
 
-
-let getMaxSumInAllRotation = (arr, len) => {
-
-    let currentSum = 0;
-    let currentValue = 0;
-    for (let i=0; i<len; i++) {
-        currentSum += arr[i];
-        currentValue += arr[i] * i;
-    }
-    let max = currentValue;
-
-    for(let i=1; i<len; i++) {
-        currentValue = currentValue - ( currentSum - arr[i-1] ) + arr[i-1] * (len - 1);
-        if (currentValue > max ) {
-            max = currentValue;
-        }
-    }
-    return max;
-}
-
 let arr3 = [10, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-console.log(getMaxSumInAllRotation(arr3,  arr3.length));
+console.log("getMaxSumInAllRotation: " + getMaxSumInAllRotation(arr3,  arr3.length));
+
 
 //o(n)
 let findRotatingCount = ( arr ) => {

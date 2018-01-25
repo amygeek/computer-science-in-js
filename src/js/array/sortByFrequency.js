@@ -1,4 +1,5 @@
 //return an array that is sorted by highest count
+// Time Complexity : O(n) + O(m Log m) where n is total number of elements and m is total number of distinct elements
 let orderBySize = (arr) => {
     let dist = new Map();
 

@@ -28,17 +28,17 @@ class RearragePostiveNegativeAlternatively {
 
         let left = 0;
         let right = arr.length - 1;
-        while (right > left) {
+        while (left <= right ) {
 
-            while (arr[left] < 0 && left < right) {
+            while (arr[left] < 0 ) {
                 left++;
             }
 
-            while (arr[right] > 0 && left < right) {
+            while (arr[right] > 0) {
                 right--;
             }
 
-            if (left < right) {
+            if (left <= right) {
     
                 this.swap(arr, left, right);
                 left++;

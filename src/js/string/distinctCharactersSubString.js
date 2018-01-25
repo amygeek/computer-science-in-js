@@ -41,10 +41,10 @@ let findSubString = ( str, k) => {
 
         for (let j=0; j<currentStr.length; j++) {
 
-            let s = map.get(currentStr[j]);
+            let c = map.get(currentStr[j]);
 
-            if ( s )  {
-                map.set(currentStr[j], s + 1 );
+            if ( c )  {
+                map.set(currentStr[j], c + 1 );
             } else {
                 map.set(currentStr[j], 1 );
             }

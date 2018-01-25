@@ -15,6 +15,7 @@
 
 class RodCutting {
 
+    // O(2n)
     profit(value, len) {
 
         if (len <= 0) {
@@ -31,6 +32,7 @@ class RodCutting {
         return max;
     }
 
+    //O(n2)
     profitDP( value, len ) {
         let res = new Array( len + 1).fill(0);
         res[0] = 0;
