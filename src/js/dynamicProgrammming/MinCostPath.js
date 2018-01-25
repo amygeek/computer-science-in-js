@@ -41,7 +41,7 @@ let minCostPath = ( m ) => {
             res[i][j] = m[i][j] + Math.min(res[i - 1][j], res[i][j - 1]);
         }
     }
-    console.log(res)
+    //console.log(res)
     return res[mLen - 1][mLen - 1];
 }
 

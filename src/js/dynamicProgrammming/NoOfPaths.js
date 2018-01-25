@@ -22,20 +22,12 @@ class NoOfPaths {
         let res = [];
         for (let i=0; i<n; i++) {
             res.push( new Array(n) );
+            res[0][i] = 1;   //number of paths to reach in any cell in first row = 1
+            res[i][0] = 1;   //number of paths to reach in any cell in first col = 1
         }
     
         //base case: if we have one cell then there is only one way
         res[0][0] = 1;
-    
-        //no of paths to reach in any cell in first row = 1
-        for (let i = 0; i < n ; i++) {
-            res[0][i] = 1;
-        }
-    
-        //no of paths to reach in any cell in first col = 1
-        for (let i = 0; i < n ; i++) {
-            res[i][0] = 1;
-        }
     
         for (let i = 1; i < n ; i++) {
             for (let j = 1; j <n ; j++) {
