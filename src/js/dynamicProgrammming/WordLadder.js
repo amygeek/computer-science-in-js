@@ -7,97 +7,71 @@
  it exists in the dictionary. It may be assumed that the ‘target’ word exists in dictionary
  and length of all dictionary words is same.
 
- Example:
+ beginWord = "hit"
+ endWord = "cog"
+ words = ["hot","dot","dog","lot","log","cog"]
+ shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog"
 
- Input:  Dictionary = {POON, PLEE, SAME, POIE, PLEA, PLIE, POIN}
- start = TOON
- target = PLEA
- Output: 7
- Explanation: TOON - POON - POIN - POIE - PLIE - PLEE - PLEA
+ hit     hot     dot     dog     cog
+                 lot     log
+ 1       2       3       4       5
 
- Time Complexity of the above code is O(n²m) where n is the number of entries originally in the dictionary and m is the size of the string
+        1      1
+      2   3    2
+    4  5   6   3
+
+ Time Complexity of the above code is O(nm) where n is the number of entries originally in the dictionary and m is the size of the string
  */
-
-/// A queue item to store word and minimum chain length to reach the word.
-class Item {
-
-    constructor(word, len) {
-        this.word = word;
-        this.len = len;
-    }
-}
 
 class WordLadder {
 
-    constructor( d ) {
-        this.dictrionary = d;
-        this.map = new Map();
-    }
+    ladderLen( beginWord, endWord, set) {
 
-    //check both length of a and b. If the length differed by only 1 char, return true; otherwise return false
-    isAdjacent ( a, b ) {
-        let n = a.length;
-        let count = 0;
-
-        for ( let i=0; i<n; i++ ) {
-
-            if ( a[i] != b[i]) {
-                count++;
-            }
-            if ( count > 1 ) {
-                return false;
-            }
+        if ( set.has( beginWord ) ) {
+            set.delete( beginWord );
         }
 
-        return (count === 1) ? true: false;
-    }
+        let queue = [];
 
-    shortestChainLen (start, target ) {
-        let q = [];
-        let n = this.dictrionary.size;
-        let item = new Item(start, 1);
-        q.push(item);
+        let map = new Map();
+        map.set(beginWord, 1);
 
-        while (q.length !== 0 ) {
+        queue.push(beginWord);
 
-            //remove item from front of the queue
-            let current = q.shift();
+        while ( queue.length !== 0 ) {
 
-            for( let val of this.dictrionary ) {
+            let word = queue.shift();
+            let current = map.get( word );
 
-                if ( this.isAdjacent( current.word, val )) {
+            for (let i=0; i<word.length; i++ ) {
 
-                    item.word = val;
-                    item.len = current.len + 1;
-                    q.push( item );
+                let chars = word.split('');
 
-                    // Remove adjacent item from dictionary so that this word is not processed again.  This is like marking visited
-                    this.dictrionary.delete(val);
+                for (let j='a'.charCodeAt(0); j<='z'.charCodeAt(0); j++ ) {
 
-                    console.log( item)
-                    // If we reached target, return the length. we can also return the chained item list, we just need to loop through the item
-                    if ( val === target ) {
-                        return item.len;
+                    chars[i] = String.fromCharCode(j);
+
+                    let temp = chars.join('');
+
+                    if ( set.has( temp ) ) {
+                        if ( temp === endWord ) {
+                            return current + 1;
+                        }
+                        map.set(temp, current + 1 );
+                        queue.push(temp);
+
+                        set.delete(temp);
                     }
                 }
-
-
             }
         }
-
         return 0;
     }
 }
-
-// Output: 7
-// Explanation: TOON - POON - POIN - POIE - PLIE - PLEE - PLEA
-//let dict = new Set(["POON", "PLEE", "SAME", "POIE", "PLEA", "PLIE", "POIN"]);
-//let start = "TOON";
-//let target = "PLEA";
 
 //"hit" -> "hot" -> "dot" -> "dog" -> "cog"  or hit -> hot -> lot -> log -> cog
 let dict = new Set(["hot","dot","dog","lot","log","cog"]);
 let start = "hit";
 let target = "cog";
-let wordLadder = new WordLadder( dict );
-console.log( wordLadder.shortestChainLen ( start, target));
+let wordLadder = new WordLadder();
+console.log( wordLadder.ladderLen ( start, target, dict));

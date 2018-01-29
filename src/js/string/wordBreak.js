@@ -14,11 +14,8 @@
 
 
 let workBreak = function (s, dist, solved) {
-    let len = s.length;
 
-    if ( !len ) {
-        return false;
-    }
+    let len = s.length;
 
     for (let i= 1; i<=len; i++) {
 
@@ -49,4 +46,4 @@ let workBreak = function (s, dist, solved) {
 let dict = new Set(['hello', 'hell', 'on', 'now']);
 
 console.log(workBreak('hellonow', dict, new Set()));  //true
-console.log(workBreak('helloow', dict, new Set()));  //true
+console.log(workBreak('', dict, new Set()));  //true
