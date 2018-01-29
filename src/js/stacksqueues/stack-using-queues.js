@@ -94,7 +94,7 @@ class stack_using_queue_2 {
     }
 }
 
-let testStack = new stack_using_queue();
+let testStack = new stack_using_queue_2();
 
 testStack.push(1);
 testStack.push(2);

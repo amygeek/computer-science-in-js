@@ -22,35 +22,43 @@ class Queue {
 
 class Node {
     constructor( v ) {
-        this.vertex = v;
-        this.adjList = new Map();
+        this.data = v;
+        this.visited = false;
     }
 }
 class Graph {
     
     // defining vertex array and
     // adjacent list
-    constructor(noVerts) {
-        this.noVerts = noVerts;
+    constructor() {
+        this.noVerts = 0;
         this.adjList = new Map();
         this.vertex = [];
     }
     
     addVertex(v) {
         // add vertex 
-        this.vertex.push(v);
+        this.vertex[this.noVerts++] = new Node( v );
         // initialize the adjacent list with an empty array
         this.adjList.set(v, []);
     }
 
+    getVertex ( v ) {
+        for ( let i=0; i<this.vertex.length; i++ ) {
+            if (this.vertex[i].data == v ) {
+                return this.vertex[i];
+            }
+        }
+        return null;
+    }
     // add edge to the graph
     addEdge(v, w) {
         
         // get the list for vertex v and put the vertex w denoting edge between v and w
         this.adjList.get(v).push(w);
 
-        // Since graph is undirected, add an edge from w to w also
-        this.adjList.get(w).push(v);
+        // if graph is undirected, add an edge from w to w by uncomment the following line
+        //this.adjList.get(w).push(v);
     }
 
     removeEdge(v, w) {
@@ -79,8 +87,9 @@ class Graph {
             let adjStr = "";
 
             // iterate over the adjacency list
-            // concatenate the values into a string
+            // concatenate the values into "a" string
             for ( let j of getAdj ) {
+
                 adjStr += j + " ";
             }
 
@@ -92,7 +101,7 @@ class Graph {
     // function to performs BFS: Breadth First Search
     bfs( startNode ) {
 
-        // create a visited array
+        // create "a" visited array
         let visited = [];
         for (let i = 0; i < this.noVerts; i++) {
             visited[i] = false;
@@ -170,7 +179,7 @@ class Graph {
         while (stack.length > 0) {
 
             let v = stack.pop();
-            console.log(v);
+            console.log( v );
 
             let adjList = g.adjList.get(v);
             let len = adjList.length;
@@ -190,34 +199,77 @@ class Graph {
         let visited = [];
         let vertex = source.vertex;
         for(let i=0; i<vertex.length; i++) {
-            visited[i] = false;
+            vertex[i].visited = false;
         }
+
         let cp = {
+            noVerts: 0,
             vertex: [],
             adjList: new Map()
         };
         
-        this.cloneGraphRec(source, source.vertex[0], cp, visited);
+        this.cloneGraphRec(source, vertex[0], cp, visited);
         return cp;
     }
 
-    cloneGraphRec(sourceG, vert, dest, visited) {
-        
-        visited[vert] = true;
+    cloneGraphRec(g, vert, dest, visited) {
+
+        vert.visited = true;
         
         dest.vertex.push(vert);
-        dest.adjList.set(vert, []);
+        dest.adjList.set(vert.data, []);
 
-        let adjList = sourceG.adjList.get(vert);
+        let adjList = g.adjList.get(vert.data);
+
         for(let i in adjList) {
-            let neighbor = adjList[i];
-            dest.adjList.get(vert).push(neighbor);
-            if ( !visited[neighbor] ) {
-                this.cloneGraphRec(sourceG, neighbor, dest, visited);
-            }
 
+            let neighbor = adjList[i];
+
+            dest.adjList.get(vert.data).push(neighbor);
+
+            let nextVert = this.getVertex( neighbor );
+
+            if ( nextVert !== null && !nextVert.visited ) {
+                this.cloneGraphRec(g, nextVert, dest, visited);
+            }
         }
     }
+
+    search ( g, start, end ) {
+
+        let node = g.vertex;
+
+        for (let i=0; i<node.length; i++ ) {
+            node[i].visited = false;
+        }
+
+        let q = [];
+        q.push(start);
+
+        start.visited = true;
+
+        while ( q.length !== 0 ) {
+
+            let current = q.shift().data;
+
+            if ( current ) {
+                for ( let v of g.adjList.get( current ) ){
+                    let nextNode = this.getVertex( v );
+                    if ( nextNode && !nextNode.visited ) {
+                        if ( nextNode === end ) {
+                            return true;
+                        } else {
+                            nextNode.visited = true;
+                            q.push(nextNode);
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+
+    }
+
 }
 
 /*
@@ -228,22 +280,24 @@ class Graph {
      4  5
  */
 // test graph class
-var g = new Graph(6);
+var g = new Graph();
 
 // adding vertices
-g.addVertex(1);
-g.addVertex(2);
-g.addVertex(3);
-g.addVertex(4);
-g.addVertex(5);
+g.addVertex("a");
+g.addVertex("b");
+g.addVertex("c");
+g.addVertex("d");
+g.addVertex("e");
+g.addVertex("f");
 
 
 // adding edges
-g.addEdge(1, 2);
-g.addEdge(1, 3);
+g.addEdge("a", "b");
+g.addEdge("a", "c");
+g.addEdge("a", "d");
 
-g.addEdge(2, 4);
-g.addEdge(2, 5);
+g.addEdge("d", "e");
+g.addEdge("e", "f");
 
 
 // prints all vertex and
@@ -258,15 +312,17 @@ g.printGraph(g.adjList);
 
 
 console.log("prints BFS");
-g.bfs(1);  //A B D E C F
+g.bfs("a");  //A B D E C F
 
 
 console.log("prints DFS");
-g.dfs(1); // A B C E D F
+g.dfs("a"); // A B C E D F
 
-// let newG = g.cloneGraph(g);
-// console.log("prints Vertex and adjacency list for cloned graph");
-// g.printGraph(newG.adjList);
+ let newG = g.cloneGraph(g);
+ console.log("prints Vertex and adjacency list for cloned graph");
+ g.printGraph(newG.adjList);
 
 console.log("prints DFS iterative");
-g.dfsI(g, 1);
+g.dfsI(g, "a");
+
+console.log(g.search(g, g.vertex[0], g.vertex[5]));

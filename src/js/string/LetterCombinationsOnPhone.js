@@ -36,9 +36,9 @@ class LetterCombinationsOnPhone {
             return res;
 
         } else {
-            for(let s of this.combine(digits.substring(1))) {
+            for(let s of this.combine(digits.substr(1))) {
 
-                for( let c of this.map.get( parseInt( digits.substring( 0,1 ) ) ) ) {
+                for( let c of this.map.get( parseInt( digits.substr( 0,1 ) ) ) ) {
                     res.push(c + s);
                 }
 

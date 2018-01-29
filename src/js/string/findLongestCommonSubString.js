@@ -1,22 +1,24 @@
 let findLongestCommonSubString = (str1, str2, m, n) => {
-    let result = [];
+
+    let res = [];
+
     for(let i=0; i<= m; i++ ) {
-        let temp = [];
-        for (let j=0; j <=n; j++) {
-            temp.push(0);
-        }
-        result.push(temp);
+
+        res.push(new Array( n + 1).fill(0));
     }
 
     let longestLen = 0;
+
     for(let i=1; i<=m; i++) {
         for(let j=1; j<=n; j++) {
 
             if (str1[i-1] == str2[j-1]) {
-                result[i][j] = result[i-1][j-1] + 1;
-                longestLen = Math.max(result[i][j], longestLen);
+
+                res[i][j] = res[i-1][j-1] + 1;
+                longestLen = Math.max(res[i][j], longestLen);
+
             } else {
-                result[i][j] = 0;
+                res[i][j] = 0;
             }
         }
     }

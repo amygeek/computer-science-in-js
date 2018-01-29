@@ -20,57 +20,111 @@
  */
 class coinChangeMin {
 
+    /**
+     * Top down dynamic programing. Using map to store intermediate results.
+     * Returns Integer.MAX_VALUE if amount cannot be formed with given coins
+     */
+    minimumCoinTopDown(amount, coins, map) {
 
-    minCoinDynamic( amount, coins) {
-
-        // this will store solution for all the values -- from 0 to given amount.
-        let res = [];
-
-        let CC = new Array(coins.length); // resets for every smaller problems
-
-        // and minimum in it is the optimal
-        // solution for the smaller problem.
-        res[0] = 0; // 0 coins are required to make the change for 0
-        // now solve for all the amounts
-        for (let amt = 1; amt <= amount; amt++) {
-
-            for (let j = 0; j < CC.length; j++) {
-                CC[j] = -1;
-            }
-            // Now try taking every coin one at a time and fill the solution in
-            // the CC[]
-            for (let j = 0; j < coins.length; j++) {
-                if (coins[j] <= amt) { // check if coin value is less than
-                    // amount
-                    CC[j] = res[amt - coins[j]] + 1; // if available,
-                    // select the
-                    // coin and add
-                    // 1 to solution
-                    // of
-                    // (amount-coin
-                    // value)
-                }
-            }
-            //Now solutions for amt using all the coins is stored in CC[]
-            //			take out the minimum (optimal) and store in res[amt]
-            //console.log(CC)
-            res[amt] = -1;
-            for(let j=1;j<CC.length;j++){
-
-                if(CC[j] > 0 && ( res[amt] == -1 || res[amt] > CC[j] )){
-                    res[amt] = CC[j];
-                }
-            }
-
+        //if amount is 0 then there is nothing to do. return 0.
+        if ( amount == 0 ) {
+            return 0;
         }
-        //return the optimal solution for amount
-        return res[amount];
+        
+        //if map contains the result means we calculated it before. Lets return that value.
+        if ( map.has(amount) ) {
+            return map.get(amount);
+        }
+        
+        //iterate through all coins and see which one gives best result.
+        let min = Number.MAX_VALUE;
 
+        for ( let i=0; i < coins.length; i++ ) {
+
+            //if value of coin is greater than amount we are looking for just continue.
+            if( coins[i] > amount ) {
+                continue;
+            }
+            //recurse with amount - coins[i] as new amount
+            let val = this.minimumCoinTopDown(amount - coins[i], coins, map);
+        
+            //if val we get from picking coins[i] as first coin for current amount is less
+            // than value found so far make it minimum.
+            if( val < min ) {
+                min = val;
+            }
+        }
+        
+        //if min is MAX_VAL dont change it. Just result it as is. Otherwise add 1 to it.
+        min =  (min == Number.MAX_VALUE ? min : min + 1);
+        
+        //memoize the minimum for current amount.
+        map.set(amount, min);
+
+        return min;
     }
+    /**
+     * Bottom up way of solving this problem.
+     * Keep input sorted. Otherwise temp[j-arr[i]) + 1 can become Integer.Max_value + 1 which
+     * can be very low negative number
+     * Returns Integer.MAX_VALUE - 1 if solution is not possible.
+     */
+    minCoinChange(amount, coins){
+        
+        let total = new Array(amount + 1).fill(  Number.MAX_VALUE );
+        let res = new Array(amount + 1).fill( -1 );
+
+        total[0] = 0;
+
+        /*
+            coins = [ 1,2,3 ];
+            amount = 5;
+
+              0 1 2 3 4 5
+            1 0 1 2 3 4 5
+            2 0 1 1 2 2 3
+            3 0 1 1 1 2 2
+         */
+        for(let j=0; j < coins.length; j++){
+            for(let i=1; i <= amount; i++){
+                if(i >= coins[j]){
+                    //total[i] = min(total[i], total[i-coins[j] + 1)
+                    if (total[i - coins[j]] + 1 < total[i]) {
+                        total[i] = total[i - coins[j]] + 1;
+                        res[i] = j;
+                    }
+                }
+            }
+        }
+
+        this.printCoinCombination(res, coins);
+
+        return total[amount];
+    }
+    
+    printCoinCombination(res, coins) {
+        if (res[res.length - 1] == -1) {
+            console.log("No solution is possible");
+            return;
+        }
+        let start = res.length - 1;
+        console.log("Coins used to form amount ");
+        while ( start != 0 ) {
+            let j = res[start];
+            console.log(coins[j] + " ");
+            start = start - coins[j];
+        }
+    }
+
 
 }
 
-let coins = [ 1, 2 ];
-let amount = 7;
+//let amount = 13;
+//let coins = [7, 3, 2, 6];
+
+let coins = [ 1,2,3 ];
+let amount = 5;
+
 let m = new coinChangeMin();
-console.log("Minimum Coins required to make change for " + amount + " are: " + m.minCoinDynamic(amount, coins));
+console.log("Minimum Coins required to make change for " + amount + " are: " + m.minCoinChange(amount, coins));
+console.log("Minimum Coins required to make change for " + amount + " are: " + m.minimumCoinTopDown(amount, coins, new Map()));

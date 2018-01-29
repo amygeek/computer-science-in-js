@@ -3,12 +3,10 @@ let  findLongestRepeatingSubSeq = ( str, n ) => {
 
     // Create and initialize DP table
     let res = [];
+
     for(let i=0; i<= n; i++ ) {
-        let temp = [];
-        for (let j=0; j <=n; j++) {
-            temp.push(0);
-        }
-        res.push(temp);
+
+        res.push(new Array( n + 1).fill(0));
     }
 
     // Fill res table (similar to LCS loops)

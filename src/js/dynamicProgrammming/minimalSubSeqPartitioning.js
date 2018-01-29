@@ -25,74 +25,51 @@
  The length of these subsequences are 9, 7 and 8.
  */
 
+let lengthOfLongestSubstring2 = (s) => {
+    let n = s.length;
+    let map = new Map();
+    let res = 0, i = 0, j = 0;
+    // try to extend the range [i, j]
 
-let minimalSubSeq = ( arr ) => {
-
-    let n = arr.length;
-    let res = [];
-    let p = [];
-    for (let i=0; i<n; i++) {
-        res.push( new Array(n).fill(0) );
-    }
-
-    for (let l=2; l<=n; l++) {
-
-        for (let i=0; i<n-l+1; i++) {
-
-            let j = i + l - 1;
-
-            if (arr[i] === arr[j]) {
-                res[i][j] = j - i + 1;
-                break;
-            }
+    for ( j = 0, i = 0; j < n; j++) {
+        if (map.has( s[j] )){
+            i = Math.max(map.get(s[j]), i);
         }
+        res = Math.max(res, j - i + 1);
+        map.set(s[j], j + 1);
     }
-
-    p[0] = 1;
-    let lastIndex = 0;
-
-    for (let i=0; i<n; i++) {
-
-        let max = 1;
-
-        for(let j=0; j<n; j++) {
-            if (res[i][j] > max) {
-                if ( p.length === 1) {
-                    max = res[i][j];
-                } else {
-                    max = max + res[i][j];
-
-                }
-                lastIndex = j;
-            }
-        }
-        if (max > p[p.length-1]) {
-
-            if ( p.length === 1) {
-
-                p[p.length-1] = max;
-                p.push(1);
-            } else {
-                p[p.length-1] = max;
-
-            }
-
-        }
-
-    }
-
-    if ( lastIndex < n && p[p.length-1] > 1 ) {
-        p.push( n - lastIndex - 2);
-    } else if ( lastIndex === 0 ) {
-        //if lastIndex is not changed, that means all the characters in the array is unique, so we need to make the cut for each one of them.
-        p = new Array(n).fill(1);
-    }
-
-    return p;
-
+    console.log(map)
+    return res;
 }
 
 let arr = ["a","b","a","b","c","b","a","c","a","d","e","f","e","g","d","e","h","i","j","h","k","l","i","j"];
 //let arr = ["a","b","c"];
 
-console.log( minimalSubSeq(arr) );
+let minCut = ( arr ) => {
+
+    let n = arr.length;
+    let map = new Map();
+    let res = 0, i = 0, j = 0;
+    // try to extend the range [i, j]
+    let start = 0;
+
+    for ( j = 0, i = 0; j < n; j++) {
+        if (map.has( arr[j] )){
+            i = Math.max(map.get(arr[j]), i);
+            //console.log(map)
+        } else {
+            start = Math.max(start, i);
+
+            console.log(start)
+        }
+        res = Math.max(res, j - i + 1);
+
+        map.set(arr[j], j + 1);
+    }
+
+    //console.log(map)
+    return res;
+}
+
+console.log( minCut(arr) );
+

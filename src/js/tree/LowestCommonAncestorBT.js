@@ -20,6 +20,12 @@ class TreeNode {
  */
 class LowestCommonAncestorBT {
 
+    constructor() {
+
+        this.v1 = false;  // use for checking if n1 is in the tree
+        this.v2 = false;   // use for checking if n2 is in the tree
+    }
+
     findLCA(root, n1, n2){
 
         if( root == null){
@@ -42,6 +48,45 @@ class LowestCommonAncestorBT {
             }
             return null;
         }
+    }
+
+    findLCA2( root, n1, n2 ) {
+
+        if ( !root ) {
+            return null;
+        }
+
+        let lca = this.findLCARec( root, n1, n2 );
+
+        if ( this.v1 && this.v2) {
+            return lca;
+        }
+        return null;
+    }
+
+    findLCARec( root, n1, n2 ) {
+
+        if ( !root ) {
+            return null;
+        }
+
+        if ( root.data === n1.data ) {
+            this.v1 = true;
+            return root;
+        }
+
+        if ( root.data === n2.data ) {
+            this.v2 = true;
+            return root;
+        }
+
+        let left = this.findLCARec(root.left, n1, n2 );
+        let right = this.findLCARec(root.right, n1, n2 );
+
+        if ( left !== null && right !== null ) {
+            return root;
+        }
+        return (left !== null) ? left : right;
     }
     /*
            1
@@ -70,10 +115,10 @@ class LowestCommonAncestorBT {
         root.left.right.right = n2 ;
 
         
-        let x = this.findLCA(root, n1, n2);
+        let x = this.findLCA2(root, n1, n2);
         //Lowest Common Ancestor (8, 11 ) is 2
         console.log("Lowest Common Ancestor ("+n1.data+", "+ n2.data +" ) is " + x.data);
-        x = this.findLCA(root,n2,n3);
+        x = this.findLCA2(root,n2,n3);
         //Lowest Common Ancestor (11, 5 ) is 5
         console.log("Lowest Common Ancestor ("+n2.data+", "+ n3.data +" ) is " + x.data);
     }
