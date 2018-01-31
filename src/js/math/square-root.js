@@ -16,13 +16,14 @@ const EPSILON = 0.00001;
  * @returns {number}
  */
 let square_root_iterative = function(num) {
-    let low = 0.0;
+
+    let low = 0;
 
     //  square root can never be more than
     //  half of number except if number is <= 1
     //  so square root of any number always lie
     //  between 0 and 1 + (num / 2);
-    let high = 1.0 + num / 2.0;
+    let high = 1 + num / 2;
 
     while (low < high) {
 
@@ -61,9 +62,10 @@ let square_root_iterative = function(num) {
  */
 
 let square_root_rec = function(num, low, high) {
+
     let mid = (low + high) / 2;
     let sqr = mid * mid;
-    let diff = Math.abs(sqr - num);
+    let diff = Math.abs(num - sqr);
 
     //  we can't do a === b for doubles because
     //  of rounding errors, so we use error threshold
@@ -85,4 +87,4 @@ let square_root_recursive = function(num) {
     return square_root_rec(num, 0, 1 + num / 2);
 };
 
-console.log(square_root_recursive(9));
+console.log(square_root_iterative(7));

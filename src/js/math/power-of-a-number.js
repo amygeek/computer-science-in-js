@@ -22,7 +22,7 @@ let power_rec = function(x, n) {
         return x;
     }
 
-    let temp = power_rec(x, Math.floor(n / 2));
+    let temp = power_rec(x, parseInt(n / 2));
     if (n % 2 === 0) {
         return temp * temp;
     } else {

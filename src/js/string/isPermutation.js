@@ -7,9 +7,8 @@ let isPermutation = (s, t) => {
         return false;
     }
 
-    //var s_array = Array.apply(null, Array(256)).map(Number.prototype.valueOf, 0);
-    let s_array = new Array(256);
-    s_array.fill(0);
+    //256 includes standard ASCII characters(0-127) and Extended ASCII characters(128-255).
+    let s_array = new Array(256).fill(0);
 
 
     for (var i = 0; i < sLength; i++) {

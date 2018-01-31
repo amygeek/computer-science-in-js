@@ -29,7 +29,7 @@ let isUnique2 = (str) => {
 
     for(let i=0; i<n; i++) {
 
-        let bitAtIndex = str[i].charCodeAt(0) - 97;
+        let bitAtIndex = str[i].charCodeAt(0) - 'a'.charCodeAt(0);
 
         if ( checker & ( 1 << bitAtIndex ) ) {
             return false;
@@ -39,5 +39,5 @@ let isUnique2 = (str) => {
     return true;
 }
 
-let isUniqueStr = isUnique2('abccd');
+let isUniqueStr = isUnique2('abcd');
 console.log(isUniqueStr);

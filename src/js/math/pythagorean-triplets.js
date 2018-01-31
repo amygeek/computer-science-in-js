@@ -120,3 +120,7 @@ let find_pythagorean_triplets_2 = function(arr) {
     }
     return triplets;
 };
+
+let arr = [1, 2, 3,4,5];
+
+console.log(find_pythagorean_triplets_2(arr));  //5, 3, 4

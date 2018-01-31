@@ -51,6 +51,6 @@ class RodCutting {
 
 let rodCutting = new RodCutting();
 
-let value = [ 2, 5, 7, 8, 10];
+let value = [ 2, 5, 7, 8];
 let len = 5;
 console.log("Max profit for len is " + len + ": " + rodCutting.profitDP(value, len));

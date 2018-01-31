@@ -18,24 +18,31 @@ class queue_using_stack {
         this.oldestStack = [];
     }
 
+    size() {
+        return this.newestStack.length + this.oldestStack.length;
+    }
     add(data) {
         this.newestStack.push(data);
     }
     empty() {
         return (this.newestStack.length === 0 && this.oldestStack.length === 0);
     }
-    remove() {
-        if (this.empty()) {
-            throw "stack is empty";
-        }
 
+    shiftStack() {
         if (this.oldestStack.length === 0) {
             while (this.newestStack.length !== 0) {
                 this.oldestStack.push(this.newestStack.pop());
             }
         }
-
+    }
+    remove() {
+        this.shiftStack();
         return this.oldestStack.pop();
+    }
+
+    peek() {
+        this.shiftStack();
+        return this.oldestStack[this.oldestStack.length - 1];
     }
 }
 
@@ -85,4 +92,5 @@ testQueue.add(3);
 testQueue.add(4);
 
 console.log(testQueue);
+console.log(testQueue.size());
 console.log(testQueue.remove());

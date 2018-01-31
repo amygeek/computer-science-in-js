@@ -75,13 +75,17 @@ let permute_string2 = (str) => {
 
 }
 
-let swap = ( str, a,  b) => {
+/*
+ Time Complexity: O(n*n!)
+ A permutation, also called an “arrangement number” or “order,” is a rearrangement of the elements of an ordered list S
+ into a one-to-one correspondence with S itself. A string of length n has n! permutation.
 
-    let temp = str[a];
-    str[a] = str[b];
-    str[b] = temp;
-
-}
+                               abc
+             swap a&a       swap a&b       swap a&c
+           abc              bac                 cba
+ swap b&b  swap b&c  swap a&a swap a&c  swap b&b    swap b&a
+       abc     acb      bac     bca         cba     cab
+ */
 
 let permutation = (str, left) => {
     if (left == str.length) {
@@ -95,9 +99,22 @@ let permutation = (str, left) => {
     }
 }
 
+let swap = ( str, a,  b) => {
 
-console.log( permute_string( 'abc' ));
+    let temp = str[a];
+    str[a] = str[b];
+    str[b] = temp;
 
+}
+//console.time("permute_string");
+//console.log( permute_string( 'abc' ));
+//console.timeEnd("permute_string");
+
+//console.time("permute_string2");
+//console.log( permute_string2( 'abc' ));
+//console.timeEnd("permute_string2");
 
 permutation( 'abc'.split(""), 0 );
+
+
 

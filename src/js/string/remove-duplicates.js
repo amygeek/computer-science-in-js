@@ -30,7 +30,7 @@ let remove_duplicates_1 = function(s) {
     return Array.from(hashset).join('');
 };
 
-console.log(remove_duplicates_1("abbabcddbabcdeedebc"));
+//console.log(remove_duplicates_1("abbabcddbabcdeedebc"));
 
 /**
      Runtime Complexity
@@ -63,4 +63,4 @@ let remove_duplicates_2 = function(str) {
     return str.substr(0, write_index);
 };
 
-console.log(remove_duplicates_2("abbabcddbabcdeedebc"));
+console.log(remove_duplicates_2("abbabcddbabcdeedebc"))

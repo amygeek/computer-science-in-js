@@ -138,14 +138,14 @@ class LongestCommonSubsequence {
          0 1 2 2 3 3
          0 1 2 2 3 4
          */
-        for (let i = 0; i <= aLen; i++) {
-            let str = " ";
-            for (let j = 0; j <= bLen; j++) {
-                str += " " + res[i][j];
-            }
-            console.log( str );
-        }
-    
+        //for (let i = 0; i <= aLen; i++) {
+        //    let str = " ";
+        //    for (let j = 0; j <= bLen; j++) {
+        //        str += " " + res[i][j];
+        //    }
+        //    console.log( str );
+        //}
+        //console.log(solution)
         return res[aLen][bLen];  //4
     }
     

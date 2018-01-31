@@ -15,15 +15,25 @@
  LPS[i, j]     =     2  +  LPS[i-1, j-1]     If first and last characters are same
  LPS[i, j]     =     MAX( LPS[i+1,j], LPS[i, j-1] )     If first and last characters are not same
 
-        0 1 2 3 4 5
-        A B A C D A
+         a   g   b   d   b   a
+         0   1   2   3   4   5
           -------
-        LPS[0,5] = 2 + LPS[1,4]
+         LPS[0,5] = 2 + LPS[1,4]
 
-         0 1 2 3 4 5
-         A B C B A B
+         a   g   b   d   b   a
+         0   1   2   3   4   5
          -------
-         LPS[0,5] = Max( LPS[0,4], LPS[1, 5] )
+        LPS[0,5] = Max( LPS[0,4], LPS[1, 5] )
+
+         a   g   b   d   b   a
+         0   1   2   3   4   5
+   a  0  1   1
+   g  1      1   1
+   b  2          1   1
+   d  3              1   1
+   b  4                  1   1
+   a  5                      1
+
  */
 let longestPalindromicSubsequence = ( str ) => {
 
@@ -56,13 +66,5 @@ let longestPalindromicSubsequence = ( str ) => {
 
 let str = "agbdba";
 
-/*
-     0 1 2 3 4 5
-     a g b d b a
-  1  g 1
-  2  b   1
-  3  d     1
-  4  b       1
-  5  a         1
-*/
+
 console.log(longestPalindromicSubsequence(str));
