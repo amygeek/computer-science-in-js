@@ -29,12 +29,12 @@ let isUnique2 = (str) => {
 
     for(let i=0; i<n; i++) {
 
-        let bitAtIndex = str[i].charCodeAt(0) - 'a'.charCodeAt(0);
+        let val = str[i].charCodeAt(0) - 'a'.charCodeAt(0);
 
-        if ( checker & ( 1 << bitAtIndex ) ) {
+        if ( checker & ( 1 << val ) ) {
             return false;
         }
-        checker |= ( 1 << bitAtIndex );
+        checker |= ( 1 << val );
     }
     return true;
 }

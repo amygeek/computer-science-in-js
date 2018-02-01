@@ -22,17 +22,18 @@ let remove_duplicates = function(head) {
     }
 
     // Let's track existing values.
-    let dup_set = new Set();
-    dup_set.add(head.data);
+    let set = new Set();
+    set.add(head.data);
+
     let curr = head;
 
     while (curr.next) {
-        if (dup_set.has(curr.next.data)) {
+        if (set.has(curr.next.data)) {
             // Duplicate node found. Let's remove it from the list.
             curr.next = curr.next.next;
         } else {
             // Element not found in map, let's add it.
-            dup_set.add(curr.next.data);
+            set.add(curr.next.data);
             curr = curr.next;
         }
     }
@@ -50,7 +51,7 @@ let print = (head) => {
         str += head.data + '->';
         head = head.next;
     }
-    console.log(str);
+    console.log(str + " null");
 
 
 }
@@ -63,13 +64,14 @@ class Node {
     }
 }
 
-//turn 7 ->14->28->28->14->21->null  to 7 ->14->28->21->null
+//turn 7->14->28->28->14->21->28-> null  to 7->14->28->21->null
 let list = new Node(7);
 list.next = new Node(14);
 list.next.next = new Node(28);
 list.next.next.next = new Node(28);
 list.next.next.next.next = new Node(14);
 list.next.next.next.next.next = new Node(21);
+list.next.next.next.next.next.next = new Node(28);
 
 print(list)
 

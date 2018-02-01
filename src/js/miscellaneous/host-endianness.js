@@ -2,6 +2,17 @@
  * Write a program to determine the host byte order (endianness) of any system. Let's scope this to big endian and little endian systems.
  In the bigendian systems, those bytes happened to be zeros (making the system appear to work properly),
  while on the little-endian systems, they were nonzero, causing the string to appear to be corrupted.
+
+ int *i; // pointer to an int (4 bytes on 32-bit machine)
+ i = 0;  // points to location zero, so *i is the value there
+ Again we ask: what is the value at i?
+
+ Big endian machine: An int is 4 bytes, and the first is the largest. I read 4 bytes (W X Y Z) and W is the largest. The number is 0x12345678.
+ Little endian machine: Sure, an int is 4 bytes, but the first is smallest. I also read W X Y Z, but W belongs way in the back -- it's the littlest.
+ The number is 0x78563412.
+
+ Big endian machine: Stores data big-end first. When looking at multiple bytes, the first byte (lowest address) is the biggest.
+ Little endian machine: Stores data little-end first. When looking at multiple bytes, the first byte is smallest.
  */
 let checkEndian = function() {
     let a = new ArrayBuffer(4);

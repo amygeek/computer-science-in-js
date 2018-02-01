@@ -36,6 +36,17 @@ let numberOf1Solution2 = ( n ) => {
 let numberOf1Solution3 = ( n ) => {
     let count = 0;
 
+    /*
+     1010
+     1011
+          10 & 11
+     1001
+     1010
+           9 & 10
+     111
+     1000
+           7 & 9  = 0
+     */
     while (n) {
         ++ count;
         n = (n - 1) & n;
@@ -44,4 +55,11 @@ let numberOf1Solution3 = ( n ) => {
     return count;
 }
 
-console.log(numberOf1Solution3(11));  //2: 1011
+console.log(numberOf1Solution3(11));  //3: 1011
+
+
+
+
+
+
+

@@ -1,31 +1,31 @@
 /**
  * Given a singly linked list, reverse nodes at even indices.
- * @param list1
- * @param list2
+ * @param head1
+ * @param head2
  * @returns {*}
  */
-let merge_alternating = function(list1, list2) {
-    if (!list1) {
-        return list2;
+let merge_alternating = function(head1, head2) {
+    if (!head1) {
+        return head2;
     }
 
-    if (!list2) {
-        return list1;
+    if (!head2) {
+        return head1;
     }
 
-    let head = list1;
+    let head = head1;
 
-    while (list1.next && list2) {
-        let temp = list2;
-        list2 = list2.next;
+    while (head1.next && head2) {
+        let temp = head2;
+        head2 = head2.next;
 
-        temp.next = list1.next;
-        list1.next = temp;
-        list1 = temp.next;
+        temp.next = head1.next;
+        head1.next = temp;
+        head1 = temp.next;
     }
 
-    if (!list1.next) {
-        list1.next = list2;
+    if (!head1.next) {
+        head1.next = head2;
     }
 
     return head;

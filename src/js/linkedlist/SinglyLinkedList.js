@@ -70,29 +70,36 @@ class SinglyLinkedList {
         return temp;
     }
 
-    deleteNode( v ) {
-        let current = this.head;
-        let previous = null;
+    deleteNode( head, d ) {
 
-        if ( current.data === v ) {
-            this.head = current.next;
-        } else {
+        let prev = null;
+        let current = head;
 
-            while(current && current.data !== v) {
-                previous = current;
-                current = current.next;
+        while (current) {
+            if (current.data === d) {
+                break;
             }
-            //not found in the list
-            if (!current) {
-                return null;
-            }
-            // skip current item that is being removed
-            previous.next = current.next;
+
+            prev = current;
+            current = current.next;
         }
 
+        //  key not found in list
+        if (!current) {
+            return head;
+        }
 
-        return this.head;
+        //  if node to be deleted is head node
+        if (current === head) {
+            return head.next;
+        }
+
+        //  for all other cases
+        prev.next = current.next;
+        return head;
     }
+
+
     removeByVal( v ) {
         let current = this.head;
         let previous = null;
@@ -141,84 +148,121 @@ class SinglyLinkedList {
 
     }
 
-    findNthFromlastNode(head, k) {
-        if ( !head || k < 1 ) {
+    findNthFromlastNode(head, n) {
+        if (!head || n < 1){
             return null;
         }
-        let current = head;
-        while ( current && k > 0) {
-            current = current.next;
-            k--;
+
+        // We will use two pointers head and tail
+        // where head and tail are 'n' nodes apart.
+        let tail = head;
+
+        while (tail && n > 0){
+            tail = tail.next;
+            --n;
         }
-        if ( k !== 0 ) {
-            return null; //out of bound
+
+        // Check out-of-bounds
+        if (n != 0){
+            return null;
         }
-        while(current) {
-            current = current.next;
+
+        // When tail pointer reaches the end of
+        // list, head is pointing at nth node.
+        while (tail){
+            tail = tail.next;
             head = head.next;
         }
+
         return head;
 
     }
 
-    add_integers (list1, list2) {
+    addIntegers( node1, node2 ) {
 
-        let result = null;
+        let newHead = null;
         let last = null;
         let carry = 0;
-        let integer1 = list1.head;
-        let integer2 = list2.head;
 
-        while (integer1 || integer2 || carry > 0) {
-            let first = !integer1 ? 0 : integer1.data;
-            let second = !integer2 ? 0 : integer2.data;
+        while (node1 || node2 || carry > 0) {
+
+            let first = !node1 ? 0 : node1.data;
+            let second = !node2 ? 0 : node2.data;
             let sum = first + second + carry;
-            let pNew = this.insert(sum);
+
+            let newNode = new Node(sum % 10);
+
             carry = Math.floor(sum / 10);
-            if (!result) {
-                result = pNew;
+
+            if (!newHead) {
+                newHead = newNode;
             } else {
-                last.next = pNew;
+                last.next = newNode;
             }
 
-            last = pNew;
-            if (integer1) {
-                integer1 = integer1.next;
+            last = newNode;
+            if (node1) {
+                node1 = node1.next;
             }
 
-            if (integer2) {
-                integer2 = integer2.next;
+            if (node2) {
+                node2 = node2.next;
+            }
+
+            if (carry) {
+                newNode.next = new Node(carry);
             }
         }
 
-        return result;
+        return newHead;
     }
 }
 
-export default SinglyLinkedList;
+//export default SinglyLinkedList;
 
 //test
-/*
-(function() {
-    let linkedList = new SinglyLinkedList();
-    linkedList.insert(3);
-    linkedList.insert(2);
-    linkedList.insert(8);
-    linkedList.insert(7);
-    linkedList.insert(1);
-    linkedList.insert(18);
-    console.log(linkedList.print());
-    let node = linkedList.findNthFromlastNode(linkedList.head, 1);
-    console.log(node);
-    console.log(linkedList.length());
-    linkedList.reverseIteratively();
-    console.log(linkedList.print());
-    node = linkedList.reverseRecursively(linkedList.head);
-    linkedList.head = node;
-    console.log(linkedList.print());
-    linkedList.deleteNode(18);
-    console.log(linkedList.length());
-    console.log(linkedList.print());
-    console.log(linkedList.removeByIndex(10)); // -1
-})();
-*/
+
+let linkedList = new SinglyLinkedList();
+linkedList.insert(3);
+linkedList.insert(2);
+linkedList.insert(8);
+linkedList.insert(7);
+linkedList.insert(1);
+linkedList.insert(18);
+linkedList.print();
+
+let node = linkedList.findNthFromlastNode(linkedList.head, 1);
+console.log(node);
+console.log(linkedList.length());
+linkedList.reverseIteratively();
+linkedList.print();
+
+node = linkedList.reverseRecursively(linkedList.head);
+linkedList.head = node;
+linkedList.print();
+
+linkedList.deleteNode(linkedList.head, 18);
+console.log(linkedList.length());
+linkedList.print();
+console.log(linkedList.removeByIndex(0)); // remove 3
+linkedList.print();
+
+//test add two integers
+let list1 = new SinglyLinkedList();
+list1.insert(1);
+list1.insert(0);
+list1.insert(9);
+list1.insert(9);
+list1.print();
+
+let list2 = new SinglyLinkedList();
+list2.insert(7);
+list2.insert(3);
+list2.insert(2);
+list2.print();
+
+let rs = list1.addIntegers(list1, list2);
+
+list1.print();
+
+

@@ -14,26 +14,30 @@ let reverse_k_nodes = function(head, k) {
     let reversed = null;
     let prev_tail = null;
 
-    while (head && k > 0) {
-        let current_head = null;
-        let current_tail = head;
+    let current = head;
+    while (current && k > 0) {
+        
+        let previous = null;
+        let current_tail = current;
 
         let n = k;
-        while (head && n > 0) {
-            let temp = head.next;
-            head.next = current_head;
-            current_head = head;
 
-            head = temp;
+        while (current && n > 0) {
+
+            let next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+
             n--;
         }
 
         if (!reversed) {
-            reversed = current_head;
+            reversed = previous;
         }
 
         if (prev_tail) {
-            prev_tail.next = current_head;
+            prev_tail.next = previous;
         }
 
         prev_tail = current_tail;
@@ -60,18 +64,15 @@ class Node {
     }
 }
 
-(function() {
+let a = new Node(1);
+a.next = new Node(2);
+a.next.next = new Node(3);
+a.next.next.next = new Node(4);
+a.next.next.next.next = new Node(5);
+a.next.next.next.next.next = new Node(6);
 
-    let a = new Node(1);
-    a.next = new Node(2);
-    a.next.next = new Node(3);
-    a.next.next.next = new Node(4);
-    a.next.next.next.next = new Node(5);
-    a.next.next.next.next.next = new Node(6);
+display(a);
+let x = reverse_k_nodes(a, 3);  //reversing every 3 elements.
+console.log("Reverse LinkedList: ");
+display(x);
 
-    display(a);
-    let x = reverse_k_nodes(a, 3);  //reversing every 3 elements.
-    console.log("Reverse LinkedList: ");
-    display(x);
-
-})();

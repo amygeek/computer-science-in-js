@@ -332,43 +332,14 @@ class BinarySearchTree {
     }
 
     /**
-     * Returns the number of items in the tree. To do this, a traversal
-     * must be executed.
-     * @return {int} The number of items in the tree.
-     * @method size
+     * Returns the number of items in the tree.
      */
-    size() {
-        var length = 0;
+    size( root ) {
+        if ( !root ) {
+            return 0;
+        }
 
-        this.traverse(function(node){
-            length++;
-        });
-
-        return length;
-    }
-
-    /**
-     * Converts the tree into an array.
-     * @return {Array} An array containing all of the data in the tree.
-     * @method toArray
-     */
-    toArray() {
-        var result = [];
-
-        this.traverse(function(node){
-            result.push(node.data);
-        });
-
-        return result;
-    }
-
-    /**
-     * Converts the list into a string representation.
-     * @return {String} A string representation of the list.
-     * @method toString
-     */
-    toString() {
-        return this.toArray().toString();
+        return 1 + this.size(root.left) + this.size(root.right);
     }
 
     /**
@@ -465,23 +436,11 @@ class BinarySearchTree {
         
     }
 
-    getNthNode (root, n, stack) {
+    getNthNode (root, n, cnt) {
         if (!root) {
             return;
         }
-        this.getNthNode(root.right, n, stack);
-
-        stack.push(root);
-
-        this.getNthNode(root.left, n, stack);
-        return stack[n-1];
-    }
-
-    getNthNode2 (root, n, cnt) {
-        if (!root) {
-            return;
-        }
-        let res = this.getNthNode2(root.right, n, cnt);
+        let res = this.getNthNode(root.right, n, cnt);
         if ( res ) {
             return res;
         }
@@ -489,7 +448,7 @@ class BinarySearchTree {
             return root;
         }
         cnt += 1;
-        res = this.getNthNode2(root.left, n, cnt);
+        res = this.getNthNode(root.left, n, cnt);
         if ( res ) {
             return res;
         }
@@ -547,23 +506,23 @@ class BinarySearchTree {
         
         while( q.length !== 0 ) {
 
-            let levelNodeLen = q.length;
+            let level = q.length;
             let str = " ";
 
-            while ( levelNodeLen !== 0 ) {
+            while ( level !== 0 ) {
 
-                let n = q.shift();
+                let node = q.shift();
 
-                str += n.data + " ";
+                str += node.data + " ";
 
-                if ( n.left ) {
-                    q.push( n.left );
+                if ( node.left ) {
+                    q.push( node.left );
                 }
 
-                if ( n.right ) {
-                    q.push( n.right );
+                if ( node.right ) {
+                    q.push( node.right );
                 }
-                levelNodeLen--;
+                level--;
             }
 
             console.log( str );
@@ -594,12 +553,13 @@ let test = () => {
     let node = new TreeNode( null );
     let root = node.createBST(arr, 0, arr.length - 1);
 
+    console.log( "size of tree: ", tree.size(root) );
+
     let isBst = tree.isBST(root, -Number.MAX_VALUE - 1, Number.MAX_VALUE);
     console.log("isBst: ", isBst);
     console.log("tree is balanced : ", tree.isBalanced(root));
-    //let stk = [];
-    //let nthNode = tree.getNthNode(tree.root, 1, stk);
-    let nthNode = tree.getNthNode2(root, 1, 1);
+
+    let nthNode = tree.getNthNode(root, 1, 1);
     console.log("Nth TreeNode: ", nthNode);
 
     console.log('travel tree in order recursively');

@@ -33,39 +33,43 @@ class Node {
     }
 }
 
-let add_integers = function(integer1, integer2) {
+let add_integers = function(node1, node2) {
 
-    let result = null;
+    let newHead = null;
     let last = null;
     let carry = 0;
 
-    while (integer1 || integer2 || carry > 0) {
-        let first = !integer1 ? 0 : integer1.data;
-        let second = !integer2 ? 0 : integer2.data;
+    while (node1 || node2 || carry > 0) {
+        
+        let first = !node1 ? 0 : node1.data;
+        let second = !node2 ? 0 : node2.data;
         let sum = first + second + carry;
-        let pNew = new Node(sum % 10);
+        
+        let newNode = new Node(sum % 10);
+        
         carry = Math.floor(sum / 10);
-        if (!result) {
-            result = pNew;
+        
+        if (!newHead) {
+            newHead = newNode;
         } else {
-            last.next = pNew;
+            last.next = newNode;
         }
 
-        last = pNew;
-        if (integer1) {
-            integer1 = integer1.next;
+        last = newNode;
+        if (node1) {
+            node1 = node1.next;
         }
 
-        if (integer2) {
-            integer2 = integer2.next;
+        if (node2) {
+            node2 = node2.next;
         }
 
         if (carry) {
-            pNew.next = new Node(carry);
+            newNode.next = new Node(carry);
         }
     }
 
-    return result;
+    return newHead;
 };
 
 

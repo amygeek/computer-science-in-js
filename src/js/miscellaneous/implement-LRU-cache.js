@@ -23,7 +23,7 @@
  (least recently accessed data) from cache to accommodate more data.
  */
 
-class LinkedListNode{
+class Node{
     constructor(key, data){
         this.data = data;
         this.next = null;
@@ -39,10 +39,10 @@ class LinkedList {
         this.size = 0;
     }
 
-    insert_at_head(key, data) {
-        let newNode = this.LinkedListNode(key, data);
+    insertAtHead(key, data) {
+        let newNode = new Node(key, data);
         if (!this.head) {
-            this.tail = newnode;
+            this.tail = newNode;
             this.head = newNode;
         } else {
             newNode.next = this.head;
@@ -55,13 +55,13 @@ class LinkedList {
         return newNode;
     }
 
-    insert_at_tail(key, value) {
-        let newNode = this.LinkedListNode(key, data);
-        this.insert_at_tail(newNode);
+    insertAtTail(key, value) {
+        let newNode = new Node(key, data);
+        this.insertAtTail(newNode);
         return newNode;
     }
 
-    insert_at_tail(node) {
+    insertAtTail(node) {
         if (!this.tail) {
             this.tail = node;
             this.head = node;
@@ -101,11 +101,11 @@ class LinkedList {
         return node;
     }
 
-    remove_head() {
+    removeHead() {
         return this.remove(this.head);
     }
 
-    remove_tail() {
+    removeTail() {
         return this.remove(this.tail);
     }
 
@@ -116,18 +116,18 @@ class LRUCache {
     constructor(capacity) {
         this.capacity = capacity;
         this.cache = {};
-        this.cache_vals = new LinkedList();
+        this.cacheList = new LinkedList();
     }
     set(key, value) {
         if (this.cache[key]) {
             let node = this.cache[key];
             node.data = value;
-            this.cache_vals.remove(node);
-            this.cache_vals.insert_at_tail(node);
+            this.cacheList.remove(node);
+            this.cacheList.insertAtTail(node);
         } else {
-            this.evict_if_needed();
-            let node = new LinkedListNode(key, value);
-            this.cache_vals.insert_at_tail(node);
+            this.isEvictNeeded();
+            let node = new Node(key, value);
+            this.cacheList.insertAtTail(node);
             this.cache[key] = node;
         }
     }
@@ -135,24 +135,23 @@ class LRUCache {
     get(key) {
         if (this.cache[key]) {
             let node = this.cache[key];
-            this.cache_vals.remove(node);
-            this.cache_vals.insert_at_tail(node);
+            this.cacheList.remove(node);
+            this.cacheList.insertAtTail(node);
             return node.data;
         } else {
             return -1;
         }
     }
 
-    evict_if_needed() {
-        if (this.cache_vals.size >= this.capacity) {
-            let node = this.cache_vals.remove_head();
-            //this.cache.remove(node);
+    isEvictNeeded() {
+        if (this.cacheList.size >= this.capacity) {
+            let node = this.cacheList.removeHead();
             delete this.cache[node.key];
         }
     }
 
     printcache() {
-        let node = this.cache_vals.head;
+        let node = this.cacheList.head;
         while (node) {
             console.log(node.key + " " + node.data + ", ");
             node = node.next;
@@ -172,7 +171,7 @@ cache.printcache();
 
 cache.set(5, 5);
 
-console.log("after access 5")
+console.log("after adding 5")
 cache.printcache();
 
 

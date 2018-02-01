@@ -6,7 +6,7 @@ class DecimalOctalPalindrome {
         let oct = "";
         while (num > 0) {
             let x = num % 8;
-            num = Math.floor( num / 8);
+            num = parseInt( num / 8);
             oct += x;
         }
         return oct;

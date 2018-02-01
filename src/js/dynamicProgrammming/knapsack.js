@@ -17,6 +17,19 @@ wt = 20 + 10; val = 100 + 60
 wt = 30 + 10; val = 120 + 60
 wt = 30 + 20; val = 120 + 100
 
+    val wt  0   1   2   3   4   5   6   7
+    (1) 1   0   1   1   1   1   1   1   1
+    (4) 3   0   1   1   4   5   5   5   5
+    (5) 4   0   1   1   4   5   6   6   9
+    (7) 5   0   1   1   4   5   7   8   9
+
+        item
+        4 (5)
+        3 (4)
+     if (j <wt[i - 1] {
+        res[i][j] = res[i-1][j]
+     else {
+        res[i][j] = max(res[i-1][j], val[i] + res[i-1][j-wt[i - 1]
  */
 let Knapsack = (val, wt, w) => {
     
@@ -30,11 +43,16 @@ let Knapsack = (val, wt, w) => {
         for (let j=0; j<=w; j++) {
 
             if ( i === 0 || j === 0 ) {
+
                 res[i][j] = 0;
-            } else if ( wt[i -1] <= j ) {
-                res[i][j] = Math.max( res[i-1][j], val[i - 1] + res[i-1][j - wt[i-1]] )
-            } else {
+
+            } else if ( j <  wt[i -1]) {
+
                 res[i][j] = res[i-1][j];
+
+            } else {
+
+                res[i][j] = Math.max( res[i-1][j], val[i - 1] + res[i-1][j - wt[i-1]] );
             }
         }
     }
