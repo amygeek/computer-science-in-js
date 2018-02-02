@@ -1,5 +1,5 @@
 // An Inplace function to rotate a N x N matrix
-// by 90 degrees in anti-clockwise direction
+// by 90 degrees in Anti-Clockwise direction
 let rotateMatrix = ( arr, n) => {
 
     // Consider all squares one by one
@@ -33,14 +33,13 @@ let arr = [[1,2,3], [4,5,6], [7,8,9]];
  1  2  3
  4  5  6
  7  8  9
- */
-/*
+
  3  6  9
  2  5  8
  1  4  7
  */
 
-//console.log(rotateMatrix(arr, 3));
+console.log(rotateMatrix(arr, 3));
 
 // An Inplace function to rotate a N x N matrix
 // by 90 degrees in clockwise direction
@@ -70,7 +69,11 @@ let rotateMatrix2 = ( arr, n) => {
     }
     return arr;
 }
+arr = [[1,2,3], [4,5,6], [7,8,9]];
+console.log(rotateMatrix2(arr, 3));
 
+// An Inplace function to rotate a N x N matrix
+// by 90 degrees in Clockwise direction
 let rotateMatrix3 = ( arr, n) => {
 
     // Consider all squares one by one
@@ -96,9 +99,14 @@ let rotateMatrix3 = ( arr, n) => {
     return arr;
 }
 
-/**
- 7    4    1
- 8    5    2
- 9    6    3
+/*
+ 1  2  3
+ 4  5  6
+ 7  8  9
+
+ 7  4  1
+ 8  5  2
+ 9  6  3
  */
+arr = [[1,2,3], [4,5,6], [7,8,9]];
 console.log(rotateMatrix3(arr, 3));

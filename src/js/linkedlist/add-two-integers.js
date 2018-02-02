@@ -6,23 +6,58 @@
  Result: 8->3->1->0->1->null
 
  */
-let display = function (head) {
-    let currNode = head;
-    let list = '';
-    while (currNode != null) {
-        list += currNode.data + "->";
-        currNode = currNode.next;
+
+class LinkedList {
+
+    addIntegers( node1, node2 ) {
+
+        let newHead = null;
+        let last = null;
+        let carry = 0;
+
+        while (node1 || node2 || carry > 0) {
+
+            let first = !node1 ? 0 : node1.data;
+            let second = !node2 ? 0 : node2.data;
+            let sum = first + second + carry;
+
+            let newNode = new Node(sum % 10);
+
+            carry = Math.floor(sum / 10);
+
+            if (!newHead) {
+                newHead = newNode;
+            } else {
+                last.next = newNode;
+            }
+
+            last = newNode;
+            if (node1) {
+                node1 = node1.next;
+            }
+
+            if (node2) {
+                node2 = node2.next;
+            }
+
+            if (carry) {
+                newNode.next = new Node(carry);
+            }
+        }
+
+        return newHead;
     }
-    console.log(list + "null");
-}
 
-let displayRec = function (head) {
-
-    if (!head) {
-        return head;
+    print( node ) {
+        let current = node;
+        let str = ''
+        while( current ) {
+            str += current.data + " -> ";
+            current = current.next;
+        }
+        str += 'null';
+        console.log( str );
     }
-
-    displayRec(head.next);
 }
 
 class Node {
@@ -33,60 +68,22 @@ class Node {
     }
 }
 
-let add_integers = function(node1, node2) {
 
-    let newHead = null;
-    let last = null;
-    let carry = 0;
-
-    while (node1 || node2 || carry > 0) {
-        
-        let first = !node1 ? 0 : node1.data;
-        let second = !node2 ? 0 : node2.data;
-        let sum = first + second + carry;
-        
-        let newNode = new Node(sum % 10);
-        
-        carry = Math.floor(sum / 10);
-        
-        if (!newHead) {
-            newHead = newNode;
-        } else {
-            last.next = newNode;
-        }
-
-        last = newNode;
-        if (node1) {
-            node1 = node1.next;
-        }
-
-        if (node2) {
-            node2 = node2.next;
-        }
-
-        if (carry) {
-            newNode.next = new Node(carry);
-        }
-    }
-
-    return newHead;
-};
-
-
+let ll = new LinkedList()
 //test
 let list1 = new Node(1);
 list1.next = new Node(0);
 list1.next.next = new Node(9);
 list1.next.next.next = new Node(9);
 
-display(list1);
+ll.print(list1);
 
 let list2 = new Node(7);
 list2.next = new Node(3);
 list2.next.next = new Node(2);
-display(list2);
+ll.print(list2);
 
-let rs = add_integers(list1, list2);
+let rs = ll.addIntegers(list1, list2);
 
-display(rs);
+ll.print(rs);
 

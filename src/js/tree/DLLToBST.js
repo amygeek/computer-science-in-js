@@ -48,10 +48,13 @@ class DLLToBST {
 
         let leftSize = Math.floor( size / 2 );
         let left = this.dLLtoBST(leftSize);
+
         let root = this.head;
         root.prev = left;
         this.head = this.head.next;
+
         root.next = this.dLLtoBST(size - leftSize - 1);
+
         return root;
     }
 
@@ -72,6 +75,40 @@ class DLLToBST {
         }
         console.log(str);
     }
+
+    levelOrderTraversal ( root ) {
+        if ( !root ) {
+            return;
+        }
+
+        let q = [];
+        q.push(root);
+
+        while( q.length !== 0 ) {
+
+            let level = q.length;
+            let str = " ";
+
+            while ( level !== 0 ) {
+
+                let node = q.shift();
+
+                str += node.data + " ";
+
+                if ( node.prev ) {
+                    q.push( node.prev );
+                }
+
+                if ( node.next ) {
+                    q.push( node.next );
+                }
+                level--;
+            }
+
+            console.log( str );
+
+        }
+    }
 }
 
 let root = new DLLToBST();
@@ -91,5 +128,5 @@ root.printDLL(head)
 
 let tree = root.dLLtoBST( root.size );
 console.log("Inorder traversal of contructed BST");
-root.inOrder(tree);
+root.levelOrderTraversal(tree);
 

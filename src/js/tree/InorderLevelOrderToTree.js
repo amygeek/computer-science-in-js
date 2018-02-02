@@ -41,16 +41,16 @@ class InorderLevelOrderToTree {
         }
         let index = this.findIndex(inorder, rootVal, start, end);
         
-        let newleftLevel = this.newLevelOrder(inorder, levelOrder, start, index - 1);
+        let left = this.newLevelOrder(inorder, levelOrder, start, index - 1);
 
-        let newrighttLevel = this.newLevelOrder(inorder, levelOrder, index + 1, end);
-        
-        root.left = this.makeBTree(inorder, newleftLevel, start, index - 1);
-        root.right = this.makeBTree(inorder, newrighttLevel, index + 1, end);
-        
+        let right = this.newLevelOrder(inorder, levelOrder, index + 1, end);
+
+        root.left = this.makeBTree(inorder, left, start, index - 1);
+        root.right = this.makeBTree(inorder, right, index + 1, end);
+
         return root;
     }
-    
+
     newLevelOrder(inorder, levelOrder, start, end) {
         
         let newlevel = [];
@@ -68,14 +68,12 @@ class InorderLevelOrderToTree {
     
     findIndex(inorder, value, start, end) {
         
-        let x = -1;
-        
         for (let i = start; i <= end; i++) {
             if (value == inorder[i]) {
-                x = i;
+                return i;
             }
         }
-        return x;
+        return -1;
     }
     
     inOrderTravesal( root) {

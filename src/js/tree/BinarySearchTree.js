@@ -435,7 +435,36 @@ class BinarySearchTree {
         return this.isBST(root.left, min, root.data) && this.isBST(root.right, root.data, max);
         
     }
+    /**
+     * Find nth highest node in a Binary Search Tree(BST).
+            100
+           /    \
+         50     200
+        /  \    /  \
+      25   75 125   350
 
+     In above BST:
+
+     Highest node is 350
+     2nd highest node is 200
+     3rd highest node is 125
+     4th highest node is 100
+     5th highest node is 75
+
+     Runtime Complexity
+     Linear, O(n).
+
+     Memory Complexity
+     O(h)
+     The recursive solution has O(h) memory complexity as it will consume memory on the stack up
+     to the height of the binary search tree h. It will be O(logn) for a balanced tree and in worst can be O(n).
+
+     In-order traversal of BST is always sorted in ascending order. To find the nth highest node,
+     we will need to scan the tree in descending order that can achieve by doing reverse inorder traversal.
+     The inorder traversal is normally LVR i.e. Left - Visit - Right. Reverse inorder traversal
+     will be RVL i.e. Right - Visit - Left. While doing so, we keep a count of nodes seen so far.
+     Once the count reaches n, that is the node to return. Let's run the above example for n = 3.
+     */
     getNthNode (root, n, cnt) {
         if (!root) {
             return;
@@ -529,6 +558,7 @@ class BinarySearchTree {
 
         }
     }
+
 };
 
 /*********************************

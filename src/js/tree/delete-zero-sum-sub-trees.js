@@ -67,16 +67,16 @@ class Node {
     }
 }
 
-(function() {
-    let root = new Node(7);
-    root.left = new Node(5);
-    root.right = new Node(6);
-    root.left.left = new Node(-3);
-    root.left.right = new Node(-2);
 
-    inOrderRec(root);
+let root = new Node(7);
+root.left = new Node(5);
+root.right = new Node(6);
+root.left.left = new Node(-3);
+root.left.right = new Node(-2);
 
-    delete_zero_sum_subtree(root);
+inOrderRec(root);
 
-    inOrderRec(root);
-})()
+delete_zero_sum_subtree(root);
+
+console.log( "after delete zero sum subtree: ")
+inOrderRec(root);

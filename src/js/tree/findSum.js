@@ -13,8 +13,8 @@ class TreeNode {
 class BTree {
 
     findSum( node, sum ) {
-        let depth = this.depth( node );
-        let path = new Array( depth );
+
+        let path =[];
         this.findSumRec ( node, sum, path, 0 )
     }
 

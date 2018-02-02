@@ -16,8 +16,7 @@ class DiameterOfTree {
     // every TreeNode will return 2 values, diameter and height wrt to the
     // particular node
     diameter( root ) {
-        let res = [ 0, 0 ]; // initialize the height (res[0]) and diameter
-        // as 0 (res[1])
+        let res = [ 0, 0 ]; // initialize the height (res[0]) and diameter as 0 (res[1])
         if (root != null) {
 
             let leftResult = this.diameter(root.left);

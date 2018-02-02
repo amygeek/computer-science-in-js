@@ -46,12 +46,12 @@ class BinaryTree {
         let right = this.getMaxSum(root.right);
 
         //get the max of root data, or root data plus max value of left or right child
-        let maxSingle = Math.max(Math.max(left, right) + root.data, root.data);
+        let currentMax = Math.max( root.data,  root.data + Math.max( left, right ) );
 
-        let maxTop = Math.max(maxSingle, left + right + root.data);
-        this.max = Math.max(maxTop, this.max);
+        let maxTop = Math.max( currentMax, left + right + root.data );
+        this.max = Math.max( maxTop, this.max );
 
-        return maxSingle;
+        return currentMax;
     }
 }
 

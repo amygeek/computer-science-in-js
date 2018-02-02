@@ -4,30 +4,70 @@
  * @param key
  * @returns {*}
  */
-let delete_node = function(head, key) {
-    let prev = null;
-    let current = head;
 
-    while (current) {
-        if (current.data === key) {
-            break;
+class LinkedList {
+
+    deleteNode( head, d ) {
+
+        let prev = null;
+        let current = head;
+
+        while (current) {
+            if (current.data === d) {
+                break;
+            }
+
+            prev = current;
+            current = current.next;
         }
 
-        prev = current;
-        current = current.next;
-    }
+        //  key not found in list
+        if (!current) {
+            return head;
+        }
 
-    //  key not found in list
-    if (!current) {
+        //  if node to be deleted is head node
+        if (current === head) {
+            return head.next;
+        }
+
+        //  for all other cases
+        prev.next = current.next;
         return head;
     }
 
-    //  if node to be deleted is head node
-    if (current === head) {
-        return head.next;
+    print( node ) {
+        let current = node;
+        let str = ''
+        while( current ) {
+            str += current.data + " -> ";
+            current = current.next;
+        }
+        str += 'null';
+        console.log( str );
     }
+}
 
-    //  for all other cases
-    prev.next = current.next;
-    return head;
-};
+//test
+class Node {
+    constructor( x ) {
+        this.data = x;
+        this.next = null;
+    }
+}
+
+let list = new Node(7);
+list.next = new Node(8);
+list.next.next = new Node(5);
+list.next.next.next = new Node(6);
+list.next.next.next.next = new Node(20);
+list.next.next.next.next.next = new Node(21);
+list.next.next.next.next.next.next = new Node(9);
+
+let ll = new LinkedList();
+
+ll.print( list );
+
+ll.deleteNode( list, 8);
+
+ll.print( list );

@@ -10,9 +10,10 @@
       9         8    10
  * @param root
  */
-let print_left_perimeter = function(root) {
+let printLeft = function(root) {
     while (root) {
-        let curr_val = root.data;
+
+        let val = root.data;
 
         if (root.left) {
             root = root.left;
@@ -21,15 +22,16 @@ let print_left_perimeter = function(root) {
         } else { // leaf node
             break;
         }
-        console.log(curr_val + " ");
+        console.log(val + " ");
     }
 };
 
-let print_right_perimeter = function(root) {
-    let r_values = []; // stack for right side values.
+let printRight = function(root) {
+    let arr = []; // stack for right side values.
 
     while (root) {
-        let curr_val = root.data;
+
+        let val = root.data;
 
         if (root.right) {
             root = root.right;
@@ -38,33 +40,34 @@ let print_right_perimeter = function(root) {
         } else { // leaf node
             break;
         }
-        r_values.push(curr_val);
+        arr.push(val);
     }
-    while (r_values.length != 0) {
-        console.log(r_values.pop() + " ");
+    while (arr.length != 0) {
+        console.log(arr.pop() + " ");
     }
 };
 
-let print_leaf_nodes = function(root) {
+let printLeaf = function(root) {
     if (root) {
-        print_leaf_nodes(root.left);
+        printLeaf(root.left);
         if (!root.left && !root.right) {
             console.log(root.data + " ");
         }
-        print_leaf_nodes(root.right);
+        printLeaf(root.right);
     }
 };
 
 let display_tree_perimeter = function(root) {
     if (root) {
         console.log(root.data + " ");
-        print_left_perimeter(root.left);
+
+        printLeft(root.left);
 
         if (root.left || root.right) {
-            print_leaf_nodes(root);
+            printLeaf(root);
         }
 
-        print_right_perimeter(root.right);
+        printRight(root.right);
     }
 };
 
@@ -84,22 +87,18 @@ class Node {
    50     200
   /  \    /  \
  25  75  125  350
-  \    \
-  40    80
-print 100 50 25 40 80 125 350 200
+
+print 100 50 25 75 125 350 200
  *********************************/
 
-(function() {
-    let root = new Node(100);
-    root.left = new Node(50);
-    root.right = new Node(200);
-    root.left.left = new Node(25);
-    //root.left.left.right = new Node(40);
-    root.left.right = new Node(75);
-    //root.left.right.right = new Node(80);
-    root.right.left = new Node(125);
-    root.right.right = new Node(350);
 
-    display_tree_perimeter(root);
+let root = new Node(100);
+root.left = new Node(50);
+root.right = new Node(200);
+root.left.left = new Node(25);
+root.left.right = new Node(75);
+root.right.left = new Node(125);
+root.right.right = new Node(350);
 
-})()
+display_tree_perimeter(root);
+

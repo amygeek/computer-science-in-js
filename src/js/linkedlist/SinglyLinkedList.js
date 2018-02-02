@@ -148,6 +148,7 @@ class SinglyLinkedList {
 
     }
 
+    //time O(n), space O(1)
     findNthFromlastNode(head, n) {
         if (!head || n < 1){
             return null;

@@ -3,8 +3,8 @@
  Given a Binary tree create Linked Lists of all the nodes at each depth , say if the tree has height k then create k linked lists.
  * Create a ArrayList of Linked List Nodes.
  * Do the level order traversal using queue(Breadth First Search).
- * For getting all the nodes at each level, before you take out a node from queue, store the size of the queue in a variable, say you call it as levelNodes.
- * Now while levelNodes>0, take out the nodes and print it and add their children into the queue. add these to a linked list
+ * For getting all the nodes at each level, before you take out a node from queue, store the size of the queue in a variable, say you call it as level.
+ * Now while level>0, take out the nodes and print it and add their children into the queue. add these to a linked list
  * After this while loop put a line break and create a new linked list
  */
 class LinkedListNode {
@@ -35,22 +35,20 @@ class ListAtDepthBtree {
         }
 
         let q = [];
-        let levelNodes = 0;
-
         q.push(root);
 
         while( q.length !== 0 ){
 
-            levelNodes = q.length;
+            let level = q.length;
 
             let head = null;
             let prev = null;
 
-            while( levelNodes > 0 ) {
+            while( level > 0 ) {
 
-                let n = q.shift();
+                let node = q.shift();
 
-                let newNode = new LinkedListNode( n.data );
+                let newNode = new LinkedListNode( node.data );
 
                 if( head == null ) {
                     head = newNode;
@@ -59,13 +57,13 @@ class ListAtDepthBtree {
                 }
                 prev  = newNode;
 
-                if ( n.left != null ) {
-                    q.push( n.left );
+                if ( node.left != null ) {
+                    q.push( node.left );
                 }
-                if ( n.right != null ){
-                    q.push( n.right );
+                if ( node.right != null ){
+                    q.push( node.right );
                 }
-                levelNodes--;
+                level--;
             }
             this.list.push(head);
         }
@@ -74,9 +72,9 @@ class ListAtDepthBtree {
 
     display( list ){
 
-        let n = list.length;
+        let node = list.length;
 
-        for (let i=0; i<n; i++) {
+        for (let i=0; i<node; i++) {
 
             let str = " ";
             let head = list[i];

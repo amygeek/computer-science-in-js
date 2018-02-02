@@ -42,14 +42,14 @@ class InorderIterator {
             return null;
         }
 
-        let r_val = this.stk.pop();
+        let current = this.stk.pop();
         // this.stk.remove(-1)
-        let temp = r_val.right;
-        while (temp) {
-            this.stk.push(temp);
-            temp = temp.left;
+        let node = current.right;
+        while (node) {
+            this.stk.push(node);
+            node = node.left;
         }
 
-        return r_val;
+        return current;
     }
 }

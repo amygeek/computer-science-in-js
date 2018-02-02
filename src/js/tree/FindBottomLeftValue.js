@@ -26,11 +26,11 @@ class TreeNode {
     
     while(q.length !== 0){
 
-        let levelNodeLen = q.length;
+        let level = q.length;
 
         let subList = [];
     
-        while ( levelNodeLen > 0) {
+        while ( level > 0) {
 
             let n = q.shift();
 
@@ -43,10 +43,10 @@ class TreeNode {
                 q.push( n.right );
             }
 
-            levelNodeLen--;
+            level--;
         }
 
-        list.unshift(subList); //push the sublist to front of the list
+        list.unshift(subList); //push the sublist to front of the list. the leftmost value will be in the front of the list list[0][0];
     }
 
     return list[0][0];

@@ -22,11 +22,10 @@ class DistanceOfTwoNodesBTree {
     pathLen(root, n1) {
         if (root != null) {
             let x = 0;
-            if ((root.data == n1) || (x = this.pathLen(root.left, n1)) > 0 || (x = this.pathLen(root.right, n1)) > 0) {
+            if ((root.data == n1) || ( x = this.pathLen(root.left, n1) ) > 0 || ( x = this.pathLen(root.right, n1) ) > 0 ) {
                
                 return x + 1;
             }
-            return 0;
         }
         return 0;
     }

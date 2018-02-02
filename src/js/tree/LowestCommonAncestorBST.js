@@ -25,7 +25,7 @@ class LowestCommonAncestorBST {
         if (root.data > n1.data && root.data > n2.data) {
             return this.lowestCommonAncestor(root.left, n1, n2);
 
-        } else if (root.data <= n1.data && root.data < n2.data) {
+        } else if (root.data < n1.data && root.data < n2.data) {
             // If root<n1 and root<n2 then lowest common ancestor will be in right subtree.
             return this.lowestCommonAncestor(root.right, n1, n2);
         }
@@ -41,7 +41,7 @@ class LowestCommonAncestorBST {
             if (root.data > n1.data && root.data > n2.data) {
                 root = root.left;
 
-            } else if (root.data <= n1.data && root.data < n2.data) {
+            } else if (root.data < n1.data && root.data < n2.data) {
                 // If root<n1 and root<n2 then lowest common ancestor will be in right subtree.
                 root = root.right;
             } else {
