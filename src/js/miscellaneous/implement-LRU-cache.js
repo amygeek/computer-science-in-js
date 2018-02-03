@@ -23,24 +23,20 @@
  (least recently accessed data) from cache to accommodate more data.
  */
 
-class Node{
-    constructor(key, data){
+
+class LinkedList {
+    constructor( key, data ) {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
         this.data = data;
         this.next = null;
         this.prev = null;
         this.key = key;
     }
-}
-
-class LinkedList {
-    constructor() {
-        this.head = null;
-        this.tail = null;
-        this.size = 0;
-    }
 
     insertAtHead(key, data) {
-        let newNode = new Node(key, data);
+        let newNode = new LinkedList(key, data);
         if (!this.head) {
             this.tail = newNode;
             this.head = newNode;
@@ -56,7 +52,7 @@ class LinkedList {
     }
 
     insertAtTail(key, value) {
-        let newNode = new Node(key, data);
+        let newNode = new LinkedList(key, data);
         this.insertAtTail(newNode);
         return newNode;
     }
@@ -126,7 +122,7 @@ class LRUCache {
             this.cacheList.insertAtTail(node);
         } else {
             this.isEvictNeeded();
-            let node = new Node(key, value);
+            let node = new LinkedList(key, value);
             this.cacheList.insertAtTail(node);
             this.cache[key] = node;
         }
