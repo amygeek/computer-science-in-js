@@ -52,12 +52,14 @@ let longestPalindromicSubsequence = ( str ) => {
             let j = i + l - 1;
 
             if(l == 2 && str[i] == str[j]){
+
                 res[i][j] = 2;
             }else if(str[i] == str[j]){
                 res[i][j] = res[i + 1][j-1] + 2;
             }else{
                 res[i][j] = Math.max(res[i + 1][j], res[i][j - 1]);
             }
+
         }
     }
 

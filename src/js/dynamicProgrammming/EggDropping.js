@@ -63,6 +63,7 @@ class EggDropping {
                 }
             }
         }
+        console.log(res)
         return res[eggs][floors];
     }
     

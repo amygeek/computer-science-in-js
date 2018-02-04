@@ -18,7 +18,7 @@
             3   1   1   2   3   4   5
 
                 if j >= coins[i]
-                    res[i] += res[i] + res[j-coins[i]
+                    res[j] += res[j] + res[j-coins[i]
 
  Runtime Complexity
  O(m n) where m is number of coins and n is amount.
@@ -70,25 +70,32 @@ class CoinChanging {
 
     printSolution(total, coins ){
         let result = [];
-        this.printActualSolution(result, total, coins, 0);
+        let min = [];
+        min[0] = Number.MAX_VALUE;
+        this.printActualSolution(result, total, coins, 0, min);
+
+        console.log( "minimal coin: ", min[0] );
     }
 
-    printActualSolution(result, total, coins, pos){
+    printActualSolution(result, total, coins, pos, min){
 
         if(total == 0){
             let str = "";
             for(let r of result){
                 str += r + " ";
             }
+            min[0] = Math.min( result.length, min[0]);
+
             console.log( str );
         }
         for(let i=pos; i < coins.length; i++){
             if(total >= coins[i]){
                 result.push(coins[i]);
-                this.printActualSolution( result, total - coins[i], coins, i );
+                this.printActualSolution( result, total - coins[i], coins, i, min );
                 result.splice ( result.length - 1 );  //remove the last item in result
             }
         }
+        return min;
     }
 
 }
@@ -100,7 +107,6 @@ let coins = [1, 2, 3];
 //console.log(coinChange( coins, 100));  //242
 
 console.log(C.coinChange( coins, 5));  //6
-console.log(C.coinChangeRec(coins, coins.length - 1, 5));
 
 C.printSolution( 5, coins);
 

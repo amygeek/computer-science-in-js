@@ -77,16 +77,7 @@ class coinChangeMin {
         total[0] = 0;
 
         /*
-
-            coins = [ 1,2,3 ];
-            amount = 5;
-
-              0 1 2 3 4 5
-            1 0 1 2 3 4 5
-            2 0 1 1 2 2 3
-            3 0 1 1 1 2 2
-
-            coints = [1,5,6,8]
+            coins = [1,5,6,8]
             amount = 11
 
            0 1 2 3 4 5 6 7 8 9 10 11
@@ -94,16 +85,29 @@ class coinChangeMin {
          5 0 1 2 3 4 1 2 3 4 5  2  3
          6 0 1 2 3 4 1 1 2 3 4  2  2
          8 0 1 2 3 4 1 1 2 1 2  2  2
+
+         coins = [ 1,2,3 ];
+         amount = 5;
+
+           0 1 2 3 4 5
+         1 0 1 2 3 4 5
+         2 0 1 1 2 2 3
+         3 0 1 1 1 2 2
+
          */
-        for(let j=0; j < coins.length; j++){
-            for(let i=1; i <= amount; i++){
-                if(i >= coins[j]){
-                    //total[i] = min(total[i], total[i-coins[j] + 1)
-                    if (total[i - coins[j]] + 1 < total[i]) {
-                        total[i] = total[i - coins[j]] + 1;
-                        res[i] = j;
+        for(let i=0; i < coins.length; i++){
+            for(let j=1; j <= amount; j++){
+
+                if(j >= coins[i]){
+                    //total[j] = min(total[j], total[j-coins[i] + 1)
+
+                    if ( total[j] > total[j - coins[i]] + 1 ) {
+
+                        total[j] = total[j - coins[i]] + 1;
+                        res[j] = i;
                     }
                 }
+
             }
         }
 
@@ -113,11 +117,13 @@ class coinChangeMin {
     }
     
     printCoinCombination(res, coins) {
+
         if (res[res.length - 1] == -1) {
             console.log("No solution is possible");
             return;
         }
         let start = res.length - 1;
+
         console.log("Coins used to form amount ");
         while ( start != 0 ) {
             let j = res[start];
@@ -137,4 +143,4 @@ let amount = 5;
 
 let m = new coinChangeMin();
 console.log("Minimum Coins required to make change for " + amount + " are: " + m.minCoinChange(amount, coins));
-console.log("Minimum Coins required to make change for " + amount + " are: " + m.minimumCoinTopDown(amount, coins, new Map()));
+//console.log("Minimum Coins required to make change for " + amount + " are: " + m.minimumCoinTopDown(amount, coins, new Map()));

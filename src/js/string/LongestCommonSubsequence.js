@@ -5,52 +5,52 @@
 class LongestCommonSubsequence {
 
     /*
-     Start comparing strings in reverse order one character at a time.
+     Start comparing strings in reverse order one character at str1 time.
 
      Now we have 2 cases –
 
      Both characters are same
      add 1 to the result and remove the last character from both the strings and make recursive call to the modified strings.
      Both characters are different
-     Remove the last character of String 1 and make a recursive call and remove the last character from String 2 and make a recursive and then return the max from returns of both recursive calls. see example below
+     Remove the last character of String 1 and make str1 recursive call and remove the last character from String 2 and make str1 recursive and then return the max from returns of both recursive calls. see example below
      Example:
 
      Case 1:
 
-     String a: "ABCD", String b: "AEBD"
+     String str1: "ABCD", String str2: "AEBD"
 
      res("ABCD", "AEBD") = 1 + res("ABC", "AEB")
 
      Case 2:
 
-     String a: "ABCDE", String b: "AEBDF"
+     String str1: "ABCDE", String str2: "AEBDF"
 
      res("ABCDE", "AEBDF") = Max(res("ABCDE", "AEBD"), res("ABCD", "AEBDF"))
      Time complexity will O(2n) since we will solving sub problems repeatedly.
      */
 
-    findRec( a,  b) {
-        if (aLen == 0 || bLen == 0) {
+    findRec( str1,  str2) {
+        if (m == 0 || n == 0) {
             return 0;
         }
-        let lenA = a.length;
-        let lenB = b.length;
+        let lenA = str1.length;
+        let lenB = str2.length;
         // check if last characters are same
-        if (a.charAt(lenA - 1) == b.charAt(lenB - 1)) {
+        if (str1.charAt(lenA - 1) == str2.charAt(lenB - 1)) {
             // Add 1 to the result and remove the last character from both
             // the strings and make recursive call to the modified strings.
-            return 1 + this.findRec(a.substr(0, lenA - 1), b.substr(0, lenB - 1));
+            return 1 + this.findRec(str1.substr(0, lenA - 1), str2.substr(0, lenB - 1));
         } else {
-            // Remove the last character of String 1 and make a recursive
-            // call and remove the last character from String 2 and make a
+            // Remove the last character of String 1 and make str1 recursive
+            // call and remove the last character from String 2 and make str1
             // recursive and then return the max from returns of both recursive
             // calls
-            return Math.max( this.findRec(a.substr(0, lenA - 1), b.substr(0, lenB)), this.findRec(a.substr(0, lenA), b.substr(0, lenB - 1)));
+            return Math.max( this.findRec(str1.substr(0, lenA - 1), str2.substr(0, lenB)), this.findRec(str1.substr(0, lenA), str2.substr(0, lenB - 1)));
         }
     }
     
     /*
-     DP: Bottom-Up and store the solution of the sub problems in a solution array and use it when ever needed
+     DP: Bottom-Up and store the solution of the sub problems in str1 solution array and use it when ever needed
      Start from bottom right corner and track the path and mark the cell from which cell the value is coming
      and whenever you go diagonal ( means last character of both string has matched,
      so we reduce the length of both the strings by 1, so we moved diagonally), mark those cells, this is our answer.
@@ -67,30 +67,26 @@ class LongestCommonSubsequence {
     
     
      */
-    find( a, b ) {
+    find( str1, str2 ) {
 
-        let aLen = a.length;
-        let bLen = b.length;
+        let m = str1.length;
+        let n = str2.length;
 
         let res = [];       //for store the LCS len
         let solution = [];  //for printing
     
-        // if b is null then res of a, b =0
-        for (let i = 0; i <= aLen; i++) {
+        // if str2 is null then res of str1, str2 =0
+        for (let i = 0; i <= m; i++) {
 
-            res.push(new Array( bLen + 1));
-            solution.push(new Array( bLen + 1));
+            res.push( new Array( n + 1).fill(0) );
+            solution.push( new Array( n + 1).fill(0) );
 
-            res[i][0] = 0;
-            res[0][i] = 0;
-            solution[i][0] = "0";
-            solution[0][i] = "0";
         }
     
-        for (let i = 1; i <= aLen; i++) {
+        for (let i = 1; i <= m; i++) {
     
-            for (let j = 1; j <= bLen; j++) {
-                if (a[i - 1] == b[j - 1]) {
+            for (let j = 1; j <= n; j++) {
+                if (str1[i - 1] == str2[j - 1]) {
     
                     res[i][j] = res[i - 1][j - 1] + 1;
     
@@ -111,13 +107,13 @@ class LongestCommonSubsequence {
         }
     
         // below code is to just prlet the result
-        let x = solution[aLen][bLen];
+        let x = solution[m][n];
         let answer = "";
-        let i = aLen;
-        let j = bLen;
+        let i = m;
+        let j = n;
         while (x != "0") {
             if (solution[i][j] == "diagonal") {
-                answer = a[i - 1] + answer;
+                answer = str1[i - 1] + answer;
                 i--;
                 j--;
             } else if (solution[i][j] == "left") {
@@ -138,21 +134,22 @@ class LongestCommonSubsequence {
          0 1 2 2 3 3
          0 1 2 2 3 4
          */
-        //for (let i = 0; i <= aLen; i++) {
+        //for (let i = 0; i <= m; i++) {
         //    let str = " ";
-        //    for (let j = 0; j <= bLen; j++) {
+        //    for (let j = 0; j <= n; j++) {
         //        str += " " + res[i][j];
         //    }
         //    console.log( str );
         //}
         //console.log(solution)
-        return res[aLen][bLen];  //4
+        return res[m][n];  //4
     }
     
     
 }
 
 let LCS = new LongestCommonSubsequence();
-let a = "ACBDEA";
-let b = "ABCDA";
-console.log("Longest Commone Sub Sequence Len :" + LCS.find(a, b));
+let str1 = "awes7some";
+let str2 = "aw2essome";
+
+console.log("Longest Commone Sub Sequence Len :" + LCS.find(str1, str2));

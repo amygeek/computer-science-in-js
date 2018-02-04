@@ -43,9 +43,9 @@ let coinGame = (arr) => {
 
         for (let i= 0, j=start; j< n; i++, j++) {
 
-            let x = ( i+2 < j ) ? res[i+2][j] : 0;  //first person chooses i, second person chooses i+1
-            let y = ( i+1 <= j-1 ) ? res[i+1][j-1] : 0; //first person chooses i, second person chooses j or first person chooses j, second person chooses i
-            let z = (i <= j - 2) ? res[i][j-2] : 0; //first person choose j, second person chooses j-1
+            let x = ( i+2 < j ) ? res[i+2][j] : 0;  //me chooses i, you chooses i+1
+            let y = ( i+1 <= j-1 ) ? res[i+1][j-1] : 0; //me chooses i, you chooses j or me chooses j, you chooses i
+            let z = (i <= j - 2) ? res[i][j-2] : 0; //me choose j, you chooses j-1
 
             res[i][j] = Math.max(arr[i] + Math.min(x, y), arr[j] + Math.min(y, z));
 

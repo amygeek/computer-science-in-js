@@ -34,15 +34,7 @@
  as a substring – the very first item of the array: res[0][0] = 1, because an empty string contains the empty string 1 time.
  So the matrix looks like this:
 
- S 0123....j
- T +----------+
- |1111111111|
- 0 |0         |
- 1 |0         |
- 2 |0         |
- . |0         |
- . |0         |
- i |0         |
+
  From here we can easily fill the whole grid: for each (x, y), we check if S[x] == T[y] we add the previous item and
  the previous item in the previous row, otherwise we copy the previous item in the same row. The reason is simple:
 
@@ -84,15 +76,16 @@ let distinctSubSeq = ( s, t ) => {
 
         res.push( new Array( tLen + 1).fill(0));
         /*
-         the first column of every rows except the first must be 0. This is because an empty string cannot contain a non-empty string
-         as a substring – the very first item of the array: res[0][0] = 1, because an empty string contains the empty string 1 time.
+         the first column of every rows must be filled with 1. That’s because the empty string is a subsequence of any string but only 1 time.
+         So res[0][j] = 1
+
          */
         res[i][0] = 1;
     }
 
     /*
-     the first row must be filled with 1. That’s because the empty string is a subsequence of any string but only 1 time.
-     So res[0][j] = 1 for every j.
+     the first row of every column except the first must be 0. This is because an empty string cannot contain a non-empty string
+     as a substring – the very first item of the array: res[0][0] = 1, because an empty string contains the empty string 1 time.
      */
     for ( let i=1; i<= tLen; i++ ) {
         res[0][i] = 0;
