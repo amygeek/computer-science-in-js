@@ -12,6 +12,8 @@ let longestPalindromeSubStr = ( str ) => {
 
     let max = 1;  //initialize max to 1. max will store the longest palindrome
 
+    let lastIndex = 0;  //use to store the index where the palindrome is found
+
     //start with length at 2 and compare two character at a time until the end of the string
     for(let l = 2; l <= n; l++){
 
@@ -37,15 +39,16 @@ let longestPalindromeSubStr = ( str ) => {
             }
             if(len > max){
                 max = len;
+                lastIndex = i;
             }
         }
     }
-    //we can print the longest palindrome sub string by looping through the res. Check i and j index if they are true return str.substr(i, j-i + 1)
-    //console.log(res)
+
+    //console.log( str.substr(lastIndex, max));  //print the longest palindrome
     return max;
 }
 
 //console.log(longestPalindromeSubStr("abba"));
-console.log(longestPalindromeSubStr("abbababba"));
+//console.log(longestPalindromeSubStr("abbababba"));
 //console.log(longestPalindromeSubStr("babcbaabcbaccba"));
-//console.log(longestPalindromeSubStr("cdbabcbabdab"));
+console.log(longestPalindromeSubStr("cdbabcbabdab"));

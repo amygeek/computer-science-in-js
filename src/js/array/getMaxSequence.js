@@ -23,7 +23,7 @@ let maxSet = (arr) => {
         if (arr[i] > 0) {
             currentSum += arr[i];
             currentSet.push(arr[i]);
-            if (currentSum > maxSum || (currentSet.length === maxSet.length && (currentSet.length > maxSet.length || currentSet[0] < maxSet[0]) ) ){
+            if (currentSum > maxSum || (currentSum === maxSum && (currentSet.length > maxSet.length || currentSet[0] < maxSet[0]) ) ){
                 maxSum = currentSum;
                 maxSet = currentSet;
             }

@@ -52,4 +52,4 @@ let longestConsecutiveSubsequence = ( arr ) => {
 
 
 let arr = [100, 4, 200, 1, 3, 2];
-console.log(longestConsecutiveSubSeq ( arr ));
+console.log(longestConsecutiveSubsequence ( arr ));

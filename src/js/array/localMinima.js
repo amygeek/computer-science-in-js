@@ -24,20 +24,15 @@
  Time Complexity – O(n)
  */
 let findLocalMinima = arr => {
+
   let n = arr.length;
 
-  if (n === 1) {
-    return arr[0];
-  } else if (n === 2 && arr[1] < arr[0]) {
-    return arr[1];
-  }
   let res = [];
-  for (let i=1; i<n-1; i++) {
-    if (arr[i] < arr[i-1] && arr[i] < arr[i+1]) {
-      res.push(arr[i]);
-    } else if ( arr[i-2] === undefined &&  arr[i-1] < arr[i]) {
-      res.push(arr[i-1]);
-    }
+  for (let i=0; i<n-1; i++) {
+
+      if( ( i==0 || arr[i] < arr[i-1] ) && ( n == 2 || arr[i] < arr[i+1] ) ) {
+          return arr[i];
+      }
   }
   return res;
 }
@@ -56,16 +51,16 @@ let findLocalMinima2 = ( arr, left, right ) => {
 
   //find the mid
   let mid = Math.floor((right + left)/2);
-  let size = arr.length;
+  let n = arr.length;
  
   //check the local minima (element is smaller than its left and right neighbors)
   //first check if left and right neighbor exists
-  if( ( mid==0 || arr[mid] < arr[mid-1] ) && ( mid==size-1 || arr[mid] < arr[mid+1] ) ) {
+  if( ( mid==0 || arr[mid] < arr[mid-1] ) && ( mid==n-1 || arr[mid] < arr[mid+1] ) ) {
     return arr[mid];
     //check if left neighbor is less than mid element, if yes go left
   } else if(mid > 0 && arr[mid] > arr[mid-1]){
     return findLocalMinima2( arr, left, mid );
-  } else { //if(mid<size-1 && arr[mid]>arr[mid+1])
+  } else { //if(mid<n-1 && arr[mid]>arr[mid+1])
     return findLocalMinima2( arr, mid + 1, right);
   }
 
@@ -73,4 +68,4 @@ let findLocalMinima2 = ( arr, left, right ) => {
 
 let arr = [11, 4, 2, 5, 11, 13, 5];
 
-console.log(findLocalMinima2(arr, 0, arr.length));
+console.log(findLocalMinima(arr, 0, arr.length));

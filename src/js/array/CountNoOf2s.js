@@ -21,6 +21,7 @@ class CountNoOf2s {
         return count;
     }
 
+    //319
     count2s ( n, d) {
         let power10 = Math.pow(10, d);
         let nexPower10 = power10 * 10;
@@ -35,6 +36,7 @@ class CountNoOf2s {
         } else if ( digit == 2 ) {
             return roundDown / 10 + right + 1;
         } else {
+            //When the 2nd digit is greater than 2, we have 200-299, …, 12200-12299. Thus we have (num/1000+1)*100
             return roundUp / 10;
         }
     }

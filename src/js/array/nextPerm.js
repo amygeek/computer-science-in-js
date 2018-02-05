@@ -30,6 +30,7 @@ class NextPerm {
             while ( j >= 0 && arr[j] < arr[i] ) {
                 j--;
             }
+
             //if both numbers found, swap them
             this.swap(arr, i, j);
         }

@@ -50,4 +50,5 @@ let printSubsets = (n, x) => {
         }
     }
 }
-printSubsets(5, "");
+
+console.log( print_all_sum(5) );

@@ -96,8 +96,6 @@ let board = [[2,  2,  1],
 
 board = ticTacToe.convertIntToPiece(board);
 
-console.log( board)
-
 let p3 = ticTacToe.hasWon(board);
 
 console.log( p3 );

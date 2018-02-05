@@ -3,6 +3,8 @@
     1) build a minHeap with same size of original array
     2) run minHeapify on minHeap
     3) loop i to k-1 to extract min
+
+ Time Complexity: O(k + (n-k)Logk) without sorted output. If sorted output is needed then O(k + (n-k)Logk + kLogk)
  */
 class KthSmallestNLargest {
 

@@ -1,15 +1,17 @@
-let move_zeros_to_left = function(A) {
-    if (A.length < 1) {
+let move_zeros_to_left = function(arr) {
+
+    let n = arr.length;
+
+    if (n < 1) {
         return;
     }
 
-    let lengthA = A.length;
-    let write_index = lengthA - 1;
-    let read_index = lengthA - 1;
+    let write_index = n - 1;
+    let read_index = n - 1;
 
     while (read_index >= 0) {
-        if (A[read_index] != 0) {
-            A[write_index] = A[read_index];
+        if (arr[read_index] != 0) {
+            arr[write_index] = arr[read_index];
             write_index--;
         }
 
@@ -17,11 +19,11 @@ let move_zeros_to_left = function(A) {
     }
 
     while (write_index >= 0) {
-        A[write_index] = 0;
+        arr[write_index] = 0;
         write_index--;
     }
 
-    return A;
+    return arr;
 };
 
 let arr = [1, 0, 3, 0, 4, 5];

@@ -57,9 +57,28 @@ class NQueens {
 
                 if (x == n - 1) {
                     console.log( this.res );
+                    this.printPlacedQueen(this.res);
                 }
                 this.placeQueens(x + 1, n);
             }
+        }
+    }
+
+    printPlacedQueen() {
+        let n = this.res.length;
+
+        for ( let i=0; i<n; i++ ) {
+
+            let col = this.res[i];
+            let str = "|";
+            for ( let j=0; j<n; j++ ) {
+                if ( col === j ) {
+                    str += " 1 |"
+                } else {
+                    str += " 0 |"
+                }
+            }
+            console.log(str);
         }
     }
 }
@@ -75,8 +94,11 @@ class NQueens {
  | 0 | 0 | 0 | 1 |
  | 0 | 1 | 0 | 0 |
  */
-let i = new NQueens();
-i.placeQueens(0, 4);;
+let q = new NQueens();
+q.placeQueens(0, 4);;
+
+
+
 
 
 

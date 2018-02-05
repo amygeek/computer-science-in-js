@@ -85,10 +85,7 @@ class AreConsecutive {
         if (max - min + 1 != n) {
             return false;
         }
-    
-        for(let i=0; i<n; i++){
-            arr[i] = arr[i] - min + 1;
-        }
+
         for(let i = 0;i<arr.length;i++){
             let x  = Math.abs(arr[i]);
             if(arr[x-1] > 0){
@@ -103,10 +100,10 @@ class AreConsecutive {
 
 
 let consecutive = new AreConsecutive();
-let arr = [5, 4, 2, 3, 1, 6];
+let arr = [5, 3, 2, 3, 1, 6];
 let n = arr.length;
 
-if (consecutive.areConsecutive(arr, n) == true) {
+if (consecutive.withoutAuxArray(arr, n) == true) {
     console.log("Array elements are consecutive");
 } else {
     console.log("Array elements are not consecutive"); 

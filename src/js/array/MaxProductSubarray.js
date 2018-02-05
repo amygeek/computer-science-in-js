@@ -55,7 +55,7 @@ class MaxProductSubarray {
              negative */
             if (arr[i] > 0) {
                 maxEnd = maxEnd * arr[i];
-                minEnd = this.min (minEnd * arr[i], 1);
+                minEnd = Math.min (minEnd * arr[i], 1);
             } else if (arr[i] == 0) {
                 /* If this element is 0, then the maximum product cannot
                  end here, make both maxEnd and minEnd 1
@@ -75,7 +75,7 @@ class MaxProductSubarray {
                  */
     
                 let temp = maxEnd;
-                maxEnd = this.max (minEnd * arr[i], 1);
+                maxEnd = Math.max (minEnd * arr[i], 1);
                 minEnd = temp * arr[i];
             }
     
