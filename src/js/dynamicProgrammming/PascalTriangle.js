@@ -42,12 +42,14 @@ class PascalTriangle {
         {
             let C = 1;  // used to represent C(line, i)
 
+            let str = " ";
             for (let i = 1; i <= line; i++)
             {
-                console.log(C);  // The first value in a line is always 1
+                str += C + " ";
+                  // The first value in a line is always 1
                 C = C * (line - i) / i;
             }
-            console.log("\n");
+            console.log(str);
         }
     }
     /*
