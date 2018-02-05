@@ -12,6 +12,12 @@
  * @param start
  * @param output
  * @param result
+ *
+ Runtime Complexity
+ Exponential.
+
+ Memory Complexity
+ Linear, O(n).
  */
 let print_all_sum_rec = function(target, current_sum, start, output, result) {
     if (current_sum === target) {

@@ -21,7 +21,7 @@ let minCostPath = ( m ) => {
     let res = [];
 
     for(let i=0; i<mLen; i++) {
-        res.push(new Array( mLen ));
+        res.push(new Array( mLen).fill( 0 ) );
     }
 
     res[0][0] = m[0][0];
@@ -34,7 +34,7 @@ let minCostPath = ( m ) => {
     for (let i = 1; i < mLen; i++) {
         res[i][0] = m[i][0] + res[i - 1][0];
     }
-    
+
     // path will be either from top or left, choose which ever is minimum
     for (let i = 1; i < mLen; i++) {
         for (let j = 1; j < mLen; j++) {

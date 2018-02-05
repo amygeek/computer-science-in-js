@@ -48,7 +48,7 @@
  */
 let uglyNumber = ( n ) => {
 
-    let res = new Array( n );  //to store ugly number
+    let res = new Array( n).fill( 0 ) ;  //to store ugly number
 
     let i2 = 0;
     let i3 = 0;
@@ -78,6 +78,7 @@ let uglyNumber = ( n ) => {
             nextMultiplyI5 = res[i5] * 5;
         }
     }
+    console.log(res);
     return nextUglyNum;
 }
 

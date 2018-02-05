@@ -111,6 +111,7 @@ class coinChangeMin {
             }
         }
 
+        console.log(res);
         this.printCoinCombination(res, coins);
 
         return total[amount];
@@ -124,12 +125,14 @@ class coinChangeMin {
         }
         let start = res.length - 1;
 
-        console.log("Coins used to form amount ");
+        let str = "";
         while ( start != 0 ) {
             let j = res[start];
-            console.log(coins[j] + " ");
+            str += coins[j] + " ";
             start = start - coins[j];
         }
+
+        console.log("Coins used to form amount: ", str);
     }
 
 

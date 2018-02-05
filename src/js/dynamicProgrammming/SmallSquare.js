@@ -68,12 +68,8 @@ class SmallSquare {
                     // select the number, add 1 to the solution of number-j*j
                     nums[j] = res[number - j * j] + 1;
 
-                    console.log(j + " = " + "number=" + number + " nums= " + nums)
-
                 }
             }
-            console.log(" ")
-            console.log("res= ", res)
 
             //Now choose the optimal solution from nums[]
 
@@ -83,7 +79,7 @@ class SmallSquare {
                     res[number] = nums[j];
                 }
             }
-            console.log("res2= ", res)
+
         }
         return res[n];
     }

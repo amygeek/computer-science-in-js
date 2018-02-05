@@ -107,5 +107,12 @@ let distinctSubSeq = ( s, t ) => {
 }
 
 //let len = distinctSubSeq("acdabefbc", "ab");
+/*
+ S = "rabbbit", T = "rabbit"
+ ra bbit
+ rab bit
+ rabb it
+ Return 3.
+ */
 let len = distinctSubSeq("rabbbit", "rabbit");
 console.log( len );

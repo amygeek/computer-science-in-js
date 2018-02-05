@@ -20,11 +20,11 @@ class RobotTravel {
         let down = 0;
 
         if( row != arr.length - 1 && arr[row+1][col] != -1 ){
-            left = this.count(arr, row + 1, col);
+            down = this.count(arr, row + 1, col);
         }
 
         if( col != arr.length - 1 && arr[row][col+1] != -1){
-            down = this.count(arr, row, col + 1);
+            left = this.count(arr, row, col + 1);
         }
         return left + down;
     }
@@ -59,17 +59,17 @@ class RobotTravel {
 
 
 
-//        let arr [][] = [[1,  1, 1],
-//                        [1, -1, 1],
-//                        [1,  1, 1]];   // path 2
+        let arr  = [[1,  1, 1],
+                        [1, -1, 1],
+                        [1,  1, 1]];   // path 2
 
-//        let arr [][] = [[1,  1, 1],
-//                        [1,  1, 1],
-//                        [1, -1, 1]];   // path 3
+        //let arr =     [[1,  1, 1],
+        //                [1,  1, 1],
+        //                [1, -1, 1]];   // path 3
 
-let arr = [[1,  1, 1],
-            [1, -1, 1],
-            [1, -1, 1]];   // path 1
+//let arr = [[1,  1, 1],
+//            [1, -1, 1],
+//            [1, -1, 1]];   // path 1
 
 let noOfPaths = new RobotTravel();
 console.log("No Of Path (Recursion): " + noOfPaths.count( arr, 0, 0));
