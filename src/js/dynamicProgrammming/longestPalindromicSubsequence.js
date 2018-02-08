@@ -27,10 +27,10 @@
 
          a   g   b   d   b   a
          0   1   2   3   4   5
-   a  0  1   1
-   g  1      1   1
-   b  2          1   1
-   d  3              1   1
+   a  0  1   1   1   1   3   5
+   g  1      1   1   1   3   3
+   b  2          1   1   3   3
+   d  3              1   1   1
    b  4                  1   1
    a  5                      1
 
@@ -63,6 +63,7 @@ let longestPalindromicSubsequence = ( str ) => {
         }
     }
 
+    console.log(res)
     return res[0][res.length - 1];
 }
 

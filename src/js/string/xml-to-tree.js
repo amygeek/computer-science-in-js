@@ -22,7 +22,7 @@
  Memory Complexity
  Linear, O(n)
  */
-const ElementType = {
+const Types = {
     UNKNOWN: 1,
     OPENING_TAG: 2,
     CLOSING_TAG: 3,
@@ -31,7 +31,7 @@ const ElementType = {
 
 class XmlElement {
     constructor() {
-        this.type = ElementType.UNKNOWN;
+        this.type = Types.UNKNOWN;
         this.name = "";
     }
 }
@@ -56,7 +56,7 @@ class XmlTokenizer {
 
         if (temp.length != 0) {
             element.name = temp;
-            element.type = ElementType.TEXT;
+            element.type = Types.TEXT;
 
             this.current_index = i;
             return true;
@@ -66,10 +66,10 @@ class XmlTokenizer {
         j += i;
         if (this.xml[i + 1] === '/') {
             element.name = this.xml.substring(i + 2, j);
-            element.type = ElementType.CLOSING_TAG;
+            element.type = Types.CLOSING_TAG;
         } else {
             element.name = this.xml.substring(i + 1, j);
-            element.type = ElementType.OPENING_TAG;
+            element.type = Types.OPENING_TAG;
         }
         this.current_index = j + 1;
         return true;
@@ -82,7 +82,7 @@ class Node {
     }
 }
 
-let create_xml_tree = function(xml) {
+let CreateXmlTree = function(xml) {
 
     let tok = new XmlTokenizer(xml);
     let element = new XmlElement();
@@ -100,14 +100,14 @@ let create_xml_tree = function(xml) {
     while (tok.getNextElement(element)) {
         //console.log(element.name);
         let n = null;
-        if (element.type === ElementType.OPENING_TAG || element.type === ElementType.TEXT) {
+        if (element.type === Types.OPENING_TAG || element.type === Types.TEXT) {
             n = new Node(element.name);
             st[st.length - 1].children.push(n);
         }
 
-        if (element.type === ElementType.OPENING_TAG) {
+        if (element.type === Types.OPENING_TAG) {
             st.push(n);
-        } else if (element.type === ElementType.CLOSING_TAG) {
+        } else if (element.type === Types.CLOSING_TAG) {
             st.pop();
         }
     }
@@ -150,7 +150,7 @@ let xml = `<html>
         </body>
         </html>`;
 
-let tree = create_xml_tree(xml);
+let tree = CreateXmlTree(xml);
 print(tree);
 //console.log(Array.from(tree.children));
 
