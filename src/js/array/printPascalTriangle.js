@@ -4,9 +4,9 @@ let printPascalTriangle = ( num ) => {
     for(let i=0; i<num; i++) {
         res.push( new Array(num).fill(0));
     }
-    let str = "";
-    for (let line=0; line<num; line++) {
 
+    for (let line=0; line<num; line++) {
+        let str = "";
         for ( let i=0; i<=line; i++) {
             if (line === 0 || i === 0 ) {
                 res[line][i] = 1;
@@ -18,8 +18,8 @@ let printPascalTriangle = ( num ) => {
         }
 
         console.log(str);
-        str = "";
+
     }
 }
 
-printPascalTriangle(4);
+printPascalTriangle(5);

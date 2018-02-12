@@ -1,6 +1,6 @@
-let printMatrix = (matrix, col, row, n) => {
+let printMatrixRec = (matrix, col, row, n) => {
 
-    if ( col >= n || row >= n ) {
+    if ( col >= parseInt(n / 2) || row >= parseInt( n /2 ) ) {
         return;
     }
     //print top row
@@ -20,8 +20,48 @@ let printMatrix = (matrix, col, row, n) => {
         console.log(matrix[i][col]);
     }
     //recursive print the rest
-    printMatrix(matrix, col + 1, row + 1, n)
+    printMatrixRec(matrix, col + 1, row + 1, n)
 }
+
+let printMatrix = (matrix, row, col) => {
+
+    let m = 0;  // row index
+    let n = 0;  // column index
+
+
+    while ( m < row && n < col ) {
+        /* Print the first row from the remaining rows */
+        for (let i = n; i<col; i++) {
+            console.log(matrix[m][i]);
+        }
+        m++;
+
+        /* Print the last column from the remaining columns */
+        for (let i = m; i < row; i++) {
+            console.log(matrix[i][col-1]);
+        }
+        col--;
+
+        /* Print the last row from the remaining rows */
+        if ( m < row ) {
+            for (let i = col-1; i>=n; i--) {
+                console.log(matrix[row-1][i]);
+            }
+            row--;
+        }
+
+        /* Print the first column from the remaining columns */
+        if ( n < col ) {
+            //print left column
+            for (let i=row-1; i>=m; i-- ) {
+                console.log(matrix[i][n]);
+            }
+            n++;
+        }
+
+    }
+}
+
 //let m2 = [
 //    [1,  2,  3,  4],
 //    [12, 13, 14, 5],
@@ -45,4 +85,6 @@ let m2 = [
  Output:
  1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10
  */
-printMatrix(m2, 0, 0, 4);
+//printMatrixRec(m2, 0, 0, 4);
+
+printMatrix(m2, m2.length, m2[0].length)

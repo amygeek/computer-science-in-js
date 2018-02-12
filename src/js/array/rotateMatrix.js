@@ -39,7 +39,7 @@ let arr = [[1,2,3], [4,5,6], [7,8,9]];
  1  4  7
  */
 
-console.log(rotateMatrix(arr, 3));
+//console.log(rotateMatrix(arr, 3));
 
 // An Inplace function to rotate a N x N matrix
 // by 90 degrees in clockwise direction
@@ -109,4 +109,4 @@ let rotateMatrix3 = ( arr, n) => {
  9  6  3
  */
 arr = [[1,2,3], [4,5,6], [7,8,9]];
-console.log(rotateMatrix3(arr, 3));
+//console.log(rotateMatrix3(arr, 3));

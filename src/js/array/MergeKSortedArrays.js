@@ -21,6 +21,9 @@
  The extracted node will also contain the list to which it belongs, insert the next element from that list into min-Heap.
  If any point of time any list gets over, insert +∞ into min-Heap.
  Keep repeating until all the K list gets over.
+
+ Time Complexity: The while loop inside findSmallestRange() function can run maximum n*k times. In every iteration of loop,
+  we call heapify which takes O(Logk) time. Therefore, the time complexity is O(nk Logk).
  */
 
 class HeapNode {
@@ -33,10 +36,10 @@ class HeapNode {
 class MergeKSortedArrays {
 
     constructor( k ) {
-        this.size = k;
-        this.heap = new Array(k + 1); // size+1 because index 0 will be empty
+
+        this.heap = new Array(k); // size+1 because index 0 will be empty
         this.size = 0;
-        this.heap[0] = new HeapNode(0, -1); // put some junk values at 0th index node
+
     }
 
     //k is the total number of lists, and n is the length of the first list in k lists
@@ -47,12 +50,12 @@ class MergeKSortedArrays {
         let count = 0;
 
         // create index pointer for every list.
-        let ptrs = new Array(k).fill(0);
+        let list = new Array(k).fill(0);
 
     
         for (let i = 0; i < k; i++) {
-            if (ptrs[i] < n) {
-                this.insert(arr[i][ptrs[i]], i); // insert the element into heap
+            if (list[i] < n) {
+                this.insert(arr[i][list[i]], i); // insert the element into heap
             } else {
                 this.insert(Number.MAX_VALUE, i); // if any of this list burns out, insert +infinity
             }
@@ -61,10 +64,12 @@ class MergeKSortedArrays {
 
         while (count < nk) {
             let min = this.extractMin(); // get the min node from the heap.
+
             res[count] = min.data; // store node data into result array
-            ptrs[min.listNo]++; // increase the particular list pointer
-            if (ptrs[min.listNo] < n) { // check if list is not burns out
-                this.insert(arr[min.listNo][ptrs[min.listNo]], min.listNo); // insert the next element from the list
+            list[min.listNo]++; // increase the particular list pointer
+
+            if (list[min.listNo] < n) { // check if list is not burns out
+                this.insert(arr[min.listNo][list[min.listNo]], min.listNo); // insert the next element from the list
             } else {
                 this.insert(Number.MAX_VALUE, min.listNo); // if any of this list burns out, insert +infinity
             }
@@ -76,8 +81,8 @@ class MergeKSortedArrays {
     
     insert(data, listNo) {
         if (this.size == 0) { // check if Heap is empty
-            this.heap[this.size + 1] = new HeapNode(data, listNo); // insert the first element in heap
-            this.size = 2;
+            this.heap[this.size] = new HeapNode(data, listNo); // insert the first element in heap
+            this.size = 1;
         } else {
             this.heap[this.size++] = new HeapNode(data, listNo);// insert the element to the end
             this.bubbleUp(); // call the bubble up operation
@@ -85,13 +90,13 @@ class MergeKSortedArrays {
     }
 
     extractMin() {
-        let min = this.heap[1]; // extract the root
-        this.heap[1] = this.heap[this.size - 1]; // replace the root with the last element
+        let min = this.heap[0]; // extract the root
+        this.heap[0] = this.heap[this.size - 1]; // replace the root with the last element
         // in
         // the heap
         this.heap[this.size - 1] = null; // set the last Node as NULL
         this.size--; // reduce the this.size pointer
-        this.minHeapify(1); // sink down the root to its correct this.size
+        this.minHeapify(0); // sink down the root to its correct this.size
         return min;
     }
 
@@ -140,4 +145,4 @@ arr[3] = [ 9, 14, 16, 19 ];
 arr[4] = [ 2, 4, 6, 9 ];
 let m = new MergeKSortedArrays(arr.length);
 let lists = m.merge(arr, arr.length, arr[0].length);
-console.log( lists );
+console.log( lists );  //[ 1, 2, 2, 3, 4, 4, 5, 6, 6, 7, 8, 9, 9, 9, 10, 11, 14, 15, 16, 19 ]
