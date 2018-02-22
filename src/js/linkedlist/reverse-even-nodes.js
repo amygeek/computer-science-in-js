@@ -90,7 +90,7 @@ list.next = new Node(2);
 list.next.next = new Node(3);
 list.next.next.next = new Node(4);
 list.next.next.next.next = new Node(5);
-//list.next.next.next.next.next = new Node(6);
+list.next.next.next.next.next = new Node(6);
 
 print(list)
 

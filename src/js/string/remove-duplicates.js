@@ -1,10 +1,10 @@
-let replaceAt = function(string, index, character){
-    return string.substr(0, index) + character + string.substr(index+character.length);
+let replaceAt = function(str, i, char){
+    return str.substr(0, i) + char + str.substr( i + char.length);
 };
 
 /**
- * Remove duplicate characters from a string.
- * For example, if the input string is "abbabcddbabcdeedebc",
+ * Remove duplicate characters from a str.
+ * For example, if the input str is "abbabcddbabcdeedebc",
  * after removing duplicates it should become "abcde".
      Runtime Complexity
      Linear O(n).
@@ -12,7 +12,7 @@ let replaceAt = function(string, index, character){
      Memory Complexity
      Linear, O(n).
  * @param s
- * @returns {string}
+ * @returns {str}
  */
 let remove_duplicates_1 = function(s) {
 
@@ -39,7 +39,7 @@ let remove_duplicates_1 = function(s) {
      Memory Complexity
      Constant, O(1).
  * @param str
- * @returns {string}
+ * @returns {str}
  */
 let remove_duplicates_2 = function(str) {
     let write_index = 0;

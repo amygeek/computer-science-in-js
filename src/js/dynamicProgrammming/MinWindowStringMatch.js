@@ -16,12 +16,12 @@ class MinWindowStringMatch {
             return "";
         }
         
-        let arrT = new Array(256).fill(0);
-        let arrS = new Array(256).fill(0);
+        let resT = new Array(256).fill(0);
+        let resS = new Array(256).fill(0);
         
         // store occurrence ofs characters of pattern
         for (let i = 0; i < tLen; i++) {
-            arrT[t.charCodeAt(i)]++;
+            resT[t.charCodeAt(i)]++;
         }
         
 
@@ -32,10 +32,10 @@ class MinWindowStringMatch {
 
         for (let j = 0; j < sLen ; j++) {
             // count occurrence of characters of string
-            arrS[s.charCodeAt(j)]++;
+            resS[s.charCodeAt(j)]++;
 
             // If string's char matches with pattern's char then increment count
-            if (arrT[s.charCodeAt(j)] != 0 && arrS[s.charCodeAt(j)] <= arrT[s.charCodeAt(j)] ) {
+            if (resT[s.charCodeAt(j)] != 0 && resS[s.charCodeAt(j)] <= resT[s.charCodeAt(j)] ) {
                 count++;
             }
         
@@ -47,10 +47,10 @@ class MinWindowStringMatch {
                 // than its occurrence  in pattern, if yes
                 // then remove it from starting and also remove
                 // the useless characters.
-                while ( arrS[s.charCodeAt(start)] > arrT[s.charCodeAt(start)]  || arrT[s.charCodeAt(start)] == 0) {
+                while ( resS[s.charCodeAt(start)] > resT[s.charCodeAt(start)]  || resT[s.charCodeAt(start)] == 0) {
         
-                    if (arrS[s.charCodeAt(start)] > arrT[s.charCodeAt(start)]) {
-                        arrS[s.charCodeAt(start)]--;
+                    if (resS[s.charCodeAt(start)] > resT[s.charCodeAt(start)]) {
+                        resS[s.charCodeAt(start)]--;
                     }
         
                     start++;

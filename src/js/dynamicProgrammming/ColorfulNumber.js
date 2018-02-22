@@ -41,13 +41,11 @@
     
     let i = 0;
     let j = 1;
-    let val1 = 0;
-    let val2 = 0;
-    
+
     while (j < n) {
     
-        val1 = s[i] - '0';
-        val2 = s[j] - '0';
+        let val1 = s[i] - '0';
+        let val2 = s[j] - '0';
     
         if (set.has(val1 * val2)) {
             return false;

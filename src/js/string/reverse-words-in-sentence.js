@@ -1,15 +1,15 @@
 /**
- * Given a sentence, reverse the order of words.
- * Reverse the order of words in a given sentence. Here are a few examples: Hello World" -> "World Hello"
+ * Given a str, reverse the order of words.
+ * Reverse the order of words in a given str. Here are a few examples: Hello World" -> "World Hello"
  * Runtime Complexity
     Linear, O(n).
-    Position of all the elements in the sentence is changed.
+    Position of all the elements in the str is changed.
  * Memory Complexity
     Constant, O(1).
  * The solution reverses every word in-place i.e. it does not require any extra space.
  */
-let replaceAt = function(string, index, character){
-    return string.substr(0, index) + character + string.substr(index + character.length);
+let replaceAt = function(str, i, c){
+    return str.substr(0, i) + c + str.substr(i + c.length);
 };
 
 let strRev = function(str, start, end) {
@@ -27,47 +27,49 @@ let strRev = function(str, start, end) {
     return str;
 };
 
-let reverseWords = function(sentence) {
+let reverseWords = function(str) {
 
-    //  Here sentence is a null-terminated string ending with char '\0'.
-    if (!sentence || sentence.length === 0) {
+    let len = str.length;
+
+    //  Here str is a null-terminated str ending with char '\0'.
+    if (!str || len === 0) {
         return;
     }
 
-    //   To reverse all words in the string, we will first reverse
-    //   the string. Now all the words are in the desired location, but
+    //   To reverse all words in the str, we will first reverse
+    //   the str. Now all the words are in the desired location, but
     //   in reverse order: "Hello World" -> "dlroW olleH".
 
-    let str_len = sentence.length;
-    sentence = strRev(sentence, 0, str_len - 1);
+    
+    str = strRev(str, 0, len - 1);
 
-    //  Now, let's iterate the sentence and reverse each word in place.
+    //  Now, let's iterate the str and reverse each word in place.
     //  "dlroW olleH" -> "World Hello"
 
     let start = 0;
     let end = 0;
     while (true) {
-        //  find the  start index of a word while skipping spaces.
-        while (sentence[start] === ' ') {
+        //  find the  start i of a word while skipping spaces.
+        while (str[start] === ' ') {
             start++;
         }
-        if (start >= sentence.length) {
+        if (start >= len) {
             break;
         }
 
-        //  find the end index of the word.
+        //  find the end i of the word.
         end = start + 1;
 
-        while (end < sentence.length && sentence[end] != ' ') {
+        while (end < len && str[end] != ' ') {
             end++;
         }
 
         //  let's reverse the word in-place.
-        sentence = strRev(sentence, start, end - 1);
+        str = strRev(str, start, end - 1);
 
         start = end;
     }
-    return sentence;
+    return str;
 };
 
 let reverseWords2 = (words) => {
@@ -84,6 +86,6 @@ let reverseWords2 = (words) => {
 }
 
 
-let sentense = "hello           world good      morning";
-console.log(reverseWords( sentense ));
-console.log(reverseWords2( sentense ));
+let str = "hello           world good      morning";
+console.log(reverseWords( str ));
+console.log(reverseWords2( str ));

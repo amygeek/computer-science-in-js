@@ -31,6 +31,7 @@ let stockSpan = (arr) => {
         } else {
             spans[i] = i - st[st.length -1];
         }
+        console.log(spans)
         //push stock index to st
         st.push(i);
     }

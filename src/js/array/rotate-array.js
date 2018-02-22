@@ -183,27 +183,69 @@ let findRotatingCount = ( arr ) => {
 
 //o(logn)
 let findRotatingCount2 = (arr, low, high) => {
-    if (high > low) {
-        return 0;
-    }
-    if (low === high) {
-        return low;
-    }
-    let mid = Math.floor( (high + low) / 2 );
-    if (mid > low && arr[mid] < arr[mid - 1]) {
-        return mid - 1;
-    }
-    if ( mid < high && arr[mid + 1] < arr[mid] ) {
-        return mid;
-    }
 
-    if (arr[mid] < arr[high]) {
-        return findRotatingCount2(arr, low, mid-1);
-    }
-    return findRotatingCount2(arr, mid+1, high);
+    // This condition is needed to handle
+    // the case when array is not rotated
+    // at all
+    if (high < low)
+        return 0;
+
+    // If there is only one element left
+    if (high == low)
+        return low;
+
+    // Find mid
+    // /*(low + high)/2;*/
+    let mid = Math.floor( (high + low) /2 );
+
+    // Check if element (mid+1) is minimum
+    // element. Consider the cases like
+    // {3, 4, 5, 1, 2}
+    if (mid < high && arr[mid+1] < arr[mid])
+        return (mid + 1);
+
+    // Check if mid itself is minimum element
+    if (mid > low && arr[mid] < arr[mid - 1])
+        return mid;
+
+    // Decide whether we need to go to left
+    // half or right half
+    if (arr[high] > arr[mid])
+        return findRotatingCount2(arr, low, mid - 1);
+
+    return findRotatingCount2(arr, mid + 1, high);
 }
 //console.log(findRotatingCount([7, 9, 11, 12, 5])) //4
-console.log(findRotatingCount([7, 9, 11, 12, 5], 0, 4)) //4
+
+let arr8 = [7, 9, 11, 12, 5];
+console.log(findRotatingCount2(arr8, 0, arr8.length-1)) //4
+
+let findMin = (arr, low, high) => {
+
+    if (high < low) {
+        return arr[0];
+    }
+
+    if ( low == high) {
+        return arr[low];
+    }
+    let mid = Math.floor ( (high + low) / 2 );
+
+    if (mid < high && arr[mid + 1] < arr[mid]) {
+        return arr[mid + 1];
+    }
+
+    if (mid > low && arr[mid] < arr[mid - 1]) {
+        return arr[mid];
+    }
+
+    if ( arr[high] > arr[mid]) {
+        return findMin(arr, low, mid -1);
+    }
+    return findMin(arr, mid+1, high);
+}
+
+console.log(findMin(arr8, 0, arr8.length - 1));
 
 /*
  Quickly find multiple left rotations of an array
@@ -238,29 +280,4 @@ preprocess(testArr, temp, testArr.length);
 console.log(findMultiRotation(testArr, 2, testArr.length, temp ));
 //console.log(findMultiRotation(testArr, 3, testArr.length, temp ));
 
-let findMin = (arr, low, high) => {
 
-    if (high < low) {
-        return arr[0];
-    }
-
-    if ( low == high) {
-        return arr[low];
-    }
-    let mid = Math.floor ( (high + low) / 2 );
-
-    if (mid > low && arr[mid] < arr[mid - 1]) {
-        return arr[mid];
-    }
-
-    if (mid < high && arr[mid + 1] < arr[mid]) {
-        return arr[mid + 1];
-    }
-
-    if ( arr[high] > arr[mid]) {
-        return findMin(arr, low, mid -1);
-    }
-    return findMin(arr, mid+1, high);
-}
-
-console.log(findMin(testArr, 0, testArr.length - 1));

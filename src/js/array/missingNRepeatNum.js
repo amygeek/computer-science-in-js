@@ -71,10 +71,10 @@ let findDuplicates = ( arr ) => {
 
     for (let i = 0; i < arr.length; ++i) {
 
-        let index = Math.abs( arr[i]) - 1;
+        let index = Math.abs( arr[i]) ;
 
         if (arr[index] < 0) {
-            res.add(Math.abs(index+1));
+            res.add(Math.abs(index));
         }
 
         arr[index] = -arr[index];

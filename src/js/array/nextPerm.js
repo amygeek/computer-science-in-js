@@ -24,6 +24,7 @@ class NextPerm {
             i--;
         }
 
+
         //find the second number that is larger than the first number from the end
         if ( i >= 0 ) {
             let j = n - 1;

@@ -7,14 +7,14 @@ let countPathsRecursive = (n, m) => {
     return countPathsRecursive(n-1, m) + countPathsRecursive(n, m-1);
 }
 
-let countPaths = (n, m) => {
+let countPaths = (m) => {
 
     let res = [];
-    for (let i=0; i<n; i++) {
+    for (let i=0; i<m; i++) {
         res.push( new Array( m ));
     }
 
-    for(let i=0; i < n; i++) {
+    for(let i=0; i < m; i++) {
         for(let j=0; j < m; j++){
 
             if ( i == 0 || j == 0 ) {
@@ -25,9 +25,9 @@ let countPaths = (n, m) => {
 
         }
     }
-    return res[n-1][m-1];
+    return res[m-1][m-1];
 }
 
-console.log( countPaths(4,4) );
+console.log( countPaths( 3 ) );
 
 

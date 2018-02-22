@@ -84,7 +84,7 @@ class RearrageArrayPositiveNegative {
     }
 }
 
-let a = [ 1, -2, -3, -4, 5, -6, 7, -8, 9, -10, -11, -12, 20 ];
+let a = [ 1, -2, -3, -4, 5, -6, 7, -8, 9, -10 ];
 let r = new RearrageArrayPositiveNegative( a );
 r.sort(0, a.length - 1);
 

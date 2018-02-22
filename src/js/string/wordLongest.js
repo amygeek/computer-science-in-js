@@ -10,7 +10,7 @@ class LongestWords {
             return (b.length - a.length );
         })
 
-        let solved = new Map();
+        let solved = new Set();
         let dist = new Set( arr );
 
         for ( let s of arr ) {

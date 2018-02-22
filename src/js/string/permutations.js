@@ -75,6 +75,7 @@ let permute_string2 = (str) => {
 
 }
 
+console.log(permute_string2('abc'))
 /*
  Time Complexity: O(n*n!)
  A permutation, also called an “arrangement number” or “order,” is a rearrangement of the elements of an ordered list S

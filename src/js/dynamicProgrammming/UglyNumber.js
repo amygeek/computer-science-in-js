@@ -60,7 +60,7 @@ let uglyNumber = ( n ) => {
 
     for ( let i=1; i<n; i++ ) {
 
-        nextUglyNum = Math.min(nextMultiplyI2, Math.min( nextMultiplyI3, nextMultiplyI5));
+        nextUglyNum = Math.min(nextMultiplyI2,  nextMultiplyI3, nextMultiplyI5);
 
         res[i] = nextUglyNum;
 
@@ -83,3 +83,6 @@ let uglyNumber = ( n ) => {
 }
 
 console.log( uglyNumber ( 10 ));
+
+
+

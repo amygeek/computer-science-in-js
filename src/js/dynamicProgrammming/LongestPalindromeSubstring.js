@@ -44,7 +44,7 @@ let longestPalindromeSubStr = ( str ) => {
         }
     }
 
-    //console.log( str.substr(lastIndex, max));  //print the longest palindrome
+    console.log( str.substr(lastIndex, max));  //print the longest palindrome
     return max;
 }
 

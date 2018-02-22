@@ -174,3 +174,5 @@ class graph_chain {
     }
 }
 
+
+let graph_chain = new graph_chain()

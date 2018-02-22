@@ -166,11 +166,11 @@ ll.insert(5);
 
 ll.display( ll.head );
 
-//let x = ll.rotateList(ll.head, 2);
-//console.log("Rotate LinkedList: ");
+let x = ll.rotateList(ll.head, 2);
+console.log("Rotate LinkedList: ");
 
-let x = ll.swapNthNode(ll.head, 4);
-console.log("Swap Nth Node: ");
+//let x = ll.swapNthNode(ll.head, 4);
+//console.log("Swap Nth Node: ");
 
 ll.display( x );
 

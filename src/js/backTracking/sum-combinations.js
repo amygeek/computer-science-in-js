@@ -8,7 +8,7 @@
      1, 1, 1, 2
      1, 1, 1, 1, 1
  * @param target
- * @param current_sum
+ * @param sum
  * @param start
  * @param output
  * @param result
@@ -18,18 +18,43 @@
 
  Memory Complexity
  Linear, O(n).
+
+ sum: 0, start: 1, output: [ ]
+ sum: 1, start: 1, output: [ 1 ]
+ sum: 2, start: 1, output: [ 1,1 ]
+ sum: 3, start: 1, output: [ 1,1,1 ]
+ sum: 4, start: 1, output: [ 1,1,1,1 ]
+ Output: 1, 1, 1, 1
+
+ sum: 4, start: 2, output: [ 1,1,2 ]
+ Output: 1, 1, 2
+
+ sum: 3, start: 2, output: [ 1,2 ]
+ sum: 4, start: 3, output: [ 1,3 ]
+ Output: 1, 3
+
+ sum: 2, start: 2, output: [ 2 ]
+ sum: 4, start: 2, output: [ 2,2 ]
+ Output: 2, 2
+
+ sum: 3, start: 3, output: [ ]
  */
-let print_all_sum_rec = function(target, current_sum, start, output, result) {
-    if (current_sum === target) {
+let print_all_sum_rec = function(target, sum, start, output, result) {
+
+    if (sum === target) {
         result.push(output.slice());
     }
 
     for (let i = start; i < target; i++) {
-        let temp_sum = current_sum + i;
-        if (temp_sum <= target) {
+
+        let temp = sum + i;
+
+        if (temp <= target) {
+
             output.push(i);
-            print_all_sum_rec(target, temp_sum, i, output, result);
+            print_all_sum_rec(target, temp, i, output, result);
             output.pop();
+
         } else {
             return;
         }
@@ -37,12 +62,15 @@ let print_all_sum_rec = function(target, current_sum, start, output, result) {
 };
 
 let print_all_sum = function(target) {
+
     let output = [];
     let result = [];
     print_all_sum_rec(target, 0, 1, output, result);
 
     return result;
 };
+
+console.log( print_all_sum(5) );
 
 let printSubsets = (n, x) => {
     if( n == 0 ){
@@ -57,4 +85,4 @@ let printSubsets = (n, x) => {
     }
 }
 
-console.log( print_all_sum(5) );
+console.log( printSubsets( 3, "") );

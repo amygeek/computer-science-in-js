@@ -43,7 +43,7 @@
 
 let  editDistDP = (str1, str2, m, n) => {
     // Create a table to store results of subproblems
-    let res = new Array( m + 1 );
+    let res = [];
     for (let i = 0; i <= m; i++) {
         res[i] = new Array( n + 1);
     }

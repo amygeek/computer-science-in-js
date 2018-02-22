@@ -31,18 +31,18 @@ let LIS2 = ( arr ) => {
 
 let ceilIndex = ( arr,  left,  right,  key) => {
 
-    while (right - left > 1) {
+    while (left <= right) {
 
-        let mid =  Math.floor((right - left ) /2 ) + left;
+        let mid =  Math.floor((right + left ) /2 ) ;
 
-        if (arr[mid] >= key) {
-            right = mid;
+        if (arr[mid] <= key) {
+            left = mid + 1;
         } else {
-            left = mid;
+            right = mid - 1;
         }
     }
 
-    return right;
+    return left;
 }
 
 let LIS = (arr, size) => {
@@ -65,20 +65,74 @@ let LIS = (arr, size) => {
             // arr[i] wants to extend largest subsequence
             res[len++] = arr[i];
 
-        } else if ( i < size - 1 ) {
+        } else {
             // If arr[i] is in between, we will find a list with largest end element that is smaller than arr[i]
             // It will replace ceil value in res. We make sure there is at least one more element after arr[i]
             res[ceilIndex(res, 0, len-1, arr[i])] = arr[i];
         }
 
     }
-
+    console.log(res)
     return res.length;
     //return res;
 }
 
-let testArr = [2, 5, 3, 7, 11, 8, 10, 13, 6];  //[ 2, 3, 7, 8, 10, 13 ]
+let getCeilIndex = ( arr, T, l,  r, key) => {
+    while (r - l > 1) {
+        let m = l + parseInt ((r - l)/2 );
+        if (arr[T[m]] >= key)
+            r = m;
+        else
+            l = m;
+    }
+
+    return r;
+}
+
+let LIS3 = (arr) => {
+    // Add boundary case, when array n is zero
+    // Depend on smart pointers
+
+    let n = arr.length;
+    let tailIndices = [];
+    let prevIndices = [];
+
+    tailIndices[0] = 0;
+    let len = 1; // it will always point to empty location
+
+    for (let i = 1; i < n; i++) {
+
+        if (arr[i] < arr[tailIndices[0]]) {
+            // new smallest value
+            tailIndices[0] = i;
+        } else if (arr[i] > arr[tailIndices[len-1]]) {
+            // arr[i] wants to extend largest subsequence
+            prevIndices[i] = tailIndices[len-1];
+            tailIndices[len++] = i;
+        } else {
+            // arr[i] wants to be a potential condidate of
+            // future subsequence
+            // It will replace ceil value in tailIndices
+            let pos = getCeilIndex(arr, tailIndices, -1, len-1, arr[i]);
+
+            prevIndices[i] = tailIndices[pos-1];
+            tailIndices[pos] = i;
+        }
+    }
+
+
+    console.log( "LIS of given input" );
+    let str = " ";
+    for (let i = tailIndices[len-1]; i >= 0; i = prevIndices[i]) {
+        str += arr[i] + " "
+    }
+    console.log(str);
+
+    return len;
+}
+
+let testArr = [10, 22, 9, 33, 21, 50, 41, 60, 80];  //[ 2, 3, 7, 8, 10, 13 ]
 
 
 console.log(LIS(testArr, testArr.length));  //6 in len [ 2, 3, 7, 8, 10, 13 ]
-console.log( LIS2(testArr) );  //6
+console.log( LIS3(testArr) );  //6

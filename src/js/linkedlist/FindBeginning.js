@@ -73,8 +73,8 @@ class LinkedList {
 
 let ll = new LinkedList();
 
-let len = 100;
-let k = 10;
+let len = 10;
+let k = 4;
 
 // Create linked list
 let nodes = [];
@@ -93,7 +93,7 @@ let loop = findBeginning.find( nodes[0] );
 if (loop == null) {
     console.log("No Cycle.");
 } else {
-    console.log( loop.data );  //90
+    console.log( loop.data );  //6
 }
 
 

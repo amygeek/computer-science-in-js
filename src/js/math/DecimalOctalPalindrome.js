@@ -11,6 +11,18 @@ class DecimalOctalPalindrome {
         }
         return oct;
     }
+
+    octalTodecimal( num ) {
+        let base = 1;
+        let decimal = 0;
+        while (num > 0) {
+            let x = num % 10;
+            num = parseInt( num / 10);
+            decimal += x * base;
+            base = base * 8;
+        }
+        return decimal;
+    }
     
     isPalindrome( str) {
         let i = 0;
@@ -32,7 +44,7 @@ class DecimalOctalPalindrome {
             if (this.isPalindrome(decimal)) {
                 let oct = this.decimalToOctal(i);
                 if ( this.isPalindrome(oct)) {
-                    console.log(oct + " ");
+                    console.log("oct= " + oct + " decimal= " + this.octalTodecimal(oct));
                 }
             }
         }

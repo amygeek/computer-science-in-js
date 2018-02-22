@@ -21,9 +21,6 @@
  The extracted node will also contain the list to which it belongs, insert the next element from that list into min-Heap.
  If any point of time any list gets over, insert +∞ into min-Heap.
  Keep repeating until all the K list gets over.
-
- Time Complexity: The while loop inside findSmallestRange() function can run maximum n*k times. In every iteration of loop,
-  we call heapify which takes O(Logk) time. Therefore, the time complexity is O(nk Logk).
  */
 
 class HeapNode {
@@ -52,19 +49,18 @@ class MergeKSortedArrays {
         // create index pointer for every list.
         let list = new Array(k).fill(0);
 
-    
+
         for (let i = 0; i < k; i++) {
             if (list[i] < n) {
                 this.insert(arr[i][list[i]], i); // insert the element into heap
             } else {
                 this.insert(Number.MAX_VALUE, i); // if any of this list burns out, insert +infinity
             }
-    
+
         }
 
         while (count < nk) {
             let min = this.extractMin(); // get the min node from the heap.
-
             res[count] = min.data; // store node data into result array
             list[min.listNo]++; // increase the particular list pointer
 
@@ -85,7 +81,7 @@ class MergeKSortedArrays {
             this.size = 1;
         } else {
             this.heap[this.size++] = new HeapNode(data, listNo);// insert the element to the end
-            this.bubbleUp(); // call the bubble up operation
+            this.bubbleUp(this.size - 1); // call the bubble up operation
         }
     }
 
@@ -125,13 +121,23 @@ class MergeKSortedArrays {
         this.heap[b] = temp;
     }
 
-    bubbleUp() {
-        let pos = this.size - 1; // last size
+    bubbleUp( i ) {
 
-        while (pos > 0 && this.heap[parseInt( pos / 2 )].data > this.heap[pos].data) { // check if its parseInt( pos / 2 ) is greater.
-            this.swap(parseInt( pos / 2 ), pos);
-            pos = parseInt( pos / 2 ); // make pos to its parseInt( pos / 2 ) for next iteration.
+
+        let parent = parseInt( i / 2 );
+        if (i > 0 && this.heap[parent].data > this.heap[i].data ) {
+            // swap the two if heap property is violated
+            this.swap(i, parent);
+
+            // call bubbleUp on the parent
+            this.bubbleUp(parent);
         }
+
+        //let pos = this.size - 1; // last size
+        //while (pos > 0 && this.heap[parseInt( pos / 2 )].data > this.heap[pos].data) { // check if its parseInt( pos / 2 ) is greater.
+        //    this.swap(parseInt( pos / 2 ), pos);
+        //    pos = parseInt( pos / 2 ); // make pos to its parseInt( pos / 2 ) for next iteration.
+        //}
     }
 
 }

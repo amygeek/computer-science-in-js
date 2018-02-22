@@ -23,4 +23,4 @@ let isPermutation = (s, t) => {
     return true;
 }
 
-console.log(isPermutation('abc', 'cba'))
+console.log(isPermutation('abc', 'dca'))

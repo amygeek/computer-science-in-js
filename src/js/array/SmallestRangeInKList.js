@@ -57,7 +57,7 @@ class SmallestRangeInKList {
     
     insert( data,  listNo) {
         // keep track of max element entered in this.heap till now
-        if (data != Number.MAX_VALUE && this.currMax < data) {
+        if ( this.currMax < data) {
             this.currMax = data;
         }
         if (this.size == 0) { // check if this.heap is empty
@@ -66,7 +66,7 @@ class SmallestRangeInKList {
         } else {
             this.heap[this.size++] = new HeapNode(data, listNo);// insert the element
             // to the end
-            this.bubbleUp(); // call the bubble up operation
+            this.bubbleUp(this.size - 1); // call the bubble up operation
         }
     }
     
@@ -106,13 +106,23 @@ class SmallestRangeInKList {
         this.heap[b] = temp;
     }
 
-    bubbleUp() {
-        let pos = this.size - 1; // last size
+    bubbleUp( i ) {
 
-        while (pos > 0 && this.heap[parseInt( pos / 2 )].data > this.heap[pos].data) { // check if its parseInt( pos / 2 ) is greater.
-            this.swap(parseInt( pos / 2 ), pos);
-            pos = parseInt( pos / 2 ); // make pos to its parseInt( pos / 2 ) for next iteration.
+
+        let parent = parseInt( i / 2 );
+        if (i > 0 && this.heap[parent].data > this.heap[i].data ) {
+            // swap the two if heap property is violated
+            this.swap(i, parent);
+
+            // call bubbleUp on the parent
+            this.bubbleUp(parent);
         }
+
+        //let pos = this.size - 1; // last size
+        //while (pos > 0 && this.heap[parseInt( pos / 2 )].data > this.heap[pos].data) { // check if its parseInt( pos / 2 ) is greater.
+        //    this.swap(parseInt( pos / 2 ), pos);
+        //    pos = parseInt( pos / 2 ); // make pos to its parseInt( pos / 2 ) for next iteration.
+        //}
     }
 }
     

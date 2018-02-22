@@ -1,27 +1,31 @@
-let replaceAt = function(string, index, character){
-    return string.substr(0, index) + character + string.substr(index + character.length);
+let replaceAt = function(str, i, char){
+    return str.substr(0, i) + char + str.substr(i + char.length);
 };
 
 /**
- * Given a null terminated string, remove any white spaces (tabs or spaces).
+ * Given a null terminated str, remove any white spaces (tabs or spaces).
  * All greek  to    me  --> Allgreektome
  * @param s
- * @returns {string}
+ * @returns {str}
  */
 let remove_white_spaces = function(s) {
+
     if (!s || s.length === 0) {
         return;
     }
 
-    let read_ptr = 0;
-    let write_ptr = 0;
-    while (read_ptr < s.length) {
-        if (s[read_ptr] != ' ' && s[read_ptr] != '\t') {
-            s = replaceAt(s, write_ptr, s[read_ptr]);
-            write_ptr++;
-        }
-        read_ptr++;
-    }
+    let i = 0;
+    let j = 0;
+    while (i < s.length) {
 
-    return s.substr(0, write_ptr);
+        if (s[i] != ' ' && s[i] != '\t') {
+            s = replaceAt(s, j, s[i]);
+            j++;
+        }
+        i++;
+    }
+    
+    return s.substr(0, j);
 };
+
+console.log(remove_white_spaces('All greek  to    me'));

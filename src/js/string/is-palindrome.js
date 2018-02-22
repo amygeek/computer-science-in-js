@@ -11,9 +11,9 @@
      Memory Complexity
      Constant, O(1).
  */
-let is_palindrome = function(input, i, j) {
+let is_palindrome = function(str, i, j) {
     while (j > i) {
-        if (input[i] != input[j]) {
+        if (str[i] != str[j]) {
             return false;
         }
         i++;
@@ -22,13 +22,13 @@ let is_palindrome = function(input, i, j) {
     return true;
 };
 
-let find_all_palindrome_substrings = function(input) {
+let findAllPalindromeSubStrI = function(str) {
     let count = 0;
 
-    for (let i = 0; i < input.length; i++) {
-        for (let j = (i + 1); j < input.length; j++) {
-            if (is_palindrome(input, i, j)) {
-                console.log(input.substring(i, j + 1));
+    for (let i = 0; i < str.length; i++) {
+        for (let j = i + 1; j < str.length; j++) {
+            if (is_palindrome(str, i, j)) {
+                console.log(str.substring(i, j + 1));
                 count++;
             }
         }
@@ -42,18 +42,18 @@ let find_all_palindrome_substrings = function(input) {
 
      Memory Complexity
      Constant, O(1).
- * @param input
+ * @param str
  * @param j
  * @param k
  * @returns {number}
  */
-let find_palindromes_in_sub_string = function(input, j, k) {
+let findAllPalindromeSubStrRec = function(str, j, k) {
     let count = 0;
-    while (j >= 0 && k < input.length) {
-        if (input[j] != input[k]) {
+    while (j >= 0 && k < str.length) {
+        if (str[j] != str[k]) {
             break;
         }
-        console.log(input.substring(j, k + 1));
+        console.log(str.substring(j, k + 1));
         count++;
         j--;
         k++;
@@ -61,13 +61,13 @@ let find_palindromes_in_sub_string = function(input, j, k) {
     return count;
 };
 
-let find_all_palindrome_substrings2 = function(input) {
+let findAllPalindromeSubStr = function(str) {
     let count = 0;
-    for (let i = 0; i < input.length; i++) {
-        count += find_palindromes_in_sub_string(input, i - 1, i + 1);
-        count += find_palindromes_in_sub_string(input, i, i + 1);
+    for (let i = 0; i < str.length; i++) {
+        count += findAllPalindromeSubStrRec(str, i - 1, i + 1);
+        count += findAllPalindromeSubStrRec(str, i, i + 1);
     }
     return count;
 };
 
-console.log(find_all_palindrome_substrings2('aabbbaa'));
+console.log(findAllPalindromeSubStr('aabbbaa'));

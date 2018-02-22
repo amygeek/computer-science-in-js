@@ -11,15 +11,15 @@
  Constant, O(1)
 
  n = size of given integer set
- subsets_count = 2^n
- for i = 0 to subsets_count
+ count = 2^n
+ for i = 0 to count
     form a subset using the value of 'i' as following:
         bits in number 'i' represent index of elements to choose from original set,
     if a specific bit is 1 choose that number from original set and add it to current subset,
         e.g. if i = 6 i.e 110 in binary means that 2nd and 3rd elements in original array need to be picked.
     if subset elements sum up to K (required sum), add current subset to list of all subsets
  */
-let get_bit = function(num, bit){
+let getBit = function(num, bit){
     let temp = (1 << bit);
     temp = temp & num
     if (temp === 0){
@@ -28,13 +28,17 @@ let get_bit = function(num, bit){
     return 1;
 }
 
-let get_k_sum_subsets_1 = function(v, target_sum, sets) {
-    let subsets_count = Math.pow(2, v.length);
-    for (let i = 0; i < subsets_count; i++) {
+let getKSumSubsets = function(v, target_sum, sets) {
+
+    let count = Math.pow(2, v.length);
+
+    for (let i = 1; i < count; i++) {
+
         let sum = 0;
         let st = new Set([]);
+
         for (let j = 0; j < v.length; j++) {
-            if (get_bit(i, j) === 1) {
+            if (getBit(i, j) === 1) {
                 sum = sum + v[j];
                 if (sum > target_sum) {
                     break;
@@ -55,7 +59,7 @@ let v = [2, 5, 7];  //{} {2}, {5}, {7} {2,5} {5,7} {2, 7} {2,5,7}
 let target_sum = 7;
 let sets = [];
 
-//console.log(get_k_sum_subsets_1(v, target_sum, sets));  //[ Set { 2, 5 }, Set { 7 } ]
+console.log(getKSumSubsets(v, target_sum, sets));  //[ Set { 2, 5 }, Set { 7 } ]
 
 /**
  * In this solution we will recursively generate subsets of the given list. While generating a subset,
@@ -101,4 +105,4 @@ let get_k_sum_subsets_2 = function(list, target_sum, sets) {
     return sets;
 };
 
-console.log(get_k_sum_subsets_2(v, target_sum, sets));  //[ Set { 2, 5 }, Set { 7 } ]
+//console.log(get_k_sum_subsets_2(v, target_sum, sets));  //[ Set { 2, 5 }, Set { 7 } ]

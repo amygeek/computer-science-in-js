@@ -70,9 +70,9 @@ class MaxDistance {
             if (minArr[i] < maxArr[j])
             {
                 maxDiff = Math.max(maxDiff, j - i);
-                j = j + 1;
+                j++;
             } else {
-                i = i + 1;
+                i++;
             }
 
         }

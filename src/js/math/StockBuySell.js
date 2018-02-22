@@ -20,15 +20,17 @@ class StockBuySell {
         let count = 0;
     
         // solution array
-        let sol = [];
+        let res = [];
     
         // Traverse through given price array
         let i = 0;
         while (i < n - 1) {
             // Find Local Minima. Note that the limit is (n-2) as we are
             // comparing present element to the next element.
-            while ((i < n - 1) && (price[i + 1] <= price[i]))
-            i++;
+            while ((i < n - 1) && (price[i + 1] <= price[i])) {
+                i++; 
+            }
+            
         
             // If we reached the end, break as no further solution possible
             if (i == n - 1)
@@ -41,29 +43,27 @@ class StockBuySell {
         
             // Find Local Maxima.  Note that the limit is (n-1) as we are
             // comparing to previous element
-            while ((i < n) && (price[i] >= price[i - 1]))
-            i++;
-        
+            while ((i < n) && (price[i] >= price[i - 1])) {
+                i++;
+            }
             // Store the index of maxima
             e.sell = i-1;
-            sol.push(e);
+            res.push(e);
         
             // Increment number of buy/sell
             count++;
         }
     
         // print solution
-        if (count == 0)
-            console.log("There is no day when buying the stock "
-                + "will make profit");
-        else
-            for (let j = 0; j < count; j++)
-        console.log("Buy on day: " + sol[j].buy  + "        " + "Sell on day : " + sol[j].sell);
-        
-        return;
+        if (count == 0) {
+            console.log("There is no day when buying the stock " + "will make profit");
+        } else {
+            for (let j = 0; j < count; j++) {
+                console.log("Buy on day: " + res[j].buy + "        " + "Sell on day : " + res[j].sell);
+            }
+        }
+
     }
-    
-   
 }
 
 let stock = new StockBuySell();

@@ -10,31 +10,31 @@
  Linear, O(n).
  */
 
-let print_all_parentheses_rec = function(n, left_count, right_count, output) {
+let printParenthesesRec = function(n, left, right, output) {
 
-    if (left_count >= n && right_count >= n) {
+    if (left >= n && right >= n) {
         console.log(output);
     }
 
-    if (left_count < n) {
+    if (left < n) {
         output.push('{');
-        print_all_parentheses_rec(n, left_count + 1, right_count, output);
+        printParenthesesRec(n, left + 1, right, output);
         output.pop();
     }
-    if (right_count < left_count) {
+    if (right < left) {
         output.push('}');
-        print_all_parentheses_rec(n, left_count, right_count + 1, output);
+        printParenthesesRec(n, left, right + 1, output);
         output.pop();
     }
 };
 
-let print_all_parentheses = function(n) {
+let printParentheses = function(n) {
     let output = [];
-    print_all_parentheses_rec(n, 0, 0, output);
+    printParenthesesRec(n, 0, 0, output);
     return output;
 };
 
-let print_all_parentheses2 = (openP, closeP, str) => {
+let printParentheses2 = (openP, closeP, str) => {
 
     if (openP === 0 && closeP === 0 ) {
         console.log(str);
@@ -44,10 +44,10 @@ let print_all_parentheses2 = (openP, closeP, str) => {
         return;
     }
     if ( openP > 0 ) {
-        print_all_parentheses2( openP - 1, closeP, str + "(")
+        printParentheses2( openP - 1, closeP, str + "(")
     }
     if ( closeP > 0 ) {
-        print_all_parentheses2 ( openP, closeP - 1, str + ")");
+        printParentheses2 ( openP, closeP - 1, str + ")");
     }
 }
 
@@ -58,9 +58,9 @@ let print_all_parentheses2 = (openP, closeP, str) => {
  [ '{', '}', '{', '{', '}', '}' ]
  [ '{', '}', '{', '}', '{', '}' ]
  */
-//console.log( print_all_parentheses( 3 ) );
+//console.log( printParentheses( 3 ) );
 /*
  [ '{', '{', '}', '}' ]
  [ '{', '}', '{', '}' ]
  */
-print_all_parentheses2( 2, 2, "" ) ;
+printParentheses2( 2, 2, "" ) ;

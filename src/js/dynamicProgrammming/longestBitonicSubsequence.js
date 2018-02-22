@@ -30,7 +30,7 @@ let longestBitonicSubSeq = ( arr ) => {
         }
     }
 
-    //console.log(lis);
+    console.log(lis);
     /*
      Allocate memory for lds and initialize LDS values for all indexes
      store longest decrease indexes
@@ -47,7 +47,7 @@ let longestBitonicSubSeq = ( arr ) => {
 
     }
 
-    //console.log(lds);
+    console.log(lds);
     /* Return the maximum value of lis[i] + lds[i] - 1*/
     let max = lis[0] + lds[0] - 1;
     for (let i = 1; i < n; i++) {

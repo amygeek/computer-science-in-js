@@ -66,7 +66,7 @@ class PrintCombinations {
 
 }
 
-let n = 5;
+let n = 3;
 let arr = [];
 console.log("Different compositions formed by 1, 2 and 3 of "+ n + " are");
 let C = new PrintCombinations();

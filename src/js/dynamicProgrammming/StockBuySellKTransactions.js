@@ -1,20 +1,23 @@
 let maxProfit = ( prices, k) => {
-    if (k == 0 || prices.length == 0) {
+
+    let n = prices.length;
+    if (k == 0 || n == 0) {
         return 0;
     }
     let res = [];
     for(let i=0; i<= k; i++) {
-        res.push( new Array( prices.length).fill(0) )
+        res.push( new Array( n ).fill(0) )
     }
 
-    for (let i = 1; i < res.length; i++) {
+    for (let i = 1; i <= k; i++) {
         let maxDiff = -prices[0];
-        for (let j = 1; j < res[0].length; j++) {
+        for (let j = 1; j < n; j++) {
             res[i][j] = Math.max(res[i][j-1], prices[j] + maxDiff);
             maxDiff = Math.max(maxDiff, res[i-1][j] - prices[j]);
         }
     }
 
+    console.log(res)
     return res[k][prices.length-1];
 }
 

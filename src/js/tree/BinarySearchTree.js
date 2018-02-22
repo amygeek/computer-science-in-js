@@ -23,6 +23,7 @@ class BinarySearchTree {
 
     constructor() {
         this.root = null;
+        this.cnt = 1;
     }
 
     /**
@@ -370,18 +371,18 @@ class BinarySearchTree {
     inOrderIterative(root) {
 
         if ( root ) {
-            let stk = [];
+            let st = [];
             let str = "";
-            while (stk.length != 0 || root) {
+            while (st.length != 0 || root) {
                 if (root) {
-                    stk.push(root);
+                    st.push(root);
                     root = root.left;
                     continue;
                 }
-                str += stk[stk.length - 1].data + " ";
+                str += st[st.length - 1].data + " ";
 
-                root = stk[stk.length - 1].right;
-                stk.pop();
+                root = st[st.length - 1].right;
+                st.pop();
             }
             console.log( str );
         }
@@ -465,19 +466,19 @@ class BinarySearchTree {
      will be RVL i.e. Right - Visit - Left. While doing so, we keep a count of nodes seen so far.
      Once the count reaches n, that is the node to return. Let's run the above example for n = 3.
      */
-    getNthNode (root, n, cnt) {
+    getNthNode (root, n) {
         if (!root) {
             return;
         }
-        let res = this.getNthNode(root.right, n, cnt);
+        let res = this.getNthNode(root.right, n);
         if ( res ) {
             return res;
         }
-        if ( n === cnt) {
+        if ( n === this.cnt) {
             return root;
         }
-        cnt += 1;
-        res = this.getNthNode(root.left, n, cnt);
+        this.cnt++;
+        res = this.getNthNode(root.left, n);
         if ( res ) {
             return res;
         }
@@ -589,8 +590,8 @@ let test = () => {
     console.log("isBst: ", isBst);
     console.log("tree is balanced : ", tree.isBalanced(root));
 
-    let nthNode = tree.getNthNode(root, 1, 1);
-    console.log("Nth TreeNode: ", nthNode);
+    let nthNode = tree.getNthNode(root, 5);
+    console.log("Nth TreeNode: ", nthNode.data);
 
     console.log('travel tree in order recursively');
     //print 25 50 75 100 125 200 350

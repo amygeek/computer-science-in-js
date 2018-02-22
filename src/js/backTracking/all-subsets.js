@@ -10,7 +10,7 @@
      Memory Complexity
      Constant, O(1)
  */
-let get_bit = function(num, bit){
+let getBit = function(num, bit){
     let temp = (1 << bit);
     temp = temp & num;
     if (temp === 0){
@@ -20,13 +20,17 @@ let get_bit = function(num, bit){
     return 1;
 };
 
-let get_all_subsets = function(v) {
+let getAllSubsets = function(v) {
+    
     let sets = new Set();
-    let subsets_count = Math.pow(2, v.length);
-    for (let i = 0; i < subsets_count; i++) {
+    let count = Math.pow(2, v.length);
+    
+    for (let i = 0; i < count; i++) {
+        
         let st = new Set();
+        
         for (let j = 0; j < v.length; j++) {
-            if (get_bit(i, j) === 1) {
+            if (getBit(i, j) === 1) {
                 st.add(v[j]);
             }
         }
@@ -38,7 +42,7 @@ let get_all_subsets = function(v) {
 
 let arr = [2, 3, 4];
 
-let sets = get_all_subsets(arr);
+let sets = getAllSubsets(arr);
 
 /**
  Set {}
