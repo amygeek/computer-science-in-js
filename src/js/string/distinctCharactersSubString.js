@@ -36,7 +36,7 @@ let findSubString = ( str, k) => {
 
     for( let i=0; i<n - k + 1; i++ ) {
         
-        let currentStr = str.substr( i, 4);
+        let currentStr = str.substr( i, k);
         let map = new Map();
 
         for (let j=0; j<currentStr.length; j++) {

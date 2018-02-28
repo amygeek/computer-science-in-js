@@ -1,3 +1,10 @@
+/*
+ Runtime Complexity
+ Linearithmic, O(nlogn).
+
+ Memory Complexity
+ Logarithmic, O(logn).
+ */
 class QuickSort {
     
     swap(arr, i, j) {

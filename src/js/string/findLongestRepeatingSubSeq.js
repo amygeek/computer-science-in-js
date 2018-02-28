@@ -1,13 +1,13 @@
 /*
- Given a string, find length of the longest repeating subseequence such that the two subsequence don’t have same string character
- at same position, i.e., any i’th character in the two subsequences shouldn’t have the same index in the original string.
+ Given a string, find length of the longest repeating sub-sequence such that the two sub-sequence don’t have same string character
+ at same position, i.e., any i’th character in the two sub-sequences shouldn't have the same index in the original string.
  Input: str = "abc"
  Output: 0
  There is no repeating subsequence
 
  Input: str = "aab"
  Output: 1
- The two subssequence are 'a'(first) and 'a'(second).
+ The two sub-sequence are 'a'(first) and 'a'(second).
  Note that 'b' cannot be considered as part of subsequence
  as it would be at same index in both.
 

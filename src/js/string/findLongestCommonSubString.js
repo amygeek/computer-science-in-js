@@ -26,7 +26,7 @@ let findLongestCommonSubString = (str1, str2, m, n) => {
 }
 
 let str1 = "this is awesome";
-let str2 = "aweqsome amy";
+let str2 = "awesome amy";
 
 let len = findLongestCommonSubString(str1, str2, str1.length, str2.length);
 console.log(len); //7

@@ -13,6 +13,14 @@
 
  Big endian machine: Stores data big-end first. When looking at multiple bytes, the first byte (lowest address) is the biggest.
  Little endian machine: Stores data little-end first. When looking at multiple bytes, the first byte is smallest.
+
+ Here is how we determine the endianness of the system.
+
+ Put a value (where each byte is unique) in an integer.
+ Reference the integer using a char pointer (P).
+ If the value of char pointer (*P) equals the least significant byte in value, the host is little endian. Otherwise, it's big endian.
+
+ Below figure shows the little endian and big endian representations of 0x0A0B0C0D. A0-A3 are the byte addresses in increasing order.
  */
 let checkEndian = function() {
     let a = new ArrayBuffer(4);

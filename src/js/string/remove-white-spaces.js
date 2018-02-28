@@ -5,27 +5,32 @@ let replaceAt = function(str, i, char){
 /**
  * Given a null terminated str, remove any white spaces (tabs or spaces).
  * All greek  to    me  --> Allgreektome
- * @param s
- * @returns {str}
- */
-let remove_white_spaces = function(s) {
 
-    if (!s || s.length === 0) {
+ Runtime Complexity
+ Linear, O(n).
+
+ Memory Complexity
+ Constant, O(1).
+ */
+let remove_white_spaces = function(str) {
+    let n = str.length;
+    if (!str || n === 0) {
         return;
     }
 
     let i = 0;
     let j = 0;
-    while (i < s.length) {
+    while (i < n) {
 
-        if (s[i] != ' ' && s[i] != '\t') {
-            s = replaceAt(s, j, s[i]);
+        if (str[i] != ' ' && str[i] != '\t') {
+            str = replaceAt(str, j, str[i]);
             j++;
         }
         i++;
     }
     
-    return s.substr(0, j);
+    return str.substr(0, j);
 };
 
 console.log(remove_white_spaces('All greek  to    me'));
+

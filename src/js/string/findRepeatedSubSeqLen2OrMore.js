@@ -27,6 +27,10 @@
 
  Input: ABCD
  Output: Repeated Subsequence Doesn't Exist
+
+ String XYBYAXBY has XB(XBXB), XY(XYXY), YY(YYY), YB(YBYB) and YBY(YBYBY) as repeated subsequences
+
+ O(n) time and space
  */
 
 class SubSequence {
@@ -42,6 +46,17 @@ class SubSequence {
         return true;
     }
 
+    isPalindrome2(str, l, h) {
+        if ( l >= h) {
+            return true;
+        }
+        return str[l] == str[h] && this.isPalindrome2(str, l+1, h-1);
+    }
+
+    replaceAt( str, i, c) {
+        return str.substr(0, i) + c + str.substr( i + c.length);
+    }
+
     // The main function that checks if repeated
     // subsequence exists in the string
     findSubSeq ( str ) {
@@ -50,21 +65,16 @@ class SubSequence {
 
         // Create an array to store all characters and their
         // frequencies in str[]
-        let map = new Map();
+        let arr = new Array(256).fill(0);
 
         // Traverse the input string and store frequencies
         // of all characters in map[] array.
-        for (let i = 0; i < n; i++)
-        {
-            let c = map.get(str[i]);
-            if ( c ) {
-                map.set(str[i], c+1);
-            } else {
-                map.set(str[i], 1);
-            }
+        for (let i = 0; i < n; i++) {
+
+            arr[str[i].charCodeAt(0)]++;
             // If the character count is more than 3
             // we found a repetition
-            if (map.get( str[i] ) > 3) {
+            if ( arr[str[i].charCodeAt(0)] >= 3) {
                 return true;
             }
 
@@ -73,43 +83,38 @@ class SubSequence {
         // In-place remove non-repeating characters
         // from the string
         let k = 0;
-
         for (let i = 0; i < n; i++) {
-            if (map.get(str[i]) <= 1) {
-
-                str = this.removeAt(str, i);
-            } else {
+            if (arr[str[i].charCodeAt(0)] > 1) {
+                str = this.replaceAt(str, k, str[i]);
                 k++;
             }
 
         }
+        str = str.substr(0, k);
 
-        //console.log(str)
+        // If the remaining string is palindrome then it is not repeated, else there is a repetition
+        //if (this.isPalindrome(str, 0, k-1))
+        //{
+        //    // special case - if length is odd
+        //    // return true if the middle characer is
+        //    // same as previous one
+        //    if (k & 1) {
+        //        let index = parseInt(k/2);
+        //        return str[index] == str[index - 1];
+        //    }
+        //
+        //    // return false if string is a palindrome
+        //    return false;
+        //}
+        //
+        //// return true if string is not a palindrome
+        //return true;
 
-        // check if the resultant string is palindrome
-        if (this.isPalindrome(str, 0, k-1))
-        {
-            // special case - if length is odd
-            // return true if the middle characer is
-            // same as previous one
-            if (k & 1) {
-                return str[k/2] == str[k/2 - 1];
-            }
-
-            // return false if string is a palindrome
-            return false;
-        }
-
-        // return true if string is not a palindrome
-        return true;
-    }
-
-   removeAt ( str, i ) {
-        return str.substr(0, i) + str.substr( i + 1);
+        return !this.isPalindrome(str, 0, k-1);
     }
 }
 
 let S = new SubSequence();
 let str = "ABCABD";
 
-console.log(S.findSubSeq(str)); //7
+console.log(S.findSubSeq(str));

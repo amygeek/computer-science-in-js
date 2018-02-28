@@ -46,4 +46,30 @@ let workBreak = function (s, dist, solved) {
 let dict = new Set(['hello', 'hell', 'on', 'now']);
 
 console.log(workBreak('hellonow', dict, new Set()));  //true
-console.log(workBreak('', dict, new Set()));  //true
+
+
+let wordBreak = (str, dist, solved) => {
+    let n = str.length;
+    if ( !str || n == 0 ) {
+        return;
+    }
+    for ( let i=1; i<n; i++) {
+        let first = str.substr(0, i);
+        if ( dist.has(first) ) {
+            let second = str.substr(i);
+            if (second.length === 0 || dist.has(second) ) {
+                return true;
+            }
+            if ( !solved.has(second) ) {
+                if ( wordBreak(second, dist, solved) ) {
+                    return true;
+                }
+                solved.add(second);
+            }
+        }
+    }
+    return false;
+}
+
+console.log(workBreak('hellonow', dict, new Set()));  //true
+

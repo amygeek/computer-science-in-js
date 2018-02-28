@@ -65,6 +65,7 @@ class Compression {
     }
 }
 
+//a2b1c4a3
 let str = "aabccccaaa";
 
 let C = new Compression();

@@ -5,6 +5,8 @@ class Ranks {
     getRandomIntInArray ( low, high ) {
         return parseInt( Math.random() * (high - low + 1) + low);
     }
+
+    //use it to find Kth smallest element
     max( arr, start, end ) {
         let max = Number.MIN_VALUE;
         for (let i=start; i<=end; i++) {
@@ -12,46 +14,73 @@ class Ranks {
         }
         return max;
     }
+
+    //use it to find Kth largest element
+    min( arr, start, end ) {
+        let min = Number.MAX_VALUE;
+        for (let i=start; i<=end; i++) {
+            min = Math.min( min, arr[i])
+        }
+        return min;
+    }
+
     swap(arr, i, j) {
         let temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
-    partition( arr, left, right) {
 
-        let mid = parseInt( (left + right) / 2 )
-        let pivot = arr[mid]; // Pick a pivot point. Can be an element.
+    //partition: smallest element in the front, use it to find Kth smallest element
+    partition( arr, left, right, pivot) {
 
-        while (left <= right) { // Until we've gone through the whole array
-            // Find element on left that should be on right
-            while (arr[left] < pivot) {
+        while (true) {
+            while (left <= right && arr[left] <= pivot) {
                 left++;
             }
 
-            // Find element on right that should be on left
-            while (arr[right] > pivot) {
+            while (left <= right && arr[right] > pivot) {
                 right--;
             }
 
-            // Swap elements, and move left and right indices
-            if (left <= right) {
-                this.swap(arr, left, right);
-                left++;
-                right--;
+            if (left > right) {
+                return left - 1;
             }
+            this.swap(arr, left, right);
         }
-        return left;
+    }
+
+    //partition: largest element in the front, use it to find Kth largest element
+    partition2( arr, left, right, pivot) {
+
+        while (true) {
+            while (left <= right && arr[left] > pivot) {
+                left++;
+            }
+
+            while (left <= right && arr[right] <= pivot) {
+                right--;
+            }
+
+            if (left > right) {
+                return left - 1;
+            }
+            this.swap(arr, left, right);
+        }
     }
 
     getRank( arr, left, right, rank) {
 
-        let leftEnd = this.partition(arr, left, right);
+
+        let pivot = arr[this.getRandomIntInArray(left, right)];
+        let leftEnd = this.partition(arr, left, right, pivot); // returns end of left partition
 
         let leftSide = leftEnd - left + 1;
 
-        if (leftSide === rank + 1) {
+        console.log("pivot, ", pivot)
+        if (leftSide === rank ) {
             //return arr.slice(0, leftEnd);
             return this.max(arr, left, leftEnd);
+            //return this.min(arr, left, leftEnd);
         } else if (rank < leftSide) {
             return this.getRank(arr, left, leftEnd, rank);
         } else {
@@ -65,5 +94,5 @@ let arr = [2, 4, 50, 7, 90, 10, 1, 30, 16, 8];
 
 let ranks = new Ranks();
 
-console.log(ranks.getRank(arr, 0, arr.length-1, 5));
+console.log(ranks.getRank(arr, 0, arr.length-1, 3));
 

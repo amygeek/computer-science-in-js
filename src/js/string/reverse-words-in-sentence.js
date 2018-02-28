@@ -12,7 +12,7 @@ let replaceAt = function(str, i, c){
     return str.substr(0, i) + c + str.substr(i + c.length);
 };
 
-let strRev = function(str, start, end) {
+let reverseStr = function(str, start, end) {
     if (!str || str.length < 2) {
         return;
     }
@@ -41,7 +41,7 @@ let reverseWords = function(str) {
     //   in reverse order: "Hello World" -> "dlroW olleH".
 
     
-    str = strRev(str, 0, len - 1);
+    str = reverseStr(str, 0, len - 1);
 
     //  Now, let's iterate the str and reverse each word in place.
     //  "dlroW olleH" -> "World Hello"
@@ -65,7 +65,7 @@ let reverseWords = function(str) {
         }
 
         //  let's reverse the word in-place.
-        str = strRev(str, start, end - 1);
+        str = reverseStr(str, start, end - 1);
 
         start = end;
     }

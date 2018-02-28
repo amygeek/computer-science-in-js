@@ -1,26 +1,35 @@
+/*
+
+ Runtime Complexity
+ Linear, O(n).
+
+ Memory Complexity
+ Constant, O(1).
+ */
 let move_zeros_to_left = function(arr) {
 
     let n = arr.length;
 
-    if (n < 1) {
+    //return if array is empty or only one element in the array
+    if (n < 2) {
         return;
     }
 
-    let write_index = n - 1;
-    let read_index = n - 1;
+    let writeIndex = n - 1;
+    let readIndex = n - 1;
 
-    while (read_index >= 0) {
-        if (arr[read_index] != 0) {
-            arr[write_index] = arr[read_index];
-            write_index--;
+    while (readIndex >= 0) {
+        if (arr[readIndex] != 0) {
+            arr[writeIndex] = arr[readIndex];
+            writeIndex--;
         }
 
-        read_index--;
+        readIndex--;
     }
 
-    while (write_index >= 0) {
-        arr[write_index] = 0;
-        write_index--;
+    while (writeIndex >= 0) {
+        arr[writeIndex] = 0;
+        writeIndex--;
     }
 
     return arr;

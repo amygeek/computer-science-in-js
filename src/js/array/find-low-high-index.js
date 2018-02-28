@@ -14,9 +14,19 @@
      num: 5, Low=2 and High=9
 
      num: 20, Low=10 and High=10
- * @param arr
- * @param num
- * @returns {number}
+
+ Runtime Complexity: O(logn).
+ Memory Complexity Constant, O(1)
+
+ *** finding the low index.
+ At every step, consider the array between low and high indices
+ Calculate the mid index.
+ If element at mid index is less than the key, low becomes mid + 1 (to move towards start of range)
+ If element at mid is greater or equal to the key, high becomes mid - 1. Index at low remains the same.
+ When low is greater than high, low would be pointing to the first occurrence of the key.
+ If element at low does not match the key, return -1.
+
+ ***
  */
 let find_low_index = function(arr, num) {
     let low = 0;
@@ -31,7 +41,6 @@ let find_low_index = function(arr, num) {
             high = mid - 1;
         }
 
-
     }
 
     if (arr[low] === num) {
@@ -42,9 +51,9 @@ let find_low_index = function(arr, num) {
 };
 
 let find_high_index = function(arr, num) {
+
     let low = 0;
     let high = arr.length - 1;
-
 
     while (low <= high) {
         let mid = Math.floor((low + high) / 2);

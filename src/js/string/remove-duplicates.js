@@ -42,9 +42,12 @@ let remove_duplicates_1 = function(s) {
  * @returns {str}
  */
 let remove_duplicates_2 = function(str) {
+
+    let n = str.length;
     let write_index = 0;
 
     for (let i = 0; i < str.length; i++) {
+
         let found = false;
 
         for (let j = 0; j < write_index; j++) {

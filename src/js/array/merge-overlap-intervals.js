@@ -13,8 +13,8 @@ let mergeInterval = function(list) {
         return;
     }
 
-    let newList = [];
-    newList.push({
+    let res = [];
+    res.push({
         'first': list[0].first,
         'second': list[0].second
     });
@@ -22,19 +22,19 @@ let mergeInterval = function(list) {
         let x1 = list[i].first;
         let y1 = list[i].second;
 
-        let y2 = newList[newList.length - 1].second;
+        let y2 = res[res.length - 1].second;
 
         if (y2 >= x1) {
-            newList[newList.length - 1].second = Math.max(y1, y2);
+            res[res.length - 1].second = Math.max(y1, y2);
         } else {
-            newList.push({
+            res.push({
                 'first': x1,
                 'second': y1
             });
         }
 
     }
-    return newList;
+    return res;
 };
 
 let list = [
