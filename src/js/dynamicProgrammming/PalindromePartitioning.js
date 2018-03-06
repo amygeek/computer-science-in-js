@@ -1,7 +1,7 @@
 // Returns the minimum number of cuts needed
 // to partition a string such that every part
 // is a palindrome
-// Time Complexity: O(n2)
+// Time Complexity: quadratic O(n2)
 
 
 class PalindromePartitioning {

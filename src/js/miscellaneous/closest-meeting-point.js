@@ -87,18 +87,17 @@ let shortestDistance = function(m, points) {
     let y = 0;
 
     // calculate the centroid
-    let centroid = new point(0, 0);
     for (let i = 0; i < n; i++) {
         x += points[i].x;
         y += points[i].y;
     }
 
-    centroid.x = parseInt(Math.round(x / n));
-    centroid.y = parseInt(Math.round(y / n));
+    x = parseInt(Math.round(x / n));
+    y = parseInt(Math.round(y / n));
 
     // initialize the minPt to centroid
-    minPt.x = centroid.x;
-    minPt.y = centroid.y;
+    minPt.x = x;
+    minPt.y = y;
 
     let minDistance = minPt.calSumOfDistance(points);
 

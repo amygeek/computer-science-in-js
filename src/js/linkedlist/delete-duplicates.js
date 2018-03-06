@@ -46,7 +46,7 @@ class LinkedList {
         return head;
     }
 
-    //time O(n2), space O(1)
+    //quadratic time O(n2), space O(1)
     deleteDup2( head ) {
 
         if ( !head ) {

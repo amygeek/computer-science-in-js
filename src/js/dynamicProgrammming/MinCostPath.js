@@ -13,7 +13,7 @@
  first column = m[i][j] + Min(res[i-1],[j] , res[i][j-1]) if i>0 && j>0
 
  See the code for better Explanation.
- Time Complexity: O(n2).
+ Time Complexity: quadratic O(n2).
  */
 
 let minCostPath = ( m ) => {

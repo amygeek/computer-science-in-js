@@ -8,28 +8,28 @@
  */
 let find_max_sum_nonadjacent = function( a ) {
     
-    let len = a.length;
+    let n = a.length;
 
-    if (len < 1) {
+    if (n < 1) {
         return 0;
-    } else if (len === 1) {
+    } else if (n === 1) {
         return a[0];
     }
 
-    let result = [];
-    result[0] = a[0];
-    for (var i = 1; i < len; i++) {
+    let res = [];
+    res[0] = a[0];
+
+    for (let i = 1; i < n; i++) {
 
         //Max Sum of the last iteration
-        result[i] = Math.max(a[i], result[i - 1]);
+        res[i] = Math.max(a[i], res[i - 1]);
+
         if (i - 2 >= 0) {
             //Max Sum of second last iteration + current iteration index.
-            result[i] = Math.max(result[i], a[i] + result[i - 2]);
+            res[i] = Math.max(res[i], a[i] + res[i - 2]);
         }
-
-        console.log(result);
     }
-    return result[len - 1];
+    return res[n - 1];
 };
 
 let res = find_max_sum_nonadjacent( [1, -1, 6, -4, 2, 2] );

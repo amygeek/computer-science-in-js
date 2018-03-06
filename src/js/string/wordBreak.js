@@ -2,10 +2,10 @@
  * We are given a dictionary of words and a large input string and we have to find out
  * whether the input string can be completely segmented into given dictionary words.
      Runtime Complexity
-     Polynomial, O(n2).
+     quadratic, O(n2).
 
      Memory Complexity
-     Polynomial, O(n2).
+     quadratic, O(n2).
  * @param s
  * @param dict
  * @param solved

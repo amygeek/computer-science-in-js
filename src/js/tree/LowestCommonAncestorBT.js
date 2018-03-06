@@ -159,7 +159,7 @@ class LowestCommonAncestorBT {
         root.left.right.right = n2 ;
 
         
-        let x = this.commonAncestor(root, n1, n2);
+        let x = this.findLCA2(root, n1, n2);
         //Lowest Common Ancestor (8, 11 ) is 2
         console.log("Lowest Common Ancestor ("+n1.data+", "+ n2.data +" ) is " + x.data);
         x = this.commonAncestor(root,n2,n3);

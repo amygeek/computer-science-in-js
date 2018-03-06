@@ -2,7 +2,7 @@
  * Given head pointer of a linked list, sort it in ascending order using insertion sort.
  * given linked list is 29 -> 23 -> 82 -> 11, then sorted list should be 11 -> 23 -> 29 -> 82.
  * Runtime Complexity
-     Polynomial, O(n2).
+   quadratic O(n2).
 
      Memory complexity
      Constant, O(1)

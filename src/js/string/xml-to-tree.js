@@ -76,8 +76,8 @@ class XmlTokenizer {
     }
 }
 class Node {
-    constructor(name) {
-        this.name = name;
+    constructor(data) {
+        this.data = data;
         this.children = [];
     }
 }
@@ -116,7 +116,6 @@ let CreateXmlTree = function(xml) {
 };
 
 let print = (node) => {
-
     if ( !node ) {
         return;
     }
@@ -125,12 +124,21 @@ let print = (node) => {
 
     while (q.length > 0) {
 
-        let n = q.shift();
-        console.log(n.name);
-        for(let i=0; i<n.children.length; i++) {
+        let level = q.length;
+        let str = "";
+        while ( level > 0 ) {
 
-            q.push(n.children[i]);
+            let n = q.shift();
+            str += n.data + " ";
+
+            for(let i=0; i<n.children.length; i++) {
+
+                q.push(n.children[i]);
+            }
+
+            level--;
         }
+        console.log( str );
     }
 }
 

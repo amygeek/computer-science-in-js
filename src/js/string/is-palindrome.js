@@ -6,7 +6,7 @@
 
     A palindrome is a word, phrase, number, or other sequence of characters which reads the same backwards as it reads forwards.
      Runtime Complexity
-     Polynomial, O(n3).
+     cubic time, O(n3).
 
      Memory Complexity
      Constant, O(1).
@@ -38,7 +38,7 @@ let findAllPalindromeSubStrI = function(str) {
 
 /**
      Runtime Complexity
-     Polynomial, O(n2).
+     quadratic, O(n2).
 
      Memory Complexity
      Constant, O(1).

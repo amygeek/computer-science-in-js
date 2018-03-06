@@ -32,7 +32,7 @@ class RodCutting {
         return max;
     }
 
-    //O(n2)
+    //quadratic O(n2)
     profitDP( value, len ) {
         let res = new Array( len + 1).fill(0);
         res[0] = 0;

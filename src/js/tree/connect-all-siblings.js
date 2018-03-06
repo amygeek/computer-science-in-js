@@ -22,9 +22,10 @@ class BinaryTree {
                 last.next = current.right;
                 last = current.right;
             }
-            last.next = null;
+
             current = current.next;
         }
+        last.next = null;
     }
 
     connectSiblingsUsingQueue (root) {
@@ -152,7 +153,7 @@ class BinaryTree {
         return nextLevelHead;
     };
     
-    connectLevelSiblings (root) {
+    connectSiblingsOnLevel (root) {
         if (!root) {
             return;
         }
@@ -202,8 +203,8 @@ console.log( "Level order traversal");
 bTree.levelOrderTraversal(root);
 
 console.log( "Connect the sibling on all levels");
-bTree.connectSiblingsUsingQueue(root );
+bTree.connectSiblings(root );
 bTree.printDll(root);
 
 console.log( "Connect the sibling on each level");
-bTree.connectLevelSiblings(root );
+bTree.connectSiblingsOnLevel(root );

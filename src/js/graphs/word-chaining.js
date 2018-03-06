@@ -174,5 +174,13 @@ class graph_chain {
     }
 }
 
+class Graph {
 
-let graph_chain = new graph_chain()
+    // defining vertex array and
+    // adjacent list
+    constructor() {
+        this.noVerts = 0;
+        this.adjList = new Map();
+        this.vertex = [];
+    }
+}

@@ -19,26 +19,22 @@ class DiameterOfTree {
         let res = [ 0, 0 ]; // initialize the height (res[0]) and diameter as 0 (res[1])
         if (root != null) {
 
-            let leftResult = this.diameter(root.left);
-            let rightResult = this.diameter(root.right);
+            let leftRes = this.diameter(root.left);
+            let rightRes = this.diameter(root.right);
 
-            let height = Math.max(leftResult[0], rightResult[0]) + 1;
+            let height = 1 + Math.max( leftRes[0], rightRes[0] );
 
-            let leftDiameter = leftResult[1];
-            let rightDiameter = rightResult[1];
-            let rootDiameter = leftResult[0] + rightResult[0] + 1;
+            let leftDiameter = leftRes[1];
+            let rightDiameter = rightRes[1];
+            let rootDiameter = leftRes[0] + rightRes[0] + 1;
 
-            let finalDiameter = this.getMax(leftDiameter, rightDiameter, rootDiameter);
+            let finalDiameter = Math.max(leftDiameter, rightDiameter, rootDiameter);
 
             res[0] = height; // update the height
             res[1] = finalDiameter;
             return res;
         }
         return res;
-    }
-    
-    getMax( a,  b,  c) {
-        return Math.max(a, Math.max(b, c));
     }
    
 }
@@ -72,5 +68,5 @@ root.left.right.left.right = new TreeNode(7);
 root.left.left.left = new TreeNode(8);
 
 let diameterOfTree = new DiameterOfTree();
-console.log("diameter of Tree " + diameterOfTree.diameter(root)[1]);
-console.log("height of Tree " + diameterOfTree.diameter(root)[0]);
+console.log("diameter of Tree " + diameterOfTree.diameter(root)[1]);  //6
+console.log("height of Tree " + diameterOfTree.diameter(root)[0]);    //5

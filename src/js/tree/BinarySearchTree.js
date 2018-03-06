@@ -23,7 +23,7 @@ class BinarySearchTree {
 
     constructor() {
         this.root = null;
-        this.cnt = 1;
+        this.cnt = 0;
     }
 
     /**
@@ -474,10 +474,12 @@ class BinarySearchTree {
         if ( res ) {
             return res;
         }
+
+        this.cnt++;
         if ( n === this.cnt) {
             return root;
         }
-        this.cnt++;
+
         res = this.getNthNode(root.left, n);
         if ( res ) {
             return res;
@@ -590,7 +592,7 @@ let test = () => {
     console.log("isBst: ", isBst);
     console.log("tree is balanced : ", tree.isBalanced(root));
 
-    let nthNode = tree.getNthNode(root, 5);
+    let nthNode = tree.getNthNode(root, 1);
     console.log("Nth TreeNode: ", nthNode.data);
 
     console.log('travel tree in order recursively');

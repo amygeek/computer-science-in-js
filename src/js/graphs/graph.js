@@ -58,7 +58,7 @@ class Graph {
         this.adjList.get(v).push(w);
 
         // if graph is undirected, add an edge from w to w by uncomment the following line
-        //this.adjList.get(w).push(v);
+        this.adjList.get(w).push(v);
     }
 
     removeEdge(v, w) {

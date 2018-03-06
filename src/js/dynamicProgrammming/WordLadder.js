@@ -1,6 +1,6 @@
 /*
  Word Ladder (Length of shortest chain to reach a target word)
- 3.1
+
  Given a dictionary, and two words ‘start’ and ‘target’ (both of same length).
  Find length of the smallest chain from ‘start’ to ‘target’ if it exists, such that
  adjacent words in the chain only differ by one character and each word in the chain is a valid word i.e.,
@@ -25,6 +25,23 @@
 
 class WordLadder {
 
+    printResultWords( map ) {
+        let newArr = Array.from(map);
+        var concatenated = newArr.reduce( function (previous, current) {
+
+            if ( !previous.get(current[1])) {
+                previous.set(current[1], current[0] );
+            }
+
+            return previous;
+
+        }, new Map());
+
+        for ( let [key, val] of concatenated) {
+            console.log(val)
+        }
+    }
+
     ladderLen( beginWord, endWord, set) {
 
         if ( set.has( beginWord ) ) {
@@ -42,6 +59,7 @@ class WordLadder {
 
             let word = queue.shift();
             let current = map.get( word );
+            //console.log(map)
 
             for (let i=0; i<word.length; i++ ) {
 
@@ -54,9 +72,12 @@ class WordLadder {
                     let temp = chars.join('');
 
                     if ( set.has( temp ) ) {
+
                         if ( temp === endWord ) {
-                            //console.log(map);
-                            return current + 1;
+                            map.set(temp, current + 1 );  //add the last word for printing
+                            this.printResultWords( map );
+
+                            return current + 1;  //return the len of word found
                         }
                         map.set(temp, current + 1 );
                         queue.push(temp);
@@ -66,21 +87,8 @@ class WordLadder {
                 }
             }
         }
-
-        public static boolean f(int[] arr) {
-            final int n = arr.length;
-            int index = 0;  // starting index, the value does not matter if there is indeed a complete cycle
-            for(int i = 0; i < n; i++) {  // at most n steps
-                // in Java, -b < a % b < b but 0 < (a % b + b) % b < b
-                index = ((index + arr[index]) % n + n) % n;
-                if(index == 0 && i < n - 1) {  // subcyle
-                    return false;
-                }
-            }
-            return index == 0;  // are we back to the original cell after n steps
-        }
-
         return 0;
+
     }
 }
 
@@ -89,4 +97,4 @@ let dict = new Set(["hot","dot","dog","lot","log","cog"]);
 let start = "hit";
 let target = "cog";
 let wordLadder = new WordLadder();
-console.log( wordLadder.ladderLen ( start, target, dict));
+console.log( wordLadder.ladderLen ( start, target, dict) );

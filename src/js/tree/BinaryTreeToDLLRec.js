@@ -45,10 +45,10 @@ class BinaryTreeToDLLRec {
     printDll( node ) {
         let str = ''
         while ( node ) {
-            str += node.data + ' ';
+            str += node.data + ' <--> ';
             node = node.right;
         }
-        console.log(str);
+        console.log(str + "null");
     }
 
     binaryTree2DllRec( node ) {

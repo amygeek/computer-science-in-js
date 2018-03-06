@@ -13,7 +13,10 @@ let isCycle = (arr) => {
     }
     let index = 0;
     for ( let i=0; i<n; i++) {
-        index = ((index + arr[index]) % n + n) % n;
+        index = ( index + arr[index] ) % n;
+        if ( index < 0 ) {
+            index = index + n;
+        }
 
         if(index == 0 && i < n - 1) {  // subcyle
             return false;
@@ -25,4 +28,5 @@ let isCycle = (arr) => {
 }
 
 console.log(isCycle([2, 2, -1]));   //true
-console.log(isCycle([2, 3, -1, 10]));   //true
+console.log(isCycle([2, 3, -1, 10]));   //false
+console.log(isCycle([1, 1, 1, 1, 1, 1 ]));   //true

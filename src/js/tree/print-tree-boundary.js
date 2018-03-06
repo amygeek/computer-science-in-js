@@ -8,7 +8,22 @@
         4      5    7
        /       \    \
       9         8    10
- * @param root
+ Runtime Complexity
+ Linear, O(n).
+
+ Memory Complexity
+ O(h).
+
+ Recursive solution has O(h) memory complexity as it will consume memory on the stack up to height of binary tree h.
+ It will be O(logn) for balanced tree and in worst case can be O(n).
+
+ We will print the perimeter of the binary tree in three passes. Here is how the algorithm looks like:
+
+ Print the root node.
+ Print the left boundary in top-down order.
+ Print the leaf nodes in left-right order.
+ Print the right boundary in bottom-up order. We will push node values in a stack here.
+ Once we hit the leaf node, we will pop all elements of the stack while printing them.
  */
 let printLeft = function(root) {
     while (root) {

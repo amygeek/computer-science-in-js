@@ -12,57 +12,169 @@
 
  * @param node
  */
+    
 
-
-let convert_n_ary_to_binary = function(node) {
-    return convert_n_ary_to_binary_rec(node, 1);
-};
-
-let convert_n_ary_to_binary_rec = function(root, isLeft) {
-    if (!root) {
-        return;
+class NTreeToBTree {
+    
+    n_aryToBinary(node) {
+        return this.n_aryToBinaryRec(node, 1);
     }
+    
+    n_aryToBinaryRec(root, isLeft) {
+        if (!root) {
+            return;
+        }
+    
+        let node = new BinaryTree(root.data);
+        let last = node;
+    
+        for (let c in root.children) {
+            if (isLeft === 1) {
+                last.left = this.n_aryToBinaryRec(root.children[c], 0);
+                last = last.left;
+            } else {
+                last.right = this.n_aryToBinaryRec(root.children[c], 1);
+                last = last.right;
+            }
+        }
+    
+        return node;
+    }
+    
+    binaryToN_ary(node) {
+        return this.binaryToN_aryRec(node, 1);
+    };
+    
+    binaryToN_aryRec(node, isLeft) {
+        if (!node) {
+            return;
+        }
 
-    let btnode = new BinaryTreeNode(root.data);
-    let lastnode = btnode;
+        let nNode = new NTreeNode(node.data);
+        let current = node;
 
-    for (let c in root.children) {
         if (isLeft === 1) {
-            lastnode.left = convert_n_ary_to_binary_rec(root.children[c], 0);
-            lastnode = lastnode.left;
+            while (current.left) {
+                let child = this.binaryToN_aryRec(current.left, 0);
+                nNode.children.push(child);
+                current = current.left;
+            }
         } else {
-            lastnode.right = convert_n_ary_to_binary_rec(root.children[c], 1);
-            lastnode = lastnode.right;
+            while (current.right) {
+                let child = this.binaryToN_aryRec(current.right, 1);
+                nNode.children.push(child);
+                current = current.right;
+            }
+        }
+        return nNode;
+    }
+
+    printNaryTreeOnLevel(node){
+        if ( !node ) {
+            return;
+        }
+        let q = [];
+        q.push(node);
+
+        while (q.length > 0) {
+
+            let level = q.length;
+            let str = "";
+            while ( level > 0 ) {
+
+                let n = q.shift();
+                str += n.data + " ";
+
+                for(let i=0; i<n.children.length; i++) {
+
+                    q.push(n.children[i]);
+                }
+
+                level--;
+            }
+            console.log( str );
         }
     }
 
-    return btnode;
-};
-
-let convert_binary_to_n_ary = function(node) {
-    return convert_binary_to_n_ary_rec(node, 1);
-};
-
-let convert_binary_to_n_ary_rec = function(node, isLeft) {
-    if (!node) {
-        return;
-    }
-
-    let nnode = new TreeNode(node.data);
-    let temp = node;
-
-    if (isLeft === 1) {
-        while (temp.left) {
-            let child = convert_binary_to_n_ary_rec(temp.left, 0);
-            nnode.children.push(child);
-            temp = temp.left;
+    printBTreeOnLeve( node ) {
+        if ( !node ) {
+            return;
         }
-    } else {
-        while (temp.right) {
-            let child = convert_binary_to_n_ary_rec(temp.right, 1);
-            nnode.children.push(child);
-            temp = temp.right;
+
+        let q = [];
+        q.push( node );
+
+        while ( q.length > 0 ) {
+            let level = q.length;
+            let str = "";
+
+            while( level > 0 ) {
+                let n = q.shift();
+                str += n.data + " ";
+
+                if ( n.left ) {
+                    q.push(n.left);
+                }
+                if (n.right ) {
+                    q.push( n.right );
+                }
+                level--;
+            }
+            console.log( str );
         }
     }
-    return nnode;
-};
+}
+
+class NTreeNode {
+    constructor(data) {
+        this.data = data;
+        this.children = [];
+    }
+}
+class BinaryTree {
+    constructor(data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+/***   Binary Tree
+         1
+        /
+       2
+      /
+     3
+    / \
+   4   5
+        \
+         6
+
+       N_ary Tree
+            1
+        /   |   \
+       2    3   4
+          /   \
+         5     6
+ */
+let root = new BinaryTree(1);
+root.left = new BinaryTree(2);
+root.left.left = new BinaryTree(3);
+root.left.left.left = new BinaryTree(4);
+root.left.left.right = new BinaryTree(5);
+root.left.left.right.right = new BinaryTree(6);
+
+let tree = new NTreeToBTree();
+
+console.log("Binary Tree Level Traversal");
+tree.printBTreeOnLeve(root);
+
+let nNode = tree.binaryToN_ary(root);
+
+console.log("N_ary Tree Level Traversal");
+tree.printNaryTreeOnLevel(nNode);
+
+let bNode = tree.n_aryToBinary(nNode);
+console.log("Binary Tree Level Traversal from N_ary to Binary");
+tree.printBTreeOnLeve(bNode);
+
