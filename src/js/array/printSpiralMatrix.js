@@ -62,6 +62,39 @@ let printMatrix = (matrix, row, col) => {
     }
 }
 
+let print = arr => {
+    let row = arr.length;
+    let col = arr[0].length;
+    let m = 0;
+    let n = 0;
+    while( m<row && n<col) {
+        for(let i=n; i<col; i++) {
+            console.log(arr[m][i]);
+        }
+        m++;
+
+        for(let i=m; i<row; i++) {
+            console.log(arr[i][col-1]);
+        }
+        col--;
+
+        if ( m < row ) {
+            for(let i=col-1; i>=n; i--) {
+                console.log(arr[row-1][i]);
+            }
+            row--;
+        }
+
+        if ( n < col ) {
+            for(let i=row-1; i>=m; i--) {
+                console.log(arr[i][n]);
+            }
+            n++;
+        }
+
+    }
+}
+
 //let m2 = [
 //    [1,  2,  3,  4],
 //    [12, 13, 14, 5],
@@ -87,4 +120,5 @@ let m2 = [
  */
 //printMatrixRec(m2, 0, 0, 4);
 
-printMatrix(m2, m2.length, m2[0].length)
+//printMatrix(m2, m2.length, m2[0].length)
+print(m2)

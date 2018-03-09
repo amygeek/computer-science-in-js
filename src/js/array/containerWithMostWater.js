@@ -40,8 +40,6 @@ let maxArea = (arr) => {
 }
 
 let a1 = [1, 5, 4, 3];
-let a2 = [3, 1, 2, 4, 5];  //min(3, 5) * (4 - 0) -> 3 * 4 =12
-
 /*
  Input : [1, 5, 4, 3]
  Output : 6
@@ -51,4 +49,8 @@ let a2 = [3, 1, 2, 4, 5];  //min(3, 5) * (4 - 0) -> 3 * 4 =12
  Height of container = min(5, 3) = 3.
  So total area = 3 * 2 = 6
  */
-console.log(maxArea(a2));  //6
+
+//let a2 = [3, 1, 2, 4, 5];  //min(3, 5) * (4 - 0) -> 3 * 4 =12
+let a2 = [2, 5, 3, 7];  //min(5, 7) * (3 - 1) -> 5 * 2 =10
+
+console.log(maxArea(a2));

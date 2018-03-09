@@ -27,6 +27,6 @@ let removeDuplicates2 = ( arr ) => {
     }
 }
 
-let arr2 = [1,2,2,3,5,5,5,7,7, 7,3,4,4 ];
+let arr2 = [1,2,2,3,5,7,7, 7,3,4,4,5,5 ];
 removeDuplicates2(arr2);
 console.log(arr2);

@@ -26,15 +26,15 @@ let missingNRepeatNum = ( arr, size ) => {
     //find the repeating element
     for ( let i=0; i<size; i++ ) {
 
-        let index = Math.abs( arr[i] ) - 1;
+        let x = Math.abs( arr[i] ) - 1;
 
-        if ( arr[ index ] > 0  ) {
-            arr[ index ] = -arr[ index ];
+        if ( arr[ x ] > 0  ) {
+            arr[ x ] *= -1;
         } else {
             console.log("The repeating element is ", Math.abs( arr[i]) );
         }
     }
-    console.log(arr)
+
     //find missing element;
     for ( let i=0; i<size; i++ ) {
         if ( arr[i] > 0) {
@@ -44,7 +44,7 @@ let missingNRepeatNum = ( arr, size ) => {
 
 }
 
-let arr = [1, 2, 3, 1, 3, 6];  //repeat 3, missing 4
+let arr = [1, 2, 3, 1, 3, 6];  //repeat 1 and 3, missing 4 and 5
 
 missingNRepeatNum(arr, arr.length);
 

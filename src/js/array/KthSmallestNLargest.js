@@ -54,7 +54,9 @@ class KthSmallestNLargest {
         for ( let i=0; i<size; i++) {
             minHeap[i] = arr[i];
         }
+        //[ 17, 18, 4, 16, 20, 9, 5, 1 ]
         this.buildMinHeap(minHeap, size);
+        //[ 1, 4, 9, 5, 20, 17, 18, 16 ]
         for (let j=0; j<k-1; j++ ) {
             this.extractMin(minHeap, size);
         }
@@ -64,17 +66,24 @@ class KthSmallestNLargest {
     findKthLargest(arr, size, k) {
 
         let minHeap = [];
-
+        //create a heap array with size of k
         for( let i=0; i<k; i++) {
             minHeap[i] = arr[i];
         }
 
+        //buildMinHeap will run minHeapify for minHeap, so the smallest number in the front of the minHeap
         this.buildMinHeap(minHeap, k);
 
+        //start at index k and loop through the rest of array
         for( let i=k; i<size; i++) {
+            //if we found the number that is greater than the first element in the minHeap
             if(arr[i] > minHeap[0]) {
+                //set the larger number for the first element
                 minHeap[0] = arr[i];
+
+                //run minHeapify to make sure it is maintained as min heap
                 this.minHeapify(minHeap, k, 0);
+
             }
         }
         return minHeap[0];
@@ -83,9 +92,9 @@ class KthSmallestNLargest {
 
 let kthSmallestNLargest = new KthSmallestNLargest();
 
-let a = [17,18,4,16,12,9,5,1];
+let a = [17,18,4,16,20,9,5,1];
 let size = a.length;
 
 let k = 3;
-console.log(kthSmallestNLargest.findKthLargest(a, size, k));
-console.log(kthSmallestNLargest.findKthSmallest(a, size, k));
+console.log(kthSmallestNLargest.findKthLargest(a, size, k));  //third largest number is 16
+console.log(kthSmallestNLargest.findKthSmallest(a, size, k)); //third smallest number is 5

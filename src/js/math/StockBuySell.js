@@ -70,8 +70,11 @@ let stock = new StockBuySell();
 
 // stock prices on consecutive days
 //let price[] = {100, 180, 260, 310, 40, 535, 695};
+/*
+Buy on day: 0        Sell on day : 2
+Buy on day: 3        Sell on day : 4
+Buy on day: 6        Sell on day : 7
+*/
 let price = [2, 5, 7, 1, 4, 3, 1, 3];
 let n = price.length;
-
-// fucntion call
 stock.stockBuySell(price, n);
