@@ -48,35 +48,35 @@ class KnightTour {
         }
         // try to solve the rest of the problem recursively
     
-        // go down and right
+        // go down 2 and right 1
         if (this.canMove(row + 2, column + 1, n) && this.findPath(row + 2, column + 1, index + 1, n)) {
             return true;
         }
-        // go right and down
+        // go down 1 and right 2
         if (this.canMove(row + 1, column + 2, n) && this.findPath(row + 1, column + 2, index + 1, n)) {
             return true;
         }
-        // go right and up
+        // go up 1 and right 2
         if (this.canMove(row - 1, column + 2, n) && this.findPath(row - 1, column + 2, index + 1, n)) {
             return true;
         }
-        // go up and right
+        // go up 2 and right 1
         if (this.canMove(row - 2, column + 1, n) && this.findPath(row - 2, column + 1, index + 1, n)) {
             return true;
         }
-        // go up and left
+        // go up 2 and left 1
         if (this.canMove(row - 2, column - 1, n) && this.findPath(row - 2, column - 1, index + 1, n)) {
             return true;
         }
-        // go left and up
+        // go up 1 and left 2
         if (this.canMove(row - 1, column - 2, n) && this.findPath(row - 1, column - 2, index + 1, n)) {
             return true;
         }
-        // go left and down
+        // go down 1 and go left 2
         if (this.canMove(row + 1, column - 2, n) && this.findPath(row + 1, column - 2, index + 1, n)) {
             return true;
         }
-        // go down and left
+        // go down 2 and go left
         if (this.canMove(row + 2, column - 1, n) && this.findPath(row + 2, column - 1, index + 1, n)) {
             return true;
         }
@@ -111,6 +111,7 @@ class KnightTour {
 
 }
 
-let n = 8;
+let n = 5;
 let i = new KnightTour(n);
+
 i.solve();

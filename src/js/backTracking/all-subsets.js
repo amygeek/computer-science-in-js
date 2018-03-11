@@ -20,18 +20,19 @@ let getBit = function(num, bit){
     return 1;
 };
 
-let getAllSubsets = function(v) {
-    
+let getAllSubsets = function(arr) {
+
+    let n = arr.length;
     let sets = new Set();
-    let count = Math.pow(2, v.length);
+    let count = Math.pow(2, n);
     
     for (let i = 0; i < count; i++) {
-        
+
         let st = new Set();
         
-        for (let j = 0; j < v.length; j++) {
+        for (let j = 0; j < n; j++) {
             if (getBit(i, j) === 1) {
-                st.add(v[j]);
+                st.add(arr[j]);
             }
         }
 
@@ -40,33 +41,30 @@ let getAllSubsets = function(v) {
     return sets;
 };
 
-let arr = [2, 3, 4];
-
-let sets = getAllSubsets(arr);
-
 /**
- Set {}
- Set { 2 }
- Set { 3 }
- Set { 2, 3 }
- Set { 4 }
- Set { 2, 4 }
- Set { 3, 4 }
- Set { 2, 3, 4 }
+ Set {
+  Set {},
+  Set { 1 },
+  Set { 2 },
+  Set { 1, 2 },
+  Set { 3 },
+  Set { 1, 3 },
+  Set { 2, 3 },
+  Set { 1, 2, 3 } }
  */
-// for(let v of sets) {
-//     console.log(v);
-// }
+let arr = [1,2,3];
+
+console.log( getAllSubsets(arr) );
 
 
-let getAllSubSets = (sets, arr, n, index) => {
+let getAllSubsets2 = (sets, arr, n, index) => {
 
     if ( n === index) {
         //base case: add an empty set
         let st = new Set();
         sets.add(st);
     } else {
-        sets = getAllSubSets(sets, arr, n, index + 1);
+        sets = getAllSubsets2(sets, arr, n, index + 1);
         let item = arr[index];
         let moreSet = new Set();
         for (let set of sets) {
@@ -89,26 +87,7 @@ let getAllSubSets = (sets, arr, n, index) => {
 }
 
 let st = new Set();
-console.log(getAllSubSets(st, [1,2,3], 3, 0));
+console.log(getAllSubsets2(st, [1,2,3], 3, 0));
 
-/*
- 111
- 12
- 21
- 3
- */
-let printSubsets = ( n, x) => {
-    if( n == 0 ){
-        console.log(x);
-        return;
-    } else {
-        for(let i=1; i<=n; i++){
-            x = x + i;
-            printSubsets(n - i, x);
-            x = x.substr(0, x.length - 1);
-        }
-    }
-}
 
-printSubsets(3,"");
 

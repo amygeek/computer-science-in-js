@@ -104,38 +104,40 @@ class coinChangeMin {
                     if ( total[j] > total[j - coins[i]] + 1 ) {
 
                         total[j] = total[j - coins[i]] + 1;
-                        res[j] = i;
+                        res[j] = i; //for printing
                     }
+
                 }
 
             }
         }
 
-        console.log(res);
         this.printCoinCombination(res, coins);
 
         return total[amount];
     }
-    
+
+
     printCoinCombination(res, coins) {
 
-        if (res[res.length - 1] == -1) {
+        let start = res.length - 1;
+
+        if (res[ start ] == -1) {
             console.log("No solution is possible");
             return;
         }
-        let start = res.length - 1;
 
-        let str = "";
+        console.log("Coins used to form amount: ");
+
         while ( start != 0 ) {
+
             let j = res[start];
-            str += coins[j] + " ";
+            console.log( coins[j] );
+
             start = start - coins[j];
+
         }
-
-        console.log("Coins used to form amount: ", str);
     }
-
-
 }
 
 //let amount = 13;

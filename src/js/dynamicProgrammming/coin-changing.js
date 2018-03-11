@@ -31,7 +31,7 @@ class CoinChanging {
 
     coinChange(coins, amount ) {
 
-        // intialize an array of zeros with indices up to amount
+        // initialize an array of zeros with indices up to amount
         let res = new Array( amount + 1).fill(0);
 
         //this will be only selected if you don't select any coin
@@ -51,6 +51,7 @@ class CoinChanging {
 
             }
         }
+
         return res[amount];
     }
 
@@ -106,7 +107,7 @@ let coins = [1, 2, 3];
 //let coins = [1, 5, 10, 25];
 //console.log(coinChange( coins, 100));  //242
 
-console.log(C.coinChange( coins, 5));  //6
+console.log(C.coinChange( coins, 5));  //5
 
 C.printSolution( 5, coins);
 

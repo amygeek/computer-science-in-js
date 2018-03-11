@@ -38,8 +38,8 @@ class NQueens {
         // for finding the column for x2 row, we will check all the columns for
         // all the rows till x2-1.
         for (let i = 0; i < x2; i++) {
-            //this.res[i] == y2 => columns are same
-            //|i - x2| == |this.res[i] - y2| => in diagonals.
+            //this.res[i] == y2 => row has a queen in the same column
+            //|i - x2| == |this.res[i] - y2| => if the distance between the columns equals the distance between the rows, then they're in the same diagonal.
             if ( this.res[i] === y2 || ( Math.abs( i - x2 ) == Math.abs( this.res[i] - y2 ) )) {
                     return false;
             }

@@ -1,35 +1,15 @@
 /*
  Coin In a Line Game
- the coins-in-a-line game, an even num­ber, n, of coins, of var­i­ous denom­i­na­tions from var­i­ous coun­tries, are placed in a line.
- Two play­ers, who we will call Alice and Bob, take turns remov­ing one of the coins from either end of the remain­ing line of coins.
- That is, when it is a player’s turn, he or she removes the coin at the left or right end of the line of coins and adds that coin
- to his or her col­lec­tion. The player who removes a set of coins with larger total value than the other player wins,
- where we assume that both Alice and Bob know the value of each coin.
- Exam­ple:
+ Input: row of n even coins of values v1 ... vn
+ Goal: maximize value of coins selected
 
- coins []  =  { 6, 9, 1, 2, 16, 8}
+ v(i, j): max value we can definitely win if it is our turn and only coins v1...vj remain
+ v(i, i) v(i,i+1) v(i, i+2) v(i, i+3)...
+ v(i,j) = max( vi + min( v(i+1, j-1), v(i+2, j ), vj + min(i, j-2), v(i+1,j-1) )
 
- trial 1: (players will pick the best option available for them)
- coins [] = { 6, 9, 1, 2, 16, 8} , Alice picks 8
- coins [] = { 6, 9, 1, 2, 16}, Bob picks 16
- coins [] = { 6, 9, 1, 2}, Alice picks 6
- coins [] = { 9, 1, 2}, Bob picks 9
- coins [] = {1, 2}, Alice picks 2
- coins [] = {1}, Bob picks 1
- Alice: 8+6+2 =16 Bob: 16+9+1=26 => Alice Lost
-
- So clearly picking up the best in each move is not good for Alice. What else Alice can do to win the game.
-
- trial 2: (Alice thinks about Bob's move, Will discuss the strategy in solution)
- coins [] = { 6, 9, 1, 2, 16, 8} , Alice picks 6
- coins [] = { 9, 1, 2, 16, 8}, Bob picks 9
- coins [] = { 1, 2, 16, 8}, Alice picks 1
- coins [] = 2, 16, 8}, Bob picks 8
- coins [] = {2, 16}, Alice picks 16
- coins [] = {2}, Bob picks 2
- Alice: 6+1+16 =23 Bob: 9+8+2=19 => Alice Won
-
- So this time Alice has won. Let's see the solution and discuss what Alice has done to win the game.
+ ---------------------------------------------------
+  vi  | vi+1  | ...  |   |   | vj  |
+ ---------------------------------------------------
  */
 
 let coinGame = (arr) => {
@@ -75,10 +55,17 @@ let coinGame = (arr) => {
             //console.log(` i = ${i}, j = ${j}, res[i][j] = ${res[i][j]} `);
         }
     }
-    console.log(res)
+
+    /*
+    res:
+     [ [ 3, 9, 4, 11 ],
+       [ 0, 9, 9, 9 ],
+       [ 0, 0, 1, 2 ],
+       [ 0, 0, 0, 2 ] ]
+     */
     return res[0][n-1];
 }
 
-let arr = [6, 9, 1, 2, 16, 8];
+let arr = [3, 9, 1, 2];
 
 console.log(coinGame(arr));

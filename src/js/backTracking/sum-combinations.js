@@ -39,7 +39,7 @@
 
  sum: 3, start: 3, output: [ ]
  */
-let print_all_sum_rec = function(target, sum, start, output, result) {
+let printAllSumRec = function(target, sum, start, output, result) {
 
     if (sum === target) {
         result.push(output.slice());
@@ -47,12 +47,12 @@ let print_all_sum_rec = function(target, sum, start, output, result) {
 
     for (let i = start; i < target; i++) {
 
-        let temp = sum + i;
+        let x = sum + i;
 
-        if (temp <= target) {
+        if (x <= target) {
 
-            output.push(i);
-            print_all_sum_rec(target, temp, i, output, result);
+            output.push( i );
+            printAllSumRec(target, x, i, output, result);
             output.pop();
 
         } else {
@@ -61,28 +61,34 @@ let print_all_sum_rec = function(target, sum, start, output, result) {
     }
 };
 
-let print_all_sum = function(target) {
+let printAllSum = function(target) {
 
     let output = [];
     let result = [];
-    print_all_sum_rec(target, 0, 1, output, result);
+    printAllSumRec(target, 0, 1, output, result);
 
     return result;
 };
 
-console.log( print_all_sum(5) );
+console.log( printAllSum(5) );
 
-let printSubsets = (n, x) => {
+/*
+ 111
+ 12
+ 21
+ 3
+ */
+let printCombinations = ( n, x) => {
     if( n == 0 ){
         console.log(x);
         return;
-    }else{
-        for(let i = 1; i <= n; i++){
+    } else {
+        for(let i=1; i<=n; i++){
             x = x + i;
-            printSubsets(n - i, x);
-            x = x.substr(0, x.length-1);
+            printCombinations(n - i, x);
+            x = x.substr(0, x.length - 1);
         }
     }
 }
 
-console.log( printSubsets( 3, "") );
+printCombinations(3,"");

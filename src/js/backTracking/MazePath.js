@@ -9,19 +9,19 @@ class Point {
 class MazePath {
 
     constructor(m) {
-        this.maze = m;
+        this.arr = m;
         this.path = [];
         this.map = new Map();
         this.size = m.length;
     }
 
     isFree( x, y ) {
-        if (this.maze[x][y] === 0 ) {
+        if (this.arr[x][y] === 0 ) {
             return false;
         }
         return true;
     }
-    getPath( x, y, path, map ) {
+    getPath( x, y ) {
 
         if ( x < 0 || y < 0 || !this.isFree( x, y)) {
             return false;
@@ -29,16 +29,17 @@ class MazePath {
 
         let p = new Point(x, y);
 
-        if ( map.get(p) ) {
-            return map.get(p);
+        if ( this.map.get(p) ) {
+            return this.map.get(p);
         }
 
         let isOrigin = ( x === 0 && y === 0) ? true : false;
         let success = false;
 
-        if ( isOrigin || this.getPath( x - 1, y, path, map) || this.getPath( x, y-1, path, map)) {
-            path.push(p);
-            map.set(p, true);
+        if ( isOrigin || this.getPath( x - 1, y) || this.getPath( x, y-1)) {
+
+            this.path.push(p);
+            this.map.set(p, true);
             success = true;
         }
         return success;
@@ -58,16 +59,14 @@ class MazePath {
     }
 }
 
-let maze = [
+let arr = [
             [2, 5, 5, 0],
             [1, 1, 3, 1],
             [3, 4, 2, 4],
             [1, 4, 0, 4]];
 
-let mazePath = new MazePath(maze);
-let path = [];
-let map = new Map();
+let mazePath = new MazePath(arr);
 
-let n = maze.length - 1;
-mazePath.getPath(n, n, path, map );
-mazePath.printPath( path );  //( 0, 0 )( 0, 1 )( 0, 2 )( 1, 2 )( 1, 3 )( 2, 3 )( 3, 3 )
+let n = arr.length - 1;
+mazePath.getPath(n, n );
+mazePath.printPath( mazePath.path );  //( 0, 0 )( 0, 1 )( 0, 2 )( 1, 2 )( 1, 3 )( 2, 3 )( 3, 3 )

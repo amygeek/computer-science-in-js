@@ -71,3 +71,25 @@ let arr = [];
 console.log("Different compositions formed by 1, 2 and 3 of "+ n + " are");
 let C = new PrintCombinations();
 C.printCompositions(arr, n, 0);
+
+
+/*
+ 111
+ 12
+ 21
+ 3
+ */
+let printCombinations = ( n, x) => {
+    if( n == 0 ){
+        console.log(x);
+        return;
+    } else {
+        for(let i=1; i<=n; i++){
+            x = x + i;
+            printCombinations(n - i, x);
+            x = x.substr(0, x.length - 1);
+        }
+    }
+}
+
+printCombinations(3,"");

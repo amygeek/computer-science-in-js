@@ -28,38 +28,40 @@ let getBit = function(num, bit){
     return 1;
 }
 
-let getKSumSubsets = function(v, target_sum, sets) {
+let getKSumSubsets = function(arr, target) {
+    
+    let n = arr.length;
+    let count = Math.pow(2, n);
+    let sets = new Set();
 
-    let count = Math.pow(2, v.length);
-
+    //start at 1 since 0 index will be an empty set
     for (let i = 1; i < count; i++) {
 
         let sum = 0;
-        let st = new Set([]);
+        let st = new Set();
 
-        for (let j = 0; j < v.length; j++) {
+        for (let j = 0; j < n; j++) {
             if (getBit(i, j) === 1) {
-                sum = sum + v[j];
-                if (sum > target_sum) {
+                sum = sum + arr[j];
+                if (sum > target) {
                     break;
                 }
-                st.add(v[j]);
+                st.add(arr[j]);
             }
         }
 
-        if (sum === target_sum) {
-            sets.push(st);
+        if (sum === target) {
+            sets.add(st);
         }
     }
 
     return sets;
 };
 
-let v = [2, 5, 7];  //{} {2}, {5}, {7} {2,5} {5,7} {2, 7} {2,5,7}
-let target_sum = 7;
-let sets = [];
+let arr = [2, 5, 7];  //{} {2}, {5}, {7} {2,5} {5,7} {2, 7} {2,5,7}
+let target = 7;
 
-console.log(getKSumSubsets(v, target_sum, sets));  //[ Set { 2, 5 }, Set { 7 } ]
+console.log(getKSumSubsets(arr, target));  //[ Set { 2, 5 }, Set { 7 } ]
 
 /**
  * In this solution we will recursively generate subsets of the given list. While generating a subset,
@@ -72,15 +74,15 @@ console.log(getKSumSubsets(v, target_sum, sets));  //[ Set { 2, 5 }, Set { 7 } ]
  Memory Complexity
  Logarithmic, O(logn).
  */
-let get_k_sum_subsets_rec = function(list, partial_list, target_sum, sets, array_stack) {
+let get_k_sum_subsets_rec = function(list, partial_list, target, sets, array_stack) {
     let list_sum = 0;
     for (let i = 0; i < partial_list.length; i++) {
         list_sum += partial_list[i];
     }
 
-    if (list_sum === target_sum && partial_list.length > 0) {
+    if (list_sum === target && partial_list.length > 0) {
         sets.push(partial_list);
-    } else if (list_sum > target_sum) {
+    } else if (list_sum > target) {
         return;
     } else {
         for (var i = 0; i < list.length; i++) {
@@ -91,18 +93,18 @@ let get_k_sum_subsets_rec = function(list, partial_list, target_sum, sets, array
             let new_partial_list = partial_list.slice();
             new_partial_list.push(list[i]);
             let new_list = list.splice(i + 1);
-            get_k_sum_subsets_rec(new_list, new_partial_list, target_sum, sets, array_stack);
+            get_k_sum_subsets_rec(new_list, new_partial_list, target, sets, array_stack);
             partial_list = array_stack.pop();
             list = array_stack.pop();
         }
     }
 };
 
-let get_k_sum_subsets_2 = function(list, target_sum, sets) {
+let get_k_sum_subsets_2 = function(list, target, sets) {
     let partial_list = [];
     let array_stack = [];
-    get_k_sum_subsets_rec(list, partial_list, target_sum, sets, array_stack);
+    get_k_sum_subsets_rec(list, partial_list, target, sets, array_stack);
     return sets;
 };
 
-//console.log(get_k_sum_subsets_2(v, target_sum, sets));  //[ Set { 2, 5 }, Set { 7 } ]
+//console.log(get_k_sum_subsets_2(arr, target, sets));  //[ Set { 2, 5 }, Set { 7 } ]
