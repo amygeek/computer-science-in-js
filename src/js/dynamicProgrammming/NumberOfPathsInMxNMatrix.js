@@ -28,6 +28,6 @@ let countPaths = (m) => {
     return res[m-1][m-1];
 }
 
-console.log( countPaths( 3 ) );
+console.log( countPaths( 3 ) );   // for 3 x 3 grid, path will be 6
 
 

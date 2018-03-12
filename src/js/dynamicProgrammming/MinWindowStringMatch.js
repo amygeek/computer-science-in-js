@@ -3,54 +3,55 @@
 
 class MinWindowStringMatch {
 
-    // Function to find smallest window containing all characters of 't'
-    findSubString( s,  t) {
+    // Function to find smallest window containing all characters of 'pattern'
+    findSubString( str,  pattern) {
         
-        let sLen = s.length;
-        let tLen = t.length;
+        let sLen = str.length;
+        let pLen = pattern.length;
     
-        // check if string's length is less than pattern's
+        // check if str's length is less than pattern's
         // length. If yes then no such window can exist
-        if (sLen < tLen) {
+        if (sLen < pLen) {
             console.log("No such window exists");
             return "";
         }
         
-        let resT = new Array(256).fill(0);
-        let resS = new Array(256).fill(0);
+        let pRes = new Array(256).fill(0);
+        let sRes = new Array(256).fill(0);
         
-        // store occurrence ofs characters of pattern
-        for (let i = 0; i < tLen; i++) {
-            resT[t.charCodeAt(i)]++;
+        // store occurrence characters in pattern
+        for (let i = 0; i < pLen; i++) {
+            pRes[pattern.charCodeAt(i)]++;
         }
         
 
-        let start = 0, startIndex = -1, minLen = Number.MAX_VALUE;
+        let start = 0;
+        let startIndex = -1;
+        let minLen = Number.MAX_VALUE;
 
-        // start traversing the string
-        let count = 0;  // count of characters
+        // start traversing the string, count of characters
+        let count = 0;
 
         for (let j = 0; j < sLen ; j++) {
             // count occurrence of characters of string
-            resS[s.charCodeAt(j)]++;
+            sRes[str.charCodeAt(j)]++;
 
-            // If string's char matches with pattern's char then increment count
-            if (resT[s.charCodeAt(j)] != 0 && resS[s.charCodeAt(j)] <= resT[s.charCodeAt(j)] ) {
+            // If string'str char matches with pattern'str char then increment count
+            if (pRes[str.charCodeAt(j)] != 0 && sRes[str.charCodeAt(j)] <= pRes[str.charCodeAt(j)] ) {
                 count++;
             }
-        
-        
+
             // if all the characters are matched
-            if (count == tLen) {
+            if (count == pLen) {
                 // Try to minimize the window i.e., check if
                 // any character is occurring more no. of times
                 // than its occurrence  in pattern, if yes
                 // then remove it from starting and also remove
                 // the useless characters.
-                while ( resS[s.charCodeAt(start)] > resT[s.charCodeAt(start)]  || resT[s.charCodeAt(start)] == 0) {
+                while ( sRes[str.charCodeAt(start)] > pRes[str.charCodeAt(start)]  || pRes[str.charCodeAt(start)] == 0) {
         
-                    if (resS[s.charCodeAt(start)] > resT[s.charCodeAt(start)]) {
-                        resS[s.charCodeAt(start)]--;
+                    if (sRes[str.charCodeAt(start)] > pRes[str.charCodeAt(start)]) {
+                        sRes[str.charCodeAt(start)]--;
                     }
         
                     start++;
@@ -72,17 +73,20 @@ class MinWindowStringMatch {
             return "";
         }
         
-        // Return substring starting from startIndex
-        // and length minLen
-        return s.substring(startIndex, startIndex + minLen);
+
+        console.log(minLen); // 6
+
+        // Return substring starting from startIndex and length minLen
+        return str.substring(startIndex, startIndex + minLen);
     }
     
 }
 
- let s = "this is a test string";
- let t = "tist";
-//let s = "ADOBECODEBANC";   //BANC
-//let t =  "ABC";
+//let str = "ADOBECODEBANC";   //BANC
+//let pattern =  "ABC";
+
+let str = "this is a test string";   //len 6: t stri
+let pattern = "tist";
 
 let minWindowStringMatch = new MinWindowStringMatch();
-console.log("Smallest window is : " + minWindowStringMatch.findSubString(s, t));
+console.log("Smallest window is : " + minWindowStringMatch.findSubString(str, pattern));

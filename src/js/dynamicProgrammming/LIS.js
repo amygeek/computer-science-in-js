@@ -11,10 +11,10 @@ let LIS2 = ( arr ) => {
 
     for ( let i=1; i<n; i++ ) {
         for ( let j=0; j<i; j++ ) {
-            if ( arr[i] > arr[j] ) {
-                if (res[j] + 1 > res[i]) {
+            if ( arr[i] > arr[j] && res[i] < res[j] + 1 ) {
+
                     res[i] = res[j] + 1;
-                }
+
             }
         }
     }
@@ -135,4 +135,5 @@ let testArr = [10, 22, 9, 33, 21, 50, 41, 60, 80];  //[ 2, 3, 7, 8, 10, 13 ]
 
 
 console.log(LIS(testArr, testArr.length));  //6 in len [ 2, 3, 7, 8, 10, 13 ]
+
 console.log( LIS3(testArr) );  //6

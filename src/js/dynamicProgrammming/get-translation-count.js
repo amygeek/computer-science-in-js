@@ -6,8 +6,10 @@
  to count the different ways to translate a number?
  */
 let getTranslationCount = (number) => {
+
     let num = number.toString();
     let len = num.length;
+
     let counts = [];
 
     for (let i = len - 1; i >= 0; --i) {
@@ -44,9 +46,9 @@ let getTranslationCount = (number) => {
 }
 
 //test
-(function(){
-    let cnt = getTranslationCount(12258);
-    console.log(cnt); //5
-    cnt = getTranslationCount(126);
-    console.log(cnt); //3
-})()
+
+let cnt = getTranslationCount(12258);
+console.log(cnt); //5
+cnt = getTranslationCount(126);
+console.log(cnt); //3
+

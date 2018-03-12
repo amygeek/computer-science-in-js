@@ -30,28 +30,29 @@ class RobotTravel {
     }
     
     countDP( arr ){
+
+        let n = arr.length;
+        let res = arr;
     
-        let result = arr;
+        for (let i = 1; i < n ; i++) {
+            for (let j = 1; j < n ; j++) {
     
-        for (let i = 1; i < arr.length ; i++) {
-            for (let j = 1; j < arr.length ; j++) {
+                if( res[i][j] != -1 ){
+                    res[i][j] = 0;
     
-                if( result[i][j] != -1 ){
-                    result[i][j] = 0;
-    
-                    if ( result[i-1][j] > 0 ) {
-                        result[i][j] += result[i-1][j];
+                    if ( res[i-1][j] > 0 ) {
+                        res[i][j] += res[i-1][j];
                     }
     
-                    if ( result[i][j-1] > 0 ) {
-                        result[i][j] += result[i][j-1];
+                    if ( res[i][j-1] > 0 ) {
+                        res[i][j] += res[i][j-1];
                     }
     
                 }
             }
         }
-    
-        return result[arr.length-1][arr.length-1];
+
+        return res[arr.length-1][arr.length-1];
     }
     
    
@@ -60,8 +61,8 @@ class RobotTravel {
 
 
         let arr  = [[1,  1, 1],
-                        [1, -1, 1],
-                        [1,  1, 1]];   // path 2
+                    [1, -1, 1],
+                    [1,  1, 1]];   // path 2
 
         //let arr =     [[1,  1, 1],
         //                [1,  1, 1],

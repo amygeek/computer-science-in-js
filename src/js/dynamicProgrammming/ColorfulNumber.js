@@ -59,8 +59,7 @@
         if (set.has(val1 * val2)) {
             return false;
         }
-            
-    
+
         set.add( val1 * val2 );
     
         i++;

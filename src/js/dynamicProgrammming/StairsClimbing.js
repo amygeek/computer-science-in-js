@@ -27,10 +27,10 @@ let findWaysDP = ( n, res) => {
     }
     
     res[n] = 1 + findWaysDP(n - 1, res) + findWaysDP(n - 2, res) + findWaysDP(n - 3, res);
-    
+
     return res[n];
 }
 
-let n = 3;
+let n = 5;
 let res = [];
-console.log( findWaysDP(n, res) );
+console.log( findWaysDP(n, []) );  //15

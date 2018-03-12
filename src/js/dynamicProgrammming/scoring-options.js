@@ -15,7 +15,7 @@
 we'll use the memoization technique.
 
  Memoization is an optimization technique used to make programs faster and improve their performance by storing the results of
- expensive function calls and returning the cached result when the same inputs occur again. It saves the computed results
+ expensive function calls and returning the cached results when the same inputs occur again. It saves the computed results
  for possible later reuse, rather than recomputing them.
 
  The scoring options are 1, 2, 4. To find the number of ways a player can score 'n' runs, the recurrence relation is as follows:
@@ -35,36 +35,37 @@ we'll use the memoization technique.
  41
 
  */
-let scoring_options_rec = function(n, result) {
+let countScoreRec = function(n, res) {
     if (n < 0) {
         return 0;
     }
 
-    if (result[n] > 0) {
-        return result[n];
+    if (res[n] > 0) {
+        return res[n];
     }
 
-    result[n] = scoring_options_rec(n - 1, result) +
-        scoring_options_rec(n - 2, result) +
-        scoring_options_rec(n - 4, result);
-    return result[n];
+    res[n] = countScoreRec(n - 1, res) +
+        countScoreRec(n - 2, res) +
+        countScoreRec(n - 4, res);
+    return res[n];
 };
 
-let scoring_options = function(n) {
+let countScore = function(n) {
+    
     if (n <= 0) {
         return 0;
     }
 
-    let result = new Array(n+1).fill(0);
+    let res = new Array(n+1).fill(0);
 
-    result[0] = 1;
+    res[0] = 1;
 
-    scoring_options_rec(n, result);
+    countScoreRec(n, res);
 
-    return result[n];
+    return res[n];
 };
 
-console.log( scoring_options(5) );  //10
+console.log( countScore(5) );  //10
 
 /**
  Runtime Complexity
@@ -79,7 +80,7 @@ console.log( scoring_options(5) );  //10
  This is because the result at 'n' is the sum of values at n-1, n-2 and n-4. We'll slide the results towards
  left and save the current result at the last index.
  */
-let scoring_options_dp = function(n) {
+let countScoreDp = function(n) {
     if (n <= 0) {
         return 0;
     }
@@ -88,20 +89,20 @@ let scoring_options_dp = function(n) {
     //last 4 ways to calculate the number of ways
     //for a given n
     //save the base case on last index of the vector
-    let result = [0, 0, 0, 1];
+    let res = [0, 0, 0, 1];
 
     for (var i = 1; i <= n; i++) {
-        let current_sum = result[3] + result[2] + result[0];
+        let current = res[3] + res[2] + res[0];
 
         //slide left all the results in each iteration
-        //result for current i will be saved at last index
-        result[0] = result[1];
-        result[1] = result[2];
-        result[2] = result[3];
-        result[3] = current_sum;
+        //res for current i will be saved at last index
+        res[0] = res[1];
+        res[1] = res[2];
+        res[2] = res[3];
+        res[3] = current;
     }
-    return result[3];
+    return res[3];
 };
 
-console.log( scoring_options_dp(5) );  //10
+console.log( countScoreDp(5) );  //10
 

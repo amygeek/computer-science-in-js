@@ -6,41 +6,41 @@
 
  Recursion is the key here.
  Take the rows count and column counts say rowCount and colCount respectively
- Take currentRow =0 and currentColumn =0 and path =””
- Call printAll(currentRow, currentcolumn,path)
+ Take row =0 and col =0 and path =””
+ Call printAll(row, col,path)
  Add array[0][0] to the path.
- Call recursively printAll(currentRow+1, currentcolumn,path)
- Call recursively printAll(currentRow, currentcolumn+1,path)
- Base Case 1: when currentRow = rowCount-1(because array index starts with 0) , print the rest of the columns, return
- Base Case 2: when currentcolumn = colCount-1(because array index starts with 0) , print the rest of the rows, return
+ Call recursively printAll(row+1, col,path)
+ Call recursively printAll(row, col+1,path)
+ Base Case 1: when row = rowCount-1(because array index starts with 0) , print the rest of the columns, return
+ Base Case 2: when col = colCount-1(because array index starts with 0) , print the rest of the rows, return
  */
 class PrintAllPathIn2DArray {
-    
+
     constructor ( arr ) {
         this.arr = arr;
         this.rowCount = arr.length;
         this.colCount = arr[0].length;
     }
-    
-    printAll( currentRow, currentColumn, path) {
-        if (currentRow == this.rowCount - 1) {
-            for (let i = currentColumn; i < this.colCount; i++) {
-                path += "-" + this.arr[currentRow][i];
+
+    printAll( row, col, path) {
+        if (row == this.rowCount - 1) {
+            for (let i = col; i < this.colCount; i++) {
+                path +=  this.arr[row][i] + " ";
             }
             console.log(path);
             return;
         }
-        if (currentColumn == this.colCount - 1) {
-            for (let i = currentRow; i <= this.rowCount - 1; i++) {
-                path += "-" + this.arr[i][currentColumn];
+        if (col == this.colCount - 1) {
+            for (let i = row; i < this.rowCount; i++) {
+                path += this.arr[i][col] + " ";
             }
             console.log(path);
             return;
         }
-        path = path + "-" + this.arr[currentRow][currentColumn];
-        this.printAll(currentRow + 1, currentColumn, path);
-        this.printAll(currentRow, currentColumn + 1, path);
-        // this.printAll(currentRow + 1, currentColumn + 1, path);
+        path = path + this.arr[row][col] + " ";
+        this.printAll(row + 1, col, path);
+        this.printAll(row, col + 1, path);
+        // this.printAll(row + 1, col + 1, path);
     }
 }
 

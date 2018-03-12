@@ -90,3 +90,4 @@ let ed = new EggDropping();
 let total = ed.calculate(2,6);
 
 console.log( total );
+console.log( ed.calculateRecursive(2, 6));

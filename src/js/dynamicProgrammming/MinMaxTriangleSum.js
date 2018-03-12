@@ -1,6 +1,6 @@
 /*
  Maximum path sum in a triangle.
- 2.8
+
  We have given numbers in form of triangle, by starting at the top of the triangle and moving to adjacent numbers
  on the row below, find the maximum total from top to bottom.
 
@@ -22,59 +22,65 @@
  Output : 19
  Explanation : 8 + 4 + 6 + 1 = 19
  */
-let maxTriangleSum = ( tri,  m ) => {
+let maxTriangleSum = ( arr ) => {
+
+    let n = arr.length - 1;
+
     // loop for bottom-up calculation
-    for (let i=m-1; i>=0; i--) {
+    for (let i=n-1; i>=0; i--) {
         for (let j=0; j<=i; j++)
         {
             // for each element, check both
             // elements just below the number
             // and below right to the number
             // add the maximum of them to it
-            if (tri[i+1][j] > tri[i+1][j+1]) {
-                tri[i][j] += tri[i+1][j];
+            if (arr[i+1][j] > arr[i+1][j+1]) {
+                arr[i][j] += arr[i+1][j];
             } else {
-                tri[i][j] += tri[i+1][j+1];
+                arr[i][j] += arr[i+1][j+1];
             }
 
         }
     }
 
     // return the top element which stores the maximum sum
-    console.log( tri );
-    return tri[0][0];
+    //console.log( arr );
+    return arr[0][0];
 }
 
-let minTriangleSum = (tri,  m) => {
+let minTriangleSum = ( arr ) => {
+
+    let n = arr.length - 1;
+
     // loop for bottom-up calculation
-    for (let i=m-1; i>=0; i--) {
+    for (let i=n-1; i>=0; i--) {
         for (let j=0; j<=i; j++) {
             // for each element, check both
             // elements just below the number
             // and below right to the number
             // add the minimum of them to it
-            if (tri[i+1][j] < tri[i+1][j+1]) {
-                tri[i][j] += tri[i+1][j];
+            if (arr[i+1][j] < arr[i+1][j+1]) {
+                arr[i][j] += arr[i+1][j];
             } else {
-                tri[i][j] += tri[i+1][j+1];
+                arr[i][j] += arr[i+1][j+1];
             }
 
         }
     }
 
     // return the top element which stores the minimum sum
-    console.log( tri );
-    return tri[0][0];
+    console.log( arr );
+    return arr[0][0];
 }
 
-//let tri = [[2, 0, 0,0],
+//let arr = [[2, 0, 0,0],
 //           [5, 4, 0,0],
 //           [5, 5, 7,0],
 //           [1, 4, 8,3]];
 
-let tri = [[1, 0, 0],
+let arr = [[1, 0, 0],
            [4, 8, 0],
            [1, 5, 3]];
 
-console.log( maxTriangleSum ( tri, 2 ))
-//console.log( minTriangleSum ( tri, tri.length - 1))
+console.log( maxTriangleSum ( arr ))
+//console.log( minTriangleSum ( arr ))

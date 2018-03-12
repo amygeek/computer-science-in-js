@@ -26,10 +26,10 @@ class SmallSquare {
             return 0;
         }
 
-        let min = solveRecursively(n - 1 * 1, options);
+        let min = this.solveRecursively(n - 1 * 1, options);
         for (let i = 2; i <= options; i++) {
             if (n >= i * i) {
-                min = Math.min(min, solveRecursively(n - i * i, options));
+                min = Math.min(min, this.solveRecursively(n - i * i, options));
             }
         }
         return min + 1;
@@ -40,48 +40,39 @@ class SmallSquare {
         let options = parseInt( Math.sqrt( n ) );
 
         //solve using recursion
-        //console.log(solveRecursively(n, options));
+        console.log(this.solveRecursively(n, options));
 
-        //solve using Dynamic programming
-        console.log( this.solveUsingDP(n, options));
     }
 
-    solveUsingDP( n, options) {
+    getMinSquare( n ) {
+        // Create a dynamic programming table
+        // to store sq
+        let res = new Array( n+1 );
+    
+        // getMinSquares table for base case entries
+        res[0] = 0;
+        res[1] = 1;
+        res[2] = 2;
+        res[3] = 3;
+    
+        // getMinSquares rest of the table using recursive
+        // formula
+        for (let i = 4; i <= n; i++) {
+            // max value is i as i can always be represented as 1*1 + 1*1 + ...
+            res[i] = i;
 
-        let res = new Array( n + 1); // Minimum numbers required whose sum is = n
-
-        res[0] = 0; // if number is 0 the answer is 0.
-
-        let nums = new Array( options + 1 );
-
-        // solve in bottom up manner
-        for (let number = 1; number <= n; number++) {
-
-            // reset the nums[] for new i
-            for (let j = 0; j <= options; j++) {
-                nums[j] = 0;
-            }
-            // now try every option one by one and fill the solution in nums[]
-            for (let j = 1; j <= options; j++) {
-                // check the criteria
-                if (j * j <= number) {
-                    // select the number, add 1 to the solution of number-j*j
-                    nums[j] = res[number - j * j] + 1;
-
+            // Go through all smaller numbers to find the minimum
+            for (let x = 1; x <= i; x++) {
+                let temp = x * x;
+                if (temp > i) {
+                    break;
+                } else {
+                    res[i] = Math.min(res[i], 1 + res[i - temp]);
                 }
             }
-
-            //Now choose the optimal solution from nums[]
-
-            res[number] = -1;
-            for(let j=1;j<nums.length;j++){
-                if( nums[j] > 0 && (res[number] == -1 || res[number] > nums[j] )){
-                    res[number] = nums[j];
-                }
-            }
-
         }
-        return res[n];
+
+        console.log( res[n] );
     }
     
 }
@@ -89,3 +80,4 @@ class SmallSquare {
 let N = 12;
 let smallSquare = new SmallSquare();
 smallSquare.solve(N);
+smallSquare.getMinSquare(N);
