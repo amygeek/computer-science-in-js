@@ -8,3 +8,5 @@ function towerOfHanoi (n, from, spare, to){
 		towerOfHanoi(n-1, spare, from, to);
 	}
 }
+
+console.log( towerOfHanoi(3, 'from', 'spare', 'to'));

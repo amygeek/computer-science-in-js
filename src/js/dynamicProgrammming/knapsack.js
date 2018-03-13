@@ -34,7 +34,7 @@ wt = 30 + 20; val = 120 + 100
 let Knapsack = (val, wt, w) => {
     
     let n = val.length;
-    let res = []
+    let res = [];
     for (let i=0; i<=n; i++) {
         res.push(new Array( w + 1));
     }
@@ -56,14 +56,22 @@ let Knapsack = (val, wt, w) => {
             }
         }
     }
+
     return res[n][w];
 }
 
 //let val = [22, 20, 15, 30, 24, 54, 21, 32, 18, 25];
 //let wt = [4, 2, 3, 5, 5, 6, 9, 7, 8, 10];
 //let res = Knapsack(val, wt, 30);  //182
-let val = [1,4,5,7];
-let wt = [1,3,4,9];
-let res = Knapsack(val, wt, 7);  //9
+
+/*
+[[ 0, 0, 0, 0, 0, 0 ],
+ [ 0, 4, 4, 4, 4, 4 ],
+ [ 0, 4, 5, 9, 9, 9 ],
+ [ 0, 4, 5, 9, 10, 11]]
+ */
+let val = [4,5,6];
+let wt = [1,2,3];
+let res = Knapsack(val, wt, 5);  //11
 
 console.log(res);

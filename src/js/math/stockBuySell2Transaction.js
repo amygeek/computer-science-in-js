@@ -72,10 +72,10 @@ let maxProfit = ( price ) => {
     return result;
 }
 
-//let prices = [10, 22, 5, 75, 65, 80];
+let prices = [10, 22, 5, 75, 65, 80];
 //let prices = [2, 30, 15, 10, 8, 25, 80];
 //let prices = [100, 30, 15, 10, 8, 25, 80];
 //let prices = [90, 80, 70, 60, 50];
-let prices = [8, 10, 80, 2, 82];
+//let prices = [8, 10, 80, 2, 82];  //152, buy at 2, sell at 82, buy at 8 sell at 80
 
 console.log("Max profit " + maxProfit(prices));

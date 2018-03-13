@@ -54,22 +54,38 @@ let maxProductRec = ( n ) => {
  */
 let maxProductCutting = ( n ) => {
 
-    let res = new Array( n + 1).fill(0);
-    res[1] = 1;
+    let res = new Array( n + 1);
+
+    res[0] = 1;
+    for ( let i=1; i<=n ; i++ ) {
+        res[i] = i;
+    }
 
     for (let i = 2; i <= n; i++) {
 
-        let max = Number.MIN_VALUE;
-
-        for (let j = 1; j < i; j++) {
-            max = Math.max(max, j * res[i - j], j * (i - j ) );
+        for (let j = 1; j <= i; j++) {
+            res[i] = Math.max(res[i], res[j]  * res[ i - j ] );
         }
-        res[i] = max;
+
     }
 
     return res[n];
 
 }
+
+//maxProduct(int num){
+//    int T[] = new int[num+1];
+//    T[0] = 1;
+//    for(int i=1; i <= num; i++){
+//        T[i] = i;
+//    }
+//    for(int i=2; i <= num; i++){
+//        for(int j=1; j <= i; j++){
+//            T[i] = Math.max(T[i],T[j]*T[i-j]);
+//        }
+//    }
+//    return T[num];
+//}
 
 console.log("Maximum product cutting in 10 is follow: ");
 console.log( maxProductRec( 5 ) );
