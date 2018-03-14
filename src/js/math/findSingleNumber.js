@@ -20,32 +20,34 @@
  Now modulus with 3
 
  3mod3  4mod3 1mod3 => 0 1 1 => 3 element appearing once.
+
+ it doesn't work for 0 number. 1 << 0 will be 1, so it results incorrect counts
  */
 let findSingleNumber = (arr) => {
 
     let n = arr.length;
-    let singleNum = null;
+    let single = null;
 
     for ( let i=0; i<32; i++) {
 
         let y = 1 << i;
 
-        let tempSum = 0;
+        let count = 0;
         for ( let j=0; j<n; j++ ) {
             if ( (arr[j] & y) >= 1 ) {
-                tempSum++;
+                count++;
             }
         }
 
-        if (tempSum % 3 !== 0 ) {
-            singleNum = y;
+        if (count % 3 !== 0 ) {
+            single = y;
         }
     }
 
-    return  singleNum;
+    return  single;
 };
 
 
-let arr2 = [6,5,3,2,4,2,5,6,3,3,6,5,2];
+let arr2 = [6,5,3,2,8,2,5,6,3,3,6,5,2];
 
-console.log("Single number is " + findSingleNumber(arr2));  //4
+console.log("Single number is " + findSingleNumber(arr2));  //8

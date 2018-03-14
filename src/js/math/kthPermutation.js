@@ -81,23 +81,35 @@ let factorial = function(n) {
     return n * factorial(n - 1);
 };
 
-let find_kth_permutation = function(v, k, result) {
-    if (!v || v.length === 0) {
+let find_kth_permutation = (arr, k, result) => {
+
+    let n = arr.length;
+
+    if (!arr || n === 0) {
         return;
     }
 
-    let n = v.length;
     // count is number of permutations starting with first digit
     let count = factorial(n - 1);
 
     let selected = Math.floor((k - 1) / count);
-    result.push(v[selected]) ;
-    v.splice(selected, 1);
-    k = k - (count * selected);
 
-    find_kth_permutation(v, k, result);
+    /*
+    arr ite:
+     [ 1, 2, 3, 4 ]
+     [ 1, 3, 4 ]
+     [ 3, 4 ]
+     [ 3 ]
+     */
+    result.push(arr[selected]) ;
+    arr.splice(selected, 1);
+
+    k = k - ( count * selected );
+
+    find_kth_permutation(arr, k, result);
+
     return result;
 };
 
 
-console.log(find_kth_permutation([1,2, 3,4], 8, []));
+console.log(find_kth_permutation([1,2, 3,4], 8, []));  //[ 2, 1, 4, 3 ]

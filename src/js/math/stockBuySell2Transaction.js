@@ -68,8 +68,8 @@ let maxProfit = ( price ) => {
         res[i] = Math.max(res[i-1], res[i] + (price[i] - minPrice) );
     }
     //get max iteration: [ 75, 75, 75, 15, 15, 0 ], after get min iteration:  [ 75, 87, 87, 87, 87, 87 ]
-    let result = res[n-1];
-    return result;
+
+    return res[n-1];
 }
 
 let prices = [10, 22, 5, 75, 65, 80];

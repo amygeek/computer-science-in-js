@@ -5,20 +5,22 @@ let maxProfit = (arr) => {
 
     let currentBuy = arr[0];
     let currentSell = arr[1];
-    let globalProfit = currentSell - currentBuy;
+    let maxP = currentSell - currentBuy;
 
     for(let i=1, l=arr.length; i<l; i++) {
-        let currentProfit = arr[i] - currentBuy;
-        if ( currentProfit > globalProfit) {
+        
+        let currentP = arr[i] - currentBuy;
+        
+        if ( currentP > maxP) {
             currentSell = arr[i];
-            globalProfit = currentProfit;
+            maxP = currentP;
         }
 
         if ( currentBuy > arr[i]) {
             currentBuy = arr[i];
         }
     }
-    return [currentSell - globalProfit, currentSell];
+    return [currentSell - maxP, currentSell];
 }
 
 console.log(maxProfit(stockPrice));

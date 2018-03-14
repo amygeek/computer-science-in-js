@@ -2,7 +2,7 @@
 *The main function that returns the max possible product
 * Given a positive integer n, break it into the sum of at least two positive integers
 * and maximize the product of those integers. Return the maximum product you can get.
-* For example, given n = 2, return 1 (2 = 1 + 1); given n = 10, return 36 (10 = 3 + 3 + 4).
+* For example, given n = 2, return 1 (2 = 1 + 1); given n = 10, return 36 (10 = 3 * 3 * 4).
 * If we see the breaking result for some numbers, we can see repeated pattern like the following:
     2 -> 1*1
     3 -> 1*2
@@ -31,7 +31,7 @@ function maxProd( n ) {
 }
 
 
-console.log( "Maximum Product is " + maxProd(9) );  //54
+console.log( "Maximum Product is " + maxProd(11) );  //54
 
 
 
