@@ -20,7 +20,7 @@
 
      We'll find the minimum spanning tree of a graph using Prim's algorithm.
  */
-find_min_spanning_tree() {
+let find_min_spanning_tree = () => {
     let vertex_count = 0;
     let weight = 0;
 

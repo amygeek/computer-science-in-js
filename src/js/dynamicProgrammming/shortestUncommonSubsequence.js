@@ -30,7 +30,6 @@ let shortestSeq = (str1, str2) => {
             let k;
             for (k = j-1; k >= 0; k--) {
                 if (str2[k] == ch) {
-                    console.log(ch)
                     break;
                 }
 
