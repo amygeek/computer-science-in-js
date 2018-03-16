@@ -16,11 +16,11 @@
 
 class NTreeToBTree {
     
-    n_aryToBinary(node) {
-        return this.n_aryToBinaryRec(node, 1);
+    NaryToBinary(node) {
+        return this.NaryToBinaryRec(node, 1);
     }
     
-    n_aryToBinaryRec(root, isLeft) {
+    NaryToBinaryRec(root, isLeft) {
         if (!root) {
             return;
         }
@@ -30,10 +30,10 @@ class NTreeToBTree {
     
         for (let c in root.children) {
             if (isLeft === 1) {
-                last.left = this.n_aryToBinaryRec(root.children[c], 0);
+                last.left = this.NaryToBinaryRec(root.children[c], 0);
                 last = last.left;
             } else {
-                last.right = this.n_aryToBinaryRec(root.children[c], 1);
+                last.right = this.NaryToBinaryRec(root.children[c], 1);
                 last = last.right;
             }
         }
@@ -41,11 +41,11 @@ class NTreeToBTree {
         return node;
     }
     
-    binaryToN_ary(node) {
-        return this.binaryToN_aryRec(node, 1);
+    binaryToNary(node) {
+        return this.binaryToNaryRec(node, 1);
     };
     
-    binaryToN_aryRec(node, isLeft) {
+    binaryToNaryRec(node, isLeft) {
         if (!node) {
             return;
         }
@@ -55,13 +55,13 @@ class NTreeToBTree {
 
         if (isLeft === 1) {
             while (current.left) {
-                let child = this.binaryToN_aryRec(current.left, 0);
+                let child = this.binaryToNaryRec(current.left, 0);
                 nNode.children.push(child);
                 current = current.left;
             }
         } else {
             while (current.right) {
-                let child = this.binaryToN_aryRec(current.right, 1);
+                let child = this.binaryToNaryRec(current.right, 1);
                 nNode.children.push(child);
                 current = current.right;
             }
@@ -169,12 +169,12 @@ let tree = new NTreeToBTree();
 console.log("Binary Tree Level Traversal");
 tree.printBTreeOnLeve(root);
 
-let nNode = tree.binaryToN_ary(root);
+let newNode = tree.binaryToNary(root);
 
 console.log("N_ary Tree Level Traversal");
-tree.printNaryTreeOnLevel(nNode);
+tree.printNaryTreeOnLevel(newNode);
 
-let bNode = tree.n_aryToBinary(nNode);
+let bNode = tree.NaryToBinary(newNode);
 console.log("Binary Tree Level Traversal from N_ary to Binary");
 tree.printBTreeOnLeve(bNode);
 

@@ -57,31 +57,31 @@ class ListAtDepthBtree {
                 }
                 prev  = newNode;
 
-                if ( node.left != null ) {
+                if ( node.left ) {
                     q.push( node.left );
                 }
-                if ( node.right != null ){
+                if ( node.right ){
                     q.push( node.right );
                 }
                 level--;
             }
             this.list.push(head);
         }
-        this.display(this.list);
+        this.print(this.list);
     }
 
-    display( list ){
+    print( list ){
 
         let node = list.length;
 
         for (let i=0; i<node; i++) {
 
             let str = " ";
-            let head = list[i];
+            let current = list[i];
 
-            while( head != null ) {
-                str += head.data + " -> ";
-                head = head.next;
+            while( current ) {
+                str += current.data + " -> ";
+                current = current.next;
             }
             console.log(str + " null ");
         }

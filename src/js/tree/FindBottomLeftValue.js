@@ -36,10 +36,10 @@ class TreeNode {
 
             subList.push( n.data );
 
-            if( n.left != null ) {
+            if( n.left ) {
                 q.push( n.left );
             }
-            if ( n.right != null ) {
+            if ( n.right ) {
                 q.push( n.right );
             }
 

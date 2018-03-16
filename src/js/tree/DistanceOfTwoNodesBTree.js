@@ -20,14 +20,21 @@ class DistanceOfTwoNodesBTree {
     }
     
     pathLen(root, n1) {
+
         if (root != null) {
+            /*
             let x = 0;
             if ((root.data == n1) || ( x = this.pathLen(root.left, n1) ) > 0 || ( x = this.pathLen(root.right, n1) ) > 0 ) {
-               
+
                 return x + 1;
             }
+           */
+            if (root.data == n1) {
+                return 1;
+            }
+
+            return 1 + (this.pathLen(root.left, n1) || this.pathLen(root.right, n1));
         }
-        return 0;
     }
     
     findLCA( root, n1, n2 ) {
@@ -82,7 +89,7 @@ class DistanceOfTwoNodesBTree {
         root.left.right.left = new TreeNode(10);
         root.left.right.right = new TreeNode(11);
 
-        console.log("Distance between 8 and 11 is : " + this.findDistance(root, 8, 11));
+        console.log("Distance between 8 and 11 is : " + this.findDistance(root, 8, 11));  //4
     }
 }
 

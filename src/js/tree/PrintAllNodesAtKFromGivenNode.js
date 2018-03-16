@@ -9,61 +9,86 @@ class TreeNode {
 
 class PrintAllNodesAtKFromGivenNode {
 
-    printAllNodes( root, node, distance) {
+    /* Recursive function to print all the nodes at distance k in
+     tree (or subtree) rooted with given root. */
+
+    printKNodeDown( node,  k) {
+        // Base Case
+        if (node == null || k < 0) {
+            return;
+        }
+            
+    
+        // If we reach a k distant node, print it
+        if (k == 0) {
+            console.log(node.data);
+            return;
+        }
         
-        let pathLen = this.pathLen(root, node) - 1;
-    
-        this.path(root, node, pathLen, distance);
+        // Recur for left and right subtrees
+        this.printKNodeDown(node.left, k - 1);
+        this.printKNodeDown(node.right, k - 1);
     }
     
-    print( root, node, prev, k, searchingDown) {
+    // Prints all nodes at distance k from a given target node.
+    // The k distant nodes may be upward or downward.This function
+    // Returns distance of root from target node, it returns -1
+    // if target node is not present in tree rooted with root.
+    printKDistance( node,  target,  k) {
+        // Base Case 1: If tree is empty, return -1
+        if ( !node ) {
+            return -1;
+        }
         
-        if (root != null) {
-            if (k == 0 && root.data != node) {
-                console.log(" " + root.data);
-            }
-            if (searchingDown) {
-                this.print(root.left, node, prev, --k, searchingDown);
-                this.print(root.right, node, prev, k, searchingDown);
+        // If target is same as root.  Use the downward function
+        // to print all nodes at distance k in subtree rooted with
+        // target or root
+        if (node == target) {
+            this.printKNodeDown(node, k);
+            return 0;
+        }
+    
+        // Recur for left subtree
+        let left = this.printKDistance(node.left, target, k);
+    
+        // Check if target node was found in left subtree
+        if (left != -1) {
+    
+            // If root is at distance k from target, print root
+            // Note that left is Distance of root's left child from 
+            // target
+            if (left + 1 == k) {
+                console.log(node.data);
+               
             } else {
-                if (root.left != prev) {
-                    this.print(root.left, node, prev, --k, searchingDown);
-                }
-                if (root.right != prev) {
-                    this.print(root.right, node, prev, --k, searchingDown);
-                }
+                // Else go to right subtree and print all k-left-2 distant nodes Note that the right child is 2 edges away from left child
+                this.printKNodeDown(node.right, k - left - 2);
             }
-        }
-    }
     
-    path(root, node, k, distance) {
-    
-        if (root == null) {
-            return null;
+            // Add 1 to the distance and return value for parent calls
+            return 1 + left;
         }
     
-        let x = null;
-        if (root.data == node || (x = this.path(root.left, node, k - 1, distance)) != null || (x = this.path(root.right, node, k - 1, distance)) != null) {
-            if (k == 0) {
-                this.print(root, node, x, distance - k, true);
+        // MIRROR OF ABOVE CODE FOR RIGHT SUBTREE: Note that we reach here only when node was not found in left subtree
+
+        let right = this.printKDistance(node.right, target, k);
+
+        if (right != -1) {
+            if (right + 1 == k) {
+                console.log(node.data);
+
             } else {
-                this.print(root, node, x, distance - k, false);
+                this.printKNodeDown(node.left, k - right - 2);
             }
-    
-            return root;
+
+            return 1 + right;
         }
-        return null;
+    
+        // If target was neither present in left nor in right subtree
+        return -1;
     }
     
-    pathLen( root, n1 ) {
-        if (root != null) {
-            let x = 0;
-            if ((root.data == n1) || (x = this.pathLen(root.left, n1)) > 0 || (x = this.pathLen(root.right, n1)) > 0) {
-                return x + 1;
-            }
-        }
-        return 0;
-    }
+    
     /*
               1
             /   \
@@ -90,7 +115,8 @@ class PrintAllNodesAtKFromGivenNode {
         root.right = new TreeNode(3);
         root.left.left = new TreeNode(4);
         root.left.left.left = new TreeNode(9);
-        root.left.right = new TreeNode(5);
+        let n5 = new TreeNode(5);
+        root.left.right = n5;
         root.left.right.left = new TreeNode(6);
         root.left.right.right = new TreeNode(7);
         root.left.right.right.right = new TreeNode(10);
@@ -98,7 +124,7 @@ class PrintAllNodesAtKFromGivenNode {
         root.right.right = new TreeNode(8);
 
         console.log("Nodes at distance '3' from TreeNode '5' are : ");
-        this.printAllNodes(root, 5, 3);
+        this.printKDistance(root, n5, 2);
     }
 }
 

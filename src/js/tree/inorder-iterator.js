@@ -30,7 +30,7 @@ class InorderIterator {
         }
     }
     hasNext() {
-        if (!this.stk || this.stk.length === 0) {
+        if (this.stk.length === 0) {
             return false;
         } else {
             return true;
@@ -38,7 +38,7 @@ class InorderIterator {
     }
     // getNext returns null if there are no more elements in tree
     getNext() {
-        if (!this.stk || this.stk.length === 0) {
+        if ( this.stk.length === 0) {
             return null;
         }
 

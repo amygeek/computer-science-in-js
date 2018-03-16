@@ -13,7 +13,7 @@ class TreeNode {
 
  inorder[] = {4,2,5}, leftlevelorder[] = {2,4,5}
  inorder[] ={6,3,7}, rightlevelorder[] = {3,6,7}
- Last element in the levelorder [] will be the root of the tree, here it is 1.
+ First element in the levelorder [] will be the root of the tree, here it is 1.
  Now the search element 1 in inorder[], say you find it at position i, once you find it, make note of elements 
  which are left to i (this will construct the leftsubtree) and elements which are right to i ( this will construct the rightSubtree).
  Suppose in previous step, there are X number of elements which are left of ‘i’ (which will construct the leftsubtree), 
@@ -41,12 +41,12 @@ class InorderLevelOrderToTree {
         }
         let index = this.findIndex(inorder, rootVal, start, end);
         
-        let left = this.newLevelOrder(inorder, levelOrder, start, index - 1);
+        let leftLevelOrder = this.newLevelOrder(inorder, levelOrder, start, index - 1);
 
-        let right = this.newLevelOrder(inorder, levelOrder, index + 1, end);
+        let rightLevelOrder = this.newLevelOrder(inorder, levelOrder, index + 1, end);
 
-        root.left = this.makeBTree(inorder, left, start, index - 1);
-        root.right = this.makeBTree(inorder, right, index + 1, end);
+        root.left = this.makeBTree(inorder, leftLevelOrder, start, index - 1);
+        root.right = this.makeBTree(inorder, rightLevelOrder, index + 1, end);
 
         return root;
     }
@@ -59,8 +59,9 @@ class InorderLevelOrderToTree {
         for (let i = 0; i < levelOrder.length; i++) {
             
             if (this.findIndex(inorder, levelOrder[i], start, end) != -1) {
-                newlevel[x] = levelOrder[i];
-                x++;
+
+                newlevel[x++] = levelOrder[i];
+
             }
         }
         return newlevel;

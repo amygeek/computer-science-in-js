@@ -15,7 +15,7 @@ class BTree {
     findSum( node, sum ) {
 
         let path =[];
-        this.findSumRec ( node, sum, path, 0 )
+        this.findSumRec ( node, sum, path, 0 );
     }
 
     findSumRec( node, sum, path, level) {

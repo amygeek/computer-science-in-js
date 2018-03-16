@@ -10,7 +10,7 @@ class Node {
 class BTreefromInorderPreorder {
 
     constructor() {
-        this.pIndex = 0;
+        this.index = 0;
     }
 
     makeBTree(inOrder, preOrder, start, end ){
@@ -19,15 +19,16 @@ class BTreefromInorderPreorder {
             return null;
         }
             
-        let root = new Node( preOrder[this.pIndex] );
-        this.pIndex++;
+        let root = new Node( preOrder[this.index++] );
+        
         
         if( start == end ){
             return root;
         }
-        let index = this.getInorderIndex(inOrder, start, end, root.data);
-        root.left = this.makeBTree(inOrder,preOrder,start, index-1);
-        root.right = this.makeBTree(inOrder,preOrder,index+1, end);
+        let i = this.getInorderIndex(inOrder, start, end, root.data);
+
+        root.left = this.makeBTree(inOrder,preOrder,start, i-1);
+        root.right = this.makeBTree(inOrder,preOrder,i+1, end);
         
         return root;
     }
@@ -52,8 +53,17 @@ class BTreefromInorderPreorder {
 
 }
 
-let inOrder = [2,5,6,10,12,14,15];
-let preOrder = [10,5,2,6,14,12,15];
+/***********************
+        1
+      /   \
+     2     3
+   /  \   / \
+  4   5  6   7
+
+ ***********************/
+
+let inOrder = [4,2,5,1,6,3,7];
+let preOrder = [1,2,4,5,3,6,7];
 
 let tree = new BTreefromInorderPreorder();
 
