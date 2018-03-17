@@ -29,7 +29,8 @@ let  isValidParenthesis = ( str) => {
     return (cnt == 0);
 }
 
-//  method to remove invalid parenthesis
+
+//  method to remove invalid parenthesis: time O(n2)
 let removeInvalidParenthesis = ( str ) =>
 {
     if (str.length === 0 ) {
@@ -46,7 +47,7 @@ let removeInvalidParenthesis = ( str ) =>
     //  pushing given string as starting node into queue
     q.push(str);
     visit.add(str);
-    
+    let count = 0;
     while (q.length !== 0) {
 
         let str = q.shift();
@@ -73,7 +74,6 @@ let removeInvalidParenthesis = ( str ) =>
             }
         }
     }
-
 }
 
 

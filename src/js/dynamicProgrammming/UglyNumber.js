@@ -53,36 +53,37 @@ let uglyNumber = ( n ) => {
     let i2 = 0;
     let i3 = 0;
     let i5 = 0;
-    let nextMultiplyI2 = 2;
-    let nextMultiplyI3 = 3;
-    let nextMultiplyI5 = 5;
-    let nextUglyNum = 1;
+    let nextI2 = 2;
+    let nextI3 = 3;
+    let nextI5 = 5;
+    let nextNum = 1;
 
     for ( let i=1; i<n; i++ ) {
 
-        nextUglyNum = Math.min(nextMultiplyI2,  nextMultiplyI3, nextMultiplyI5);
+        nextNum = Math.min(nextI2,  nextI3, nextI5);
 
-        res[i] = nextUglyNum;
+        res[i] = nextNum;
 
-        if (nextUglyNum === nextMultiplyI2 ) {
+        if (nextNum === nextI2 ) {
             i2++;
-            nextMultiplyI2 = res[i2] * 2;
+            nextI2 = res[i2] * 2;
         }
 
-        if ( nextUglyNum === nextMultiplyI3 ) {
+        if ( nextNum === nextI3 ) {
             i3++;
-            nextMultiplyI3 = res[i3] * 3;
+            nextI3 = res[i3] * 3;
         }
-        if ( nextUglyNum === nextMultiplyI5 ) {
+        if ( nextNum === nextI5 ) {
             i5++;
-            nextMultiplyI5 = res[i5] * 5;
+            nextI5 = res[i5] * 5;
         }
     }
-    console.log(res);
-    return nextUglyNum;
+    console.log(res);  //[ 0, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 25, 27, 30, 32, 36 ]
+    return nextNum;
 }
 
-console.log( uglyNumber ( 10 ));
+//The ugly-number sequence is 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15
+console.log( uglyNumber ( 11 )); // ugly 12 -> 16 ugly 20 -> 36
 
 
 

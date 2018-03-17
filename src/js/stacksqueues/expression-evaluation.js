@@ -94,13 +94,13 @@ let evaluate = function(expr) {
 
             if (is_div_or_mul(op)) {
                 operators.pop();
-                operands.pop();
-                prev = (op === '*') ? (prev * d) : (prev / d);
-                operands.push(prev);
+                let prev = operands.pop();
+                let num = (op === '*') ? (prev * d) : (prev / d);
+                operands.push(num);
                 op = 0;
             } else {
                 operands.push(d);
-                prev = d;
+                //prev = d;
             }
         }
     }
