@@ -70,7 +70,7 @@ let printAllSum = function(target) {
     return result;
 };
 
-console.log( printAllSum(5) );
+console.log( printAllSum(3) );
 
 /*
  111

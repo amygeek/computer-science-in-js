@@ -43,14 +43,15 @@ let isInterleaved = (A, B, C) => {
             }
         }
     }
+    console.log(res)
     return res[m][n];
 }
 
 //console.log( isInterleaved( A, B, C ) );
 
-console.log( isInterleaved("XXYM", "XXZT", "XXXZXYTM") );   //true
-console.log( isInterleaved("XXY", "XXZ", "XXZXXXY") );      //false
+//console.log( isInterleaved("XXYM", "XXZT", "XXXZXYTM") );   //true
+//console.log( isInterleaved("XXY", "XXZ", "XXZXXXY") );      //false
 console.log( isInterleaved("XY" ,"WZ" ,"WZXY") );           //true
-console.log( isInterleaved ("XY", "X", "XXY") );            //true
-console.log( isInterleaved ("YX", "X", "XXY") );            //false
-console.log( isInterleaved ("XXY", "XXZ", "XXXXZY") );      //true
+//console.log( isInterleaved ("XY", "X", "XXY") );            //true
+//console.log( isInterleaved ("YX", "X", "XXY") );            //false
+//console.log( isInterleaved ("XXY", "XXZ", "XXXXZY") );      //true

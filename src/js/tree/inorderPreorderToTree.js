@@ -19,20 +19,20 @@ class BTreefromInorderPreorder {
             return null;
         }
             
-        let root = new Node( preOrder[this.index++] );
-        
+        let root = new Node( preOrder[this.index] );
+        this.index++;
         
         if( start == end ){
             return root;
         }
-        let i = this.getInorderIndex(inOrder, start, end, root.data);
+        let i = this.getIndex(inOrder, root.data, start, end );
 
         root.left = this.makeBTree(inOrder,preOrder,start, i-1);
         root.right = this.makeBTree(inOrder,preOrder,i+1, end);
         
         return root;
     }
-    getInorderIndex(inOrder, start, end, data){
+    getIndex(inOrder, data, start, end ){
     
         for (let i=start;i<=end;i++) {
             if( inOrder[i] == data ){

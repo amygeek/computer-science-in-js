@@ -14,7 +14,8 @@ let orderBySize = (arr) => {
     let newArr = Array.from(dist);
 
     newArr.sort((a, b) => {
-        return a[1] > b[1] ? -1 : a[1] < b[1] ? 1 : 0;
+        //return a[1] > b[1] ? -1 : a[1] < b[1] ? 1 : 0;
+        return b[1] - a[1];   //sort by count in descending order
     });
 
     let temp = [];
@@ -27,7 +28,7 @@ let orderBySize = (arr) => {
 
 }
 
-let arr = ['pear', 'orange','apple', 'orange', 'orange', 'apple', 'apple'];
+let arr = ['pear', 'orange','apple', 'orange', 'orange', 'apple', 'banana'];
 
 console.log(orderBySize(arr));  //[ 'orange', 'orange', 'orange', 'apple', 'apple', 'apple', 'pear' ]
 

@@ -22,16 +22,13 @@ class SnakeSequence {
         let res = [];
 
         for (let i = 0; i <rows; i++) {
-            res.push( new Array( cols))
-            for (let j = 0; j <cols; j++) {
-                res[i][j] =1;
-            }
+            res.push( new Array( cols).fill( 1 ) );
         }
 
         for (let i = 0; i <rows ; i++) {
             for (let j = 0; j <cols ; j++) {
                 if (i != 0 || j != 0) {
-                    //check from left
+                    //check from top
                     if( i > 0 && Math.abs( arr[i][j] - arr[i-1][j] ) == 1 ) {
 
                         res[i][j] = Math.max(res[i][j], res[i-1][j] + 1);
@@ -43,7 +40,7 @@ class SnakeSequence {
                         }
                     }
         
-                    //check from top
+                    //check from left
                     if ( j > 0 && Math.abs( arr[i][j] - arr[i][j-1] ) == 1){
 
                         res[i][j] = Math.max(res[i][j], res[i][j-1] + 1);

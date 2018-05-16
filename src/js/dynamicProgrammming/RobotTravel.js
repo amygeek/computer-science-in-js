@@ -52,7 +52,7 @@ class RobotTravel {
             }
         }
 
-        return res[arr.length-1][arr.length-1];
+        return res[n-1][n-1];
     }
     
    

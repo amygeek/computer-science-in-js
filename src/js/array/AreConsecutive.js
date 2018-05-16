@@ -21,7 +21,7 @@ class AreConsecutive {
         let max = this.getMax(arr, n);
     
         /* 3) max - min + 1 is equal to n,  then only check all elements */
-        if (max - min + 1 == n) {
+        if (max - min == n - 1) {
             /* Create a temp array to hold visited flag of all elements.
              Note that, calloc is used here so that all values are initialized
              as false */
@@ -79,14 +79,14 @@ class AreConsecutive {
 
     withoutAuxArray(arr, n){
 
-        let max = this.getMax(arr, n);
-        let min = this.getMin(arr, n);
+        let max = Math.max( ...arr );
+        let min = Math.min( ...arr );
     
-        if (max - min + 1 != n) {
+        if (max - min !== n - 1) {
             return false;
         }
 
-        for(let i = 0;i<arr.length;i++){
+        for(let i = 0; i<n; i++){
             let x  = Math.abs(arr[i]);
             if(arr[x-1] > 0){
                 arr[x-1] *= -1;
@@ -94,18 +94,20 @@ class AreConsecutive {
                 return false;
             }
         }
+
         return true;
     }
 }
 
 
 let consecutive = new AreConsecutive();
-let arr = [5, 3, 2, 3, 1, 6];
+let arr = [5, 3, 2, 4, 1, 6];
 let n = arr.length;
 
 if (consecutive.withoutAuxArray(arr, n) == true) {
     console.log("Array elements are consecutive");
 } else {
+    console.log( arr );
     console.log("Array elements are not consecutive"); 
 }
         

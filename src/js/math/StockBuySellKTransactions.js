@@ -67,7 +67,7 @@ let maxProfit = ( prices, k) => {
         }
     }
 
-    //console.log(res)
+    console.log(res)
     return res[k][prices.length-1];
 }
 

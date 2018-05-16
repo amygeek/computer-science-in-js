@@ -41,7 +41,7 @@ let missingNumber = ( arr ) => {
             singleNumber = singleNumber | y;
         }
     }
-    console.log("missing number: ", singleNumber);
+    console.log("single number: ", singleNumber);
 }
 
 let arr = [1, 4, 5, 6, 1, 4, 6, 1, 4, 6];

@@ -19,6 +19,9 @@
  So the size of the base = 4.
  Height of container = min(5, 3) = 3.
  So total area = 4 * 3 = 12
+
+ Note 1 : When you consider a1 and aN, then the area is (N-1) * min(a1, aN).
+ Note 2 : The base (N-1) is the maximum possible.
  */
 let maxArea = (arr) => {
 

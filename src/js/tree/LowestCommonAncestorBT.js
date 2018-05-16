@@ -28,35 +28,11 @@ class LowestCommonAncestorBT {
 
     constructor() {
 
-        this.v1 = false;  // use for checking if n1 is in the tree
-        this.v2 = false;   // use for checking if n2 is in the tree
+        this.node1 = false;  // use for checking if n1 is in the tree
+        this.node2 = false;   // use for checking if n2 is in the tree
     }
 
-    findLCA(root, n1, n2){
-
-        if( root == null){
-            return null;
-        } else{
-
-            if( root.data == n1.data || root.data == n2.data ){
-                return root;
-            }
-            let left = this.findLCA( root.left, n1, n2);
-            let right = this.findLCA( root.right, n1, n2);
-
-            if ( left != null && right != null){
-                return root;
-            }
-            if ( left != null ){
-                return left;
-            } else if ( right != null ){
-                return right;
-            }
-            return null;
-        }
-    }
-
-    findLCA2( root, n1, n2 ) {
+    findLCA( root, n1, n2 ) {
 
         if ( !root ) {
             return null;
@@ -64,7 +40,7 @@ class LowestCommonAncestorBT {
 
         let lca = this.findLCARec( root, n1, n2 );
 
-        if ( this.v1 && this.v2) {
+        if ( this.node1 && this.node2) {
             return lca;
         }
         return null;
@@ -77,12 +53,12 @@ class LowestCommonAncestorBT {
         }
 
         if ( root.data === n1.data ) {
-            this.v1 = true;
+            this.node1 = true;
             return root;
         }
 
         if ( root.data === n2.data ) {
-            this.v2 = true;
+            this.node2 = true;
             return root;
         }
 
@@ -159,10 +135,10 @@ class LowestCommonAncestorBT {
         root.left.right.right = n2 ;
 
         
-        let x = this.findLCA2(root, n1, n2);
+        let x = this.findLCA(root, n1, n2);
         //Lowest Common Ancestor (8, 11 ) is 2
         console.log("Lowest Common Ancestor ("+n1.data+", "+ n2.data +" ) is " + x.data);
-        x = this.commonAncestor(root,n2,n3);
+        x = this.findLCA(root,n2,n3);
         //Lowest Common Ancestor (11, 5 ) is 5
         console.log("Lowest Common Ancestor ("+n2.data+", "+ n3.data +" ) is " + x.data);
     }

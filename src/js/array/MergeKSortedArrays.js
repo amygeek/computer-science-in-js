@@ -34,7 +34,7 @@ class MergeKSortedArrays {
 
     constructor( k ) {
 
-        this.heap = new Array(k); // size+1 because index 0 will be empty
+        this.heap = new Array(k);
         this.size = 0;
 
     }
@@ -42,9 +42,9 @@ class MergeKSortedArrays {
     //k is the total number of lists, and n is the length of the first list in k lists
     //in the example, we have total k of 5 lists and 4 numbers in the first list
     merge( arr, k, n) {
+
         let nk = n * k;
         let res = new Array(nk).fill(0);
-        let count = 0;
 
         // create index pointer for every list.
         let list = new Array(k).fill(0);
@@ -52,17 +52,24 @@ class MergeKSortedArrays {
 
         for (let i = 0; i < k; i++) {
             if (list[i] < n) {
-                this.insert(arr[i][list[i]], i); // insert the element into heap
+                this.insert(arr[i][ list[i] ], i); // insert the element into heap
             } else {
                 this.insert(Number.MAX_VALUE, i); // if any of this list burns out, insert +infinity
             }
 
         }
 
+        let count = 0;
         while (count < nk) {
-            let min = this.extractMin(); // get the min node from the heap.
-            res[count] = min.data; // store node data into result array
-            list[min.listNo]++; // increase the particular list pointer
+
+            // get the min node from the heap.
+            let min = this.extractMin();
+
+            // store node data into result array
+            res[count] = min.data;
+
+            // increase the particular list pointer
+            list[min.listNo]++;
 
             if (list[min.listNo] < n) { // check if list is not burns out
                 this.insert(arr[min.listNo][list[min.listNo]], min.listNo); // insert the next element from the list

@@ -26,11 +26,15 @@
 let findLocalMinima = arr => {
 
   let n = arr.length;
-
+  if ( n === 1 ) {
+      return arr[0];
+  } else if ( n == 2 && arr[0]> arr[1]) {
+      return arr[1];
+  }
   let res = [];
   for (let i=0; i<n-1; i++) {
 
-      if( ( i==0 || arr[i] < arr[i-1] ) && ( n == 2 || arr[i] < arr[i+1] ) ) {
+      if( (  arr[i] < arr[i-1] ) && (  arr[i] < arr[i+1] ) ) {
           return arr[i];
       }
   }
@@ -66,6 +70,6 @@ let findLocalMinima2 = ( arr, left, right ) => {
 
 }
 
-let arr = [11, 4, 2, 5, 11, 13, 5];
+let arr = [6,4];
 
 console.log(findLocalMinima(arr, 0, arr.length));

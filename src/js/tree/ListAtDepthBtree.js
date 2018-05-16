@@ -50,7 +50,7 @@ class ListAtDepthBtree {
 
                 let newNode = new LinkedListNode( node.data );
 
-                if( head == null ) {
+                if( !head ) {
                     head = newNode;
                 } else {
                     prev.next = newNode;

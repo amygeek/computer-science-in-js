@@ -1,6 +1,6 @@
 /**
  Given an arithmetic expression, evaluate it i.e. calculate its result.
- Let's assume that there are no parentheses in the expression and only binary operations ( +, -, *, / ) are allowed.
+ Let'str assume that there are no parentheses in the expression and only binary operations ( +, -, *, / ) are allowed.
 
  Runtime Complexity
  Linear, O(n).
@@ -26,28 +26,24 @@ let is_digit = function(ch) {
     return (ch >= '0' && ch <= '9');
 };
 
-let str_to_double = function(s, i) {
-    let n = s.length;
+let str_to_double = function(str, i) {
+
+    let n = str.length;
+
+    if (i >= n) {
+        return null;
+    }
+
+    while (i < n && (str[i] === ' ' || str[i] === '\t')) {
+        i++;
+    }
     if (i >= n) {
         return null;
     }
 
     let temp = '';
-    while (i < n && (s[i] === ' ' || s[i] === '\t')) {
-        i++;
-    }
-
-    if (i >= n) {
-        return null;
-    }
-
-    if (s[i] === '-') {
-        temp += '-';
-        i++;
-    }
-
     while (i < n) {
-        let ch = s[i];
+        let ch = str[i];
         if (ch !== '.' && !is_digit(ch)) {
             break;
         }
@@ -66,41 +62,47 @@ let is_div_or_mul = function(ch) {
     return (ch === '*' || ch === '/');
 };
 
-let evaluate = function(expr) {
+let evaluate = function(exp) {
 
     let operators = [];
     let operands = [];
 
-    let op = 0;
+    let op = null;
     let prev = 0;
 
     let i = 0;
-    let n = expr.length;
+    let n = exp.length;
+
     while (i < n) {
-        let ch = expr[i];
+        let ch = exp[i];
         if (ch === ' ' || ch === '\t') {
             i++;
             continue;
         }
 
         if (is_operator(ch)) {
+            
             op = ch;
             operators.push(ch);
             i++;
+            
         } else {
-            let re = str_to_double(expr, i);
+            
+            let re = str_to_double(exp, i);
             let d = re.digit;
             i = re.index;
 
             if (is_div_or_mul(op)) {
+                
                 operators.pop();
-                let prev = operands.pop();
+                prev = operands.pop();
+                
                 let num = (op === '*') ? (prev * d) : (prev / d);
                 operands.push(num);
-                op = 0;
+                op = null;
+                
             } else {
                 operands.push(d);
-                //prev = d;
             }
         }
     }
@@ -118,4 +120,5 @@ let evaluate = function(expr) {
     return t;
 };
 
-evaluate("3+6*5-1/2.5");
+evaluate("3 + 6 * 5 - 1 / 2.5");
+

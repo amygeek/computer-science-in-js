@@ -6,6 +6,14 @@ class DLL {
         this.prev = null;
     }
 }
+
+class Node {
+    constructor( data ) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
 /*
  Given a sorted doubly linked list, convert it into Balanced binary search tree
  Get the size of the Doubly Linked list.
@@ -47,13 +55,13 @@ class DLLToBST {
         }
 
         let leftSize = Math.floor( size / 2 );
-        let left = this.dLLtoBST(leftSize);
+        let left = this.dLLtoBST( leftSize );
 
-        let root = this.head;
-        root.prev = left;
+        let root = new Node ( this.head.data );
+        root.left = left;
         this.head = this.head.next;
 
-        root.next = this.dLLtoBST(size - leftSize - 1);
+        root.right = this.dLLtoBST(size - leftSize - 1);
 
         return root;
     }
@@ -95,12 +103,12 @@ class DLLToBST {
 
                 str += node.data + " ";
 
-                if ( node.prev ) {
-                    q.push( node.prev );
+                if ( node.left ) {
+                    q.push( node.left );
                 }
 
-                if ( node.next ) {
-                    q.push( node.next );
+                if ( node.right ) {
+                    q.push( node.right );
                 }
                 level--;
             }
@@ -129,4 +137,5 @@ root.printDLL(head)
 let tree = root.dLLtoBST( root.size );
 console.log("Inorder traversal of contructed BST");
 root.levelOrderTraversal(tree);
+//console.log(tree)
 

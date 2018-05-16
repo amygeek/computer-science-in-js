@@ -20,6 +20,7 @@ class PrintAllPathIn2DArray {
         this.arr = arr;
         this.rowCount = arr.length;
         this.colCount = arr[0].length;
+        this.count = 0;
     }
 
     printAll( row, col, path) {
@@ -27,6 +28,7 @@ class PrintAllPathIn2DArray {
             for (let i = col; i < this.colCount; i++) {
                 path +=  this.arr[row][i] + " ";
             }
+            this.count++;
             console.log(path);
             return;
         }
@@ -34,6 +36,7 @@ class PrintAllPathIn2DArray {
             for (let i = row; i < this.rowCount; i++) {
                 path += this.arr[i][col] + " ";
             }
+            this.count++;
             console.log(path);
             return;
         }
@@ -52,7 +55,8 @@ class PrintAllPathIn2DArray {
 let a = [
     [1,2,3,4],
     [5,6,7,8],
-    [9,10,11,12]];
+    [9,10,11,12],
+    [13,14,15,16]];
 /*
  [1, 2, 3, 4, 8, 12]
  [1, 2, 3, 7, 8, 12]
@@ -67,4 +71,5 @@ let a = [
  */
 let path = new PrintAllPathIn2DArray( a );
 path.printAll(0, 0, "");
+console.log(path.count);
 

@@ -15,9 +15,8 @@ class SmallestRangeInKList {
     }
     
     merge(arr, k, n) {
-        let nk = n * k;
-        let count = 0;
 
+        let nk = n * k;
         // create index pointer for every list.
         let list = new Array(k).fill(0);
         
@@ -27,10 +26,10 @@ class SmallestRangeInKList {
     
         }
 
-
+        let count = 0;
         while (count < nk) {
-            console.log(this.heap)
-            console.log(list)
+
+            //console.log(this.heap)
 
             let min = this.extractMin(); // get the min node from the heap. this is min among all the values in the heap
 

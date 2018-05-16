@@ -4,7 +4,7 @@ let printPath = ( arr, row, col, result, pos) => {
 
     if ( col === arr[0].length - 1 && row === arr.length - 1) {
         result[pos] = arr[row][col];
-        console.log(result);
+        console.log(...result);
         return;
     }
 

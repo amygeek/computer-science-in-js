@@ -100,18 +100,18 @@ class BinaryTree {
         }
     }
 
-    connectNextLevel (head) {
+    connectOnLevel (head) {
 
         let current = head;
-        let nextLevelHead = null;
+        let levelHead = null;
         let prev = null;
 
         while (current) {
     
             if (current.left && current.right) {
     
-                if ( !nextLevelHead ) {
-                    nextLevelHead = current.left;
+                if ( !levelHead ) {
+                    levelHead = current.left;
                 }
                 current.left.next = current.right;
     
@@ -122,8 +122,8 @@ class BinaryTree {
                 prev = current.right;
 
             } else if (current.left  ) {
-                if ( !nextLevelHead ) {
-                    nextLevelHead = current.left;
+                if ( !levelHead ) {
+                    levelHead = current.left;
                 }
                 if (prev) {
                     prev.next = current.left;
@@ -132,8 +132,8 @@ class BinaryTree {
                 prev = current.left;
 
             } else if ( current.right ) {
-                if ( !nextLevelHead ) {
-                    nextLevelHead = current.right;
+                if ( !levelHead ) {
+                    levelHead = current.right;
                 }
                 if ( prev ) {
                     prev.next = current.right;
@@ -150,7 +150,7 @@ class BinaryTree {
 
         this.printDll( head );  //print DLL
 
-        return nextLevelHead;
+        return levelHead;
     };
     
     connectSiblingsOnLevel (root) {
@@ -162,7 +162,7 @@ class BinaryTree {
     
         while (root) {
 
-            root = this.connectNextLevel(root);
+            root = this.connectOnLevel(root);
 
         }
     }

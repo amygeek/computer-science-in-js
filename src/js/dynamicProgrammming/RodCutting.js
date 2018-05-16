@@ -33,6 +33,25 @@ class RodCutting {
         return max;
     }
 
+    profitMemoi(val, n, res) {
+
+        if ( res[n] ) {
+            return res[n];
+        }
+
+        let max = Number.MIN_VALUE;
+
+        if ( n <= 0 ) {
+            return 0;
+        }
+
+        for(let i=0; i<n; i++) {
+            max = Math.max(max, val[i] + this.profitMemoi(val, n - i - 1, res));
+        }
+        res[n] = max;
+        return max;
+    }
+
     //quadratic O(n2)
     profitDP( value, len ) {
         let res = new Array( len + 1).fill(0);
@@ -56,3 +75,4 @@ let rodCutting = new RodCutting();
 let value = [ 1, 5, 8, 9, 10];
 let len = 5;
 console.log("Max profit for len is " + len + ": " + rodCutting.profitDP(value, len));  //11
+console.log("Max profit for len is " + len + ": " + rodCutting.profitMemoi(value, len, []));  //11

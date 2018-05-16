@@ -21,22 +21,23 @@
  * @returns {*}
  */
 let delete_zero_sum_subtree_rec = function(root) {
+
     if (!root) {
         return 0;
     }
 
-    let sum_left = delete_zero_sum_subtree_rec(root.left);
-    let sum_right = delete_zero_sum_subtree_rec(root.right);
-
-    if (sum_left === 0) {
+    let sumLeft = delete_zero_sum_subtree_rec(root.left);
+    if ( sumLeft === 0 ) {
         root.left = null;
     }
 
-    if (sum_right === 0) {
+    let sumRight = delete_zero_sum_subtree_rec(root.right);
+
+    if (sumRight === 0) {
         root.right = null;
     }
 
-    return (root.data + sum_left + sum_right);
+    return (root.data + sumLeft + sumRight);
 };
 
 let delete_zero_sum_subtree = function(root) {

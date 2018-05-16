@@ -12,11 +12,16 @@
  4 + (permutations of 1, 2, 3)
 
 
- We know how to calculate the number of permutations of n numbers… n! So each of those with permutations of 3 numbers means there are 6 possible permutations. Meaning there would be a total of 24 permutations in this particular one. So if you were to look for the (k = 14) 14th permutation, it would be in the
+ We know how to calculate the number of permutations of n numbers… n! So each of those with permutations of 3 numbers means
+ there are 6 possible permutations. Meaning there would be a total of 24 permutations in this particular one. So if you were
+ to look for the (k = 14) 14th permutation, it would be in the
 
  3 + (permutations of 1, 2, 4) subset.
 
- To programmatically get that, you take k = 13 (subtract 1 because of things always starting at 0) and divide that by the 6 we got from the factorial, which would give you the index of the number you want. In the array {1, 2, 3, 4}, k/(n-1)! = 13/(4-1)! = 13/3! = 13/6 = 2. The array {1, 2, 3, 4} has a value of 3 at index 2. So the first number is a 3.
+ To programmatically get that, you take k = 13 (subtract 1 because of things always starting at 0) and divide that by the 6
+ we got from the factorial, which would give you the index of the number you want.
+ In the array {1, 2, 3, 4}, k/(n-1)! = 13/(4-1)! = 13/3! = 13/6 = 2.
+ The array {1, 2, 3, 4} has a value of 3 at index 2. So the first number is a 3.
 
  Then the problem repeats with less numbers.
 
@@ -28,11 +33,13 @@
 
  4 + (permutations of 1, 2)
 
- But our k is no longer the 14th, because in the previous step, we’ve already eliminated the 12 4-number permutations starting with 1 and 2. So you subtract 12 from k… which gives you 1. Programmatically that would be…
+ But our k is no longer the 14th, because in the previous step, we’ve already eliminated the 12 4-number permutations
+ starting with 1 and 2. So you subtract 12 from k… which gives you 1. Programmatically that would be…
 
  k = k - (index from previous) * (n-1)! = k - 2*(n-1)! = 13 - 2*(3)! = 1
 
- In this second step, permutations of 2 numbers has only 2 possibilities, meaning each of the three permutations listed above a has two possibilities, giving a total of 6. We’re looking for the first one, so that would be in the 1 + (permutations of 2, 4) subset.
+ In this second step, permutations of 2 numbers has only 2 possibilities, meaning each of the three permutations listed
+ above a has two possibilities, giving a total of 6. We’re looking for the first one, so that would be in the 1 + (permutations of 2, 4) subset.
 
  Meaning: index to get number from is k / (n - 2)! = 1 / (4-2)! = 1 / 2! = 0… from {1, 2, 4}, index 0 is 1
 
@@ -83,6 +90,33 @@ let factorial = function(n) {
 
 let find_kth_permutation = (arr, k, result) => {
 
+
+
+    /*
+     arr: [ 1, 2, 3, 4 ], k=8
+     1 Iteration:           find_kth( [ 1, 2, 3, 4 ], 8, [] )
+        count = 6           // f(4-1)  f(arr.length - 1)
+        selected = 1        // (k - 1 ) / count = (8 - 1) / 6
+        arr = [ 1, 3, 4 ]   // 2 is removed from the array
+        k = 2               // k - ( count * selected ) = 8 - ( 6 * 1 )
+     2 Iteration:           find_kth( [ 1, 3, 4 ], 2, [2] )
+        count = 2           // f(3-1)
+        selected = 0        // (k - 1 ) / count = (2 - 1) / 2
+        arr = [ 3, 4 ]      // 1 is removed from the array
+        k = 2               // k - ( count * selected ) = 2 - ( 2 * 0 )
+     3 Iteration:           find_kth( [ 3, 4 ], 2, [2, 1] )
+        count = 1           // f(2-1)
+        selected = 1        // (k - 1 ) / count = (2 - 1) / 1
+        arr = [ 3 ]         // 4 is removed from the array
+        k = 1               // k - ( count * selected ) = 2 - ( 1 * 1 )
+     last Iteration:        find_kth( [ 4 ], 1, [2, 1, 4] )
+        count = 1           // f(1-1)
+        selected = 0        // (k - 1 ) / count = (1 - 1) / 1
+        arr = []            // 3 is removed from the array, now it is empty, result = [2, 1, 4, 3]
+        k = 1               // k - ( count * selected ) = 1 - ( 1 * 0 )
+
+     */
+
     let n = arr.length;
 
     if (!arr || n === 0) {
@@ -91,16 +125,8 @@ let find_kth_permutation = (arr, k, result) => {
 
     // count is number of permutations starting with first digit
     let count = factorial(n - 1);
-
     let selected = Math.floor((k - 1) / count);
 
-    /*
-    arr ite:
-     [ 1, 2, 3, 4 ]
-     [ 1, 3, 4 ]
-     [ 3, 4 ]
-     [ 3 ]
-     */
     result.push(arr[selected]) ;
     arr.splice(selected, 1);
 
