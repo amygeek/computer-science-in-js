@@ -59,6 +59,44 @@ let Knapsack = (val, wt, w) => {
 
     return res[n][w];
 }
+/**
+ * 
+ * @param {*} v  value in the array
+ * @param {*} w  weight in the array
+ * @param {*} C  capacity in the knapsack
+ * @param {*} n  length in the value and weight array
+ */
+let knapsackRec = (v, w, C, n) => {
+    let res;
+    if (n===0 || C==0) {
+        res = 0;
+    } else if (w[n] > C) {
+        res = knapsackRec(n-1, C);
+    } else {
+        let temp1 = knapsackRec(n-1, C);
+        let temp2 = v[n] + knapsackRec(n-1, C-w[n]);
+        res = Math.max(temp1, temp2);
+    }
+    return res;
+}
+
+let knapsackMemo = (v, w, C, n, memo) => {
+    if (memo[n][C]) {
+        return memo[n][C];
+    }
+    let res;
+    if (n===0 || C==0) {
+        res = 0;
+    } else if (w[n] > C) {
+        res = knapsackRec(n-1, C);
+    } else {
+        let temp1 = knapsackRec(n-1, C);
+        let temp2 = v[n] + knapsackRec(n-1, C-w[n]);
+        res = Math.max(temp1, temp2);
+    }
+    memo[n][C] = res;
+    return res;
+}
 
 //let val = [22, 20, 15, 30, 24, 54, 21, 32, 18, 25];
 //let wt = [4, 2, 3, 5, 5, 6, 9, 7, 8, 10];
@@ -70,8 +108,18 @@ let Knapsack = (val, wt, w) => {
  [ 0, 4, 5, 9, 9, 9 ],
  [ 0, 4, 5, 9, 10, 11]]
  */
-let val = [4,5,6];
-let wt = [1,2,3];
-let res = Knapsack(val, wt, 5);  //11
+let v = [4,5,6];
+let w = [1,2,3];
 
-console.log(res);
+let res = Knapsack(v, w, 5);  //11
+console.log(`Knapsack DP: ${res}`);
+
+res = Knapsack(v, w, 5, 3);  //11
+console.log(`Knapsack Rec: ${res}`);
+
+let memo = [];  //create 2 D array from Capacity of 5 and array length of w
+for(let i=0; i<=5; i++) {
+    memo.push(new Array(4)); // len of 3 + 1;
+}
+res = Knapsack(v, w, 5, 3, memo);  //11
+console.log(`Knapsack Memo: ${res}`);
