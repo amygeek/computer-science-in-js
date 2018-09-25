@@ -29,24 +29,46 @@ class LongestCommonSubsequence {
      Time complexity will O(2n) since we will solving sub problems repeatedly.
      */
 
-    findRec( str1,  str2) {
+    findRec( str1,  str2, m, n) {
         if (m == 0 || n == 0) {
             return 0;
         }
-        let lenA = str1.length;
-        let lenB = str2.length;
         // check if last characters are same
-        if (str1.charAt(lenA - 1) == str2.charAt(lenB - 1)) {
+        if (str1.charAt(m - 1) == str2.charAt(n - 1)) {
             // Add 1 to the result and remove the last character from both
             // the strings and make recursive call to the modified strings.
-            return 1 + this.findRec(str1.substr(0, lenA - 1), str2.substr(0, lenB - 1));
+            return 1 + this.findRec(str1, str2, m-1, n-1);
         } else {
             // Remove the last character of String 1 and make str1 recursive
             // call and remove the last character from String 2 and make str1
             // recursive and then return the max from returns of both recursive
             // calls
-            return Math.max( this.findRec(str1.substr(0, lenA - 1), str2.substr(0, lenB)), this.findRec(str1.substr(0, lenA), str2.substr(0, lenB - 1)));
+            return Math.max( this.findRec(str1, str2, m-1, n), this.findRec(str1, str2, m, n-1));
         }
+    }
+
+    findMemo( str1,  str2, m, n, res) {
+        if (res[m][n]) {
+            return res[m][n];
+        }
+        let total;
+        if (m == 0 || n == 0) {
+            total = 0;
+        }
+        // check if last characters are same
+        if (str1.charAt(m - 1) == str2.charAt(n - 1)) {
+            // Add 1 to the result and remove the last character from both
+            // the strings and make recursive call to the modified strings.
+            total = 1 + this.findRec(str1, str2, m-1, n-1);
+        } else {
+            // Remove the last character of String 1 and make str1 recursive
+            // call and remove the last character from String 2 and make str1
+            // recursive and then return the max from returns of both recursive
+            // calls
+            total = Math.max( this.findRec(str1, str2, m-1, n), this.findRec(str1, str2, m, n-1));
+        }
+        res[m][n] = total;
+        return total;
     }
     
     /*
@@ -134,14 +156,14 @@ class LongestCommonSubsequence {
          0 1 2 2 3 3
          0 1 2 2 3 4
          */
-        //for (let i = 0; i <= m; i++) {
+        // for (let i = 0; i <= m; i++) {
         //    let str = " ";
         //    for (let j = 0; j <= n; j++) {
         //        str += " " + res[i][j];
         //    }
         //    console.log( str );
-        //}
-        //console.log(solution)
+        // }
+        // console.log(solution)
         return res[m][n];  //4
     }
     
@@ -150,6 +172,11 @@ class LongestCommonSubsequence {
 
 let LCS = new LongestCommonSubsequence();
 let str1 = "awes7some";
-let str2 = "aw2essome";
-
-console.log("Longest Commone Sub Sequence Len :" + LCS.find(str1, str2));
+let str2 = "aw2essomeme";
+let res = [];
+for (let i=0; i<= str1.length; i++) {
+    res.push(new Array(str2.length + 1).fill(0));
+}
+console.log("Longest Commone Sub Sequenc Len :" + LCS.find(str1, str2));
+console.log("Longest Commone Sub Sequenc Len findRec :" + LCS.findRec(str1, str2, str1.length, str2.length));
+console.log("Longest Commone Sub Sequenc Len findMemo :" + LCS.findMemo(str1, str2, str1.length, str2.length, res));

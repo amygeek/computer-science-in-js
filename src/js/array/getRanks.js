@@ -72,7 +72,7 @@ class Ranks {
 //testing
 let arr = [2, 4, 50, 7, 90, 10, 1, 30, 16, 8];
 
-let ranks = new Rank();
+let ranks = new Ranks();
 
 console.log(ranks.getRank(arr, 0, arr.length-1, 3));  //third smallest number is 7 with index starts at 0, it will be number 4 smallest element
 console.log(arr.sort((a,b) => (a-b))); //sorted array [ 1, 2, 4, 7, 8, 10, 16, 30, 50, 90 ]
