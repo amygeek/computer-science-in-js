@@ -87,14 +87,14 @@ class AreConsecutive {
         }
 
         for(let i = 0; i<n; i++){
-            let x  = Math.abs(arr[i]);
-            if(arr[x-1] > 0){
-                arr[x-1] *= -1;
+            let x  = max - Math.abs(arr[i]);
+            if(arr[x] > 0){
+                arr[x] *= -1;
             } else {
                 return false;
-            }
+            } 
         }
-
+     
         return true;
     }
 }
