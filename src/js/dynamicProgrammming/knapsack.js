@@ -31,16 +31,16 @@ wt = 30 + 20; val = 120 + 100
      else {
         res[i][j] = max(res[i-1][j], val[i] + res[i-1][j-wt[i - 1]
  */
-let Knapsack = (val, wt, w) => {
+let knapsackDP = (v, wt, C) => {
     
-    let n = val.length;
+    let n = v.length;
     let res = [];
     for (let i=0; i<=n; i++) {
-        res.push(new Array( w + 1));
+        res.push(new Array( C + 1));
     }
     
     for ( let i=0; i<=n; i++ ) {
-        for (let j=0; j<=w; j++) {
+        for (let j=0; j<=C; j++) {
 
             if ( i === 0 || j === 0 ) {
 
@@ -52,12 +52,12 @@ let Knapsack = (val, wt, w) => {
 
             } else {
 
-                res[i][j] = Math.max( res[i-1][j], val[i - 1] + res[i-1][j - wt[i-1]] );
+                res[i][j] = Math.max( res[i-1][j], v[i - 1] + res[i-1][j - wt[i-1]] );
             }
         }
     }
 
-    return res[n][w];
+    return res[n][C];
 }
 /**
  * 
@@ -70,11 +70,11 @@ let knapsackRec = (v, w, C, n) => {
     let res;
     if (n===0 || C==0) {
         res = 0;
-    } else if (w[n] > C) {
-        res = knapsackRec(n-1, C);
+    } else if (w[n-1] > C) {
+        res = knapsackRec(v, w, C, n-1);
     } else {
-        let temp1 = knapsackRec(n-1, C);
-        let temp2 = v[n] + knapsackRec(n-1, C-w[n]);
+        let temp1 = knapsackRec(v, w, C, n-1);
+        let temp2 = v[n-1] + knapsackRec(v, w, C-w[n-1], n-1);
         res = Math.max(temp1, temp2);
     }
     return res;
@@ -87,21 +87,26 @@ let knapsackMemo = (v, w, C, n, memo) => {
     let res;
     if (n===0 || C==0) {
         res = 0;
-    } else if (w[n] > C) {
-        res = knapsackRec(n-1, C);
+    } else if (w[n-1] > C) {
+        res = knapsackRec(v, w, C, n-1, memo);
     } else {
-        let temp1 = knapsackRec(n-1, C);
-        let temp2 = v[n] + knapsackRec(n-1, C-w[n]);
+        let temp1 = knapsackRec(v, w, C, n-1, memo);
+        let temp2 = v[n-1] + knapsackRec(v, w, C-w[n-1], n-1, memo);
         res = Math.max(temp1, temp2);
     }
     memo[n][C] = res;
     return res;
 }
 
-//let val = [22, 20, 15, 30, 24, 54, 21, 32, 18, 25];
-//let wt = [4, 2, 3, 5, 5, 6, 9, 7, 8, 10];
-//let res = Knapsack(val, wt, 30);  //182
+// let v = [22, 20, 15, 30, 24, 54, 21, 32, 18, 25];
+// let w = [4, 2, 3, 5, 5, 6, 9, 7, 8, 10];
+// let C = 30;
+//let res = knapsackDP(v, w, C);  //182
 
+// let v = [60, 100, 120];
+// let w = [ 10, 20, 30];
+// let C = 50;
+// let res = knapsackDP(v, w, C);  //220
 /*
 [[ 0, 0, 0, 0, 0, 0 ],
  [ 0, 4, 4, 4, 4, 4 ],
@@ -110,16 +115,17 @@ let knapsackMemo = (v, w, C, n, memo) => {
  */
 let v = [4,5,6];
 let w = [1,2,3];
+C = 5
 
-let res = Knapsack(v, w, 5);  //11
-console.log(`Knapsack DP: ${res}`);
 
-res = Knapsack(v, w, 5, 3);  //11
-console.log(`Knapsack Rec: ${res}`);
+console.log(`Knapsack DP: ${knapsackDP(v, w, C)}`);
+
+
+console.log(`Knapsack Rec: ${knapsackRec(v, w, C, v.length)}`);
 
 let memo = [];  //create 2 D array from Capacity of 5 and array length of w
-for(let i=0; i<=5; i++) {
-    memo.push(new Array(4)); // len of 3 + 1;
+for(let i=0; i<=C; i++) {
+    memo.push(new Array(v.length));
 }
-res = Knapsack(v, w, 5, 3, memo);  //11
-console.log(`Knapsack Memo: ${res}`);
+
+console.log(`Knapsack Memo: ${knapsackMemo(v, w, C, v.length, memo)}`);
