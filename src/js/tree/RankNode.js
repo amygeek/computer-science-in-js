@@ -111,7 +111,7 @@ for (let i = 0; i < size; i++) {
     trackRank.track(list[i]);
 }
 
-console.log( trackRank.getRankOfNumber( 3 ));  //
+console.log( trackRank.getRankOfNumber( 3 ));  //2
 trackRank.levelOrderTraversal();
 
 

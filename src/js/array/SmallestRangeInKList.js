@@ -60,8 +60,7 @@ class SmallestRangeInKList {
             this.currMax = data;
         }
         if (this.size == 0) { // check if this.heap is empty
-            this.heap[this.size ] = new HeapNode(data, listNo); // insert the first element in heap
-            this.size = 1;
+            this.heap[this.size++ ] = new HeapNode(data, listNo); // insert the first element in heap
         } else {
             this.heap[this.size++] = new HeapNode(data, listNo);// insert the element
             // to the end

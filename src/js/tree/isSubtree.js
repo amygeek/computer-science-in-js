@@ -22,10 +22,8 @@ class BTree {
             return false;  //big tree is tempty & subtree not found
         }
 
-        if ( t1.data === t2.data ) {
-            if ( this.matchTree( t1, t2 ) ) {
-                return true;
-            }
+        if ( t1.data === t2.data && this.matchTree( t1, t2 ) ) {           
+            return true;          
         }
 
         return this.subTree(t1.left, t2 ) || this.subTree(t1.right, t2 );

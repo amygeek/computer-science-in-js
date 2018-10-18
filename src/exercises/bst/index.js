@@ -20,14 +20,28 @@ class Node {
   }
 
   insert(data) {
-    if (data < this.data && this.left) {
-      this.left.insert(data);
-    } else if (data < this.data) {
-      this.left = new Node(data);
-    } else if (data > this.data && this.right) {
-      this.right.insert(data);
-    } else if (data > this.data) {
-      this.right = new Node(data);
+    // if (data < this.data && this.left) {
+    //   this.left.insert(data);
+    // } else if (data < this.data) {
+    //   this.left = new Node(data);
+    // } else if (data > this.data && this.right) {
+    //   this.right.insert(data);
+    // } else if (data > this.data) {
+    //   this.right = new Node(data);
+    // }
+
+    if ( this.data > data ) {
+      if (this.left) {
+        this.left.insert(data);
+      } else {
+        this.left = new Node(data);
+      }
+    } else if ( this.data < data ) {
+      if (this.right) {
+        this.right.insert(data);
+      } else {
+        this.right = new Node(data);
+      }
     }
   }
 

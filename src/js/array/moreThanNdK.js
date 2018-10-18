@@ -16,6 +16,7 @@
  Also check if element[] gets full when inserting an element, if it is not, follow the previous step. If it is full then reduce the count of every existing element in the element[]. (Just think of a Tetris game, when row gets full, it gets deleted and size of the Tetris reduced by 1) see the picture below.
  Once all the elements of array gets over, check every element of element[] with array and print those elements which has N/K times.
  */
+
 class Element {
     constructor(e, c) {
         this.element = e;
@@ -98,3 +99,17 @@ let res = nbyKElement.findElement();
 
 console.log(res)
 
+let arr2 = [2, 2, 4, 4, 3, 5, 3, 4, 4, 6, 4, 3, 3, 8];
+
+let findNOverK = ( arr, k ) => {
+   let n = arr.length;
+   let map = new Map();
+   for ( let item of arr ) {
+       let count = map.has(item) ? map.get(item) + 1 : 1;
+       map.set(item, count);
+   }
+   let newArr = Array.from(map);
+   newArr = newArr.filter(res => res[1] >= Math.floor( n / k) ).map(item => item[0]); 
+   return newArr;
+}
+findNOverK( arr2, 4 );  //[4, 3]

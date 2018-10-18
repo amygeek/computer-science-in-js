@@ -46,13 +46,13 @@ class DistanceOfTwoNodesBTree {
             let left = this.findLCA(root.left, n1, n2);
             let right = this.findLCA(root.right, n1, n2);
     
-            if (left != null && right != null) {
+            if (left && right) {
                 return root;
             }
-            if (left != null) {
+            if (left) {
                 return left;
             }
-            if (right != null) {
+            if (right) {
                 return right;
             }
         }
