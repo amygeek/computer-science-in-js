@@ -14,8 +14,8 @@ class KthSmallestNLargest {
         arr[j] = temp;
     }
     minHeapify(arr, size, i) {
-        let l = 2 * i;
-        let r = 2 * i + 1;
+        let l = 2 * i + 1;
+        let r = l + 1;
 
         let smallest = i;
         if ( l<size && arr[l] < arr[i]) {
@@ -64,8 +64,8 @@ class KthSmallestNLargest {
     }
 
     maxHeapify(arr, size, i) {
-        let l = 2 * i;
-        let r = 2 * i + 1;
+        let l = 2 * i + 1;
+        let r = l + 1;
 
         let max = i;
         if ( l<size && arr[l] > arr[i]) {

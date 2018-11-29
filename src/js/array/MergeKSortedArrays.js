@@ -105,8 +105,8 @@ class MergeKSortedArrays {
 
     minHeapify( i ) {
         let smallest = i;
-        let l = 2 * i;
-        let r = 2 * i + 1;
+        let l = 2 * i + 1;
+        let r = l + 1;
         // check which is smaller child , 2k or 2k+1.
         if (l < this.size && this.heap[l].data < this.heap[i].data) {
             smallest = l;
@@ -131,7 +131,7 @@ class MergeKSortedArrays {
     bubbleUp( i ) {
 
 
-        let parent = parseInt( i / 2 );
+        let parent = parseInt( (i - 1) / 2 );
         if (i > 0 && this.heap[parent].data > this.heap[i].data ) {
             // swap the two if heap property is violated
             this.swap(i, parent);

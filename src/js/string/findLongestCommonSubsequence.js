@@ -47,6 +47,7 @@ class LongestCommonSubsequence {
         }
     }
 
+    //time complexity: 0(m*n)
     findMemo( str1,  str2, m, n, res) {
         if (res[m][n]) {
             return res[m][n];
@@ -87,7 +88,7 @@ class LongestCommonSubsequence {
      E  0  1   2   2   3   3
      A  0  1   2   2   3   4
     
-    
+    time complexity: 0(m*n)
      */
     find( str1, str2 ) {
 
@@ -167,16 +168,41 @@ class LongestCommonSubsequence {
         return res[m][n];  //4
     }
     
+    //return longest common sub sequence: s1 = "abcd", s2 = "acdeb" result = "acd"
+    lcsMemo(s1, s2, i, j, memo) {
+        if (i === s1.length || j === s2.length) {
+            return "";
+        }
+        if (memo[i][j]) {
+            return memo[i][j];
+        }
+        if (s1[i] === s2[j]) {
+            memo[i][j] = s1[i] + this.lcsMemo(s1, s2, i + 1, j + 1, memo);
+            return memo[i][j];
+        } 
+        let resultA = this.lcsMemo(s1, s2, i + 1, j, memo);
+        let resultB = this.lcsMemo(s1, s2, i, j + 1, memo);
+        if (resultA.length > resultB.length) {
+            memo[i][j] = resultA;
+        } else {
+            memo[i][j] = resultB;           
+        }
+        return memo[i][j];
+    }
     
 }
 
 let LCS = new LongestCommonSubsequence();
-let str1 = "awes7some";
-let str2 = "aw2essomeme";
+let str1 = "ABCDE";
+let str2 = "AEBD";
 let res = [];
 for (let i=0; i<= str1.length; i++) {
-    res.push(new Array(str2.length + 1).fill(0));
+    res.push(Array(str2.length+1).fill(0));
 }
-console.log("Longest Commone Sub Sequenc Len :" + LCS.find(str1, str2));
-console.log("Longest Commone Sub Sequenc Len findRec :" + LCS.findRec(str1, str2, str1.length, str2.length));
-console.log("Longest Commone Sub Sequenc Len findMemo :" + LCS.findMemo(str1, str2, str1.length, str2.length, res));
+
+let memo = [...Array(str1.length)].map( e => Array(str2.length));  //create 2D array
+
+console.log("Longest Commone Sub Sequenc Len: " + LCS.find(str1, str2));
+console.log("Longest Commone Sub Sequenc Len findRec: " + LCS.findRec(str1, str2, str1.length, str2.length));
+console.log("Longest Commone Sub Sequenc Len findMemo: " + LCS.findMemo(str1, str2, str1.length, str2.length, res));
+console.log("Longest Commone Sub Sequenc Len lcsMemo: " + LCS.lcsMemo(str1, str2, 0, 0, memo)); //ABD
