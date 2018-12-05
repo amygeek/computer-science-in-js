@@ -25,9 +25,9 @@
  The length of these subsequences are 9, 7 and 8.
  */
 
-let minCut = ( str ) => {
+let minCut = ( list ) => {
 
-    let n = str.length;
+    let n = list.length;
     let res = [];
     let i = 0;
     let j = 1;
@@ -41,7 +41,7 @@ let minCut = ( str ) => {
         for (j=i+1; j < n; j++ ) {
 
             //compare with the iTh character with the rest of characters and get the max length of the sequence that contains repeating labels
-            if ( str[i] == str[j] ) {
+            if ( list[i] == list[j] ) {
                 max = Math.max( max, j - i + 1 );
             }
         }
@@ -49,13 +49,13 @@ let minCut = ( str ) => {
 
             //if max is not 0, that means we found the the sequence that contains repeating labels.
             //store the sequence for next letter lookup
-            seq = str.slice( i, max + i);
+            seq = list.slice( i, max + i);
 
             i = i + max; // i will be the next while loop iteration.
 
             //let's check the next char is that is in the sequence, if it is yes, we need increment max and i count
             while( i < n) {
-                if ( seq.indexOf(str[i]) !== -1 ) {
+                if ( seq.indexOf(list[i]) !== -1 ) {
                     max++;
                     i++;
                 } else {
@@ -83,16 +83,58 @@ let minCut = ( str ) => {
    return res;
 }
 
+let minCut2 = (list) => {
+    let len = list.length;
+    let map = new Map();
+    let res = [];
+    let last = 0;
+    // loop through the list and 
+    for(let i = 0; i < len; i++) {
+        // check if the character is in the map
+        if (map.has(list[i])) {
+            let c = map.get(list[i]);
+            let end = i - c.start + 1;
+            map.set(list[i], {start: c.start, end: end});
+            // let j = res.length - 1;
+            // while ( j > 0 && res[j] === 1) {
+            //     res.pop();
+            // }
+            // res.push(end);
+        } else {
+            map.set(list[i], {start: i, end: i + 1});
+            res.push(1);
+        }
+    }
+
+    return res.join(', ');
+}
+
 let arr = ["a","b","a","b","c","b","a","c","a","d","e","f","e","g","d","e","h","i","j","h","k","l","i","j"];
 
-console.log( '["a","b","a","b","c","b","a","c","a","d","e","f","e","g","d","e","h","i","j","h","k","l","i","j"] ->', minCut(arr) ); // [9, 7, 8]
+console.log('["a","b","a","b","c","b","a","c","a","d","e","f","e","g","d","e","h","i","j","h","k","l","i","j"] ->');
 
-arr = ['a', 'b', 'c', 'e', 'a', 'e', 'f', 'g', 'h', 'i', 'j', 'e'];
-console.log( "['a', 'b', 'c', 'e', 'a', 'e', 'f', 'g', 'h', 'i', 'j', 'e'] ->", minCut(arr) );  // [12]
+// console.log( 'minCut: ', minCut(arr) ); // [9, 7, 8]
+console.log( 'minCut2: ', minCut2(arr) ); // [9, 7, 8]
 
-arr = ['a', 'b', 'c','a'];
-console.log( "['a', 'b', 'c','a'] ->", minCut(arr) );  // [4]
 
-arr = ['a', 'b', 'c', 'd', 'a', 'e', 'f', 'g', 'h', 'i', 'j', 'e'];
-console.log( "['a', 'b', 'c', 'd', 'a', 'e', 'f', 'g', 'h', 'i', 'j', 'e'] ->", minCut(arr) );  // [5, 7]
+// arr = ['a', 'b', 'c', 'e', 'a', 'e', 'f', 'g', 'h', 'i', 'j', 'e'];
+// console.log("['a', 'b', 'c', 'e', 'a', 'e', 'f', 'g', 'h', 'i', 'j', 'e'] ->");
+// console.log( 'minCut: ', minCut(arr) );  // [12]
+// console.log( 'minCut2: ', minCut2(arr) );  // [12]
 
+
+// arr = ['a', 'b', 'c','a'];
+// console.log("['a', 'b', 'c','a'] ->");
+// console.log('minCut: ', minCut(arr) );  // [4]
+// console.log('minCut2: ', minCut2(arr) );  // [4]
+
+
+// arr = ['a', 'b', 'c', 'd', 'a', 'e', 'f', 'g', 'h', 'i', 'j', 'e'];
+// console.log("['a', 'b', 'c', 'd', 'a', 'e', 'f', 'g', 'h', 'i', 'j', 'e'] ->");
+// console.log('minCut: ', minCut(arr) );  // [5, 7]
+// console.log('minCut2: ', minCut2(arr) );  // [5, 7]
+
+// arr = ['a', 'b', 'c', 'd'];
+// console.log("['a', 'b', 'c', 'd'] ->");
+// console.log('minCut: ', minCut(arr) );  // [1, 1, 1, 1]
+// console.log('minCut2: ', minCut2(arr) );  // [1, 1, 1, 1]
