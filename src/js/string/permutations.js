@@ -117,5 +117,30 @@ let swap = ( str, a,  b) => {
 
 permutation( 'abc'.split(""), 0 );
 
+let perm = (str) => {
+    let len = str.length;
+    let used = [];
+    let out = [];
+    let level = 0;
+    doPermutation(str, used, out, len, level);
+}
+
+let doPermutation = (str, used, out, len, level) => {
+    if(level === len) {
+        console.log(out.join(''));
+    }
+    for(let i = 0; i < len; i++) {
+        if(used[i]) {
+            continue;
+        }
+        out[level] = str[i];
+        used[i] = 1;
+        doPermutation(str, used, out, len, level + 1);
+        used[i] = 0;
+    }
+}
+
+console.log('perm: ');
+perm('abc');
 
 

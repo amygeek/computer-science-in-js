@@ -38,7 +38,7 @@ let minCut = ( str ) => {
         let max = 0;  //store the current max length of the sequence
         let seq = []; // store the repeat label sequence
 
-        for (j=i+1; j<n-1; j++ ) {
+        for (j=i+1; j < n; j++ ) {
 
             //compare with the iTh character with the rest of characters and get the max length of the sequence that contains repeating labels
             if ( str[i] == str[j] ) {
@@ -84,7 +84,15 @@ let minCut = ( str ) => {
 }
 
 let arr = ["a","b","a","b","c","b","a","c","a","d","e","f","e","g","d","e","h","i","j","h","k","l","i","j"];
-//let arr = ["a","b","c"];
 
-console.log( minCut(arr) );
+console.log( '["a","b","a","b","c","b","a","c","a","d","e","f","e","g","d","e","h","i","j","h","k","l","i","j"] ->', minCut(arr) ); // [9, 7, 8]
+
+arr = ['a', 'b', 'c', 'e', 'a', 'e', 'f', 'g', 'h', 'i', 'j', 'e'];
+console.log( "['a', 'b', 'c', 'e', 'a', 'e', 'f', 'g', 'h', 'i', 'j', 'e'] ->", minCut(arr) );  // [12]
+
+arr = ['a', 'b', 'c','a'];
+console.log( "['a', 'b', 'c','a'] ->", minCut(arr) );  // [4]
+
+arr = ['a', 'b', 'c', 'd', 'a', 'e', 'f', 'g', 'h', 'i', 'j', 'e'];
+console.log( "['a', 'b', 'c', 'd', 'a', 'e', 'f', 'g', 'h', 'i', 'j', 'e'] ->", minCut(arr) );  // [5, 7]
 
