@@ -25,116 +25,131 @@
  The length of these subsequences are 9, 7 and 8.
  */
 
-let minCut = ( list ) => {
-
+let minCut = (list) => {
     let n = list.length;
     let res = [];
     let i = 0;
     let j = 1;
-
-    //start in the first character
-    while ( i < n )  { 
-
-        let max = 0;  //store the current max length of the sequence
-        let seq = []; // store the repeat label sequence
-
-        for (j=i+1; j < n; j++ ) {
-
-            //compare with the iTh character with the rest of characters and get the max length of the sequence that contains repeating labels
-            if ( list[i] == list[j] ) {
-                max = Math.max( max, j - i + 1 );
-            }
+  
+    // start in the first character
+    while (i < n) {
+      let max = 0; // store the current max length of the sequence
+      let seq = []; // store the repeat label sequence
+  
+      for (j = i + 1; j < n; j++) {
+        // compare with the iTh character with the rest of characters and get the max length of the sequence that contains repeating labels
+        if (list[i] == list[j]) {
+          max = Math.max(max, j - i + 1);
         }
-        if ( max !== 0 ) {
-
-            //if max is not 0, that means we found the the sequence that contains repeating labels.
-            //store the sequence for next letter lookup
-            seq = list.slice( i, max + i);
-
-            i = i + max; // i will be the next while loop iteration.
-
-            //let's check the next char is that is in the sequence, if it is yes, we need increment max and i count
-            while( i < n) {
-                if ( seq.indexOf(list[i]) !== -1 ) {
-                    max++;
-                    i++;
-                } else {
-                    break;
-                }
-
-            }
-            res.push( max );  //story the max in result
-
-        } else {
-            res.push(1);    //if there is no repeat label found, store 1 for each label
+      }
+      if (max !== 0) {
+        // if max is not 0, that means we found the the sequence that contains repeating labels.
+        // store the sequence for next letter lookup
+        seq = list.slice(i, max + i);
+  
+        i += max; // i will be the next while loop iteration.
+  
+        // let's check the next char is that is in the sequence, if it is yes, we need increment max and i count
+        while (i < n) {
+          if (seq.indexOf(list[i]) !== -1) {
+            max++;
             i++;
-        }
-    }
-    //we need to check result set if we found repeated sequence. If we found the sequence, and we need to add none repeated seq
-    // to the last sequence
-    for ( i=res.length-1; i>=0; i--) {
-        // turn [ 9, 7, 4, 1, 1, 1, 1 ] into [ 9, 7, 8 ]
-        if ( res[i] !== 1 ) {
-            res[i] += res.length - i - 1;
-            res = res.splice(0, i + 1);
+          } else {
             break;
+          }
         }
+        res.push(max); // story the max in result
+      } else {
+        res.push(1); // if there is no repeat label found, store 1 for each label
+        i++;
+      }
     }
-   return res;
-}
-
-let minCut2 = (list) => {
+    // we need to check result set if we found repeated sequence. If we found the sequence, and we need to add none repeated seq
+    // to the last sequence
+    for (i = res.length - 1; i >= 0; i--) {
+      // turn [ 9, 7, 4, 1, 1, 1, 1 ] into [ 9, 7, 8 ]
+      if (res[i] !== 1) {
+        res[i] += res.length - i - 1;
+        res = res.splice(0, i + 1);
+        break;
+      }
+    }
+    return res;
+  };
+  
+  class Dist {
+    constructor(c, start) {
+      this.c = c;
+      this.start = start;
+      this.end = start;
+    }
+  }
+  
+  let minCut2 = (list) => {
     let len = list.length;
     let map = new Map();
     let res = [];
     let last = 0;
-    // loop through the list and 
-    for(let i = 0; i < len; i++) {
-        // check if the character is in the map
-        if (map.has(list[i])) {
-            let c = map.get(list[i]);
-            let end = i - c.start + 1;
-            map.set(list[i], {start: c.start, end: end});
-            // let j = res.length - 1;
-            // while ( j > 0 && res[j] === 1) {
-            //     res.pop();
-            // }
-            // res.push(end);
-        } else {
-            map.set(list[i], {start: i, end: i + 1});
-            res.push(1);
-        }
+    // loop through the list and
+    for (let i = 0; i < len; i++) {
+      // check if the character is in the map
+      if (map.has(list[i])) {
+        const c = map.get(list[i]);
+        c.end = i;
+      } else {
+        map.set(list[i], new Dist(list[i], i));
+      }
     }
-
-    return res.join(', ');
-}
-
-let arr = ["a","b","a","b","c","b","a","c","a","d","e","f","e","g","d","e","h","i","j","h","k","l","i","j"];
-
-console.log('["a","b","a","b","c","b","a","c","a","d","e","f","e","g","d","e","h","i","j","h","k","l","i","j"] ->');
-
-// console.log( 'minCut: ', minCut(arr) ); // [9, 7, 8]
-console.log( 'minCut2: ', minCut2(arr) ); // [9, 7, 8]
-
-
-// arr = ['a', 'b', 'c', 'e', 'a', 'e', 'f', 'g', 'h', 'i', 'j', 'e'];
-// console.log("['a', 'b', 'c', 'e', 'a', 'e', 'f', 'g', 'h', 'i', 'j', 'e'] ->");
-// console.log( 'minCut: ', minCut(arr) );  // [12]
-// console.log( 'minCut2: ', minCut2(arr) );  // [12]
-
-
-// arr = ['a', 'b', 'c','a'];
-// console.log("['a', 'b', 'c','a'] ->");
-// console.log('minCut: ', minCut(arr) );  // [4]
-// console.log('minCut2: ', minCut2(arr) );  // [4]
-
-
-// arr = ['a', 'b', 'c', 'd', 'a', 'e', 'f', 'g', 'h', 'i', 'j', 'e'];
-// console.log("['a', 'b', 'c', 'd', 'a', 'e', 'f', 'g', 'h', 'i', 'j', 'e'] ->");
-// console.log('minCut: ', minCut(arr) );  // [5, 7]
-// console.log('minCut2: ', minCut2(arr) );  // [5, 7]
-
-// arr = ['a', 'b', 'c', 'd'];
-// console.log("['a', 'b', 'c', 'd'] ->");
-// console.log('minCut: ', minCut(arr) );  // [1, 1, 1, 1]
-// console.log('minCut2: ', minCut2(arr) );  // [1, 1, 1, 1]
+  
+    let prev;
+    for (let cur of map.values()) {
+      if (!prev) {
+        prev = cur;
+      } else if (prev.end < cur.start) {
+        res.push((prev.end - prev.start) + 1);
+        prev.start = cur.start;
+        prev.end = cur.end;
+      } else if (prev.end <= cur.end) {
+        prev.end = cur.end;
+      }
+    }
+    res.push((prev.end - prev.start) + 1);
+    return res;
+  };
+  
+  let arr = ['a', 'b', 'a', 'b', 'c', 'b', 'a', 'c', 'a', 'd', 'e', 'f', 'e', 'g', 'd', 'e', 'h', 'i', 'j', 'h', 'k', 'l', 'i', 'j'];
+  
+  console.log(`
+  ["a","b","a","b","c","b","a","c","a","d","e","f","e","g","d","e","h","i","j","h","k","l","i","j"] -> [9, 7, 8]
+  ****************** `);
+  console.log('minCut: ', minCut(arr)); // [9, 7, 8]
+  console.log('minCut2: ', minCut2(arr)); // [9, 7, 8]
+  
+  arr = ['a', 'b', 'c', 'e', 'a', 'e', 'f', 'g', 'h', 'i', 'j', 'e'];
+  console.log(`
+  ['a', 'b', 'c', 'e', 'a', 'e', 'f', 'g', 'h', 'i', 'j', 'e'] -> [12]
+  ****************** `);
+  console.log('minCut: ', minCut(arr)); // [12]
+  console.log('minCut2: ', minCut2(arr)); // [12]
+  
+  arr = ['a', 'b', 'c', 'a'];
+  console.log(`
+  ['a', 'b', 'c', 'a'] -> [4] 
+  ****************** `);
+  console.log('minCut: ', minCut(arr)); // [4]
+  console.log('minCut2: ', minCut2(arr)); // [4]
+  
+  
+  arr = ['a', 'b', 'c', 'd', 'a', 'e', 'f', 'g', 'h', 'i', 'j', 'e'];
+  console.log(`
+  ['a', 'b', 'c', 'd', 'a', 'e', 'f', 'g', 'h', 'i', 'j', 'e'] -> [5, 7]
+  ******************`);
+  console.log('minCut: ', minCut(arr)); // [5, 7]
+  console.log('minCut2: ', minCut2(arr)); // [5, 7]
+  
+  console.log(`
+  ['a', 'b', 'c', 'd'] -> [1, 1, 1, 1]
+  ******************`);
+  console.log('minCut: ', minCut(['a', 'b', 'c', 'd'])); // [1, 1, 1, 1]
+  console.log('minCut2: ', minCut2(['a', 'b', 'c', 'd'])); // [1, 1, 1, 1]
+  

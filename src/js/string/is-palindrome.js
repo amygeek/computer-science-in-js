@@ -71,3 +71,5 @@ let findAllPalindromeSubStr = function(str) {
 };
 
 console.log(findAllPalindromeSubStr('aabbbaa'));
+
+console.log(findAllPalindromeSubStrI('aabbbaa'));

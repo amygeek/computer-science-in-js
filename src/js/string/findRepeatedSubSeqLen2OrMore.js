@@ -67,21 +67,18 @@ class SubSequence {
         // frequencies in str[]
         let arr = new Array(256).fill(0);
 
-        // Traverse the input string and store frequencies
-        // of all characters in map[] array.
+        // Traverse the input string and store frequencies of all characters in map[] array.
         for (let i = 0; i < n; i++) {
 
             arr[str[i].charCodeAt(0)]++;
-            // If the character count is more than 3
-            // we found a repetition
+            // If the character count is more than 3, we found a repetition
             if ( arr[str[i].charCodeAt(0)] >= 3) {
                 return true;
             }
 
         }
 
-        // In-place remove non-repeating characters
-        // from the string
+        // In-place remove non-repeating characters from the string
         let k = 0;
         for (let i = 0; i < n; i++) {
             if (arr[str[i].charCodeAt(0)] > 1) {
@@ -91,30 +88,16 @@ class SubSequence {
 
         }
         str = str.substr(0, k);
-
-        // If the remaining string is palindrome then it is not repeated, else there is a repetition
-        //if (this.isPalindrome(str, 0, k-1))
-        //{
-        //    // special case - if length is odd
-        //    // return true if the middle characer is
-        //    // same as previous one
-        //    if (k & 1) {
-        //        let index = parseInt(k/2);
-        //        return str[index] == str[index - 1];
-        //    }
-        //
-        //    // return false if string is a palindrome
-        //    return false;
-        //}
-        //
-        //// return true if string is not a palindrome
-        //return true;
-
         return !this.isPalindrome(str, 0, k-1);
     }
 }
 
 let S = new SubSequence();
-let str = "ABCABD";
 
-console.log(S.findSubSeq(str));
+console.log('ABCABD: ', S.findSubSeq('ABCABD'));  //true (A B is repeated)
+console.log('ABBB: ', S.findSubSeq('ABBB'));      // true (B B is repeated)
+console.log('AAB: ', S.findSubSeq('AAB'));        // false
+console.log('AABBC: ', S.findSubSeq('AABBC'));    // true (A B is repeated)
+console.log('ABCDACB: ', S.findSubSeq('ABCDACB')); // true Exists (A B or A C is repeated)
+console.log('ABCD: ', S.findSubSeq('ABCD'));       // false
+console.log('XYBYAXBY: ', S.findSubSeq('XYBYAXBY')); // true XB(XBXB), XY(XYXY), YY(YYY), YB(YBYB) and YBY(YBYBY)

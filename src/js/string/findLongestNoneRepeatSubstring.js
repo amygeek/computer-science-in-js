@@ -11,43 +11,24 @@
  "pwke" is a subsequence and not a substring.
  */
 
-let lengthOfLongestSubstring = (str) => {
-    let n = str.length;
-    let set = new Set();
-    let res = 0, i = 0, j = 0;
-
-    while (i < n && j < n) {
-
-        // try to extend the range [i, j]
-        if (!set.has( str[j] )){
-            set.add(str[j++]);
-            res = Math.max(res, j - i);
-        } else {
-            set.delete(str[i++]);
-        }
-    }
-
-    return res;
-}
-
-let lengthOfLongestSubstring2 = (str) => {
+let longestNoneRepeatSubstring = (str) => {
 
     let n = str.length;
     let map = new Map();
-    let res = 0;
-    // try to extend the range [i, j]
+    let max = 0;
+    
+    for (let i = 0; i < n; i++) {
 
-    for (let j = 0, i = 0; j < n; j++) {
-
-        if (map.has( str[j] )){
-            i = Math.max(map.get(str[j]), i);
+        if (map.has( str[i] )){
+            max = Math.max(max, i - map.get(str[i]));
         }
-        res = Math.max(res, j - i + 1);
-        map.set(str[j], j + 1);
+        map.set(str[i], i);
     }
 
-    return res;
+    return max;
 }
 
-let str = "abcabcbb";
-console.log( lengthOfLongestSubstring2( str ) );
+// "abcabcbb" -> 3: abc
+// "bbbbb"  -> 1: b
+let str = "pwwkew";  // 3: wke   
+console.log( longestNoneRepeatSubstring( str ) ); //

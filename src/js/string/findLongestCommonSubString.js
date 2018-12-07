@@ -16,7 +16,6 @@ let findLongestCommonSubString = (str1, str2, m, n) => {
 
                 res[i][j] = res[i-1][j-1] + 1;
                 max = Math.max(res[i][j], max);
-
             } else {
                 res[i][j] = 0;
             }
@@ -36,4 +35,4 @@ let str1 = "xy";
 let str2 = "abxy";
 
 let len = findLongestCommonSubString(str1, str2, str1.length, str2.length);
-console.log(len); //7
+console.log(len); //2
