@@ -46,9 +46,36 @@ let getTranslationCount = (number) => {
 }
 
 //test
-
 let cnt = getTranslationCount(12258);
 console.log(cnt); //5
 cnt = getTranslationCount(126);
 console.log(cnt); //3
 
+let helper = (data, k, memo) => {
+    if (k === 0) {
+        return 1;
+    }
+    let i = data.length - k;
+    if (data[i] === '0') {
+        return 0;
+    }
+    if (memo[k]) {
+        return memo[k];
+    }
+    let result = helper(data, k - 1, memo);
+    let s = data.substr(i, 2) - '0';  // convert string to number
+    if (k >= 2 && s <= 26) {
+        result += helper(data, k - 2, memo);
+    }
+    memo[k] = result;
+    return result;
+}
+let numWays = (data) => {
+    data = data + '';   // convert number to string
+    let k = data.length;
+    let memo = [...Array(k+1)];
+    return helper(data, k, memo);
+}
+
+console.log('numWays 12258: ', numWays(12258)); //5
+console.log('numWays 126: ', numWays(126)); //3

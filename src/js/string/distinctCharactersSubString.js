@@ -50,7 +50,7 @@ let findSubString = ( str, k) => {
             }
         }
         //if map size is 3, that means only one character is repeated
-        if ( map.size === 3 ) {
+        if ( map.size === k - 1 ) {
             return currentStr;  //return it if we only care about finding one
         }
     }

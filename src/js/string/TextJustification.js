@@ -24,43 +24,43 @@
  */
 
 let getSpace = ( spaceCount ) => {
-    let str = "";
+    let str = '';
     while ( spaceCount > 0) {
-        str += " ";
+        str += ' ';
         spaceCount--;
     }
     return str;
 }
 
-let fullJustify = (words, maxLen) => {
+let fullJustify = (s, maxLen) => {
     
-    let n = words.length;
+    let n = s.length;
 
     for(let i = 0, k=0; i < n; i += k) {
 
-        let l = 0;
+        let curLen = 0;
 
-        for(k = 0; i + k < n && l + words[i+k].length <= maxLen - k; k++) {
-            l += words[i+k].length;
+        for(k = 0; i + k < n && curLen + s[i+k].length <= maxLen - k; k++) {
+            curLen += words[i+k].length;
         }
 
-        let tmp = words[i];
+        let tmp = s[i];
 
         for(let j = 0; j < k - 1; j++) {
 
             if(i + k >= n) {
-                tmp += " "
+                tmp += ' ';
             } else {
-                let spaceBetweenWords = parseInt( (maxLen - l) / (k - 1) ) ;
+                let space = parseInt( (maxLen - curLen) / (k - 1) ) ;
 
-                tmp += getSpace( spaceBetweenWords );
+                tmp += getSpace(space);
 
                 //If even distribution is not possible, extra space will be assigned on the left most space (between two words).
-                if ( j < (maxLen - l) % (k - 1) ) {
-                    tmp += ' '
+                if ( j < (maxLen - curLen) % (k - 1) ) {
+                    tmp += ' ';
                 }
             }
-            tmp += words[i+j+1];
+            tmp += s[i + j + 1];
         }
         
         let spaceOnTheRight = maxLen - tmp.length;

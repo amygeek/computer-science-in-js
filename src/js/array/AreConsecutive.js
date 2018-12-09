@@ -77,8 +77,8 @@ class AreConsecutive {
      If is already negative, we have duplicates, return false.
      */
 
-    withoutAuxArray(arr, n){
-
+    withoutAuxArray(arr){
+        let n = arr.length;
         let max = Math.max( ...arr );
         let min = Math.min( ...arr );
     
@@ -88,27 +88,26 @@ class AreConsecutive {
 
         for(let i = 0; i<n; i++){
             let x  = max - Math.abs(arr[i]);
-            if(arr[x] > 0){
+            if(arr[x] >= 0){
                 arr[x] *= -1;
             } else {
                 return false;
             } 
         }
-     
         return true;
     }
 }
 
 
 let consecutive = new AreConsecutive();
-let arr = [5, 3, 2, 4, 1, 6];
-let n = arr.length;
 
-if (consecutive.withoutAuxArray(arr, n) == true) {
-    console.log("Array elements are consecutive");
-} else {
-    console.log( arr );
-    console.log("Array elements are not consecutive"); 
-}
+console.log(consecutive.withoutAuxArray([5, 3, 2, 1, 4, 0]));  // true
+
+console.log(consecutive.withoutAuxArray([5, 3, 2, 1, 4, 8]));  // false
+
+console.log(consecutive.withoutAuxArray([100, 105, 103, 102, 104, 101]));  // true
+
+
+
         
 

@@ -11,17 +11,16 @@ class LongestWords {
         })
 
         let solved = new Set();
-        let dist = new Set( arr );
 
         for ( let s of arr ) {
-            if ( this.containWord( s, dist, solved )) {
+            if ( this.containWord( arr, s, solved )) {
                 console.log( s );
                 return s;
             }
         }
     }
 
-    containWord(s, dist, solved) {
+    containWord(arr, s, solved) {
 
         let len = s.length;
 
@@ -29,16 +28,16 @@ class LongestWords {
 
             let first = s.substr(0, i);
 
-            if ( dist.has(first)) {
+            if ( arr.includes(first)) {
 
                 let second = s.substr(i);
 
-                if( second.length === 0 || dist.has(second)) {
+                if( second.length === 0 || arr.includes(second)) {
                     return true;
                 } else {
 
                     if (!solved.has(second)) {
-                        if ( this.containWord( second, dist, solved)) {
+                        if ( this.containWord(arr, second, solved)) {
 
                             return true;
                         }

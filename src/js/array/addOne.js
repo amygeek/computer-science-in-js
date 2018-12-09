@@ -5,7 +5,7 @@ let addOne = (arr) => {
 
     for(let i=len; i>=0; i--) {
 
-        if ( i === len - 1 || ( i < len - 1  && carry === 1 ) ) {
+        if ( i === len - 1 || carry === 1 ) {
             arr[i]++;
             if (arr[i] === 10 ) {
                 arr[i] = 0;
@@ -17,7 +17,7 @@ let addOne = (arr) => {
     }
 
     carry !== 0 && arr.unshift(1);
-    //return arr;
+    return arr;
 }
 
 
@@ -53,4 +53,4 @@ let addOne2 = (arr, x) => {
 
 let arr = [ 9,9,9 ];
 console.log(addOne(arr));
-//console.log(addOne2(arr, 8));
+// console.log(addOne2(arr, 8));
