@@ -3,7 +3,7 @@ let getMaxValue = ( arr ) => {
     let row = arr.length;
     let col = arr[0].length;
 
-    let maxValue = new Array( col );
+    let maxValue = [...Array(col)];
     for( let i=0; i<row; i++) {
         for (let j=0; j<col; j++) {
             let left = 0;

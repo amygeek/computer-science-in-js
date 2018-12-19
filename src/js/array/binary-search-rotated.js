@@ -49,15 +49,13 @@ let search = function(a, left, right, x) {
 
 
 let binary_search_rotated = function(a, x) {
-    return search2(a, 0, a.length - 1, x);
+    return search(a, 0, a.length - 1, x);
 };
 
 let a = [2, 3, 2, 2, 2, 2, 2, 2 , 2 , 2 ];
 console.log(binary_search_rotated( a, 2));  //4
 console.log(binary_search_rotated( a, 3));   //1
-console.log(binary_search_rotated( a, 4));   //-1
-console.log(binary_search_rotated( a, 1));   //-1
+console.log(binary_search_rotated([6,7,1,2,3,4,5], 3));   // 4
+console.log(binary_search_rotated([4,5,6,1,2,3], 3 ));   // 5
+console.log(binary_search_rotated([4,5,6,1,2,3], 6 ));   // 2
 
-let searchMin = (arr, low, high) => {
-
-}

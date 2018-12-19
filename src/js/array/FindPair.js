@@ -50,12 +50,12 @@ class FindPair {
         }
 
         if ( arr[high] > arr[mid]) {
-            return findMin(arr, low, mid -1);
+            return this.findMinNumberIndex(arr, low, mid -1);
         }
-        return findMin(arr, mid+1, high);
+        return this.findMinNumberIndex(arr, mid+1, high);
     }
 
-    findPairRotated(arr, sum, sets) {
+    findPairRotated(arr, sum) {
 
         let n = arr.length;
         let i;
@@ -65,15 +65,13 @@ class FindPair {
         //    }
         //}
         i = this.findMinNumberIndex( arr, 0, n - 1);
-
         let low = i % n;
         let high = i - 1;
-
+        let sets = new Set();
         while(low != high) {
             let v = arr[low] + arr[high];
             if (v === sum) {
                 sets.add([arr[low], arr[high]]);
-
             }
             if (v < sum) {
                 low = (low + 1) % n;
@@ -81,6 +79,7 @@ class FindPair {
                 high = (high - 1 + n) % n;
             }
         }
+        return sets;
     }
 }
 
@@ -94,5 +93,8 @@ let findPair = new FindPair();
 
 let rotatedArr = [3, 4, 5, 1, 2];
 
-findPair.findPairRotated(rotatedArr, 5, st);
-console.log(st)
+let sets = findPair.findPairRotated(rotatedArr, 5);
+for ( let item of sets) {
+    console.log(item);
+}
+

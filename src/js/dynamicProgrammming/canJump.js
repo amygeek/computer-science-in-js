@@ -14,3 +14,15 @@ function canHop(towers) {
 }
 let arr = [4,2,0,0,2,0];
 console.log(canHop(arr));  //true
+
+let canJump = (arr) => {
+    let n = arr.length;
+    for(let i=0; i<n; i++) {
+        if ( arr[i] + arr[arr[i]] >= n) {
+            return true;
+        }
+    }
+    return false;
+}
+
+console.log(canJump(arr));  //true

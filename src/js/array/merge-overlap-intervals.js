@@ -19,17 +19,17 @@ let mergeInterval = function(list) {
         'second': list[0].second
     });
     for (let i = 1; i < len; i++) {
-        let x1 = list[i].first;
-        let y1 = list[i].second;
+        let x2 = list[i].first;
+        let y2 = list[i].second;
 
-        let y2 = res[res.length - 1].second;
+        let y1 = res[res.length - 1].second;
 
-        if (y2 >= x1) {
+        if (y1 >= x2) {
             res[res.length - 1].second = Math.max(y1, y2);
         } else {
             res.push({
-                'first': x1,
-                'second': y1
+                'first': x2,
+                'second': y2
             });
         }
 
@@ -45,4 +45,4 @@ let list = [
     {first: 10, second: 12},
     {first: 11, second: 15}];
 
-console.log(mergeInterval(list));
+console.log(mergeInterval(list)); // [{first: 1, second: 8}, {first: 10, second: 15}]

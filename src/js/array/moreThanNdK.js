@@ -108,8 +108,14 @@ let findNOverK = ( arr, k ) => {
        let count = map.has(item) ? map.get(item) + 1 : 1;
        map.set(item, count);
    }
-   let newArr = Array.from(map);
-   newArr = newArr.filter(res => res[1] >= Math.floor( n / k) ).map(item => item[0]); 
+//    let newArr = Array.from(map);
+//    newArr = newArr.filter(res => res[1] >= Math.floor( n / k) ).map(item => item[0]); 
+   let newArr = [];
+   for( let [key, val] of map) {
+       if (val >= Math.floor( n / k)) {
+           newArr.push(key);
+       }
+   }
    return newArr;
 }
 findNOverK( arr2, 4 );  //[4, 3]

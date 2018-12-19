@@ -1,10 +1,7 @@
 let printPascalTriangle = ( num ) => {
 
-    let res = [];
-    for(let i=0; i<num; i++) {
-        res.push( new Array(num).fill(0));
-    }
-
+    let res = [...Array(num)].map(e => [...Array(num).fill(0)]);
+    
     for (let line=0; line<num; line++) {
         let str = "";
         for ( let i=0; i<=line; i++) {

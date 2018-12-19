@@ -50,7 +50,22 @@ let find_max_sliding_window = function(arr, wSize) {
     return result;
 };
 
+let find_max_sliding_window2 = function(arr, window_size) {
+    //TODO: Write - Your - Code
+    let n = arr.length;
+    let res = []
+    for(let i=0; i <= n - window_size; i++) {
+      
+      let temp = arr.slice(i, window_size + i);
+      res.push(Math.max(...temp));
+    }
+    return res;
+};
+
 let arr = [-4, 2, -5, 1, -1, 6]; // [ 2, 2, 1, 6 ]
 let size = 3;
 
 console.log(find_max_sliding_window(arr, size));
+
+let res = find_max_sliding_window([1,2,3,4,3,2,1,2,5], 4);
+console.log(res); // [4,4,4,4,3,5]

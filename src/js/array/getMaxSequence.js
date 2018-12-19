@@ -14,16 +14,16 @@ let maxSet = (arr) => {
     let n = arr.length;
 
     let maxSum = Number.MIN_VALUE;
+    let maxSet = [];
     let currentSum = 0;
     let currentSet = [];
-    let maxSet = [];
 
     for( let i=0; i<n; i++ ) {
 
         if (arr[i] > 0) {
             currentSum += arr[i];
             currentSet.push(arr[i]);
-            if (currentSum > maxSum || (currentSum === maxSum && (currentSet.length > maxSet.length || currentSet[0] < maxSet[0]) ) ){
+            if (currentSum > maxSum || (currentSum === maxSum && (currentSet.length > maxSet.length || currentSet[currentSet.length-1] < maxSet[maxSet.length-1]) ) ){
                 maxSum = currentSum;
                 maxSet = currentSet;
             }

@@ -23,4 +23,4 @@
      }
  }
 
- console.log(findUniqueElm('abcdb'));
+ console.log(findUniqueElm('abcdb'));  // a

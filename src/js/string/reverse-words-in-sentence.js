@@ -27,6 +27,17 @@ let reverseStr = function(str, start, end) {
     return str;
 };
 
+let reverse = (w, low, high) => {
+    while(low < high ) {
+        let temp = w[low];
+        w[low] = w[high];
+        w[high] = temp;
+        low++;
+        high--;
+    }
+    return w;
+}
+
 let reverseWords = function(str) {
 
     let len = str.length;
@@ -72,7 +83,31 @@ let reverseWords = function(str) {
     return str;
 };
 
-let reverseWords2 = (words) => {
+
+let reverseWords2 = (w) => {
+    let i = 0;
+    let j = w.length - 1;
+    reverse(w, i, j);
+
+    let end = 0;
+    while (i <= j) {
+        while (w[end] !== ' ' && end <= j) {
+            end++;
+        }
+        reverse(w, i, end - 1);
+        while (w[end] === ' ' && end <= j) {
+            end++;
+        }
+        i = end;
+    }
+    return w;
+}
+
+let words = ['a', 'm', 'y', ' ', 'h', 'u', 'a', 'n', 'g'];
+let w = reverseWords2(words);
+console.log(w);
+
+let reverseWords3 = (words) => {
     words = words.split( ' ');
     let len = words.length;
     let mid = Math.floor(len / 2);
@@ -88,4 +123,4 @@ let reverseWords2 = (words) => {
 
 let str = "hello           world good      morning";
 console.log(reverseWords( str ));
-console.log(reverseWords2( str ));
+console.log(reverseWords3( str ));

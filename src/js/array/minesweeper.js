@@ -5,8 +5,7 @@ let minesweeper = (arr) => {
 
     for (let i = 0; i < m; i++) {
         for (let j = 0; j < n; j++) {
-            
-            
+                        
             if (arr[i][j-1] === true) {
                 res[i][j]++;
             }

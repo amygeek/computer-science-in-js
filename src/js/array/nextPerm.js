@@ -44,4 +44,4 @@ class NextPerm {
 let nextPerm = new NextPerm();
 let arr = [1,5,8,4,7,6,5,3,1]; //[1, 5, 8, 5, 1, 3, 4, 6, 7]
 nextPerm.findNextPerm( arr );
-console.log( arr );
+console.log( arr.toString() );

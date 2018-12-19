@@ -25,11 +25,11 @@ let find_least_common_number = function(a, b, c) {
         // Let's advance the iterator
         // for the smallest value.
 
-        if (a[i] <= b[j] && a[i] <= c[k]) {
+        if (a[i] < b[j]) {
             i++;
-        } else if (b[j] <= a[i] && b[j] <= c[k]) {
+        } else if (b[j] < c[k]) {
             j++;
-        } else if (c[k] <= a[i] && c[k] <= b[j]) {
+        } else {
             k++;
         }
     }
