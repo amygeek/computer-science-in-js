@@ -35,7 +35,30 @@ class LinkedList {
         prev.next = current.next;
         return head;
     }
+    
+    deleteNode2(head, key) {
+  
+      let current = head;
+      let prev = null;
 
+      while (current) {
+        if (current.data === key) {
+          if (current === head) {
+            head = head.next;
+          } else {
+            prev.next = current.next;
+          }
+          return head;
+        } else {
+          prev = current;
+          current = current.next;
+        }
+
+      }
+  
+      return head;
+    }
+    
     print( node ) {
         let current = node;
         let str = ''
