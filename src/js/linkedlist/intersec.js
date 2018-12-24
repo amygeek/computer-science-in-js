@@ -58,3 +58,27 @@ let getLen = function(head) {
   
   return len;
 };
+
+let intersect2 = function(head1, head2) {
+  
+  let m = getLen(head1);
+  let n = getLen(head2);
+  
+  if (m > n) {
+    while(m > n) {
+      head1 = head1.next;
+    }
+  } else {
+    while (n > m) {
+      head2 = head2.next;
+    }
+  }
+  while(head1) {
+    if (head1 === head2) {
+      return head1;
+    }
+    head1 = head1.next;
+    head2 = head2.next;  
+  }
+  return null;
+};
