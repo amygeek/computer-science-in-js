@@ -53,27 +53,26 @@ console.log(trappingWater([2, 0, 2]));  // 2
  */
 
  let trappingWater2 = (arr) => {
-     let n = arr.length;
-     let low = 0;
-     let high = n - 1;
+     let left = 0;
+     let right = arr.length - 1;
      let maxLeft = 0;
      let maxRight = 0;
      let res = 0;
-     while (low < high) {
-        if (arr[low] < arr[high]) {
-            if (arr[low] > maxLeft) {
-                maxLeft = arr[low]
+     while (left < right) {
+        if (arr[left] < arr[right]) {
+            if (arr[left] > maxLeft) {
+                maxLeft = arr[left]
             } else {
-                res += maxLeft - arr[low];
+                res += maxLeft - arr[left];
             }
-            low++;
+            left++;
         } else {
-            if (arr[high] > maxRight) {
-                maxRight = arr[high];
+            if (arr[right] > maxRight) {
+                maxRight = arr[right];
             } else {
-                res += maxRight - arr[high];
+                res += maxRight - arr[right];
             }
-            high--;
+            right--;
         }
      }
      return res;

@@ -14,10 +14,8 @@ let mergeInterval = function(list) {
     }
 
     let res = [];
-    res.push({
-        'first': list[0].first,
-        'second': list[0].second
-    });
+    res.push(list[0]); // push the first elm into the list
+
     for (let i = 1; i < len; i++) {
         let x2 = list[i].first;
         let y2 = list[i].second;
@@ -27,10 +25,7 @@ let mergeInterval = function(list) {
         if (y1 >= x2) {
             res[res.length - 1].second = Math.max(y1, y2);
         } else {
-            res.push({
-                'first': x2,
-                'second': y2
-            });
+            res.push(list[i]);
         }
 
     }
@@ -46,3 +41,13 @@ let list = [
     {first: 11, second: 15}];
 
 console.log(mergeInterval(list)); // [{first: 1, second: 8}, {first: 10, second: 15}]
+
+list = [
+    {"first":4,"second":12},
+    {"first":13,"second":16},
+    {"first":19,"second":20},
+    {"first":20,"second":24}];
+    /**
+     * [{"first":4,"second":12},{"first":13,"second":16},{"first":19,"second":24}]
+     */
+console.log(mergeInterval(list));

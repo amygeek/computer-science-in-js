@@ -38,15 +38,17 @@ we'll use the memoization technique.
 let countScoreRec = function(n, res) {
     if (n < 0) {
         return 0;
-    }
-
-    if (res[n] > 0) {
+    } 
+    if ( n === 0) {
+        res[n] = 1;
         return res[n];
     }
 
-    res[n] = countScoreRec(n - 1, res) +
-        countScoreRec(n - 2, res) +
-        countScoreRec(n - 4, res);
+    if (res[n]) {
+        return res[n];
+    }
+
+    res[n] = countScoreRec(n - 1, res) + countScoreRec(n - 2, res) + countScoreRec(n - 4, res);
     return res[n];
 };
 
@@ -56,16 +58,13 @@ let countScore = function(n) {
         return 0;
     }
 
-    let res = new Array(n+1).fill(0);
+    let res = [...Array(n)];
 
-    res[0] = 1;
+    return countScoreRec(n, res);
 
-    countScoreRec(n, res);
-
-    return res[n];
 };
 
-console.log( countScore(5) );  //10
+console.log( countScore(4) );  //6
 
 /**
  Runtime Complexity

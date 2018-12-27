@@ -15,14 +15,10 @@ class QuickSort {
 
     
     sort(arr, left, right) {
-
-        let pivot = this.partition(arr, left, right);
-
-        if (left < pivot - 1) { // Sort left half
-            this.sort(arr, left, pivot - 1);
-        }
-        if (pivot < right) { // Sort right half
-            this.sort(arr, pivot, right);
+        if (right > left) {       
+            let pivot = this.partition(arr, left, right);
+            this.sort(arr, left, pivot - 1); // Sort left half
+            this.sort(arr, pivot, right); // Sort right half
         }
     }
 
@@ -58,4 +54,5 @@ let quickSort = new QuickSort();
 let arr = [1,8,6, 2, 1, 4, 1, 5, 0, 10];
 
 quickSort.sort(arr, 0, arr.length - 1);
-console.log( arr );
+console.log( arr.toString() );
+

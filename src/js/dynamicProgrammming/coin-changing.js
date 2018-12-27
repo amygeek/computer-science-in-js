@@ -69,6 +69,28 @@ class CoinChanging {
         return this.coinChangeRec(coins, numOfCoins, amount - coins[numOfCoins]) + this.coinChangeRec(coins, numOfCoins - 1, amount);
     }
 
+    coinChangeMemo(coins, amount, index, res) {
+        if (amount === 0) {
+            return 1;
+        }
+        if (index >= coins.length) {
+            return 0;
+        }
+        let key = `${amount}-${index}`;
+        if (res.has(key)){
+            return res.get(key);
+        }
+        let changeAmount = 0;
+        let ways = 0;
+        while (changeAmount <= amount) {
+            let remainding = amount - changeAmount;
+            ways += this.coinChangeMemo(coins, remainding, index + 1, res);
+            changeAmount += coins[index];
+        }
+        res.set(key, ways);
+        return ways;
+    }
+
     printSolution(total, coins ){
         let result = [];
         let min = [];
@@ -109,5 +131,7 @@ let coins = [1, 2, 3];
 
 console.log(C.coinChange( coins, 5));  //5
 
-C.printSolution( 5, coins);
+console.log(C.coinChangeMemo(coins, 5, 0, new Map()));  //5
+
+// C.printSolution( 5, coins);
 
