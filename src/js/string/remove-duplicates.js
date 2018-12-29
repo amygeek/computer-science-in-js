@@ -30,6 +30,17 @@ let remove_duplicates_1 = function(s) {
     return Array.from(hashset).join('');
 };
 
+let remove_duplicates = function(str) {
+    let res = [];
+    let n = str.length;
+    for (let i=0; i<n; i++) {
+      if (!res.includes(str[i])) {
+        res.push(str[i])
+      }
+    }
+    return res.join('');
+};
+
 //console.log(remove_duplicates_1("abbabcddbabcdeedebc"));
 
 /**

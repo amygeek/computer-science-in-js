@@ -14,11 +14,11 @@ let make_zeroes = function(matrix) {
     let zero_rows = new Set();
     let zero_cols = new Set();
 
-    let rows = matrix.length;
-    let cols = matrix[0].length;
+    let m = matrix.length;
+    let n = matrix[0].length;
 
-    for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < cols; j++) {
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
             if (matrix[i][j] === 0) {
                 if (!zero_rows.has(i)) {
                     zero_rows.add(i);
@@ -30,15 +30,15 @@ let make_zeroes = function(matrix) {
         }
     }
 
-    for (let r of zero_rows)  {
-        for (let c = 0; c < cols; c++) {
-            matrix[r][c] = 0;
+    for (let i of zero_rows)  {
+        for (let j = 0; j < n; j++) {
+            matrix[i][j] = 0;
         }
     }
 
-    for ( let c of zero_cols) {
-        for (let r = 0; r < rows; r++) {
-            matrix[r][c] = 0;
+    for ( let j of zero_cols) {
+        for (let i = 0; i < m; i++) {
+            matrix[i][j] = 0;
         }
     }
 
