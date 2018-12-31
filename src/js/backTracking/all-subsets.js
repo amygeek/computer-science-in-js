@@ -90,4 +90,20 @@ let st = new Set();
 console.log(getAllSubsets2(st, [1,2,3], 3, 0));
 
 
-
+let get_all_subsets = function(v, sets) {
+  let res = [...Array(v.length)];
+  getSubsetsRec(v, sets, res, 0);
+  return sets;
+};
+let getSubsetsRec =(v, sets, res, i) => {
+  if (i === v.length) {
+    sets.push(res.slice());
+  } else {
+    res[i] = null;
+    getSubsetsRec(v, sets, res, i+1);
+    res[i] = v[i];
+    getSubsetsRec(v, sets, res, i+1);
+  }
+  
+}
+console.log(get_all_subsets([8,13,3,22,17,39,87,45,36], [])) // 512
