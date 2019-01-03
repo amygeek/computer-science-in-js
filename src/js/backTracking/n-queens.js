@@ -94,13 +94,101 @@ class NQueens {
  | 0 | 0 | 0 | 1 |
  | 0 | 1 | 0 | 0 |
  */
-let q = new NQueens();
-q.placeQueens(0, 4);;
+// let q = new NQueens();
+// q.placeQueens(0, 4);
 
+let solve_n_queens = function(n) {
+    let solved = [];
+    let res = [];
+    solveQueenRec(n, 0, res, solved);
+    return res;
+};
+let solveQueenRec = (n, row, res, solved) => {
+    if (row === n) {
+        res.push(solved.slice());
+        return;
+    }
+    for (let j=0; j<n; j++) {
+        if (isValid(row, j, solved)) {
+            solved[row] = j;
+            solveQueenRec(n, row+1, res, solved);
+        }
+    }
+}
+let isValid = (row, col, solved) => {
+    for (let i=0; i<row; i++) {
+        if (solved[i] === col || row - i === Math.abs(solved[i] - col)) {
+        return false;
+        }    
+    }
+    return true;
+}
 
+console.log(solve_n_queens(4).toString());
 
+// This solution uses stack to store the solution.
+// Stack will hold only the column values and one solution
+// will be stored in the stack at a time.
 
+let is_valid_move = function(proposed_row, proposed_col, solution) {
 
-
-
+    // we need to check with all queens
+    // in current solution
+    for (let i = 0; i < proposed_row; i++) {
+      if (solution[i] === proposed_col || proposed_row - i === Math.abs(solution[i] - proposed_col)) {
+        return false;
+      }
+    }
+    return true;
+  };
+  
+  let solve_n_queens_2 = function(n, results) {
+    let solution = new Array(n);
+    let sol_stack = [];
+  
+    let row = 0;
+    let col = 0;
+  
+    while (row < n) {
+      while (col < n) {
+        if (is_valid_move(row, col, solution)) {
+          sol_stack.push(col);
+          solution[row] = col;
+          row = row + 1;
+          col = 0;
+          break;
+        }
+        col = col + 1;
+      }
+  
+      if (col === n) {
+        if (sol_stack.length != 0) {
+          col = sol_stack.pop() + 1;
+          row = row - 1;
+        } else {
+          break; // no more solutions exist
+        }
+      }
+  
+      if (row === n) {
+        // add the solution into results
+        results.push(solution.slice());
+  
+        // backtrack to find the next solution
+        row = row - 1;
+        col = sol_stack.pop() + 1;
+      }
+    }
+  };
+  
+  console.log("+++++++++++++++++++++++++++++++++++++++");
+  console.log("n queens");
+  console.log("---------------------------------------");
+  let results = [];
+  solve_n_queens_2(8, results);
+  console.log("Total Solutions Count: " + results.length);
+  for (let i = 0; i < results.length; i++) {
+      console.log(results[i]);
+  }
+  console.log("++++++ Test Done Successfully ++++++");
 

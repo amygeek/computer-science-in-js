@@ -10,35 +10,28 @@
      Memory Complexity
      Constant, O(1)
  */
-let getBit = function(num, bit){
-    let temp = (1 << bit);
-    temp = temp & num;
-    if (temp === 0){
-        return 0;
+let pickMe = (num, bit) => {
+  let temp = 1 << bit;
+  if (temp && num > 0) {
+    return true;
+  }
+  return false;
+}
+
+let getAllSubsets = function(v) {
+  let sets = [];
+  let n = v.length;
+  let count = Math.pow(2, n);
+  for (let i=0; i<count; i++) {
+    let st = new Set();
+    for (let j=0; j<n; j++) {
+      if (pickMe(i, j)) {
+        st.add(v[j]);
+      }
     }
-
-    return 1;
-};
-
-let getAllSubsets = function(arr) {
-
-    let n = arr.length;
-    let sets = new Set();
-    let count = Math.pow(2, n);
-    
-    for (let i = 0; i < count; i++) {
-
-        let st = new Set();
-        
-        for (let j = 0; j < n; j++) {
-            if (getBit(i, j) === 1) {
-                st.add(arr[j]);
-            }
-        }
-
-        sets.add(st);
-    }
-    return sets;
+    sets.push(st);
+  }
+  return sets;
 };
 
 /**
@@ -57,37 +50,20 @@ let arr = [1,2,3];
 console.log( getAllSubsets(arr) );
 
 
-let getAllSubsets2 = (sets, arr, n, index) => {
-
-    if ( n === index) {
-        //base case: add an empty set
-        let st = new Set();
-        sets.add(st);
-    } else {
-        sets = getAllSubsets2(sets, arr, n, index + 1);
-        let item = arr[index];
-        let moreSet = new Set();
-        for (let set of sets) {
-            let st = new Set();
-            for (let s of set) {
-                st.add(s);
-            }
-            st.add(item);
-            moreSet.add(st);
-
-        }
-
-        for (let set of moreSet) {
-            sets.add(set);
-        }
-
-    }
-    return sets;
-
+let get_all_subsets = function(v, sets) {
+  let res = [...Array(v.length)];
+  getSubsetsRec(v, sets, res, 0);
+  return sets;
+};
+let getSubsetsRec =(v, sets, res, i) => {
+  if (i === v.length) {
+    sets.push(res.slice());
+  } else {
+    res[i] = null;
+    getSubsetsRec(v, sets, res, i+1);
+    res[i] = v[i];
+    getSubsetsRec(v, sets, res, i+1);
+  }
+  
 }
-
-let st = new Set();
-console.log(getAllSubsets2(st, [1,2,3], 3, 0));
-
-
-
+console.log(get_all_subsets([8,13,3,22,17,39,87,45,36], [])) // 512
