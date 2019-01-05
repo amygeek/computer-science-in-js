@@ -40,11 +40,11 @@ class FindPair {
             return low;
         }
         let mid = Math.floor ( (high + low) / 2 );
-
+        // [3,4,5,1,2]
         if (mid < high && arr[mid + 1] < arr[mid]) {
             return mid + 1;
         }
-
+        // [4,5,1,2,3]
         if (mid > low && arr[mid] < arr[mid - 1]) {
             return mid;
         }
