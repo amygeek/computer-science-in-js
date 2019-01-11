@@ -18,19 +18,19 @@ let getMax = ( a,  b) => {
     /* We want to define a value k which is 1 if a > b and 0 if a < b. 
      * (if a = b, it doesn't matter what value k is) */
 
-    let use_sign_of_a = sa ^ sb; // If a and b have different signs, then k = sign(a)
-    let use_sign_of_c = flip(sa ^ sb); // If a and b have the same sign, then k = sign(a - b)
+    let useSignA = sa ^ sb; // If a and b have different signs, then k = sign(a)
+    let useSignC = flip(sa ^ sb); // If a and b have the same sign, then k = sign(a - b)
 
     /* 
     We can't use a comparison operator, but we can multiply values by 1 or 0 
     if a > b, k will be 1, q will be 0, so (a * k + b * q) returns max a
     if a < b, k will be 0, q will be 1, so (a * k + b * q) returns max b
     */
-    let k = use_sign_of_a * sa + use_sign_of_c * sc;
+    let k = useSignA * sa + useSignC * sc;
     let q = flip(k); // opposite of k
 
     return a * k + b * q;
 }
 
-console.log( getMax( 2, 11 ));
-console.log( getMax( 10, 2 ));
+// console.log( getMax( -2, -11 ));
+console.log( getMax( 10, 20 ));

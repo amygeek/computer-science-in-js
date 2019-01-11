@@ -6,9 +6,9 @@
  Time complexity : O(n).
 
  Although the time complexity appears to be quadratic due to the while loop nested within the for loop,
- closer inspection reveals it to be linear. Because the while loop is reached only when currentNum marks
- the beginning of a sequence (i.e. currentNum-1 is not present in nums), the while loop can only run
- for nn iterations throughout the entire runtime of the algorithm. This means that despite looking
+ closer inspection reveals it to be linear. Because the while loop is reached only when current i marks
+ the beginning of a sequence (i.e. i-1 is not present in the set ), the while loop can only run
+ for n iterations throughout the entire runtime of the algorithm. This means that despite looking
  the nested loops actually run in O(n + n) =O(n) time.
  All other computations occur in constant time, so the overall runtime is linear.
 
@@ -16,34 +16,26 @@
  */
 
 let longestConsecutiveSubsequence = ( arr ) => {
-
-    let set = new Set();
-
     let n = arr.length;
     let max = 0;
+    let set = new Set();
 
-    // Hash all the array elements
+    // create set of the arr to remove all duplicate value since they are irrelevant to the sequence
     for (let i=0; i<n; ++i) {
         set.add(arr[i]);
     }
-    // check each possible sequence from the start
-    // then update optimal length
-    for (let i=0; i<n; ++i) {
-        // if current element is the starting
-        // element of a sequence
-        if ( !set.has( arr[i] - 1 ) ) {
-            // Then check for next elements in the
-            // sequence
-            let j = arr[i];
-            while (set.has(j)) {
-                j++;
+    // check each possible sequence from the set
+    for (let i of set) {
+        
+        // if i-1 (leftmost start sequence) is not present in the set
+        if (!set.has(i - 1)) {
+            // Then check for next elements in the sequence
+            let len = 0;
+            while (set.has(i++)) {
+                len++;
             }
 
-            // update  optimal length if this length
-            // is more
-            if ( max < j - arr[i] ) {
-                max = j - arr[i];
-            }
+            max = Math.max(max, len);
 
         }
     }
@@ -51,5 +43,5 @@ let longestConsecutiveSubsequence = ( arr ) => {
 }
 
 
-let arr = [100, 4, 200, 1, 3, 2];
-console.log(longestConsecutiveSubsequence ( arr ));
+let arr = [4, 2, 1, 6, 5];
+console.log(longestConsecutiveSubsequence ( arr ));  // Max: 3 -> 4, 5, 6

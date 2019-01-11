@@ -1,7 +1,7 @@
 /**
  * Implement a queue using Stacks.
- * Imagine we have a stack class that provides all common operations like push, pop, isEmpty.
- * Using the instances of this stack class, implement a queue class with its add, remove and isEmpty operations.
+ * Imagine we have a stack class that provides all common operations like push, pop, isEmpty. 
+ * Using the instances of this stack class, implement a queue class with its enqueue, dequeue and isEmpty operations.
 
      Solution #1: make the 'add' operation faster
      Runtime Complexity
@@ -14,35 +14,38 @@
  */
 class queue_using_stack {
     constructor() {
-        this.newestStack = [];
-        this.oldestStack = [];
+        this.oldStack = [];
+        this.newStack = [];
     }
 
     size() {
-        return this.newestStack.length + this.oldestStack.length;
+        return this.newStack.length + this.oldStack.length;
     }
-    add(data) {
-        this.newestStack.push(data);
+    enqueue(data) {
+        this.newStack.push(data);
     }
     empty() {
-        return (this.newestStack.length === 0 && this.oldestStack.length === 0);
+        return (this.newStack.length === 0 && this.oldStack.length === 0);
     }
 
     shiftStack() {
-        if (this.oldestStack.length === 0) {
-            while (this.newestStack.length !== 0) {
-                this.oldestStack.push(this.newestStack.pop());
+        if (this.oldStack.length === 0) {
+            while (this.newStack.length !== 0) {
+                this.oldStack.push(this.newStack.pop());
             }
         }
     }
-    remove() {
+    dequeue() {
+        if (this.empty()) {
+            throw('Stack is empty.');
+        }
         this.shiftStack();
-        return this.oldestStack.pop();
+        return this.oldStack.pop();
     }
 
     peek() {
         this.shiftStack();
-        return this.oldestStack[this.oldestStack.length - 1];
+        return this.oldStack[this.oldStack.length - 1];
     }
 }
 
@@ -58,39 +61,38 @@ class queue_using_stack {
  */
 class queue_using_stack_2 {
     constructor() {
-        this.newestStack = [];
-        this.oldestStack = [];
+        this.oldStack = [];
+        this.newStack = [];
     }
-    //newest item is on the bottom of oldestStack, and the oldest item are on top of oldestStack
-    add(data) {
-
-        while (this.oldestStack.length !== 0) {
-            this.newestStack.push(this.oldestStack.pop());
+    //newest item is on the bottom of oldStack, and the oldest item are on top of oldStack
+    enqueue(data) {
+        while(this.oldStack.length > 0) {
+          this.newStack.push(this.oldStack.pop());
         }
-        this.oldestStack.push(data);
-
-        while (this.newestStack.length !== 0) {
-            this.oldestStack.push(this.newestStack.pop());
+        this.oldStack.push(data);
+        while(this.newStack.length > 0) {
+          this.oldStack.push(this.newStack.pop());
         }
     }
     empty() {
-        return (this.newestStack.length === 0 && this.oldestStack.length === 0);
+        return this.oldStack.length === 0 && this.newStack.length === 0;
     }
-    remove() {
+    
+    dequeue() {
         if (this.empty()) {
-            throw "stack is empty";
+            Throw('stack is empty');
         }
-        return this.oldestStack.pop();
+        return this.oldStack.pop();
     }
 }
 
 let testQueue = new queue_using_stack();
 
-testQueue.add(1);
-testQueue.add(2);
-testQueue.add(3);
-testQueue.add(4);
+testQueue.enqueue(1);
+testQueue.enqueue(2);
+testQueue.enqueue(3);
+testQueue.enqueue(4);
 
 console.log(testQueue);
 console.log(testQueue.size());
-console.log(testQueue.remove());
+console.log(testQueue.dequeue());

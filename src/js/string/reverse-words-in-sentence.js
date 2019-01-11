@@ -124,3 +124,33 @@ let reverseWords3 = (words) => {
 let str = "hello           world good      morning";
 console.log(reverseWords( str ));
 console.log(reverseWords3( str ));
+
+// using stack
+let reverseWords4 = (str) => {
+    let n = str.length;
+    if (n === 0) {
+        return;
+    }
+    let st = [];
+    let temp = '';
+    for (let i=0; i<n; i++) {     
+        if (str[i] == ' ') {
+            st.push(temp);
+            temp = '';
+        } else {
+            temp += str[i];
+        }
+    }
+    if (temp.length > 0) {
+        st.push(temp); // push last word
+    }
+    
+    temp = '';
+    while (st.length > 1) {
+        temp += st.pop() + ' ';
+    }
+    temp += st[0];
+    return temp;
+}
+
+console.log(reverseWords4( 'amy huang' ));

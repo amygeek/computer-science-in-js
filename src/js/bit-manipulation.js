@@ -35,3 +35,12 @@ let abs = ( x ) => {
 }
 
 console.log( abs(-15) );  //15
+
+// determine whether two integers differ by exactly 1 bit
+let differByOne = (a, b) => {
+    let x = a ^ b;
+    return (x & (x - 1)) === 0;
+}
+
+console.log("It is differ by one bit: ", differByOne(0, 1));  // true
+console.log("It is differ by one bit: ", differByOne(1, 2));  // false

@@ -40,3 +40,17 @@ let getLargestSum = ( arr ) => {
 let arr = [-4, 2, -5, 1, 2, 3, 6, -5, 1];
 
 console.log(getLargestSum(arr));
+
+let getLargestSum2 = (arr) => {
+    let currentMax = 0;
+    let max = 0;
+    let n = arr.length;
+
+    for (let i=0; i<n; i++) {
+        currentMax = Math.max(currentMax + arr[i], 0);
+        max = Math.max(max, currentMax);
+    }
+    return max;
+}
+
+console.log(getLargestSum2(arr));

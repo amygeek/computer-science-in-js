@@ -14,6 +14,9 @@
     9 -> 3*3*3
     10 -> 3*3*4
     11 -> 3*3*3*2
+    12 -> 3*3*3*3
+    13 -> 3*3*3*4
+    14 -> 3*3*3*3*2
 */
 function maxProd( n ) {
     // n equals to 2 or 3 must be handled explicitly
