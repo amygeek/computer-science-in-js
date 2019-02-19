@@ -23,11 +23,8 @@
      let map = new Map();
      for (let i = 0; i < bLen; i++) {
         let num = map.get(b[i]);
-        if (num) {
-            map.set(b[i], num + 1);
-        } else {
-            map.set(b[i], 1);
-        }
+        let count = num ? num + 1 : 1;
+        map.set(b[i], count);
      }
      for (let i = 0; i < aLen; i++) {
          if (!map.get(a[i])) {
@@ -36,12 +33,7 @@
      }
  }
 
- let finder3 = (a, b) => {
-     let s1 = new Set(a);
-     let s2 = new Set(b);
-     return s1 - s2;
- }
+
 
  console.log(finder([1,2,3,4,5,6,7], [3,7,2,1,4,6]));
  console.log(finder2([1,2,3,4,5,6,7], [3,7,2,1,4,6]));
- console.log(finder3([1,2,3,4,5,6,7], [3,7,2,1,4,6]));

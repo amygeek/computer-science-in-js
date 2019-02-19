@@ -8,27 +8,27 @@
 let sortColor = ( arr ) => {
     let n = arr.length;
 
-    let countArray = new Array(3).fill(0);
+    let count = [0, 0, 0];
 
     //count the number 0, 1, 2;  return [5, 5, 2] in the example
     for( let i=0; i<n; i++ ) {
-        countArray[arr[i]]++;
+        count[arr[i]]++;
     }
 
+    let i=0;
     let j=0;
-    let k=0;
     while ( j <= 2 ) {
-
-        if ( countArray[j] != 0 ) {
-            arr[k++] = j;
-            countArray[j]--;
+        if ( count[j] != 0 ) {
+            arr[i++] = j;
+            count[j]--;
         } else {
             j++;
         }
     }
 }
 
-let arr = [0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1];
-sortColor(arr);
+let arr = [0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1]; 
 
-console.log(arr);
+sortColor(arr); // [0,0,0,0,0,1,1,1,1,1,2,2]
+
+console.log(arr.toString());

@@ -16,105 +16,46 @@
   16
  */
 
-//works only on matrix that has same length on columns and rows
-let printDiagonalMatrix = ( arr ) => {
-
-    let n = arr.length;
-
-    //print first half
-    let row = 0;
-    let col = 0;
-
-    while( row < n) {
-
-        col =0;
-        let rowTemp = row;
-        let str = "";
-
-        while( rowTemp >= 0 ){
-            str += arr[rowTemp][col] + " ";
-            rowTemp--;
-            col++;
-        }
-        console.log( str );
-
-        row++;
-    }
-
-    col = 1;
-    while ( col < n ) {
-
-        row = n - 1;
-        let colTemp = col;
-        let str = "";
-
-        while ( colTemp < n ) {
-            str += arr[row][colTemp] + " ";
-            colTemp++;
-            row--;
-        }
-
-        console.log( str );
-        col++
-    }
-
-}
-
-////works on matrix that has different length on columns and rows
+// works on matrix that has different length on columns and rows
 let printDiagonalMatrix2 = ( arr ) => {
 
-    let row = arr.length;
-    let col = arr[0].length;
+    let m = arr.length;
+    let n = arr[0].length;
 
     let i = 0;
+    while( i < m) {
 
-    while( i < row) {
-
-        let c = 0;
-        let temp = i;
+        let row = i;
+        let col = 0;
         let str = "";
 
-        while( temp >= 0 && c < col ){
-            str += arr[temp][c] + " ";
-            temp--;
-            c++;
+        while( row >= 0 && col < n ){
+            str += arr[row][col] + " ";
+            row--;
+            col++;
         }
+        
         console.log( str );
-
         i++;
     }
 
     let j = 1;
-    while ( j < col ) {
+    while ( j < n ) {
 
-        let r = row - 1;
-        let temp = j;
+        let row = m - 1;
+        let col = j;
         let str = "";
 
-        while ( temp < col  ) {
-            str += arr[r][temp] + " ";
-            temp++;
-            r--;
+        while ( col < n  ) {
+            str += arr[row][col] + " ";
+            row--;
+            col++;
         }
 
         console.log( str );
         j++
     }
-
 }
-
-
-/*
- 1
- 4 2
- 7 5 3
- 8 6
- 9
-let m = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9]];
-*/
 
 let m = [
     [1, 2, 3, 4],

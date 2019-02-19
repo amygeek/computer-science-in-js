@@ -8,48 +8,42 @@
 let getTranslationCount = (number) => {
 
     let num = number.toString();
-    let len = num.length;
+    let n = num.length;
 
-    let counts = [];
+    let res = [];
 
-    for (let i = len - 1; i >= 0; --i) {
+    for (let i = n - 1; i >= 0; i--) {
 
         let count = 0;
-
-        if (num[i] >= '1' && num[i] <= '9') {
-            if (i < len - 1) {
-                count += counts[i + 1];
-            } else {
-                count = 1;
-            }
-        }
-
-        if (i < len - 1) {
-
-            // convert string num[i] to number by minus '0'
-            let digit1 = num[i] - '0';
-            let digit2 = num[i + 1] - '0';
-            let converted = digit1 * 10 + digit2;
-            if (converted >= 10 && converted <= 26) {
-                if (i < len - 2) {
-                    count += counts[i + 2];
+        
+        //start from the end of the string.
+        if (i === n - 1) {
+            // count one from last digit at the end of the string
+            count = 1;
+        } else {
+            // if i < n - 1, first we need the add the previou count
+            count += res[i + 1];
+            let digit = parseInt(num.substr(i, 2));
+            
+            if (digit >= 10 && digit <= 26) {
+                if (i < n - 2) {
+                    count += res[i + 2];
                 } else {
-                    count += 1;
+                    count++;
                 }
             }
         }
 
-        counts[i] = count;
+        res[i] = count;
     }
 
-    return counts[0];
+    return res[0];
 }
 
 //test
-let cnt = getTranslationCount(12258);
-console.log(cnt); //5
-cnt = getTranslationCount(126);
-console.log(cnt); //3
+console.log('getTranslationCount 12258: ', getTranslationCount(12258)); // 5
+console.log('getTranslationCount 126: ', getTranslationCount(126)); // 3
+console.log('getTranslationCount 56789: ', getTranslationCount(56789)); // 1
 
 let helper = (data, k, memo) => {
     if (k === 0) {
@@ -77,5 +71,6 @@ let numWays = (data) => {
     return helper(data, k, memo);
 }
 
-console.log('numWays 12258: ', numWays(12258)); //5
-console.log('numWays 126: ', numWays(126)); //3
+console.log('numWays 12258: ', numWays(12258)); // 5
+console.log('numWays 126: ', numWays(126)); // 3
+console.log('numWays 56789: ', numWays(56789)); // 1

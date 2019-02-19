@@ -105,7 +105,7 @@ class MergeKSortedArrays {
 
     minHeapify( i ) {
         let smallest = i;
-        let l = 2 * i + 1;
+        let l = 2 * i;
         let r = l + 1;
         // check which is smaller child , 2k or 2k+1.
         if (l < this.size && this.heap[l].data < this.heap[i].data) {

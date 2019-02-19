@@ -47,7 +47,7 @@ let removeInvalidParenthesis = ( str ) =>
     //  pushing given string as starting node into queue
     q.push(str);
     visit.add(str);
-    let count = 0;
+
     while (q.length !== 0) {
 
         let str = q.shift();
@@ -56,6 +56,7 @@ let removeInvalidParenthesis = ( str ) =>
             console.log(str);
             level = true;
         }
+        
         if (level) {
             continue;
         }
@@ -77,9 +78,16 @@ let removeInvalidParenthesis = ( str ) =>
 }
 
 
-let str = "((r()()(";   // ()() and (())
+// let str = "((()()(";   // ()() and (())
 //let str = "()())()";   // (())() and ()()()
 // let str = "()v)";    //(v)
+let str = "((r()()(";
+/**
+r()()
+(r)()
+(r())
+((r))
+ */
 removeInvalidParenthesis(str);
 
 

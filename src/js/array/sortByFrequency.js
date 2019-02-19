@@ -1,38 +1,5 @@
 //return an array that is sorted by highest count
 // Time Complexity : O(n) + O(m Log m) where n is total number of elements and m is total number of distinct elements
-let orderBySize = (arr) => {
-    let dist = new Map();
-
-    for( let i= 0, l=arr.length; i<l; i++) {
-        if (dist.has(arr[i])) {
-            dist.set(arr[i], dist.get(arr[i]) + 1)
-        } else {
-            dist.set(arr[i], 1);
-        }
-    }
-
-    let newArr = Array.from(dist);
-
-    newArr.sort((a, b) => {
-        //return a[1] > b[1] ? -1 : a[1] < b[1] ? 1 : 0;
-        return b[1] - a[1];   //sort by count in descending order
-    });
-
-    let temp = [];
-    for (let i= 0; i<newArr.length; i++) {
-        for (let j= 0; j<newArr[i][1]; j++) {
-            temp.push(newArr[i][0]);
-        }
-    }
-    return temp;
-
-}
-
-let arr = ['pear', 'orange','apple', 'orange', 'orange', 'apple', 'banana'];
-
-console.log(orderBySize(arr));  //[ 'orange', 'orange', 'orange', 'apple', 'apple', 'apple', 'pear' ]
-
-let arr2 = [2, 5, 2, 8, 5, 6, 8, 8];
 
 let sortByFrequency = (arr) => {
 
@@ -63,4 +30,33 @@ let sortByFrequency = (arr) => {
     return temp;
 }
 
-console.log(sortByFrequency(arr2)); //[ 8, 8, 8, 2, 2, 5, 5, 6 ]
+// arr = ['pear', 'orange','apple', 'orange', 'orange', 'apple', 'banana']
+let sortByFrequency2 = (arr) => {
+    // after reduce, res = {pear: 1, orange: 3, apple: 2, banana: 1}
+    let res = arr.reduce((prev, curr) => {
+        prev[curr] = prev[curr] ? prev[curr] + 1 : 1;
+        return prev;
+    }, {});
+    
+    // sort object value by descending: sortedKeys = ["orange", "apple", "pear", "banana"]
+    const sortedKeys = Object.keys(res).sort((a, b) => (res[b] - res[a]));
+
+    let n = sortedKeys.length;
+    let newArr = [];
+    for (let i=0; i<n; i++) {
+        /**
+         * res[sortedKeys[0] = 3
+         * sortedKeys[0] = "orange"
+         * push 3 'orange' into newArr
+         */
+        newArr.push(...Array(res[sortedKeys[i]]).fill(sortedKeys[i]));
+    }
+    return newArr; // ["orange", "orange", "orange", "apple", "apple", "pear", "banana"]
+}
+
+const arr = [2, 5, 2, 8, 5, 6, 8, 8];
+console.log(sortByFrequency(arr)); //[ 8, 8, 8, 2, 2, 5, 5, 6 ]
+
+const arr2 = ['pear', 'orange','apple', 'orange', 'orange', 'apple', 'banana'];
+console.log(sortByFrequency2(arr2));  //[ 'orange', 'orange', 'orange', 'apple', 'apple', 'apple', 'pear' ]
+

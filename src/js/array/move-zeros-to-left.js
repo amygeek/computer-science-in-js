@@ -6,7 +6,7 @@
  Memory Complexity
  Constant, O(1).
  */
-let move_zeros_to_left = function(arr) {
+let moveZerosToLeft = function(arr) {
 
     let n = arr.length;
 
@@ -15,25 +15,53 @@ let move_zeros_to_left = function(arr) {
         return;
     }
 
-    let writeIndex = n - 1;
-    let readIndex = n - 1;
+    let i = n - 1;
+    let j = n - 1;
 
-    while (readIndex >= 0) {
-        if (arr[readIndex] != 0) {
-            arr[writeIndex] = arr[readIndex];
-            writeIndex--;
+    while (i >= 0) {
+        if (arr[i] != 0) {
+            arr[j] = arr[i];
+            j--;
         }
 
-        readIndex--;
+        i--;
     }
 
-    while (writeIndex >= 0) {
-        arr[writeIndex] = 0;
-        writeIndex--;
+    while (j >= 0) {
+        arr[j] = 0;
+        j--;
     }
 
     return arr;
 };
 
 let arr = [1, 0, 3, 0, 4, 5];
-console.log(move_zeros_to_left(arr));
+console.log(moveZerosToLeft(arr));  // [0, 0, 1, 3, 4, 5]
+
+let swap = (arr, i, j) => {
+    let temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+
+// Use Quick sort technique. The none-zeros value is moved to the right, but they will be changed the respective order
+let moveZerosToLeft2 = (arr) => {
+    let i = 0;
+    let j = arr.length - 1;
+    while (i <= j) {
+        if (arr[i] === 0) {
+            i++;
+        }
+        if (arr[j] !== 0) {
+            j--;
+        }
+        if (i <= j && arr[j] === 0) {
+            swap(arr, i, j);
+            i++;
+            j--;
+        }
+    }
+    return arr;
+}
+
+console.log(moveZerosToLeft2([1, 0, 3, 0, 4, 5])); // [0, 0, 3, 1, 4, 5]

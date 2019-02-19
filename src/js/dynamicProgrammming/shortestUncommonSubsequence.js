@@ -15,13 +15,15 @@ let shortestSeq = (str1, str2) => {
     }
 
     // str2 string is empty
-    for (let i = 0; i <= m; i++)
-    res[i][0] = 1;
-
+    for (let i = 0; i <= m; i++) {
+        res[i][0] = 1;
+    }
+    
     // str1 string is empty
-    for (let i = 0; i <= n; i++)
-    res[0][i] = max;
-
+    for (let i = 0; i <= n; i++) {
+        res[0][i] = max;
+    }
+    
     for (let i = 1; i <= m; i++)
     {
         for (let j = 1; j <= n; j++)

@@ -47,6 +47,7 @@ class SmallSquare {
     getMinSquare( n ) {
         // Create a dynamic programming table
         // to store sq
+        
         let res = new Array( n+1 );
     
         // getMinSquares table for base case entries

@@ -1,112 +1,70 @@
-// An Inplace function to rotate a N x N matrix
-// by 90 degrees in Anti-Clockwise direction
+
+/**
+ * 
+ * An Inplace function to rotate a N x N matrix by 90 degrees in clockwise direction
+        a[i][j]         a[j][n-i-1]
+                1  2  3
+                4  5  6
+                7  8  9
+    arr[n-j-1][i]       a[n-i-1][n-j-1]
+                7  4  1
+                8  5  2
+                9  6  3
+
+            [[1,2,3,4],
+             [5,6,7,8],
+             [9,10,11,12],
+             [13,14,15,16]]
+
+            [[13,9,5,1],
+             [14,10,6,2],
+             [15,11,7,3],
+             [16,12,8,4]]
+
+ */
 let rotateMatrix = ( arr, n) => {
-
     // Consider all squares one by one
-    for (let x = 0; x < n / 2; x++)
+    for (let i = 0; i < parseInt(n / 2); i++)
     {
-        // Consider elements in group of 4 in
-        // current square
-        for (let y = x; y < n-x-1; y++)
+        // Consider elements in group of 4 in current square
+        for (let j = i; j < n-i-1; j++)
         {
 
-            let temp = arr[x][y];
-            // move values from right to top
-            arr[x][y] = arr[y][n-x-1];
+            let temp = arr[i][j];
+            // bottom left -> top left
+            arr[i][j] = arr[n-j-1][i];
 
-            // move values from bottom to right
-            arr[y][n-x-1] = arr[n-x-1][n-y-1];
+            // bottom right -> bottom left
+            arr[n-j-1][i] = arr[n-i-1][n-j-1];
 
-            // move values from left to bottom
-            arr[n-x-1][n-y-1] = arr[n-y-1][x];
+            // top right -> bottom right
+            arr[n-i-1][n-j-1] = arr[j][n-i-1];
 
-            // assign temp to left
-            arr[n-y-1][x] = temp;
+            // top left -> top right
+            arr[j][n-i-1] = temp;
         }
     }
     return arr;
 }
+let arr = [
+    [1,2,3],
+    [4,5,6],
+    [7,8,9]
+];
 
-let arr = [[1,2,3], [4,5,6], [7,8,9]];
+arr = [
+    [1,2,3,4],
+    [5,6,7,8],
+    [9,10,11,12],
+    [13,14,15,16]
+];
+//[
+    [13,9,5,1],
+    [14,10,6,2],
+    [15,11,7,3],
+    [16,12,8,4]
+]
+console.log(rotateMatrix(arr, arr.length));
 
-/*
- 1  2  3
- 4  5  6
- 7  8  9
 
- 3  6  9
- 2  5  8
- 1  4  7
- */
 
-//console.log(rotateMatrix(arr, 3));
-
-// An Inplace function to rotate a N x N matrix
-// by 90 degrees in clockwise direction
-let rotateMatrix2 = ( arr, n) => {
-
-    // Consider all squares one by one
-    for (let x = 0; x < n / 2; x++)
-    {
-        // Consider elements in group of 4 in
-        // current square
-        for (let y = x; y < n-x-1; y++)
-        {
-
-            let temp = arr[x][y];
-            // left -> top
-            arr[x][y] = arr[n-y-1][x];
-
-            // bottom -> left
-            arr[n-y-1][x] = arr[n-x-1][n-y-1];
-
-            // right -> bottom
-            arr[n-x-1][n-y-1] = arr[y][n-x-1];
-
-            // top -> right
-            arr[y][n-x-1] = temp;
-        }
-    }
-    return arr;
-}
-arr = [[1,2,3], [4,5,6], [7,8,9]];
-console.log(rotateMatrix2(arr, 3));
-
-// An Inplace function to rotate a N x N matrix
-// by 90 degrees in Clockwise direction
-let rotateMatrix3 = ( arr, n) => {
-
-    // Consider all squares one by one
-    for (let x=0; x < n/2; x++) {
-        let first = x;
-        let last = n - x -1;
-
-        for(let i=first; i<last; i++) {
-
-            let offset = i-first;
-            let temp = arr[first][i];
-
-            arr[first][i] = arr[last-offset][first];
-
-            arr[last-offset][first] = arr[last][last-offset];
-
-            arr[last][last-offset] = arr[i][last];
-
-            arr[i][last] = temp;
-        }
-    }
-
-    return arr;
-}
-
-/*
- 1  2  3
- 4  5  6
- 7  8  9
-
- 7  4  1
- 8  5  2
- 9  6  3
- */
-arr = [[1,2,3], [4,5,6], [7,8,9]];
-//console.log(rotateMatrix3(arr, 3));

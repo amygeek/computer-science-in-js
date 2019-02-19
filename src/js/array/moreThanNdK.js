@@ -67,11 +67,12 @@ class NbyKElement {
         let res = [];
         for(let i=0; i<this.size; i++) {
 
-            let index = this.found( arr[i]);
+            let index = this.found( this.arr[i]);
+
             if ( index !== -1 ) {
                 this.elm[index].count++;
             } else {
-                this.copyToArray( arr[i]);
+                this.copyToArray( this.arr[i]);
             }
 
         }
@@ -93,8 +94,8 @@ class NbyKElement {
 }
 
 
-let arr = [2, 2, 4, 4, 3, 5, 3, 4, 4, 6, 4, 3, 3, 8];
-let nbyKElement = new NbyKElement( arr, arr.length, 4)
+let arr3 = [2, 2, 4, 4, 3, 5, 3, 4, 4, 6, 4, 3, 3, 8];
+let nbyKElement = new NbyKElement( arr3, arr3.length, 4)
 let res = nbyKElement.findElement();
 
 console.log(res)
@@ -116,6 +117,6 @@ let findNOverK = ( arr, k ) => {
            newArr.push(key);
        }
    }
-   return newArr;
+   console.log(newArr);
 }
 findNOverK( arr2, 4 );  //[4, 3]

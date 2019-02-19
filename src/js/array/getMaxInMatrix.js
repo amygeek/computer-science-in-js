@@ -3,24 +3,24 @@ let getMaxValue = ( arr ) => {
     let row = arr.length;
     let col = arr[0].length;
 
-    let maxValue = [...Array(col)];
+    let res = [...Array(col)];
     for( let i=0; i<row; i++) {
         for (let j=0; j<col; j++) {
             let left = 0;
             let up = 0;
             if ( i > 0 ) {
-                up = maxValue[j];
+                up = res[j];
             }
             if ( j > 0 ) {
-                left = maxValue[ j - 1 ];
+                left = res[ j - 1 ];
             }
 
-            maxValue[j] = Math.max( up, left ) + arr[i][j];
+            res[j] = Math.max( up, left ) + arr[i][j];
 
         }
     }
 
-    return maxValue[col-1];
+    return res[col-1];
 }
 
 
@@ -32,7 +32,7 @@ let arr1 = [
 ];
 
 //output 53
-console.log(getMaxValue(arr1));
+// console.log(getMaxValue(arr1));
 
 let arr2 = [
 [1, 2, 3],

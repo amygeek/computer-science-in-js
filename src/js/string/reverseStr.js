@@ -15,12 +15,9 @@ let reverseStr2 = Array.prototype.map.call(this, function(x) {
 
 let reverseStr3 = str.split('').reverse().join('');
 
-let sortStringByLen = (arr) => {
-    arr.sort( (a, b)  => {
-        return a.length > b.length ? -1 : a.length < b.length ? 1 : 0;
-    })
-}
 
 let arr = ['hell', 'hello', 'on', 'now', 'awesome'];
-sortStringByLen(arr);
+// arr.sort( (a, b)  => a.length - b.length ); // sort array by length ascending order
+arr.sort( (a, b)  => b.length - a.length ); // sort array by length descending order
+
 console.log(arr);

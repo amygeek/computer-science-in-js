@@ -5,9 +5,6 @@
 
 
 class PalindromePartitioning {
-    constructor() {
-        this.map = new Map();
-    }
 
     getMinCut2 (str, n) {
 
@@ -76,7 +73,7 @@ class PalindromePartitioning {
         return true;
     }
 
-    getMinCut ( str ) {
+    getMinCut (str, map) {
 
         if ( str === "" || this.isPalindrome( str ) ) {
             return 0;
@@ -84,26 +81,25 @@ class PalindromePartitioning {
 
             let cuts = Number.MAX_VALUE;
 
-
             for ( let i=1; i<str.length; i++) {
 
                 let leftCut = 0;
                 let rightCut = 0;
 
                 let leftStr = str.substr(0, i);
-                let rightStr = str.substr(i, str.length);
+                let rightStr = str.substr(i);
 
-                if ( this.map.get(leftStr) ) {
-                    leftCut = this.map.get( leftStr );
+                if ( map.has(leftStr) ) {
+                    leftCut = map.get( leftStr );
                 } else {
-                    leftCut = this.getMinCut( leftStr );
-                    this.map.set(leftStr, leftCut);
+                    leftCut = this.getMinCut( leftStr, map );
+                    map.set(leftStr, leftCut);
                 }
-                if ( this.map.get(rightStr) ) {
-                    rightCut = this.map.get(rightStr);
+                if ( map.has(rightStr) ) {
+                    rightCut = map.get(rightStr);
                 } else {
-                    rightCut = this.getMinCut(rightStr);
-                    this.map.set(rightStr, rightCut);
+                    rightCut = this.getMinCut(rightStr, map);
+                    map.set(rightStr, rightCut);
                 }
                 cuts = Math.min( 1 + leftCut + rightCut, cuts);
             }
@@ -120,4 +116,4 @@ let p = new PalindromePartitioning();
 
 console.log(p.getMinCut2(str, str.length));
 
-console.log(p.getMinCut(str));
+console.log(p.getMinCut(str, new Map()));

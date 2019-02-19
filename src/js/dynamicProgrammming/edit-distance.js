@@ -66,8 +66,8 @@ let  editDistDP = (str1, str2, m, n) => {
                     // if last characters are same, update cost to 0;
                     cost = 0;
                 } 
-                res[i][j] = Math.min(res[i][j - 1] + cost,  // Insert
-                            res[i - 1][j] + cost,  // Remove
+                res[i][j] = Math.min(res[i][j - 1] + 1,  // Insert
+                            res[i - 1][j] + 1,  // Remove
                             res[i - 1][j - 1] + cost); // Replace
                
             }

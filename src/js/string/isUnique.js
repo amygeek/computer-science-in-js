@@ -8,7 +8,8 @@ let isUnique = ( str ) => {
     if ( len > 256 ) {
         return false;
     }
-    let arr = Array(256).fill(false);
+    
+    let arr = [...Array(256).fill(false)];
 
     for(let i= 0; i<len; i++) {
         if( arr[str[i].charCodeAt(0)] ) {

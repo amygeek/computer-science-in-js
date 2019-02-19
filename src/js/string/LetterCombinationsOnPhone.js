@@ -26,10 +26,9 @@ class LetterCombinationsOnPhone {
 
         if(digits.length == 0) {
 
-            res.add(new String(""));
+            res.push('');
 
         } else if(digits.length == 1) {
-
             for(let c of this.map.get(parseInt(digits))) {
                 res.push(c);
             }
@@ -37,11 +36,10 @@ class LetterCombinationsOnPhone {
 
         } else {
             for(let s of this.combine(digits.substr(1))) {
-
                 for( let c of this.map.get( parseInt( digits.substr( 0,1 ) ) ) ) {
                     res.push(c + s);
+                    
                 }
-
             }
         }
         return res;

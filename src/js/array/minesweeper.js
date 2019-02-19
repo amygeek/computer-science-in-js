@@ -40,5 +40,10 @@ let arr = [
     [false, true, false],
     [false, false, false]
 ];
+/**
+  [[1,2,1],
+   [2,1,1],
+   [1,1,1]]
+ */
 
 console.log(minesweeper(arr));

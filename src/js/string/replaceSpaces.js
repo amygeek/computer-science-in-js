@@ -7,7 +7,7 @@ let replaceSpaces = ( str ) => {
 
     for ( let i=0; i<len; i++ ) {
 
-        arr[i] = str.charAt(i);
+        arr[i] = str[i];
 
         if ( str[i] === " ") {
             spaceCount++;
@@ -18,13 +18,11 @@ let replaceSpaces = ( str ) => {
 
     for ( let i=len-1; i>=0; i-- ) {
         if (arr[i] === " ") {
-            arr[newLen-1] = '0';
-            arr[newLen-2] = '2';
-            arr[newLen-3] = '%';
-            newLen = newLen - 3;
+            arr[--newLen] = '0';
+            arr[--newLen] = '2';
+            arr[--newLen] = '%';
         } else {
-            arr[newLen-1] = arr[i];
-            newLen = newLen - 1;
+            arr[--newLen] = arr[i];
         }
     }
     return arr.join('');

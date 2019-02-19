@@ -5,7 +5,7 @@ class SmallestRangeInKList {
     
     constructor( k ) {
 
-        this.heap = new Array( k );
+        this.heap = [...Array( k )];
         this.size = 0;
 
         this.currMax = 0; //tracks the max entry in the heap
@@ -18,7 +18,7 @@ class SmallestRangeInKList {
 
         let nk = n * k;
         // create index pointer for every list.
-        let list = new Array(k).fill(0);
+        let list = [...Array(k).fill(0)];
         
         
         for (let i = 0; i < k; i++) {
@@ -82,7 +82,7 @@ class SmallestRangeInKList {
     minHeapify( i ) {
         let smallest = i;
         let l = 2 * i;
-        let r = 2 * i + 1;
+        let r = l + 1;
         // check which is smaller child , 2k or 2k+1.
         if (l < this.size && this.heap[l].data < this.heap[i].data) {
             smallest = l;
@@ -105,8 +105,6 @@ class SmallestRangeInKList {
     }
 
     bubbleUp( i ) {
-
-
         let parent = parseInt( i / 2 );
         if (i > 0 && this.heap[parent].data > this.heap[i].data ) {
             // swap the two if heap property is violated

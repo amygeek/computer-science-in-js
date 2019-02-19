@@ -164,61 +164,11 @@ let getMaxSumInAllRotation = (arr, len) => {
     return max;
 }
 
-
 let arr3 = [10, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 console.log("getMaxSumInAllRotation: " + getMaxSumInAllRotation(arr3,  arr3.length));
 
 
-//o(n)
-let findRotatingCount = ( arr ) => {
-    let count = 0;
-    for(let i=1, l=arr.length; i<l; i++) {
-        if(arr[i] < arr[i - 1]) {
-            count = count + i;
-            break;
-        }
-    }
-    return count;
-}
-
-//o(logn)
-let findRotatingCount2 = (arr, low, high) => {
-
-    // This condition is needed to handle
-    // the case when array is not rotated
-    // at all
-    if (high < low)
-        return 0;
-
-    // If there is only one element left
-    if (high == low)
-        return low;
-
-    // Find mid
-    // /*(low + high)/2;*/
-    let mid = Math.floor( (high + low) /2 );
-
-    // Check if element (mid+1) is minimum
-    // element. Consider the cases like
-    // {3, 4, 5, 1, 2}
-    if (mid < high && arr[mid+1] < arr[mid])
-        return (mid + 1);
-
-    // Check if mid itself is minimum element
-    if (mid > low && arr[mid] < arr[mid - 1])
-        return mid;
-
-    // Decide whether we need to go to left
-    // half or right half
-    if (arr[high] > arr[mid])
-        return findRotatingCount2(arr, low, mid - 1);
-
-    return findRotatingCount2(arr, mid + 1, high);
-}
-//console.log(findRotatingCount([7, 9, 11, 12, 5])) //4
-
 let arr8 = [7, 9, 11, 12, 1];
-console.log(findRotatingCount2(arr8, 0, arr8.length-1)) //4
 
 let findMin = (arr, low, high) => {
 
@@ -245,39 +195,14 @@ let findMin = (arr, low, high) => {
     return findMin(arr, mid+1, high);
 }
 
-console.log("min = ", findMin(arr8, 0, arr8.length - 1));
+// console.log("min = ", findMin(arr8, 0, arr8.length - 1));
 
-/*
- Quickly find multiple left rotations of an array
- Given an array of size n and multiple values around which we need to left rotate the array.
- How to quickly find multiple left rotations?
- */
-
-let preprocess = (arr, temp, len) => {
-    //fills temp[] with two copies of arr[]
-    for(let i=0; i<len; i++) {
-        temp[i] = temp[i+len] = arr[i];
-    }
-}
-let findMultiRotation = (arr, n, len, temp) => {
-
-    if ( n < 0) {
-        n = n + len;
-    }
-
-    let start = n % len;
-
-
-    //for( let i=start; i< start+ len; i++) {
-    //    console.log(temp[i]);
-    //}
-    return temp.slice(start, start+ len);
+let rotateArr = (arr, n) => {
+    return [...arr.slice(n), ...arr.slice(0, n)];
 }
 
-let testArr = [7, 9, 11, 12, 5];
-let temp = [];
-preprocess(testArr, temp, testArr.length);
-console.log(findMultiRotation(testArr, 2, testArr.length, temp ));
-//console.log(findMultiRotation(testArr, 3, testArr.length, temp ));
+let testArr = [1,2,3,4,5];  // [3, 4, 5, 1, 2]
+console.log('rotateArr: ', rotateArr(testArr, 2 ));
+
 
 

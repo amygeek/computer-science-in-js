@@ -1,16 +1,16 @@
-let printPascalTriangle = ( num ) => {
+let printPascalTriangle = ( n ) => {
 
-    let res = [...Array(num)].map(e => [...Array(num).fill(0)]);
+    let res = [...Array(n)].map(e => [...Array(n).fill(0)]);
     
-    for (let line=0; line<num; line++) {
+    for (let i=0; i<n; i++) {
         let str = "";
-        for ( let i=0; i<=line; i++) {
-            if (line === 0 || i === 0 ) {
-                res[line][i] = 1;
+        for ( let j=0; j<=i; j++) {
+            if (j === 0 || j === i ) {
+                res[i][j] = 1;
             } else {
-                res[line][i] = res[line-1][i-1] + res[line-1][i];
+                res[i][j] = res[i-1][j-1] + res[i-1][j];
             }
-            str += " " + res[line][i];
+            str += " " + res[i][j];
 
         }
 

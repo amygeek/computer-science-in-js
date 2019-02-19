@@ -31,7 +31,7 @@ wt = 30 + 20; val = 120 + 100
      else {
         res[i][j] = max(res[i-1][j], val[i] + res[i-1][j-wt[i - 1]
  */
-let knapsackDP = (v, wt, C) => {
+let knapsackDP = (v, w, C) => {
     
     let n = v.length;
     let res = [];
@@ -46,13 +46,13 @@ let knapsackDP = (v, wt, C) => {
 
                 res[i][j] = 0;
 
-            } else if ( j <  wt[i -1]) {
+            } else if ( j <  w[i -1]) {
 
                 res[i][j] = res[i-1][j];
 
             } else {
 
-                res[i][j] = Math.max( res[i-1][j], v[i - 1] + res[i-1][j - wt[i-1]] );
+                res[i][j] = Math.max( res[i-1][j], v[i - 1] + res[i-1][j - w[i-1]] );
             }
         }
     }
@@ -124,8 +124,8 @@ console.log(`Knapsack DP: ${knapsackDP(v, w, C)}`);
 console.log(`Knapsack Rec: ${knapsackRec(v, w, C, v.length)}`);
 
 let memo = [];  //create 2 D array from Capacity of 5 and array length of w
-for(let i=0; i<=C; i++) {
-    memo.push(new Array(v.length));
+for (let i=0; i<=v.length; i++) {
+    memo.push(new Array( C + 1));
 }
 
 console.log(`Knapsack Memo: ${knapsackMemo(v, w, C, v.length, memo)}`);

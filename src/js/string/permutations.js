@@ -133,7 +133,7 @@ let doPermutation = (str, used, out, n, level) => {
             out[level] = str[i];
             used[i] = 1;
             doPermutation(str, used, out, n, level + 1);
-            used[i] = 0;
+            used[i] = 0; // back track
         }        
     }
 }

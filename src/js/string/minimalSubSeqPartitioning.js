@@ -26,8 +26,7 @@
  */
   
   class Interval {
-    constructor(c, start) {
-      this.c = c;
+    constructor(start) {
       this.start = start;
       this.end = start;
     }
@@ -45,7 +44,7 @@
         const c = map.get(list[i]);
         c.end = i;
       } else {
-        map.set(list[i], new Interval(list[i], i));
+        map.set(list[i], new Interval(i));
       }
     }
   

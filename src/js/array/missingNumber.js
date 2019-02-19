@@ -25,25 +25,50 @@ let missingNumber = ( arr ) => {
 
     let n = arr.length;
 
-    let singleNumber = 0;
+    let single = 0;
 
     for (let i=0; i<32; i++) {  //this is for calculating for every position in 32 bit integer
 
-        let y = 1 << i;
+        let x = 1 << i;
         let count = 0;
         for (let j=0; j<n; j++) {
-            if( ( arr[j] & y ) >= 1 ) { //if that particular bit is set for the ith position, add 1 to count
+            if(( arr[j] & x )) { //if that particular bit is set for the ith position, add 1 to count
                 count++;
             }
         }
         //if bits are not multiple of 3 then that bit belongs to the element appearing single time
-        if ( (count % 3) === 1 ) {
-            singleNumber = singleNumber | y;
+        if ( count % 3 ) {
+            single = single | x;
         }
     }
-    console.log("single number: ", singleNumber);
+    console.log("single number: ", single);
 }
 
-let arr = [1, 4, 5, 6, 1, 4, 6, 1, 4, 6];
+let missingNumber2 = (arr) => {
+    let n = arr.length;
+    let first = 0;
+    let second = 0;
+    let three = 0;
+    
+    for (let i=0; i<n; i++) {
+        // value appeared second time
+        second = second | (first & arr[i]);
+        // value appeared first time
+        first = first ^ arr[i];
+        /**
+         * value appears third time: we have to discard the element as number
+         * appears 3 times which is fine and it is not the variable we are looking for.
+         * Also, if the number appears 3 times properly, then we have to initialize first and second to 0 to 
+         * start looking for new element. So for all the numbers which appears thrice, first and second
+         * will become 0 but only for number which appears only once, first will be set with that value.
+         */
+        three = ~(first & second);
+        first = first & three;
+        second = second & three;
+    }
+    console.log("single number: ", first);
+}
+let arr = [3, 3,8,3];
 
 missingNumber( arr );
+missingNumber2( arr );

@@ -23,11 +23,12 @@ let printMatrixRec = (matrix, col, row, n) => {
     printMatrixRec(matrix, col + 1, row + 1, n)
 }
 
-let printMatrix = (matrix, row, col) => {
+let printMatrix = (matrix) => {
 
     let m = 0;  // row index
     let n = 0;  // column index
-
+    let row = matrix.length;
+    let col = matrix[0].length;
 
     while ( m < row && n < col ) {
         /* Print the first row from the remaining rows */
@@ -43,55 +44,16 @@ let printMatrix = (matrix, row, col) => {
         col--;
 
         /* Print the last row from the remaining rows */
-        if ( m < row ) {
-            for (let i = col-1; i>=n; i--) {
-                console.log(matrix[row-1][i]);
-            }
-            row--;
+        for (let i = col-1; i>=n; i--) {
+            console.log(matrix[row-1][i]);
         }
+        row--;
 
         /* Print the first column from the remaining columns */
-        if ( n < col ) {
-            //print left column
-            for (let i=row-1; i>=m; i-- ) {
-                console.log(matrix[i][n]);
-            }
-            n++;
+        for (let i=row-1; i>=m; i-- ) {
+            console.log(matrix[i][n]);
         }
-
-    }
-}
-
-let print = arr => {
-    let row = arr.length;
-    let col = arr[0].length;
-    let m = 0;
-    let n = 0;
-    while( m<row && n<col) {
-        for(let i=n; i<col; i++) {
-            console.log(arr[m][i]);
-        }
-        m++;
-
-        for(let i=m; i<row; i++) {
-            console.log(arr[i][col-1]);
-        }
-        col--;
-
-        if ( m < row ) {
-            for(let i=col-1; i>=n; i--) {
-                console.log(arr[row-1][i]);
-            }
-            row--;
-        }
-
-        if ( n < col ) {
-            for(let i=row-1; i>=m; i--) {
-                console.log(arr[i][n]);
-            }
-            n++;
-        }
-
+        n++;
     }
 }
 
@@ -120,5 +82,4 @@ let m2 = [
  */
 //printMatrixRec(m2, 0, 0, 4);
 
-//printMatrix(m2, m2.length, m2[0].length)
-print(m2)
+printMatrix(m2)

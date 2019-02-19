@@ -95,7 +95,7 @@ let reverseWords2 = (w) => {
             end++;
         }
         reverse(w, i, end - 1);
-        while (w[end] === ' ' && end <= j) {
+        while (w[end] === ' ') {
             end++;
         }
         i = end;

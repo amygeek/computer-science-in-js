@@ -27,8 +27,7 @@ class NoOfPaths {
         }
     
         //base case: if we have one cell then there is only one way
-        res[0][0] = 1;
-    
+       
         for (let i = 1; i < n ; i++) {
             for (let j = 1; j <n ; j++) {
                 res[i][j] = res[i-1][j] + res[i][j-1];

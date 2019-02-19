@@ -1,14 +1,14 @@
-let minJump = (arr) => {  
-    let res = [...Array(arr.length).fill(Number.MAX_VALUE)];
+let minJump = (arr) => { 
+    let n = arr.length; 
+    let res = [...Array(n).fill(Number.MAX_VALUE)];
     res[0] = 0;
-
-    let n = arr.length;
+    
     for (let i=1; i < n; i++) {
         for(let j=0; j < i; j++) {
-            if (arr[j] + j >= i) {
-                if (res[i] > res[j] + 1) {
-                    res[i] = res[j] + 1;
-                }
+            if (arr[j] + j >= i && res[i] > res[j] + 1) {
+                
+                res[i] = res[j] + 1;
+                
             }
         }
     }

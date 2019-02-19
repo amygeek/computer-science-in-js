@@ -25,13 +25,13 @@ let longestConsecutiveSubsequence = ( arr ) => {
         set.add(arr[i]);
     }
     // check each possible sequence from the set
-    for (let i of set) {
+    for (let val of set) {
         
         // if i-1 (leftmost start sequence) is not present in the set
-        if (!set.has(i - 1)) {
+        if (!set.has(val - 1)) {
             // Then check for next elements in the sequence
             let len = 0;
-            while (set.has(i++)) {
+            while (set.has(val++)) {
                 len++;
             }
 

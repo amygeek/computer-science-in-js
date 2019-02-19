@@ -1,12 +1,15 @@
-let getRanIndex = (low, high) => (parseInt(Math.random() * (high - low + 1) + low));
+let swap = (arr, i, j) => {
+    let temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+
 let shuffle = (arr) => {
     let n = arr.length;
 
     for (let i=n-1; i>0; i--) {
-        let num = getRanIndex(0, i);
-        let temp = arr[i];
-        arr[i] = arr[num];
-        arr[num] = temp;
+        let num = parseInt((i + 1) * Math.random());
+        swap(arr, i, num);
     }
     return arr;
 }

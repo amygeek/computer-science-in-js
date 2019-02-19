@@ -20,27 +20,27 @@
 let regx_match = function(text, pattern) {
     let m = text.length;
     let n = pattern.length;
-    return matchRec(text, pattern, m, n, 0, 0);
+    return matchRec(text, pattern, 0, 0, m, n);
 };
 
-let matchRec = (s1, s2, m, n, i, j) => {
+let matchRec = (s1, s2, i, j, m, n) => {
     if (i === m && j === n) {
         return true;
     }
     if (j < n - 1 && s2[j + 1] === '*') {
-        for (let k=i; k<=m; k++) {
-        if (matchRec(s1, s2, m, n, k, j + 2)) {
-            return true;
-        }
-        if (k >= m) {
-            return false;
-        }
-        if (s2[j] !== '.' && s1[k] !== s2[j]) {
-            return false;
-        }
+        for (let k = i; k <= m; k++) {
+            if (matchRec(s1, s2, k, j + 2, m, n)) {
+                return true;
+            }
+            if (k >= m) {
+                return false;
+            }
+            if (s2[j] !== '.' && s1[k] !== s2[j]) {
+                return false;
+            }
         }
     } else if (i<m && j<n && (s2[j] === '.' || s1[i] === s2[j])) {
-        return matchRec(s1, s2, m, n, i + 1, j + 1);
+        return matchRec(s1, s2, i + 1, j + 1, m, n);
     }
     return false;
 }

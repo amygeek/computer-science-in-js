@@ -8,7 +8,7 @@ let pickSet = (arr, m) => {
         subset[i] = arr[i];
     }
     for (let j=m, l=arr.length; j<l; j++) {
-        let num = rand(0, j);
+        let num = parseInt(Math.random() * (j + 1));
         if ( num < m ) {
             subset[num] = arr[j];
         }
@@ -20,4 +20,4 @@ let pickSet = (arr, m) => {
 //test
 let arr = [2, 4, 50, 7, 90, 10, 1, 30, 16, 8];
 
-console.log(pickSet(arr, 4));
+console.log(pickSet(arr, 4)); //[90, 10, 1, 7]
